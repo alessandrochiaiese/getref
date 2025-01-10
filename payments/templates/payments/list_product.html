@@ -1,0 +1,63 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block styles %}
+<!-- CSS Plugin e Custom -->
+<link rel="stylesheet" href="{% static 'dashboard/vendors/feather/feather.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/vendors/ti-icons/css/themify-icons.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/vendors/css/vendor.bundle.base.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/vertical-layout-light/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Elenco Prodotti</h1>
+
+    <a class="btn btn-primary mt-3" href="{% url 'create_product' %}">Crea Prodotto</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantità</th>
+                <th>Prezzo</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a class="btn btn-primary mt-3" href="{% url 'product_detail' product.pk %}">Visualizza</a>
+                    <a class="btn btn-secondary mt-3" href="{% url 'update_product' product.pk %}">Modifica</a>
+                    <a class="btn btn-warning mt-3" href="{% url 'create_order' %}">Ordina</a>
+                    <a class="btn btn-danger mt-3" href="{#% url 'product_delate' product.pk %#}">Cancella</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nessun prodotto disponibile.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        {% if is_paginated %}
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; prima</a>
+            <a href="?page={{ page_obj.previous_page_number }}">precedente</a>
+            {% endif %}
+            <span>Pagina {{ page_obj.number }} di {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">successiva</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">ultima &raquo;</a>
+            {% endif %}
+        </span>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

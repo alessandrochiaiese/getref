@@ -1,0 +1,122 @@
+[
+  {
+    "id": "13",
+    "name": "Abruzzo",
+    "latitude": 42.354008,
+    "longitude": 13.391992
+  },
+  {
+    "id": "17",
+    "name": "Basilicata",
+    "latitude": 40.633333,
+    "longitude": 15.800000
+  },
+  {
+    "id": "18",
+    "name": "Calabria",
+    "latitude": 38.910000,
+    "longitude": 16.587500
+  },
+  {
+    "id": "15",
+    "name": "Campania",
+    "latitude": 40.833333,
+    "longitude": 14.250000
+  },
+  {
+    "id": "8",
+    "name": "Emilia-Romagna",
+    "latitude": 44.493889,
+    "longitude": 11.342778
+  },
+  {
+    "id": "6",
+    "name": "Friuli-Venezia Giulia",
+    "latitude": 45.636111,
+    "longitude": 13.804167
+  },
+  {
+    "id": "12",
+    "name": "Lazio",
+    "latitude": 41.893056,
+    "longitude": 12.482778
+  },
+  {
+    "id": "7",
+    "name": "Liguria",
+    "latitude": 44.411156,
+    "longitude": 8.932661
+  },
+  {
+    "id": "3",
+    "name": "Lombardia",
+    "latitude": 45.464161,
+    "longitude": 9.190336
+  },
+  {
+    "id": "11",
+    "name": "Marche",
+    "latitude": 43.616667,
+    "longitude": 13.516667
+  },
+  {
+    "id": "14",
+    "name": "Molise",
+    "latitude": 41.561000,
+    "longitude": 14.668400
+  },
+  {
+    "id": "1",
+    "name": "Piemonte",
+    "latitude": 45.066667,
+    "longitude": 7.700000
+  },
+  {
+    "id": "16",
+    "name": "Puglia",
+    "latitude": 41.125278,
+    "longitude": 16.866667
+  },
+  {
+    "id": "20",
+    "name": "Sardegna",
+    "latitude": 39.216667,
+    "longitude": 9.116667
+  },
+  {
+    "id": "19",
+    "name": "Sicilia",
+    "latitude": 38.115556,
+    "longitude": 13.361389
+  },
+  {
+    "id": "9",
+    "name": "Toscana",
+    "latitude": 43.771389,
+    "longitude": 11.254167
+  },
+  {
+    "id": "4",
+    "name": "Trentino-Alto Adige/Südtirol",
+    "latitude": 46.066667,
+    "longitude": 11.116667
+  },
+  {
+    "id": "10",
+    "name": "Umbria",
+    "latitude": 43.112100,
+    "longitude": 12.388800
+  },
+  {
+    "id": "2",
+    "name": "Valle d'Aosta/Vallée d'Aoste",
+    "latitude": 45.737222,
+    "longitude": 7.320556
+  },
+  {
+    "id": "5",
+    "name": "Veneto",
+    "latitude": 45.439722,
+    "longitude": 12.331944
+  }
+]

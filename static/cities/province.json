@@ -1,0 +1,992 @@
+[
+  {
+    "id": "84",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Agrigento",
+    "automotive_acronym": "AG",
+    "latitude": 37.31109,
+    "longitude": 13.576548
+  },
+  {
+    "id": "6",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Alessandria",
+    "automotive_acronym": "AL",
+    "latitude": 44.817559,
+    "longitude": 8.704663
+  },
+  {
+    "id": "42",
+    "id_region": "11",
+    "metropolitan_city_code": null,
+    "name": "Ancona",
+    "automotive_acronym": "AN",
+    "latitude": 43.549325,
+    "longitude": 13.266348
+  },
+  {
+    "id": "51",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Arezzo",
+    "automotive_acronym": "AR",
+    "latitude": 43.466896,
+    "longitude": 11.88236
+  },
+  {
+    "id": "44",
+    "id_region": "11",
+    "metropolitan_city_code": null,
+    "name": "Ascoli Piceno",
+    "automotive_acronym": "AP",
+    "latitude": 42.863893,
+    "longitude": 13.589973
+  },
+  {
+    "id": "5",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Asti",
+    "automotive_acronym": "AT",
+    "latitude": 44.900765,
+    "longitude": 8.206432
+  },
+  {
+    "id": "64",
+    "id_region": "15",
+    "metropolitan_city_code": null,
+    "name": "Avellino",
+    "automotive_acronym": "AV",
+    "latitude": 40.996451,
+    "longitude": 15.125896
+  },
+  {
+    "id": "72",
+    "id_region": "16",
+    "metropolitan_city_code": "272",
+    "name": "Bari",
+    "automotive_acronym": "BA",
+    "latitude": 41.117123,
+    "longitude": 16.871976
+  },
+  {
+    "id": "110",
+    "id_region": "16",
+    "metropolitan_city_code": null,
+    "name": "Barletta-Andria-Trani",
+    "automotive_acronym": "BT",
+    "latitude": 41.200454,
+    "longitude": 16.205148
+  },
+  {
+    "id": "25",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Belluno",
+    "automotive_acronym": "BL",
+    "latitude": 46.249766,
+    "longitude": 12.196957
+  },
+  {
+    "id": "62",
+    "id_region": "15",
+    "metropolitan_city_code": null,
+    "name": "Benevento",
+    "automotive_acronym": "BN",
+    "latitude": 41.203509,
+    "longitude": 14.752094
+  },
+  {
+    "id": "16",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Bergamo",
+    "automotive_acronym": "BG",
+    "latitude": 45.85783,
+    "longitude": 9.881998
+  },
+  {
+    "id": "96",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Biella",
+    "automotive_acronym": "BI",
+    "latitude": 45.562818,
+    "longitude": 8.058272
+  },
+  {
+    "id": "37",
+    "id_region": "8",
+    "metropolitan_city_code": "237",
+    "name": "Bologna",
+    "automotive_acronym": "BO",
+    "latitude": 44.50051,
+    "longitude": 11.304784
+  },
+  {
+    "id": "21",
+    "id_region": "4",
+    "metropolitan_city_code": null,
+    "name": "Bolzano/Bozen",
+    "automotive_acronym": "BZ",
+    "latitude": 46.734096,
+    "longitude": 11.288802
+  },
+  {
+    "id": "17",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Brescia",
+    "automotive_acronym": "BS",
+    "latitude": 45.659677,
+    "longitude": 10.385672
+  },
+  {
+    "id": "74",
+    "id_region": "16",
+    "metropolitan_city_code": null,
+    "name": "Brindisi",
+    "automotive_acronym": "BR",
+    "latitude": 40.611266,
+    "longitude": 17.763621
+  },
+  {
+    "id": "92",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Cagliari",
+    "automotive_acronym": "CA",
+    "latitude": 39.223763,
+    "longitude": 9.121867
+  },
+  {
+    "id": "85",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Caltanissetta",
+    "automotive_acronym": "CL",
+    "latitude": 37.490112,
+    "longitude": 14.062893
+  },
+  {
+    "id": "70",
+    "id_region": "14",
+    "metropolitan_city_code": null,
+    "name": "Campobasso",
+    "automotive_acronym": "CB",
+    "latitude": 41.673887,
+    "longitude": 14.752094
+  },
+  {
+    "id": "107",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Carbonia-Iglesias",
+    "automotive_acronym": "CI",
+    "latitude": 39.253466,
+    "longitude": 8.572102
+  },
+  {
+    "id": "61",
+    "id_region": "15",
+    "metropolitan_city_code": null,
+    "name": "Caserta",
+    "automotive_acronym": "CE",
+    "latitude": 41.207835,
+    "longitude": 14.100133
+  },
+  {
+    "id": "87",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Catania",
+    "automotive_acronym": "CT",
+    "latitude": 37.612598,
+    "longitude": 14.938885
+  },
+  {
+    "id": "79",
+    "id_region": "18",
+    "metropolitan_city_code": null,
+    "name": "Catanzaro",
+    "automotive_acronym": "CZ",
+    "latitude": 38.889635,
+    "longitude": 16.440587
+  },
+  {
+    "id": "69",
+    "id_region": "13",
+    "metropolitan_city_code": null,
+    "name": "Chieti",
+    "automotive_acronym": "CH",
+    "latitude": 42.033443,
+    "longitude": 14.379191
+  },
+  {
+    "id": "13",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Como",
+    "automotive_acronym": "CO",
+    "latitude": 45.808042,
+    "longitude": 9.085179
+  },
+  {
+    "id": "78",
+    "id_region": "18",
+    "metropolitan_city_code": null,
+    "name": "Cosenza",
+    "automotive_acronym": "CS",
+    "latitude": 39.564411,
+    "longitude": 16.252214
+  },
+  {
+    "id": "19",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Cremona",
+    "automotive_acronym": "CR",
+    "latitude": 45.201438,
+    "longitude": 9.983658
+  },
+  {
+    "id": "101",
+    "id_region": "18",
+    "metropolitan_city_code": null,
+    "name": "Crotone",
+    "automotive_acronym": "KR",
+    "latitude": 39.130986,
+    "longitude": 17.006703
+  },
+  {
+    "id": "4",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Cuneo",
+    "automotive_acronym": "CN",
+    "latitude": 44.597031,
+    "longitude": 7.611422
+  },
+  {
+    "id": "86",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Enna",
+    "automotive_acronym": "EN",
+    "latitude": 37.516481,
+    "longitude": 14.379191
+  },
+  {
+    "id": "109",
+    "id_region": "11",
+    "metropolitan_city_code": null,
+    "name": "Fermo",
+    "automotive_acronym": "FM",
+    "latitude": 43.093137,
+    "longitude": 13.589973
+  },
+  {
+    "id": "38",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Ferrara",
+    "automotive_acronym": "FE",
+    "latitude": 44.766368,
+    "longitude": 11.764407
+  },
+  {
+    "id": "48",
+    "id_region": "9",
+    "metropolitan_city_code": "248",
+    "name": "Firenze",
+    "automotive_acronym": "FI",
+    "latitude": 43.767918,
+    "longitude": 11.252379
+  },
+  {
+    "id": "71",
+    "id_region": "16",
+    "metropolitan_city_code": null,
+    "name": "Foggia",
+    "automotive_acronym": "FG",
+    "latitude": 41.638448,
+    "longitude": 15.594339
+  },
+  {
+    "id": "40",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Forlì-Cesena",
+    "automotive_acronym": "FC",
+    "latitude": 44.2225,
+    "longitude": 12.040833
+  },
+  {
+    "id": "60",
+    "id_region": "12",
+    "metropolitan_city_code": null,
+    "name": "Frosinone",
+    "automotive_acronym": "FR",
+    "latitude": 41.657653,
+    "longitude": 13.636272
+  },
+  {
+    "id": "10",
+    "id_region": "7",
+    "metropolitan_city_code": "210",
+    "name": "Genova",
+    "automotive_acronym": "GE",
+    "latitude": 44.446625,
+    "longitude": 9.145615
+  },
+  {
+    "id": "31",
+    "id_region": "6",
+    "metropolitan_city_code": null,
+    "name": "Gorizia",
+    "automotive_acronym": "GO",
+    "latitude": 45.90539,
+    "longitude": 13.516373
+  },
+  {
+    "id": "53",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Grosseto",
+    "automotive_acronym": "GR",
+    "latitude": 42.851801,
+    "longitude": 11.252379
+  },
+  {
+    "id": "8",
+    "id_region": "7",
+    "metropolitan_city_code": null,
+    "name": "Imperia",
+    "automotive_acronym": "IM",
+    "latitude": 43.941866,
+    "longitude": 7.828637
+  },
+  {
+    "id": "94",
+    "id_region": "14",
+    "metropolitan_city_code": null,
+    "name": "Isernia",
+    "automotive_acronym": "IS",
+    "latitude": 41.589156,
+    "longitude": 14.193092
+  },
+  {
+    "id": "66",
+    "id_region": "13",
+    "metropolitan_city_code": null,
+    "name": "L'Aquila",
+    "automotive_acronym": "AQ",
+    "latitude": 42.349848,
+    "longitude": 13.399509
+  },
+  {
+    "id": "11",
+    "id_region": "7",
+    "metropolitan_city_code": null,
+    "name": "La Spezia",
+    "automotive_acronym": "SP",
+    "latitude": 44.10245,
+    "longitude": 9.824083
+  },
+  {
+    "id": "59",
+    "id_region": "12",
+    "metropolitan_city_code": null,
+    "name": "Latina",
+    "automotive_acronym": "LT",
+    "latitude": 41.408748,
+    "longitude": 13.08179
+  },
+  {
+    "id": "75",
+    "id_region": "16",
+    "metropolitan_city_code": null,
+    "name": "Lecce",
+    "automotive_acronym": "LE",
+    "latitude": 40.234739,
+    "longitude": 18.142867
+  },
+  {
+    "id": "97",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Lecco",
+    "automotive_acronym": "LC",
+    "latitude": 45.938294,
+    "longitude": 9.385729
+  },
+  {
+    "id": "49",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Livorno",
+    "automotive_acronym": "LI",
+    "latitude": 43.023985,
+    "longitude": 10.66471
+  },
+  {
+    "id": "98",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Lodi",
+    "automotive_acronym": "LO",
+    "latitude": 45.240504,
+    "longitude": 9.529251
+  },
+  {
+    "id": "46",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Lucca",
+    "automotive_acronym": "LU",
+    "latitude": 43.837674,
+    "longitude": 10.495053
+  },
+  {
+    "id": "43",
+    "id_region": "11",
+    "metropolitan_city_code": null,
+    "name": "Macerata",
+    "automotive_acronym": "MC",
+    "latitude": 43.245932,
+    "longitude": 13.266348
+  },
+  {
+    "id": "20",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Mantova",
+    "automotive_acronym": "MN",
+    "latitude": 45.156417,
+    "longitude": 10.791375
+  },
+  {
+    "id": "45",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Massa-Carrara",
+    "automotive_acronym": "MS",
+    "latitude": 44.079325,
+    "longitude": 10.097677
+  },
+  {
+    "id": "77",
+    "id_region": "17",
+    "metropolitan_city_code": null,
+    "name": "Matera",
+    "automotive_acronym": "MT",
+    "latitude": 40.66635,
+    "longitude": 16.604364
+  },
+  {
+    "id": "106",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Medio Campidano",
+    "automotive_acronym": "VS",
+    "latitude": 39.531739,
+    "longitude": 8.704075
+  },
+  {
+    "id": "83",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Messina",
+    "automotive_acronym": "ME",
+    "latitude": 38.06324,
+    "longitude": 14.985618
+  },
+  {
+    "id": "15",
+    "id_region": "3",
+    "metropolitan_city_code": "215",
+    "name": "Milano",
+    "automotive_acronym": "MI",
+    "latitude": 45.458626,
+    "longitude": 9.181873
+  },
+  {
+    "id": "36",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Modena",
+    "automotive_acronym": "MO",
+    "latitude": 44.55138,
+    "longitude": 10.918048
+  },
+  {
+    "id": "108",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Monza e della Brianza",
+    "automotive_acronym": "MB",
+    "latitude": 45.623599,
+    "longitude": 9.258802
+  },
+  {
+    "id": "63",
+    "id_region": "15",
+    "metropolitan_city_code": "263",
+    "name": "Napoli",
+    "automotive_acronym": "NA",
+    "latitude": 40.901975,
+    "longitude": 14.332644
+  },
+  {
+    "id": "3",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Novara",
+    "automotive_acronym": "NO",
+    "latitude": 45.548513,
+    "longitude": 8.515079
+  },
+  {
+    "id": "91",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Nuoro",
+    "automotive_acronym": "NU",
+    "latitude": 40.32869,
+    "longitude": 9.456155
+  },
+  {
+    "id": "105",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Ogliastra",
+    "automotive_acronym": "OG",
+    "latitude": 39.841054,
+    "longitude": 9.456155
+  },
+  {
+    "id": "104",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Olbia-Tempio",
+    "automotive_acronym": "OT",
+    "latitude": 40.826838,
+    "longitude": 9.278558
+  },
+  {
+    "id": "95",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Oristano",
+    "automotive_acronym": "OR",
+    "latitude": 40.059907,
+    "longitude": 8.748117
+  },
+  {
+    "id": "28",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Padova",
+    "automotive_acronym": "PD",
+    "latitude": 45.366186,
+    "longitude": 11.820914
+  },
+  {
+    "id": "82",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Palermo",
+    "automotive_acronym": "PA",
+    "latitude": 38.115621,
+    "longitude": 13.361318
+  },
+  {
+    "id": "34",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Parma",
+    "automotive_acronym": "PR",
+    "latitude": 44.801532,
+    "longitude": 10.327935
+  },
+  {
+    "id": "18",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Pavia",
+    "automotive_acronym": "PV",
+    "latitude": 45.321817,
+    "longitude": 8.846624
+  },
+  {
+    "id": "54",
+    "id_region": "10",
+    "metropolitan_city_code": null,
+    "name": "Perugia",
+    "automotive_acronym": "PG",
+    "latitude": 42.938004,
+    "longitude": 12.621621
+  },
+  {
+    "id": "41",
+    "id_region": "11",
+    "metropolitan_city_code": null,
+    "name": "Pesaro e Urbino",
+    "automotive_acronym": "PU",
+    "latitude": 43.613012,
+    "longitude": 12.713512
+  },
+  {
+    "id": "68",
+    "id_region": "13",
+    "metropolitan_city_code": null,
+    "name": "Pescara",
+    "automotive_acronym": "PE",
+    "latitude": 42.357066,
+    "longitude": 13.960809
+  },
+  {
+    "id": "33",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Piacenza",
+    "automotive_acronym": "PC",
+    "latitude": 44.826311,
+    "longitude": 9.529145
+  },
+  {
+    "id": "50",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Pisa",
+    "automotive_acronym": "PI",
+    "latitude": 43.722832,
+    "longitude": 10.401719
+  },
+  {
+    "id": "47",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Pistoia",
+    "automotive_acronym": "PT",
+    "latitude": 43.954373,
+    "longitude": 10.89031
+  },
+  {
+    "id": "93",
+    "id_region": "6",
+    "metropolitan_city_code": null,
+    "name": "Pordenone",
+    "automotive_acronym": "PN",
+    "latitude": 46.037886,
+    "longitude": 12.710835
+  },
+  {
+    "id": "76",
+    "id_region": "17",
+    "metropolitan_city_code": null,
+    "name": "Potenza",
+    "automotive_acronym": "PZ",
+    "latitude": 40.418219,
+    "longitude": 15.876004
+  },
+  {
+    "id": "100",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Prato",
+    "automotive_acronym": "PO",
+    "latitude": 44.04539,
+    "longitude": 11.116445
+  },
+  {
+    "id": "88",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Ragusa",
+    "automotive_acronym": "RG",
+    "latitude": 36.930622,
+    "longitude": 14.705431
+  },
+  {
+    "id": "39",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Ravenna",
+    "automotive_acronym": "RA",
+    "latitude": 44.418444,
+    "longitude": 12.2036
+  },
+  {
+    "id": "80",
+    "id_region": "18",
+    "metropolitan_city_code": null,
+    "name": "Reggio di Calabria",
+    "automotive_acronym": "RC",
+    "latitude": 38.111301,
+    "longitude": 15.647291
+  },
+  {
+    "id": "35",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Reggio nell'Emilia",
+    "automotive_acronym": "RE",
+    "latitude": 44.585658,
+    "longitude": 10.556474
+  },
+  {
+    "id": "57",
+    "id_region": "12",
+    "metropolitan_city_code": null,
+    "name": "Rieti",
+    "automotive_acronym": "RI",
+    "latitude": 42.367441,
+    "longitude": 12.89751
+  },
+  {
+    "id": "99",
+    "id_region": "8",
+    "metropolitan_city_code": null,
+    "name": "Rimini",
+    "automotive_acronym": "RN",
+    "latitude": 43.967605,
+    "longitude": 12.575703
+  },
+  {
+    "id": "58",
+    "id_region": "12",
+    "metropolitan_city_code": "258",
+    "name": "Roma",
+    "automotive_acronym": "RM",
+    "latitude": 41.872411,
+    "longitude": 12.480225
+  },
+  {
+    "id": "29",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Rovigo",
+    "automotive_acronym": "RO",
+    "latitude": 45.024182,
+    "longitude": 11.823816
+  },
+  {
+    "id": "65",
+    "id_region": "15",
+    "metropolitan_city_code": null,
+    "name": "Salerno",
+    "automotive_acronym": "SA",
+    "latitude": 40.428783,
+    "longitude": 15.219481
+  },
+  {
+    "id": "90",
+    "id_region": "20",
+    "metropolitan_city_code": null,
+    "name": "Sassari",
+    "automotive_acronym": "SS",
+    "latitude": 40.796791,
+    "longitude": 8.575041
+  },
+  {
+    "id": "9",
+    "id_region": "7",
+    "metropolitan_city_code": null,
+    "name": "Savona",
+    "automotive_acronym": "SV",
+    "latitude": 44.2888,
+    "longitude": 8.265058
+  },
+  {
+    "id": "52",
+    "id_region": "9",
+    "metropolitan_city_code": null,
+    "name": "Siena",
+    "automotive_acronym": "SI",
+    "latitude": 43.293773,
+    "longitude": 11.433915
+  },
+  {
+    "id": "89",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Siracusa",
+    "automotive_acronym": "SR",
+    "latitude": 37.075437,
+    "longitude": 15.286593
+  },
+  {
+    "id": "14",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Sondrio",
+    "automotive_acronym": "SO",
+    "latitude": 46.172764,
+    "longitude": 9.799492
+  },
+  {
+    "id": "73",
+    "id_region": "16",
+    "metropolitan_city_code": null,
+    "name": "Taranto",
+    "automotive_acronym": "TA",
+    "latitude": 40.57409,
+    "longitude": 17.242998
+  },
+  {
+    "id": "67",
+    "id_region": "13",
+    "metropolitan_city_code": null,
+    "name": "Teramo",
+    "automotive_acronym": "TE",
+    "latitude": 42.589561,
+    "longitude": 13.636272
+  },
+  {
+    "id": "55",
+    "id_region": "10",
+    "metropolitan_city_code": null,
+    "name": "Terni",
+    "automotive_acronym": "TR",
+    "latitude": 42.563453,
+    "longitude": 12.529803
+  },
+  {
+    "id": "1",
+    "id_region": "1",
+    "metropolitan_city_code": "201",
+    "name": "Torino",
+    "automotive_acronym": "TO",
+    "latitude": 45.063299,
+    "longitude": 7.669289
+  },
+  {
+    "id": "81",
+    "id_region": "19",
+    "metropolitan_city_code": null,
+    "name": "Trapani",
+    "automotive_acronym": "TP",
+    "latitude": 37.87774,
+    "longitude": 12.713512
+  },
+  {
+    "id": "22",
+    "id_region": "4",
+    "metropolitan_city_code": null,
+    "name": "Trento",
+    "automotive_acronym": "TN",
+    "latitude": 46.0512,
+    "longitude": 11.117539
+  },
+  {
+    "id": "26",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Treviso",
+    "automotive_acronym": "TV",
+    "latitude": 45.666852,
+    "longitude": 12.243062
+  },
+  {
+    "id": "32",
+    "id_region": "6",
+    "metropolitan_city_code": null,
+    "name": "Trieste",
+    "automotive_acronym": "TS",
+    "latitude": 45.689482,
+    "longitude": 13.783307
+  },
+  {
+    "id": "30",
+    "id_region": "6",
+    "metropolitan_city_code": null,
+    "name": "Udine",
+    "automotive_acronym": "UD",
+    "latitude": 46.140797,
+    "longitude": 13.16629
+  },
+  {
+    "id": "7",
+    "id_region": "2",
+    "metropolitan_city_code": null,
+    "name": "Valle d'Aosta/Vallée d'Aoste",
+    "automotive_acronym": "AO",
+    "latitude": 45.738888,
+    "longitude": 7.426187
+  },
+  {
+    "id": "12",
+    "id_region": "3",
+    "metropolitan_city_code": null,
+    "name": "Varese",
+    "automotive_acronym": "VA",
+    "latitude": 45.799026,
+    "longitude": 8.730095
+  },
+  {
+    "id": "27",
+    "id_region": "5",
+    "metropolitan_city_code": "227",
+    "name": "Venezia",
+    "automotive_acronym": "VE",
+    "latitude": 45.493048,
+    "longitude": 12.4177
+  },
+  {
+    "id": "103",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Verbano-Cusio-Ossola",
+    "automotive_acronym": "VB",
+    "latitude": 46.139969,
+    "longitude": 8.272465
+  },
+  {
+    "id": "2",
+    "id_region": "1",
+    "metropolitan_city_code": null,
+    "name": "Vercelli",
+    "automotive_acronym": "VC",
+    "latitude": 45.32022,
+    "longitude": 8.418508
+  },
+  {
+    "id": "23",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Verona",
+    "automotive_acronym": "VR",
+    "latitude": 45.44185,
+    "longitude": 11.073532
+  },
+  {
+    "id": "102",
+    "id_region": "18",
+    "metropolitan_city_code": null,
+    "name": "Vibo Valentia",
+    "automotive_acronym": "VV",
+    "latitude": 38.637857,
+    "longitude": 16.205148
+  },
+  {
+    "id": "24",
+    "id_region": "5",
+    "metropolitan_city_code": null,
+    "name": "Vicenza",
+    "automotive_acronym": "VI",
+    "latitude": 45.545479,
+    "longitude": 11.535421
+  },
+  {
+    "id": "56",
+    "id_region": "12",
+    "metropolitan_city_code": null,
+    "name": "Viterbo",
+    "automotive_acronym": "VT",
+    "latitude": 42.420677,
+    "longitude": 12.107669
+  }
+]

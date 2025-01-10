@@ -1,0 +1,42 @@
+<!-- create_product.html -->
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    #card {
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Choose payment broker</h2>
+                </div>
+                <!--<form action="{#% url 'getpaid:create-payment' %#}" method="POST"></form>-->
+                <form action="{% url 'payment' %}" method="POST">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <div class="card-footer"> 
+                        <button class="btn btn-primary mt-3" type="submit">Checkout</button>
+                        <a class="btn btn-secondary mt-3" href="{% url 'product_list' %}">Annulla</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

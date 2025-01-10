@@ -1,0 +1,108 @@
+{% extends "dashboard/layout.html" %}
+
+{% load static %}
+
+{% block title %}Signup Enterprise{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Header Signup Enterprise -->
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h2>{{ title }}</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Campo Number Job Request Desired Per Week -->
+        <div class="form-group">
+          <label for="id_number_job_request_desidered_per_week">Number of Job Requests Desired Per Week</label>
+          {{ form.number_job_request_desidered_per_week }}
+        </div>
+
+        <!-- Campo Have Office Shop To Receive Customers -->
+        <div class="form-group">
+          <label for="id_have_office_shop_to_receive_customers">Do you have an office/shop to receive customers?</label>
+          {{ form.have_office_shop_to_receive_customers }}
+        </div>
+
+        <!-- Campo Google Maps Link -->
+        <div class="form-group">
+          <label for="id_link_google_maps">Google Maps Link</label>
+          {{ form.link_google_maps }}
+        </div>
+
+        <!-- Campo Contact Number -->
+        <div class="form-group">
+          <label for="id_contact_number">Contact Number</label>
+          {{ form.contact_number }}
+        </div>
+
+        <!-- Campo Chamber Commerce Certificate -->
+        <div class="form-group">
+          <label for="id_chamber_commerce_certificate">Chamber of Commerce Certificate</label>
+          {{ form.chamber_commerce_certificate }}
+        </div>
+
+        <!-- Campo Insurance Policy Certificate -->
+        <div class="form-group">
+          <label for="id_insurance_policy_certificate">Insurance Policy Certificate</label>
+          {{ form.insurance_policy_certificate }}
+        </div>
+
+        <!-- Campo Region -->
+        <div class="form-group">
+          <label for="id_region">Region</label>
+          <select name="region" id="id_region" class="form-control">
+            {% for region in form.region.field.queryset %}
+              <option value="{{ region.id }}" {% if form.region.value == region.id %}selected{% endif %}>
+                {{ region.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+
+        <!-- Campo Sectors (Checkboxes) -->
+        <div class="form-group">
+          <label for="id_sectors">Sectors</label>
+          <div class="row" style="margin-left: 25px;">
+            {% for sector in form.sectors.field.queryset %}
+            <div class="form-check col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+              <input class="form-check-input" type="checkbox" name="sectors" value="{{ sector.id }}" {% if sector.id in form.sectors.value %}checked{% endif %}>
+              <label class="form-check-label">{{ sector.name }}</label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+
+        <!-- Campo Holder -->
+        <div class="form-group">
+          <label for="id_holder">Holder</label>
+          {{ form.holder }}
+        </div>
+
+        <!-- Campo Company Name -->
+        <div class="form-group">
+          <label for="id_company_name">Company Name</label>
+          {{ form.company_name }}
+        </div>
+
+        <!-- Campo Email -->
+        <div class="form-group">
+          <label for="id_email">Email</label>
+          {{ form.email }}
+        </div>
+
+        <!-- Pulsante Salva -->
+        <button class="btn btn-primary btn-lg me-2" type="submit">Salva</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,216 @@
+{% extends "dashboard/layout.html" %}
+
+{% load static %}
+
+{% block title %}Pagina Profilo - {{ user.first_name }}{% endblock %}
+
+{% block styles %}
+<!-- Aggiungere stili personalizzati per la pagina -->
+<style>
+    .profile-header {
+        background-color: #f8f9fa;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-header img {
+        height: 100%; 
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+ 
+
+    .section-title {
+        font-weight: bold;
+        color: #2d3e50;
+        margin-top: 20px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .profile-stat {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .profile-stat-value {
+        font-size: 18px;
+        color: #28a745;
+    }
+
+    .card {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn-custom {
+        background-color: #0062cc;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .btn-custom:hover {
+        background-color: #0056b3;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .copy-link-btn {
+        margin-top: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Header Profilo -->
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="profile-header-img img-fluid rounded-circle"
+                sizes="150x150">
+            <h2>{{ user.first_name|default:"Guest" }} {{ user.last_name|default:"" }}</h2>
+            <p class="text-muted">Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi referral.</p>
+            <p>Ti sei registrato con il codice referral:
+                {% if referrer_code %}
+                {{ referrer_code }}
+                {% else %}
+                Nessuno
+                {% endif %} </p>
+
+            <h4>Il tuo codice referral</h4>
+            {% if referral_code %}
+            <div class="input-group">
+                <input type="text" class="form-control" id="referral-code" value="{{ referral_code }}" readonly>
+                <button class="btn btn-primary" id="copy-code"><i class="bi bi-clipboard"></i></button>
+            </div>
+            {% else %}
+            <p class="text-muted">Non hai un codice referral disponibile.</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+    {% if messages %}
+    <div class="alert alert-dismissible fade show mt-3">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Modifica Dati Personali -->
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="section-title mb-4">Modifica Dati Personali</h4>
+                    <form method="POST" action="{% url 'core_profile' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- User form -->
+                        {{ form.as_p }}
+
+                        <!-- Profile form -->
+                        {{ profile_form.as_p }}
+
+                        <!-- Profile Base form -->
+                        {{ profile_base_form.as_p }}
+
+                        <!-- Profile Business form -->
+                        {#{ profile_business_form.as_p }#}
+
+                        <!-- Pulsanti -->
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg me-2">Salva Modifiche</button>
+                            <button type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dashboard/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'dashboard/js/off-canvas.js' %}"></script>
+<script src="{% static 'dashboard/js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'dashboard/js/template.js' %}"></script>
+<script src="{% static 'dashboard/js/settings.js' %}"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Funzione per copiare il codice referral
+        $('#copy-code').click(function () {
+            var copyText = $('#referral-code')[0];
+            copyText.select();
+
+            // Cambia l'icona del bottone in "clipboard-check"
+            var copyCode = $('#copy-code');
+            copyCode.html('<i class="bi bi-clipboard-check"></i>');  // Cambia l'icona
+
+            // Esegui il comando per copiare il testo
+            document.execCommand('copy');
+
+            // Dopo 2 secondi (2000 ms), ripristina l'icona originale
+            setTimeout(function () {
+                copyCode.html('<i class="bi bi-clipboard"></i>');  // Ripristina il testo o l'icona originale
+            }, 2000);  // Tempo di attesa in millisecondi (2 secondi)
+        });
+
+        // Funzione per caricare i dati dalla backend
+        function loadUserData() {
+            const response = fetch(`${window.location.protocol}://${window.location.host}/get-level-users/`);  // URL delle API backend
+            const users = response.json();
+
+            console.log(users);
+            let tableBody = document.getElementById('user-table-tbody');
+            tableBody.innerHTML = '';  // Svuota la tabella esistente
+
+            // Aggiungi una riga per ogni utente
+            users.forEach(user => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${user.first_name}</td>
+                    <td>${user.last_name}</td>
+                    <td>${user.username}</td>
+                    <td>${user.level}</td>
+                `;
+
+                console.log(row);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Carica i dati degli utenti quando la pagina viene caricata
+        //loadUserData(); // document.addEventListener('DOMContentLoaded', loadUserData);
+        // Carica i dati all'avvio
+        // loadProfileData();
+    });
+</script>
+{% endblock %}

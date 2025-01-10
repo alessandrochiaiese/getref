@@ -1,0 +1,193 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %} Register Page {% endblock title%}
+
+{% block styles %}
+<!-- plugins:css -->
+<link rel="stylesheet" href="{% static 'dashboard/vendors/feather/feather.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/vendors/ti-icons/css/themify-icons.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/vendors/css/vendor.bundle.base.css' %}">
+<!-- inject:css -->
+<link rel="stylesheet" href="{% static 'dashboard/css/vertical-layout-light/style.css' %}">
+<!-- endinject -->
+<link rel="shortcut icon" href="{% static 'dashboard/images/favicon.png' %}" />
+<style>
+  /* Full height for the page */
+  .full-page-wrapper {
+    height: 100vh;
+  }
+
+  /* Flexbox layout for centering the content */
+  .auth {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-form-light {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Style for the logo section */
+  .logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f4f5f7;
+  }
+
+  .logo-section img {
+    max-width: 250px;
+  }
+
+  /* Responsive columns */
+  @media (min-width: 768px) {
+    .login-form-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 50%;  /* Each column takes half the width */
+    }
+    .logo-section {
+      width: 50%;
+    }
+  }
+
+  /* On small screens, the layout should stack */
+  @media (max-width: 768px) {
+    .login-form-wrapper,
+    .logo-section {
+      width: 100%;  /* Each section takes full width */
+    }
+  }
+
+  /* Optional: Add a subtle effect for the form when hovering */
+  .auth-form-light:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+  <div class="content-wrapper d-flex align-items-center auth px-0">
+    <div class="row w-100 mx-0">
+      <div class="col-lg-4 mx-auto">
+        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+          <div class="brand-logo">
+            <img src="{% static 'dashboard/images/logo.png' %}" alt="logo">
+          </div>
+          <h4>New here?</h4>
+          <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+
+          <!-- Gestione errori del form -->
+          {% if form.errors %}
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              <div id="form_errors">
+                  {% for key, value in form.errors.items %}
+                      <strong>{{ value }}</strong>
+                  {% endfor %}
+              </div>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% endif %}
+
+          <form method="POST" class="pt-3">
+            {% csrf_token %} 
+            <!-- Nome -->
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">First Name</label>
+                  {{ form.first_name }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">Last Name</label>
+                  {{ form.last_name }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Username e Email -->
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">Username</label>
+                  {{ form.username }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">Email</label>
+                  {{ form.email }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">Password</label>
+                  {{ form.password1 }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="small mb-1">Confirm Password</label>
+                  {{ form.password2 }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Termini e condizioni -->
+            <div class="mb-4">
+              <div class="form-check">
+                <label class="form-check-label text-muted">
+                  <input type="checkbox" class="form-check-input" name="agree">
+                  I agree to all Terms & Conditions
+                </label>
+              </div>
+            </div>
+
+            <!-- Bottone per registrarsi -->
+            <div class="mt-3">
+              <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                SIGN UP
+              </button>
+            </div>
+
+            <!-- Link per login -->
+            <div class="text-center mt-4 font-weight-light">
+              Already have an account? <a href="{% url 'core_login' %}" class="text-primary">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<!-- plugins:js -->
+<script src="{% static 'dashboard/vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- inject:js -->
+<script src="{% static 'dashboard/js/off-canvas.js' %}"></script>
+<script src="{% static 'dashboard/js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'dashboard/js/template.js' %}"></script>
+<script src="{% static 'dashboard/js/settings.js' %}"></script>
+<script src="{% static 'dashboard/js/todolist.js' %}"></script>
+{% endblock %}

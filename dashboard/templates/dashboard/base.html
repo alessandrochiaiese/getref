@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %} {% endblock %} </title>
+
+    <!-- CSS Plugin e Custom -->
+    <link rel="stylesheet" href="{% static 'dashboard/vendors/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/vendors/ti-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/vertical-layout-light/style.css' %}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Logo -->
+    <link rel="icon" href="https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color-150x150.png" sizes="32x32" />
+    <link rel="icon" href="https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color.png" />
+    <meta name="msapplication-TileImage" content="https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color.png" />
+   
+    {% block styles %} {% endblock %}  
+</head>
+
+<body>
+    <div class="container-scroller">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- container-scroller -->
+    {% block scripts %} {% endblock %} 
+</body>
+
+</html>
