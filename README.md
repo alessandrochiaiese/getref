@@ -67,13 +67,23 @@ Accettiamo contributi da parte di chiunque sia interessato a migliorare questo p
 
 ## Forka il repository.
 
-## Crea un nuovo branch con una descrizione significativa: git checkout -b feature/my-new-feature
+# Crea un nuovo branch con una descrizione significativa:
 
-## Commit delle modifiche: git commit -m 'Add some feature'
+```bash
+git checkout -b feature/my-new-feature
+```
 
-## Push al branch: git push origin feature/my-new-feature
+# Commit delle modifiche: 
 
-## Apri una Pull Request.
+```bash
+git commit -m 'Add some feature'
+```
+
+# Push al branch:
+```bash
+git push origin feature/my-new-feature
+```
+# Apri una Pull Request.
 
 ## License
 Questo progetto è distribuito sotto la licenza MIT. Vedi il file LICENSE per i dettagli.
