@@ -1,34 +1,93 @@
 # getref
- 
-## HOW TO START
-# Create Env
-<code>python -m venv env</code>
-<code>env\scripts\activate</code>
-<code>pip install -r requirements.txt</code>
+ # Referral Code System
 
-# Create Migrations
-<code>python manage.py makemigrations referral</code>
-<code>python manage.py makemigrations affiliate</code>
-<code>python manage.py makemigrations dashboard</code>
-<code>python manage.py migrate</code>
-<code>python manage.py collectstatic</code>
+## Description
+> Questo progetto è un sistema di codici referral sviluppato con Django e Bootstrap, che permette agli utenti di generare e gestire codici referral per incentivare la condivisione e l'espansione della rete utente.
 
+## Features
+- **Registrazione e accesso degli utenti**
+- **Generazione e gestione dei codici referral**
+- **Tracciamento delle referenze e statistiche**
+- **Dashboard interattiva per amministratori e utenti**
+- **Supporto per settori e città multiple**
 
-# Populate Cities and Sectors
-<code>python manage.py populate_cities</code>
-<code>python manage.py populate_sectors</code>
-<code>python manage.py populate_cities</code>
-<code>python manage.py populate_sectors</code>
+## Tech Stack
+- **Frontend:** HTML, CSS, Bootstrap
+- **Backend:** Django, Python
+- **Database:** MySQL
+- **Version Control:** Git
+- **Deployment:** Heroku (o altra piattaforma a tua scelta)
 
-# Start Web-Project
-<code>env\scripts\activate</code>
-<code>python manage.py runserver</code>
+## Prerequisites
+Assicurati di avere questi strumenti installati:
+- Python 3.x
+- pip
+- MySQL
 
-<h3 align="center">A passionate frontend developer from India</h3>
+## Installation
+### Create Env
+```bash
+python -m venv env
+env\scripts\activate
+pip install -r requirements.txt
+```
+## Create Migrations
+```bash
+python manage.py makemigrations referral
+python manage.py makemigrations affiliate
+python manage.py makemigrations dashboard
+python manage.py migrate
+python manage.py collectstatic
+```
+## Populate Cities and Sectors
+```bash
+python manage.py populate_cities
+python manage.py populate_sectors
+python manage.py populate_cities
+python manage.py populate_sectors
+```
+## Start Web-Project
+```bash
+env\scripts\activate
+python manage.py runserver
+```
+## Usage
+Registra un nuovo utente.
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-</p>
+Accedi con le credenziali create.
 
-<h3 align="left">Languages and Tools:</h3>
+Genera un codice referral dal dashboard utente.
+
+Condividi il codice referral con amici e familiari.
+
+Monitora le referenze e le statistiche dal tuo dashboard.
+
+## Contributing
+Accettiamo contributi da parte di chiunque sia interessato a migliorare questo progetto. Segui questi passaggi per contribuire:
+
+## Forka il repository.
+
+## Crea un nuovo branch con una descrizione significativa: git checkout -b feature/my-new-feature
+
+## Commit delle modifiche: git commit -m 'Add some feature'
+
+## Push al branch: git push origin feature/my-new-feature
+
+## Apri una Pull Request.
+
+## License
+Questo progetto è distribuito sotto la licenza MIT. Vedi il file LICENSE per i dettagli.
+
+## Acknowledgements
+Grazie a tutti i contributori.
+
+## Ringraziamenti speciali a [nome del mentore, team, o community].
+
+## Contact
+Se hai domande o suggerimenti, puoi contattarmi a [tuo email] o attraverso [tuo LinkedIn/profilo social].
+
+## Connect with me
+<p align="left"> </p>
+
+## Languages and Tools
 <p align="left"> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://www.selenium.dev" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" width="40" height="40"/> </a> </p>
