@@ -139,13 +139,26 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 
 MAX_CONN_AGE = 600
 
+# Local DB
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
+# MySQL DB
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'getcall$default', #'getcall$mydatabase',  # Sostituisci 'mydatabase' con il nome del tuo database
+        'USER': 'getcall',
+        'PASSWORD': config('DB_DATABASE'), #'your_password',  # Sostituisci 'your_password' con la tua password
+        'HOST': 'getcall.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
- 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
