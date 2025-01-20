@@ -151,10 +151,10 @@ MAX_CONN_AGE = 600
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'getcall$default', #'getcall$mydatabase',  # Sostituisci 'mydatabase' con il nome del tuo database
-        'USER': 'getcall',
-        'PASSWORD': config('DB_DATABASE'), #'your_password',  # Sostituisci 'your_password' con la tua password
-        'HOST': 'getcall.mysql.pythonanywhere-services.com',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
         'PORT': '3306',
     }
 }
