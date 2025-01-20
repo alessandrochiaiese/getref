@@ -11,3 +11,9 @@ class ProductTag(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        ordering = ("-created_at",)
+        db_table = 'product_tags'
+        verbose_name = 'ProductTag'
+        verbose_name_plural = 'ProductTags'
