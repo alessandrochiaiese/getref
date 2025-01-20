@@ -1,11 +1,7 @@
-#pip install django-getpaid
-#pip install django-getpaid-payu
-
 from django.urls import reverse
-
 from getref import settings
-#from getpaid.abstracts import AbstractOrder
-from django.db import models
+from django.db import models 
+from django.contrib.auth.models import User
 
 class CustomOrder(models.Model):
     amount = models.DecimalField(decimal_places=2, max_digits=8)

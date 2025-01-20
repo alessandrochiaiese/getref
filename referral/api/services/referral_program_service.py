@@ -5,12 +5,8 @@ import logging
 
 from typing import List
 from dashboard.models.region import Region
-from referral.abstracts.test import ReferralCode
-from referral.models import ReferralProgram
+from referral.models import *
 from django.contrib.auth import get_user_model
-
-from referral.models.referral_stats import ReferralStats
-from referral.models.referral_user import ReferralUser
 
 User = get_user_model()
 
