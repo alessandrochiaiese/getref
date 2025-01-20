@@ -2,7 +2,7 @@ import datetime
 import logging
 from typing import List
 from django.http import JsonResponse
-from accounts.models.user import User
+
 from dashboard.models.profile import Profile
 from dashboard.api.serializers import ProfileSerializer 
 

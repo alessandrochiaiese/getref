@@ -9,10 +9,7 @@ from referral.api.views.views_referral_stats import ReferralStatsAPIView
 from referral.api.views.views_referral_transaction import ReferralTransactionAPIView
 
 urlpatterns = [
-    #path("referral/program/", ReferralProgramView.as_view(), name="referral-program"),
-    #path("referral/", ReferralView.as_view(), name="referral"),
-    #path("referral/reward/<int:referral_id>/", ReferralRewardView.as_view(), name="referral-reward"),
-
+    
     path('audits/', ReferralAuditAPIView.as_view(), name='referral_audits'),
     path('audits/<int:referral_audit_id>/', ReferralAuditAPIView.as_view(), name='referral_audit'),
 

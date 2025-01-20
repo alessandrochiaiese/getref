@@ -1,4 +1,4 @@
-# affiliate_system/serializers.py
+# dashboard/api/serializers.py
 
 from rest_framework import serializers
 from dashboard.models import Profile

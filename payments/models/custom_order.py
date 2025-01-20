@@ -2,7 +2,7 @@
 #pip install django-getpaid-payu
 
 from django.urls import reverse
-from accounts.models.user import User
+
 from getref import settings
 #from getpaid.abstracts import AbstractOrder
 from django.db import models

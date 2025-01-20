@@ -1,8 +1,5 @@
 from django import forms
-
-from payments.models.payment_method import PaymentMethod
-
-from .models import Product, Order, OrderItem
+from payments.models import *
 
 class ProductForm(forms.ModelForm):
     class Meta:

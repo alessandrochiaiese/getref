@@ -143,24 +143,3 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
 ]+ static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-
-"""urlpatterns = [
-    path('', HomeView.as_view(), name='core_home'),
-    
-    path('', home, name='home'), 
-    path('home/', home, name='home'), 
-    path('pages/charts/chartjs/', charts_chartjs, name='charts'), 
-    path('documentation/', documentation, name='documentation'), 
-    path('pages/forms/basic_elements/', forms_basic_elements, name='forms_basic_elements'), 
-    path('icons_mdi/', icons_mdi, name='icons_mdi'), 
-    path('error_404/', error_404, name='error-404'), 
-    path('error_500/', error_500, name='error-500'), 
-    #path('login/', login, name='login'), 
-    #path('register/', register, name='register'), 
-    path('tables_basic_table/', tables_basic_table, name='basic_table'), 
-    path('pages/ui-features/buttons/', ui_features_buttons, name='ui_features_buttons'), 
-    path('pages/ui-features/dropdowns/', ui_dropdowns, name='ui_features_dropdowns'), 
-    path('pages/ui-features/typography/', ui_features_typography, name='ui_features_typography'), 
-
-] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-"""

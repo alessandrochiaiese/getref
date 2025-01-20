@@ -30,9 +30,6 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('process_payment/<str:client_secret>/', views.process_payment, name='process_payment'),
     
-    #path("", ProductListView.as_view(), name="product-list"),
-    #path("<int:pk>/", ProductDetailView.as_view(), name="product-detail"),
-
     path('product/list/', ProductListView.as_view(), name='product_list'),
     path('product/create/', ProductCreateView.as_view(), name='create_product'), 
     path('product/<int:product_id>/update/', ProductUpdateView.as_view(), name='update_product'),

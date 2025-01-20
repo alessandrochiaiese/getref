@@ -1,18 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from referral.models import Referral, ReferralReward, ReferralProgram
-from referral.models.referral_audit import ReferralAudit
-from referral.models.referral_bonus import ReferralBonus
-from referral.models.referral_campaign import ReferralCampaign
-from referral.models.referral_code import ReferralCode
-from referral.models.referral_conversion import ReferralConversion
-from referral.models.referral_engagement import ReferralEngagement
-from referral.models.referral_notification import ReferralNotification
-from referral.models.referral_program_partecipation import ReferralProgramPartecipation
-from referral.models.referral_settings import ReferralSettings
-from referral.models.referral_stats import ReferralStats
-from referral.models.referral_transaction import ReferralTransaction
-from referral.models.referral_user import ReferralUser
+from referral.models import *
  
 class ReferralAuditForm(forms.ModelForm):
     class Meta:

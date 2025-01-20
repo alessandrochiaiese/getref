@@ -1,4 +1,4 @@
-# referral_system/serializers.py
+# referral/api/serializers.py
 
 from rest_framework import serializers 
 from referral.models import *

@@ -16,27 +16,20 @@ Including another URLconf
 from django.contrib.auth.models import User, Group
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.urls import include, path, re_path as url 
-from affiliate.views.views_home import index_view
+from django.urls import include, path, re_path as url
 from getref import settings
-
-#schema_view = get_swagger_view(title='Pastebin API')
 from rest_framework import generics, permissions, serializers
-
 from oauth2_provider import urls as oauth2_urls
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
-
-
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Get Call API",
+        title="Get Ref API",
         default_version='v1',
-        description="Get Call is a web-server RESTful ",
-        terms_of_service="https://www.google.com/policies/terms/",
-        #contact=openapi.Contact(email="contact@local.local"),
+        description="Get Ref is a web-server RESTful ",
+        terms_of_service="https://www.google.com/policies/terms/", 
         contact=openapi.Contact(email="alessandro.chiaiese@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
@@ -51,13 +44,8 @@ urlpatterns = [
     # accounts 
     path('', include('accounts.urls')),
     # apps   
-    path('', include('dashboard.urls')),
-    path('', include('affiliate.urls')),
-    path('', include('referral.urls')), 
-    #path('', include('subscriptions.urls')), 
-    
-    #path('/', index_view, name='home'),
-    #path('home/', index_view, name='home2'),
+    path('', include('dashboard.urls')), 
+    path('', include('referral.urls')),  
     
     # stripe
     path('', include('payments.urls')),
@@ -65,9 +53,7 @@ urlpatterns = [
     # health
     path('health/', include('health_check.urls')),
     
-    # swagger
-    #path('api/documentation/', schema_view),
-    #url(r'^api/v0/$', schema_view), 
+    # swagger 
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

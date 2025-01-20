@@ -22,11 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
  
 
 
-#!pip install python-dotenv
-#from dotenv import load_dotenv
-
-#load_dotenv()  # take environment variables from .env.
- 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -35,10 +30,10 @@ from decouple import config
 # Now you can access your environment variables using os.getenv 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY") #'j4t8b-htj3%e0vi!eazyysx%tch$w3#u=*@c$3njqc9&!j!x9r'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG") # True #
+DEBUG = config("DEBUG")
 
 # Stripe configuration 
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
@@ -53,8 +48,7 @@ OAUTH2_CLIENT_ID=config('OAUTH2_CLIENT_ID')
 OAUTH2_CLIENT_SECRET=config('OAUTH2_CLIENT_SECRET')
 
 
-#ALLOWED_HOSTS = ['*'] #["127.0.0.1", "localhost"]
-ALLOWED_HOSTS = ["getcall.pythonanywhere.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["getcall.pythonanywhere.com", "127.0.0.1", "localhost"] # ['*']  # ["127.0.0.1", "localhost"]
 
  
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx',
@@ -75,9 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'dashboard',
-    'affiliate',
     'referral',
-    #'subscriptions',
     'health_check',                             # the default health check
     'health_check.db',                          # stock Django health checkers
     'health_check.cache',                       # required if you use cache
@@ -87,10 +79,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders', 
     'drf_yasg',
-    "accounts",  # Django users
+    "accounts",                                 # Django users
     'social_django', 
     # Local
-    'payments.apps.PaymentsConfig', # new 
+    'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +97,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # ... custom middleware ...
-    'affiliate.middleware.affiliate_cookie_middleware.AffiliateCookieMiddleware',
     'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
 
@@ -229,24 +220,23 @@ SOCIAL_AUTH_GITHUB_SECRET = str(config('GITHUB_SECRET', ""))
 # social auth configs for google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(config('GOOGLE_KEY', ""))
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(config('GOOGLE_SECRET', ""))
-"""
-# email configs
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
-EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
-"""
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-"""
+
 if not DEBUG:
+    # email configs
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
+    EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
+    SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+    SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
     # Security settings 
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -260,7 +250,8 @@ if not DEBUG:
 
     # Aggiungere automaticamente lo schema a ogni dominio
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
-"""
+
+# OAuth2 Provider
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000, 
     # this is the list of available scopes

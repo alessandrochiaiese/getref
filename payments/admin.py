@@ -1,8 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-
-from .models import Price, Product, ProductTag, CustomOrder, Order
+from .models import *
 
 class PriceAdmin(admin.StackedInline):
     model = Price

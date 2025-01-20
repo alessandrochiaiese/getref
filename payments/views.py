@@ -1,4 +1,3 @@
-from accounts.models.user import User
 from django.conf import settings
 from django.http.response import JsonResponse, HttpResponse
 from django.views import View
@@ -6,17 +5,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, FormView 
 from django.views.generic.base import TemplateView
-
-
-from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.urls import reverse_lazy, reverse
-   
-from django.shortcuts import get_object_or_404, redirect 
-from .forms import OrderItemForm, OrderForm, ProductForm, PaymentMethodForm
-
-from .models import Order, OrderItem, Price, Product, PaymentMethod
-
+from django.shortcuts import get_object_or_404, render, redirect 
+from payments.forms import *
+from payments.models import *
 import stripe
 
 class HomePageView(TemplateView):
@@ -219,48 +212,6 @@ def stripe_webhook(request):
 #####################
 # Product and Order #
 #####################
- 
-"""
-def create_product(request):
-    if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('product_list')  # Redirect to the product list page
-    else:
-        form = ProductForm()
-    return render(request, 'payments/create_product.html', {'form': form})
-
-
-
-def create_order(request):
-    if request.method == "POST":
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            order = form.save()
-            # Optionally, calculate the total price here
-            order.calculate_total_price()
-            return redirect('order_detail', order_id=order.id)
-    else:
-        form = OrderForm()
-    return render(request, 'payments/create_order.html', {'form': form})
-
-
-
-def add_item_to_order(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    if request.method == "POST":
-        form = OrderItemForm(request.POST)
-        if form.is_valid():
-            order_item = form.save(commit=False)
-            order_item.order = order
-            order_item.save()
-            order.calculate_total_price()  # Recalculate the total price of the order
-            return redirect('order_detail', order_id=order.id)
-    else:
-        form = OrderItemForm()
-    return render(request, 'payments/add_item_to_order.html', {'form': form, 'order': order})
-"""
 
 class ProductListView(ListView):
     model = Product  # Modello associato alla vista
