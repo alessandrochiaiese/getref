@@ -94,7 +94,7 @@ Grazie a tutti i contributori.
 ## Ringraziamenti speciali a AnySolution.
 
 ## Contact
-Se hai domande o suggerimenti, puoi contattarmi a [info@getcall.it] o attraverso [https://www.linkedin.com/company/anysolution-it].
+Se hai domande o suggerimenti, puoi contattarmi a info@getcall.it o attraverso https://www.linkedin.com/company/anysolution-it.
 
 ## Connect with me
 <p align="left"> </p>
