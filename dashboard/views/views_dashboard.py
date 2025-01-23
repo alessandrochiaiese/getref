@@ -1,24 +1,13 @@
 
 from django.http import JsonResponse
-from django.views import View
-from django.views.generic import TemplateView 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
-from dashboard.models.profile import Profile  
-from dashboard.utils import calculate_user_level, get_tree_referred, tree_to_list
-from referral.models.referral import Referral
-from referral.models.referral_code import ReferralCode 
-  
-from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required 
-from django.views.generic import TemplateView 
-from django.utils.decorators import method_decorator 
-from referral.models import *
-from referral.forms import *
+from django.views import View 
+from django.views.generic import TemplateView
+from dashboard.models import * 
 from dashboard.forms import * 
- 
+from dashboard.utils import calculate_user_level, get_tree_referred, tree_to_list
 
 User = get_user_model()
 
@@ -120,88 +109,6 @@ class MasterAccountsView(TemplateView):
     def get_object(self, queryset=None):
         # Ritorna l'oggetto corrispondente all'utente autenticato
         return self.request.user
-    
-    """
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Get the user 
-        user=self.request.user#user = User.objects.filter(user=self.request.user).first()
-
-        # Get the user's profile
-        profile = Profile.objects.filter(user=user).first()
-
-        # Get the referral code for the user
-        referral_code = ReferralCode.objects.filter(user=user).first()
- 
-        # Get the user's referral information
-        try:
-            referral = Referral.objects.filter(referrer=user).first()
-        except Exception:
-            referrer = None
-
-        referrer = None
-        referrer_code = None
-        # Get the referral code for the referrer
-        try:
-            referrer = ReferralCode.objects.filter(user=referral.referrer).first()
-        except Exception:
-            referrer = None
-
-        # If the referrer exists, get the referrer code
-        if referrer:
-            referrer_code = referrer.code
-        else:
-            referrer_code = None
- 
-        # Add the referral code to the context
-        try: 
-            context['referral_code'] = referral_code.code
-        except AttributeError:
-            context['referral_code'] = None
-        
-        # Add the referrer code to the context
-        try: 
-            context['referrer_code'] = referrer_code
-        except AttributeError:
-            context['referrer_code'] = None
-
-        
-        # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
-
-        referreds = []
-        tree_referred = get_tree_referred(user, level=0)
-        list_referred = tree_to_list(tree_referred, referreds)
-        
-        print(tree_referred)
-        print(list_referred)
-        context['referred_leveled_users'] = list_referred
-        
-        return context
-    """
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

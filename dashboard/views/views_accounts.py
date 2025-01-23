@@ -1,20 +1,14 @@
 
-from django.shortcuts import redirect
-from django.views.generic import TemplateView 
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import login, logout
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView 
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy 
 from django.utils.crypto import get_random_string 
-from referral.models import *
-from referral.forms import *
-from referral.models.referral import Referral
-from referral.models.referral_code import ReferralCode  
+from dashboard.models import *   
 from dashboard.forms import * 
 
 

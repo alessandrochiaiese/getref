@@ -1,14 +1,8 @@
  
-from django.contrib.auth import get_user_model 
-from referral.models.referral import Referral
-from referral.models.referral_code import ReferralCode 
-  
- 
-from django.contrib.auth import get_user_model 
+from django.contrib.auth import get_user_model   
 from django.http import JsonResponse 
 from django.utils import timezone 
-from referral.models import *
-from referral.forms import *
+from dashboard.models import *
 from dashboard.forms import * 
  
 

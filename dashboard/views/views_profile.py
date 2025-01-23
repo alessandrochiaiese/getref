@@ -1,7 +1,6 @@
 
 from django.http import JsonResponse 
-from django.db.models import Sum
-from django.shortcuts import redirect
+from django.db.models import Sum 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -10,10 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views import View 
 from django.views.generic.edit import UpdateView 
 from dashboard.utils import get_tree_referred, tree_to_list
-from referral.models import *
-from referral.forms import *
-from referral.models.referral import Referral
-from referral.models.referral_code import ReferralCode  
+from dashboard.models import *
 from dashboard.forms import * 
 
 #####################

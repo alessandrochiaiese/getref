@@ -2,9 +2,9 @@ import datetime
 import logging
 from typing import List
 from django.http import JsonResponse
-
 from dashboard.models.profile import Profile
 from dashboard.api.serializers import ProfileSerializer 
+from django.contrib.auth.models import User
 
 # Set up a logger
 logger = logging.getLogger(__name__)

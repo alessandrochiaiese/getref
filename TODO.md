@@ -14,8 +14,8 @@ TODO:
 [ ] Track payment (Debit card In o OUT), se è completato è cliente 100% quindi la commissione va a chi l ha invitato
 [ ] Creazione di Form a fasi tipo 4 fasi, la prima registrazione, seconda registrazione dell'azienda, terza per la aggiunta di un metodo di pagamento
 [ ] sistema dell'email, anche nela registrazione per confermare, ma anche un email del cliente prerogativa per chiedere di fare un azione un pagamento o per le condizioni da confermare
-[X] Auth Github (NOT USEFUL)
-[ ] Auth Google
+[\] Auth Github (NOT USEFUL)
+[\] Auth Google
 [ ] Wordpress + Stripe Plugin
 [ ]
 
@@ -32,7 +32,10 @@ TODO:
 [X] Populate Sectors
 [X] Signup Enterprise Page
 
-
+23.01.2025
+[ ] Move important models and middleware from referral to dashboard
+[ ] Delete referral app
+[ ] Test
 
 https://aisaastemplate.com/blog/django-stripe-integration/
 https://github.com/testdrivenio/django-stripe-checkout

@@ -45,7 +45,6 @@ urlpatterns = [
     path('', include('accounts.urls')),
     # apps   
     path('', include('dashboard.urls')), 
-    path('', include('referral.urls')),  
     
     # stripe
     path('', include('payments.urls')),

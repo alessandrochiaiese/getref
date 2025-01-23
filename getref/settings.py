@@ -68,8 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
-    'dashboard',
-    'referral',
+    'dashboard', 
     'health_check',                             # the default health check
     'health_check.db',                          # stock Django health checkers
     'health_check.cache',                       # required if you use cache
@@ -97,7 +96,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # ... custom middleware ...
-    'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
+    'dashboard.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allows requests from all origins
@@ -140,25 +139,25 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 MAX_CONN_AGE = 600
 
 # Local DB
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
-# MySQL DB
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': '3306',
-        'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'" }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# MySQL DB
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': config('DATABASE_NAME'),
+#        'USER': config('DATABASE_USER'),
+#        'PASSWORD': config('DATABASE_PASSWORD'),
+#        'HOST': config('DATABASE_HOST'),
+#        'PORT': '3306',
+#        'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'" }
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
