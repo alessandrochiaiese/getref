@@ -25,6 +25,30 @@ Assicurati di avere questi strumenti installati:
 - MySQL
 
 ## Installation
+### Create Env (on PythonAnywhere)
+```bash
+python -m venv /home/getcall/.virtualenvs/getcall.pythonanywhere.com
+source /home/getcall/.virtualenvs/getcall.pythonanywhere.com/bin/activate
+```
+### Clean Cache and Temporany folder (on on PythonAnywhere)
+```bash
+rm -rf /home/getcall/.cache/*
+rm -rf /home/getcall/tmp/*
+
+```
+### Cheeck file log (on on PythonAnywhere)
+```bash
+ls -lh /home/getcall/logs
+
+```
+### Cheeck Space after cleaning (on on PythonAnywhere)
+```bash
+df -h
+```
+### Find Big Files (on on PythonAnywhere)
+```bash
+find /home/getcall -type f -size +50M -exec ls -lh {} \;
+```
 ### Create Env
 ```bash
 python -m venv env

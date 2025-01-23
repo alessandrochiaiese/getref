@@ -14,8 +14,8 @@ TODO:
 [ ] Track payment (Debit card In o OUT), se è completato è cliente 100% quindi la commissione va a chi l ha invitato
 [ ] Creazione di Form a fasi tipo 4 fasi, la prima registrazione, seconda registrazione dell'azienda, terza per la aggiunta di un metodo di pagamento
 [ ] sistema dell'email, anche nela registrazione per confermare, ma anche un email del cliente prerogativa per chiedere di fare un azione un pagamento o per le condizioni da confermare
-[\] Auth Github (NOT USEFUL)
-[\] Auth Google
+[/] Auth Github (NOT USEFUL)
+[/] Auth Google
 [ ] Wordpress + Stripe Plugin
 [ ]
 
@@ -33,9 +33,22 @@ TODO:
 [X] Signup Enterprise Page
 
 23.01.2025
-[ ] Move important models and middleware from referral to dashboard
-[ ] Delete referral app
-[ ] Test
+[X] Move important models and middleware from referral to dashboard
+[X] Delete referral app
+[X] Test
+[X] Populate Regions
+[X] Modify field regions into TextField
+[X] Add in admin.py ProfileBusiness
+[ ] ProfileBusiness can be saved in admin, but not into /signup-enterprise/
+[ ] Referral Code in Dashboard [DON'T WORK]
+[ ] Referral COde needs to be dispayed as URL
+[ ] Statical [DON'T WORK]
+[ ] Flash List in Dashboard [DON'T DESERVE]
+[ ] Create Affiliation Program and Campaign [DON'T DESERVE]
+[ ] 
+[ ] 
+[ ] 
+[ ] 
 
 https://aisaastemplate.com/blog/django-stripe-integration/
 https://github.com/testdrivenio/django-stripe-checkout

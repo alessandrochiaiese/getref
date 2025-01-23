@@ -55,13 +55,15 @@
 
         <!-- Campo Region -->
         <div class="form-group">
+          <!--<p>N.B.: Scrivi la regione (Abruzzo, Basilicata, Calabria, Campania, Emilia-Romagna, Friuli-Venezia Giulia, Lazio, Liguria, Lombardia, Marche, Molise, Piemonte, Puglia, Sardegna, Sicilia, Toscana, Trentino-Alto Adige/Südtirol, Umbria, Valle d'Aosta/Vallée d'Aoste, Veneto)</p>-->
           <label for="id_region">Region</label>
+          {#{ form.region }#}
           <select name="region" id="id_region" class="form-control">
-            {% for region in form.region.field.queryset %}
+            {#% for region in form.region.field.queryset %#}
               <option value="{{ region.id }}" {% if form.region.value == region.id %}selected{% endif %}>
                 {{ region.name }}
               </option>
-            {% endfor %}
+            {#% endfor %#}
           </select>
         </div>
 
