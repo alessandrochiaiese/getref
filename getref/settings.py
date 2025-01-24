@@ -48,7 +48,7 @@ OAUTH2_CLIENT_ID=config('OAUTH2_CLIENT_ID')
 OAUTH2_CLIENT_SECRET=config('OAUTH2_CLIENT_SECRET')
 
 
-ALLOWED_HOSTS = ["getcall.pythonanywhere.com", "127.0.0.1", "localhost"] # ['*']  # ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS =  ['*']  # ["getcall.pythonanywhere.com", "127.0.0.1", "localhost"] # ["127.0.0.1", "localhost"]
 
  
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx',
@@ -159,6 +159,19 @@ DATABASES = {
 #    }
 #}
 
+# MySQL DB
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DATABASE_NAME'),#'mydatabase',
+        'USER': config('DATABASE_USER'),#'mydatabaseuser',
+        'PASSWORD': config('DATABASE_PASSWORD'),#'mypassword',
+        'HOST': config('DATABASE_HOST'),#'myrdshost.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -205,12 +218,9 @@ USE_TZ = True
  
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')    
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-
 UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads') 
 
 #STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  # new
@@ -244,10 +254,12 @@ if not DEBUG:
     # email configs
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_USE_TLS = True
     EMAIL_PORT = 587
     EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
     EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = True
+
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
@@ -259,11 +271,22 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     CSRF_TRUSTED_ORIGINS = [
-        'getcall.pythonanywhere.com',
+        '*', #'getcall.pythonanywhere.com',
     ]
 
     # Aggiungere automaticamente lo schema a ogni dominio
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
+
+# AWS Provider
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
