@@ -65,10 +65,13 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'whitenoise.runserver_nostatic',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'dashboard', 
+    'referral', 
+    'affiliate',
     'health_check',                             # the default health check
     'health_check.db',                          # stock Django health checkers
     'health_check.cache',                       # required if you use cache
@@ -89,6 +92,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -96,13 +100,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # ... custom middleware ...
-    'dashboard.middleware.referral_audit_middleware.ReferralAuditMiddleware'
+    'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allows requests from all origins
 
 CORS_ALLOWED_ORIGINS = [
-    'https://getcall.pythonanywhere.com',
+    #'https://getcall.pythonanywhere.com',
     'http://localhost:3000',  # Add your frontend's URL
     'http://0.0.0.0:8000'
 ]
@@ -139,12 +143,12 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 MAX_CONN_AGE = 600
 
 # Local DB
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 # MySQL DB
 #DATABASES = {
@@ -159,14 +163,14 @@ DATABASES = {
 #    }
 #}
 
-# MySQL DB
+# AWS RDS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DATABASE_NAME'),#'mydatabase',
-        'USER': config('DATABASE_USER'),#'mydatabaseuser',
-        'PASSWORD': config('DATABASE_PASSWORD'),#'mypassword',
-        'HOST': config('DATABASE_HOST'),#'myrdshost.rds.amazonaws.com',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
         'PORT': '5432',
     }
 }

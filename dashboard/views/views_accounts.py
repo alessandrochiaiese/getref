@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy 
 from django.utils.crypto import get_random_string 
 from dashboard.models import *   
+from referral.models import *   
 from dashboard.forms import * 
 
 
@@ -67,7 +68,7 @@ class RegisterView(View):
         referral_code_used = kwargs.get('referral_code', None)  # Codice referral passato nel percorso URL
         print('Referral code from URL:', referral_code_used)
 
-        form = self.form_class(request.POST)
+        form = self.form_class(self.request.POST)
         #referral_code_used = request.GET.get('referral_code')  # Codice referral passato come query param (se esiste)
         #print('referral_code_used',referral_code_used)
         
@@ -128,8 +129,8 @@ class RegisterView(View):
 
             # Creazione del codice referral per il nuovo utente
             code = get_random_string(length=8).upper()
-            campaign_source = request.POST.get('campaign_source')
-            campaign_medium = request.POST.get('campaign_medium')
+            campaign_source = self.request.POST.get('campaign_source')
+            campaign_medium = self.request.POST.get('campaign_medium')
 
             # Ensure that 'campaign_source' is not None or empty
             if not campaign_source:
@@ -143,8 +144,8 @@ class RegisterView(View):
                 usage_count=0,
                 status="active",
                 referred_user_count=0,
-                expiry_date=request.POST.get('expiry_date'),
-                unique_url=request.build_absolute_uri("/referral-code/" + code + "/"), # request.get_host() + '/referral-code/' + code + '/'#,
+                expiry_date=self.request.POST.get('expiry_date'),
+                unique_url=self.request.build_absolute_uri("/referral-code/" + code + "/"), # request.get_host() + '/referral-code/' + code + '/'#,
                 #campaign_source=campaign_source,  # Now we ensure it's not None
                 #campaign_medium=campaign_medium
             )

@@ -8,24 +8,24 @@ from dashboard.utils import *
 from django.contrib.auth import views as auth_views 
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
-from dashboard.views.views_profile import (EnterpriseView, ProfileView, UserProfileDataView,)
+from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView, UserProfileDataView,)
 from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyIBsView, ParticipateCampaignView, WithdrawalView, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error400View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
-from dashboard.views.views_referral_audit import *
-from dashboard.views.views_referral_campaign import *
-from dashboard.views.views_referral_conversion import *
-from dashboard.views.views_referral_bonus import *
-from dashboard.views.views_referral_code import *
-from dashboard.views.views_referral_notification import *
-from dashboard.views.views_referral_engagement import *
-from dashboard.views.views_referral_program import *
-from dashboard.views.views_referral_program_partecipation import *
-from dashboard.views.views_referral_reward import *
-from dashboard.views.views_referral_setting import *
-from dashboard.views.views_referral_stat import *
-from dashboard.views.views_referral_transaction import *
+from referral.views.views_referral_audit import *
+from referral.views.views_referral_campaign import *
+from referral.views.views_referral_conversion import *
+from referral.views.views_referral_bonus import *
+from referral.views.views_referral_code import *
+from referral.views.views_referral_notification import *
+from referral.views.views_referral_engagement import *
+from referral.views.views_referral_program import *
+from referral.views.views_referral_program_partecipation import *
+from referral.views.views_referral_reward import *
+from referral.views.views_referral_setting import *
+from referral.views.views_referral_stat import *
+from referral.views.views_referral_transaction import *
 
 urlpatterns = [
     ## dashboard
@@ -78,8 +78,11 @@ urlpatterns = [
     
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
-    path('signup-enterprise/', EnterpriseView.as_view(), name='signup_enterprise'),
-    
+    path('create-enterprise/', EnterpriseCreateView.as_view(), name='create_enterprise'),  # Aggiungi azienda
+    path('update-enterprise/<int:pk>/', EnterpriseUpdateView.as_view(), name='update_enterprise'),  # Modifica azienda
+    path('enterprise-list/', EnterpriseListView.as_view(), name='enterprise_list'),  # Elenco di tutte le aziende
+    path('enterprise-detail/<int:pk>/', EnterpriseDetailView.as_view(), name='enterprise_detail'),  # Dettagli di una singola azienda
+
     ## kit_template visible only for admin
     path('charts/chartjs/', ChartJSView.as_view(), name='charts'),
     path('documentation/', DocumentationView.as_view(), name='documentation'),

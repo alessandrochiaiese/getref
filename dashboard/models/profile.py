@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 
-from dashboard.models.referral_transaction import ReferralTransaction
+from referral.models.referral_transaction import ReferralTransaction
 import payments
 from payments.models.payment_method import PaymentMethod
 

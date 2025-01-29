@@ -1,0 +1,34 @@
+{% extends "dashboard/layout.html" %}
+
+{% load static %}
+
+{% block title %}Dettaglio Azienda{% endblock %}
+
+{% block styles %} {% endblock %}
+{% block content %}
+<div class="container">
+    <h2>{{ profile.company_name }}</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Numero richieste di lavoro per settimana:</strong> {{ profile.number_job_request_desidered_per_week }}</p>
+            <p><strong>Contatto:</strong> {{ profile.contact_number }}</p>
+            <p><strong>Email:</strong> {{ profile.email }}</p>
+            <p><strong>Link Google Maps:</strong> <a href="{{ profile.link_google_maps }}" target="_blank">{{ profile.link_google_maps }}</a></p>
+            <p><strong>Settori:</strong> {{ profile.sectors.all|join:", " }}</p>
+            <p><strong>Regione:</strong> {{ profile.region.name }}</p>
+            <p><strong>Comunicazione dell'ufficio:</strong> {{ profile.have_office_shop_to_receive_customers|yesno:"Sì,No" }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Certificato della Camera di Commercio:</strong></p>
+            <img src="{{ profile.chamber_commerce_certificate.url }}" alt="chamber_commerce_certificate" class="img-fluid">
+            <a href="{{ profile.chamber_commerce_certificate.url }}" target="_blank">Visualizza documento</a>
+            <p><strong>Certificato Polizza Assicurativa:</strong></p>
+            <img src="{{ profile.insurance_policy_certificate.url }}" alt="chamber_commerce_certificate" class="img-fluid">
+            <a href="{{ profile.insurance_policy_certificate.url }}" target="_blank">Visualizza documento</a>
+        </div>
+    </div>
+    <a href="{% url 'enterprise_list' %}" class="btn btn-secondary">Torna alla lista</a>
+</div>
+{% endblock %}
+
+{% block scripts %} {% endblock %}

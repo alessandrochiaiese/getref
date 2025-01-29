@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View 
 from django.views.generic import TemplateView
 from dashboard.models import * 
+from referral.models import * 
 from dashboard.forms import * 
 from dashboard.utils import calculate_user_level, get_tree_referred, tree_to_list
 
@@ -56,16 +57,17 @@ class HomeView(TemplateView):
         # Add the referral code to the context
         try: 
             context['referral_code'] = referral_code.code
+            context['referral_unique_url'] = referral_code.unique_url
         except AttributeError:
             context['referral_code'] = None
+            context['referral_unique_url'] = None
         
         # Add the referrer code to the context
         try: 
             context['referrer_code'] = referrer_code
         except AttributeError:
             context['referrer_code'] = None
-
-        
+ 
         # Retrieve all referrals made by the logged-in user
         referred_users = []
 
@@ -500,14 +502,14 @@ class UserReferredLevelView(View):
             user_data = []
 
             # Itera su tutti gli utenti che sono stati referenziati direttamente da te
-            for user in referral.referred.all():
+            for referred in referral.referred.all():
                 # Calcola il livello di ogni utente ricorsivamente
                 level = calculate_user_level(user)
 
                 user_to_add = {
-                    "first_name": user.first_name,
-                    "last_name": user.last_name,
-                    "username": user.username,
+                    "first_name": referred.first_name,
+                    "last_name": referred.last_name,
+                    "username": referred.username,
                     "level": level,
                 }
                 print(user_to_add)

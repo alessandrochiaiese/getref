@@ -1,0 +1,45 @@
+{% extends "dashboard/layout.html" %}
+
+{% load static %}
+
+{% block title %}Lista delle Aziende{% endblock %}
+
+{% block styles %} {% endblock %}
+{% block content %}
+<div class="container">
+    <h2>{{ title }}</h2>
+    <div class="row">
+        {% for profile in profiles %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ profile.company_name }}</h5>
+                    <p class="card-text">{{ profile.sectors.all|join:", " }}</p>
+                    <a href="{% url 'enterprise_detail' pk=profile.pk %}" class="btn btn-primary">Dettagli</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Paginazione -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if profiles.has_previous %}
+                <a href="?page=1">&laquo; primo</a>
+                <a href="?page={{ profiles.previous_page_number }}">precedente</a>
+            {% endif %}
+
+            <span class="current">
+                Pagina {% if profiles.number >= 1 %}{{ profiles.number }}{% else %}1{% endif %} di {% if profiles.paginator.num_pages >= 1 %}{{ profiles.paginator.num_pages }}{% else %}1{% endif %}.
+            </span>
+
+            {% if profiles.has_next %}
+                <a href="?page={{ profiles.next_page_number }}">successivo</a>
+                <a href="?page={{ profiles.paginator.num_pages }}">ultimo &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %} {% endblock %}

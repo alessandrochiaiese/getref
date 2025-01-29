@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth.models import User
 
 class Sector(models.Model):
     SECTOR_CHOICES = [
@@ -47,6 +48,7 @@ class Sector(models.Model):
         verbose_name_plural = "Sectors" 
 
 class ProfileBusiness(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='profile_businesses')
     number_job_request_desidered_per_week = models.IntegerField(default=0)
     have_office_shop_to_receive_customers = models.BooleanField(default=False)
     link_google_maps = models.CharField(max_length=255, blank=True, null=True)

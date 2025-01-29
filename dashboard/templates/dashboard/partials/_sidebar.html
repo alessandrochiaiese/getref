@@ -104,6 +104,25 @@
     </li>
     {% endif %}
     <li class="nav-item">
+      <a class="nav-link" href="{% url 'create_enterprise' %}">
+        <i class="bi bi-shop menu-icon"></i>
+        <span class="menu-title">Signup Enterprise</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#enterprise" aria-expanded="false" aria-controls="enterprise">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Enterprise</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="enterprise">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_enterprise' %}">Create Enterprise</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'enterprise_list' %}">List Enterprise</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#referred-accounts" aria-expanded="false" aria-controls="referred-accounts">
         <i class="icon-layout menu-icon"></i>
         <span class="menu-title">Referred Accounts</span>

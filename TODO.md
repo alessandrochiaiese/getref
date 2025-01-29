@@ -39,10 +39,11 @@ TODO:
 [X] Populate Regions
 [X] Modify field regions into TextField
 [X] Add in admin.py ProfileBusiness
-[ ] ProfileBusiness can be saved in admin, but not into /signup-enterprise/
-[ ] Referral Code in Dashboard [DON'T WORK]
-[ ] Referral COde needs to be dispayed as URL
-[ ] Statical [DON'T WORK]
+[X] ProfileBusiness can be saved in admin, but not into /create_enterprise/
+[X] Create Read Update Delete Enterprise created by user. Admin can see all
+[X] Referral Code in Dashboard [DON'T WORK]
+[X] Referral COde needs to be dispayed as URL
+[X] Statical [DON'T WORK]
 [ ] Flash List in Dashboard [DON'T DESERVE]
 [ ] Create Affiliation Program and Campaign [DON'T DESERVE]
 [ ] 

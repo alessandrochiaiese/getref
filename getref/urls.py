@@ -44,7 +44,9 @@ urlpatterns = [
     # accounts 
     path('', include('accounts.urls')),
     # apps   
-    path('', include('dashboard.urls')), 
+    path('', include('dashboard.urls')),
+    path('', include('affiliate.urls')), 
+    path('', include('referral.urls')), 
     
     # stripe
     path('', include('payments.urls')),
@@ -58,8 +60,8 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
 
-]  + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+]
 
-
-# Media Assets
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

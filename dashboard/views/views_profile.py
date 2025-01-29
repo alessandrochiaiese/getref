@@ -7,13 +7,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import View 
+from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.edit import UpdateView 
 from dashboard.utils import get_tree_referred, tree_to_list
 from dashboard.models import *
+from referral.models import *
 from dashboard.forms import * 
 
 #####################
-# Profile           #
+#     Profile       #
 #####################
 @method_decorator(login_required, name='dispatch')
 class ProfileView(UpdateView):
@@ -74,8 +76,8 @@ class ProfileView(UpdateView):
 
         # Add the referrer code to the context
         context['referrer_code'] = referrer_code.code if referrer_code else None
-
-
+  
+        context['referral_unique_url'] = referral_code.unique_url if referral_code else None
         
         # Retrieve all referrals made by the logged-in user
         referred_users = []
@@ -159,6 +161,8 @@ class UserProfileDataView(View):
             #'total_rewards': (ReferralBonus.objects.filter(user=user).aggregate(Sum('bonus_value'))['bonus_value__sum'] or 0) + 
             #                (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
             
+            'total_rewards': (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
+            
             # Numero di referral attivi
             'active_referrals': Referral.objects.filter(referrer=user).count(),
             
@@ -200,18 +204,69 @@ class UserProfileDataView(View):
 
         return JsonResponse(data, status=200)
     
+#####################
+#    Enterprise     #
+#####################
+@method_decorator(login_required, name='dispatch')
+class EnterpriseListView(ListView):
+    model = ProfileBusiness
+    template_name = 'dashboard/enterprise/enterprise_list.html'
+    context_object_name = 'profiles'  # Nome del contesto nel template
+    paginate_by = 10  # Paginazione dei risultati
 
-class EnterpriseView(UpdateView):
+    def get_queryset(self):
+        # Se l'utente è un admin, mostra tutte le aziende
+        if self.request.user.is_superuser:
+            return ProfileBusiness.objects.all()
+        
+        # Se l'utente non è admin, mostra solo le aziende che ha creato
+        return ProfileBusiness.objects.filter(user=self.request.user)
+
+@method_decorator(login_required, name='dispatch')
+class EnterpriseCreateView(CreateView):
     model = ProfileBusiness
     form_class = EnterpriseForm
-    template_name = 'core/signup-enterprise.html'
-    success_url = reverse_lazy('core_profile')
+    template_name = 'dashboard/enterprise/create_enterprise.html'
+    success_url = reverse_lazy('core_profile')  # Redirige alla pagina del profilo dell'utente o a un'altra pagina di successo
 
-    def get_object(self, queryset=None):
-        # Ritorna l'oggetto associato all'utente autenticato
-        return self.request.user #ProfileBusiness.objects.get(email=self.request.user.email)
+    def form_valid(self, form):
+        # Se vuoi eseguire operazioni extra quando il form è valido
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Modifica il profilo aziendale"
+        context['title'] = "Aggiungi nuovo profilo aziendale"
         return context
+    
+@method_decorator(login_required, name='dispatch')
+class EnterpriseUpdateView(UpdateView):
+    model = ProfileBusiness
+    form_class = EnterpriseForm
+    template_name = 'dashboard/enterprise/create_enterprise.html'
+    success_url = reverse_lazy('core_profile')
+
+    def get_object(self, queryset=None):
+        # Puoi gestire l'oggetto in base alla logica che desideri, per esempio
+        # Restituisci un oggetto ProfileBusiness specifico per l'utente corrente
+        return ProfileBusiness.objects.get(id=self.kwargs['pk'])
+
+    def form_valid(self, form):
+        # Operazioni personalizzate quando il form è valido
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Modifica profilo aziendale"
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class EnterpriseDetailView(DetailView):
+    model = ProfileBusiness
+    template_name = 'dashboard/enterprise/enterprise_detail.html'
+    context_object_name = 'profile'  # Nome del contesto nel template
+
+    def get_object(self, queryset=None):
+        # Recupera il profilo aziendale in base all'ID passato nell'URL
+        return ProfileBusiness.objects.get(id=self.kwargs['pk'])
