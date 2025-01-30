@@ -155,12 +155,12 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 MAX_CONN_AGE = 600
 
 # Local DB
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 # MySQL DB
 #DATABASES = {
@@ -176,16 +176,16 @@ DATABASES = {
 #}
 
 # AWS RDS
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': config('DATABASE_NAME'),
-#        'USER': config('DATABASE_USER'),
-#        'PASSWORD': config('DATABASE_PASSWORD'),
-#        'HOST': config('DATABASE_HOST'),
-#        'PORT': '5432',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -305,15 +305,15 @@ CLIENT_SECRET = config('CLIENT_SECRET')
 APP_NAME = config('APP_NAME')
 
 # AWS Provider
-#AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
-#AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
-#AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
-#AWS_S3_SIGNATURE_NAME = 's3v4',
-#AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
-#AWS_S3_FILE_OVERWRITE = False
-#AWS_DEFAULT_ACL =  None
-#AWS_S3_VERIFY = True
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
