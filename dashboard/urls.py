@@ -36,7 +36,7 @@ urlpatterns = [
     path('accounts/master/', MasterAccountsView.as_view(), name='master_accounts'),
     path('accounts/investor/', InvestorAccountsView.as_view(), name='investor_accounts'),
     path('accounts/incomplete/', IncompleteRegistrationsView.as_view(), name='incomplete_registrations'),
-    path('my-ibs/', MyNetworkView.as_view(), name='my_network'),
+    path('accounts/my-network/', MyNetworkView.as_view(), name='my_network'),
 
     # get users referred with level
     #path('get-level-users/', UserReferredLevelView.as_view(), name='get_user_table'), #get_user_table, name='get_user_table'),
