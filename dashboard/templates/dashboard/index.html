@@ -334,7 +334,7 @@
         // Carica i dati tramite fetch 
         async function loadReferralStats() {
             try {
-                const response = await fetch('/api/v0/referral/stats/');
+                const response = await fetch(`${window.location.origin}/api/v0/referral/stats/`);
 
                 // Controllo se la risposta è valida
                 if (!response.ok) {

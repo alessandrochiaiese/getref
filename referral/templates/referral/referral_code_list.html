@@ -56,7 +56,7 @@
     let allAffiliates = []; // Store all referral data
     async function fetchReferralCampaigns() {
         try {
-            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/codes/`);
+            const response = await fetch(`${window.location.origin}/api/v0/referral/codes/`);
             allReferrals = await response.json();
             populateReferralTable(allReferrals);
             
@@ -135,7 +135,7 @@
 
     function saveReferralChanges(id) {
         const updatedData = getFormData('editModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/codes/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/codes/${id}/`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -152,12 +152,12 @@
 
     // Define the navigateTo function
     function navigateToDetail(id) {
-        const url = `${window.location.protocol}://${window.location.host}/referral/codes/${id}/`; // Adjust the URL pattern to match your Django view
+        const url = `${window.location.origin}/referral/codes/${id}/`; // Adjust the URL pattern to match your Django view
         window.location.href = url; // Navigate to the URL
     }
 
     function deleteReferral(id) {
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/codes/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/codes/${id}/`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -171,7 +171,7 @@
 
     function saveNewReferral() {
         const newReferral = getFormData('createModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/codes/`, {
+        fetch(`${window.location.origin}/api/v0/referral/codes/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newReferral),

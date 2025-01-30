@@ -56,7 +56,7 @@
     let allAffiliates = []; // Store all referral data
     async function fetchReferralTransactions() {
         try {
-            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/transactions/`);
+            const response = await fetch(`${window.location.origin}/api/v0/referral/transactions/`);
             allReferrals = await response.json();
             populateReferralTable(allReferrals);
             
@@ -136,7 +136,7 @@
 
     function saveReferralChanges(id) {
         const updatedData = getFormData('editModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/transactions/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/transactions/${id}/`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -153,12 +153,12 @@
 
     // Define the navigateTo function
     function navigateToDetail(id) {
-        const url = `${window.location.protocol}://${window.location.host}/referral/transactions/${id}/`; // Adjust the URL pattern to match your Django view
+        const url = `${window.location.origin}/referral/transactions/${id}/`; // Adjust the URL pattern to match your Django view
         window.location.href = url; // Navigate to the URL
     }
 
     function deleteReferral(id) {
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/transactions/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/transactions/${id}/`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -172,7 +172,7 @@
 
     function saveNewReferral() {
         const newReferral = getFormData('createModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/transactions/`, {
+        fetch(`${window.location.origin}/api/v0/referral/transactions/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newReferral),

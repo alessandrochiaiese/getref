@@ -51,7 +51,7 @@
     let allAffiliates = []; // Store all referral data
     async function fetchReferralEngagements() {
         try {
-            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/engagements/`);
+            const response = await fetch(`${window.location.origin}/api/v0/referral/engagements/`);
             allReferrals = await response.json();
             populateReferralTable(allReferrals);
             
@@ -126,7 +126,7 @@
 
     function saveReferralChanges(id) {
         const updatedData = getFormData('editModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/engagements/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/engagements/${id}/`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -143,12 +143,12 @@
 
     // Define the navigateTo function
     function navigateToDetail(id) {
-        const url = `${window.location.protocol}://${window.location.host}/referral/engagements/${id}/`; // Adjust the URL pattern to match your Django view
+        const url = `${window.location.origin}/referral/engagements/${id}/`; // Adjust the URL pattern to match your Django view
         window.location.href = url; // Navigate to the URL
     }
 
     function deleteReferral(id) {
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/engagements/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/referral/engagements/${id}/`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -162,7 +162,7 @@
 
     function saveNewReferral() {
         const newReferral = getFormData('createModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral/engagements/`, {
+        fetch(`${window.location.origin}/api/v0/referral/engagements/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newReferral),

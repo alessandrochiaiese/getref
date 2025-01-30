@@ -208,7 +208,7 @@
 
         // Funzione per caricare i dati dalla backend
         function loadUserData() {
-            const response = fetch(`${window.location.protocol}://${window.location.host}/get-level-users/`);  // URL delle API backend
+            const response = fetch(`${window.location.origin}/get-level-users/`);  // URL delle API backend
             const users = response.json();
 
             console.log(users);

@@ -36,7 +36,7 @@
     }
         async function fetchAffiliates() {
             try {
-                const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/affiliates/`);
+                const response = await fetch(`${window.location.origin}/api/v0/affiliate/affiliates/`);
                 const affiliates = await response.json();
                 const tableBody = document.getElementById('affiliateTableBody');
                 affiliates.forEach(affiliate => {

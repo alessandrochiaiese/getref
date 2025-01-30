@@ -47,7 +47,7 @@
     let allAffiliates = []; // Store all affiliate data
     async function fetchAffiliateRewards() {
         try {
-            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/rewards/`);
+            const response = await fetch(`${window.location.origin}/api/v0/affiliate/rewards/`);
             allAffiliates = await response.json();
             
         } catch (error) {
@@ -119,7 +119,7 @@
 
     function saveAffiliateChanges(id) {
         const updatedData = getFormData('editModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/rewards/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/affiliate/rewards/${id}/`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -137,12 +137,12 @@
 
     // Define the navigateTo function
     function navigateToDetail(id) {
-        const url = `${window.location.protocol}://${window.location.host}/affiliate/audits/${id}/`; // Adjust the URL pattern to match your Django view
+        const url = `${window.location.origin}/affiliate/audits/${id}/`; // Adjust the URL pattern to match your Django view
         window.location.href = url; // Navigate to the URL
     }
 
     function deleteAffiliate(id) {
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/rewards/${id}/`, {
+        fetch(`${window.location.origin}/api/v0/affiliate/rewards/${id}/`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -156,7 +156,7 @@
 
     function saveNewAffiliate() {
         const newAffiliate = getFormData('createModal');
-        fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/rewards/`, {
+        fetch(`${window.location.origin}/api/v0/affiliate/rewards/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newAffiliate),
