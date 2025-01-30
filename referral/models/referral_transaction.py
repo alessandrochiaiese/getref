@@ -10,7 +10,7 @@ class ReferralTransaction(models.Model):
     referral_codes = models.ManyToManyField('ReferralCode', verbose_name=_("Referral Codes"), related_name='referra_transaction_referral_codes')
     referred_user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("User"), related_name='referra_transaction_user')
     transaction_date = models.DateField(verbose_name=_("Transaction Date"))
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name=_("Order"))
+    order = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, verbose_name=_("Order"))
     transaction_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Amount"))
     currency = models.CharField(max_length=10, verbose_name=_("Currency"))
     status = models.CharField(max_length=50, verbose_name=_("Status"))
