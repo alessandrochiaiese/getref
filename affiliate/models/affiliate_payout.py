@@ -8,7 +8,7 @@ class AffiliatePayout(models.Model):
     payout_date = models.DateField(verbose_name=_("Payout Date"))
     payout_method = models.CharField(max_length=50, verbose_name=_("Payout Method"))
     payout_status = models.CharField(max_length=50, verbose_name=_("Payout Status"))
-    transaction = models.ForeignKey('AffiliateTransaction', on_delete=models.CASCADE, verbose_name=_("Transaction"))
+    transaction = models.ForeignKey('AffiliateTransaction', null=True, on_delete=models.CASCADE, verbose_name=_("Transaction"))
     processing_fee = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Processing Fee"))
     net_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Net Amount"))
     payout_provider = models.CharField(max_length=50, verbose_name=_("Payout Provider"))
