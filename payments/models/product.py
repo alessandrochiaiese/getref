@@ -17,16 +17,16 @@ class Product(models.Model):
         return self.name
 """
 class Product(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name=_("Name"))
     #tags = models.ManyToManyField(ProductTag, blank=True, related_name="tags")
-    description = models.TextField(_("Description"), blank=True)
-    thumbnail = models.ImageField(upload_to=get_image_filename, blank=True)
-    url = models.URLField()  
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  # Prezzo con 2 decimali
-    quantity = models.IntegerField(default=1)
+    description = models.TextField(max_length=1000, blank=True, verbose_name=_("Description"))
+    thumbnail = models.ImageField(upload_to=get_image_filename, blank=True, verbose_name=_("Thumbnail"))
+    url = models.URLField(verbose_name=_("URL"))  
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, verbose_name=_("Price"))  # Prezzo con 2 decimali
+    quantity = models.IntegerField(default=1, verbose_name=_("Quantity"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
     class Meta:
         ordering = ("-created_at",)

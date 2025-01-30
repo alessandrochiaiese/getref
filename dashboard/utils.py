@@ -2,13 +2,24 @@
 from django.contrib.auth import get_user_model   
 from django.http import JsonResponse 
 from django.utils import timezone 
+from django.utils.translation import activate
 from dashboard.models import *
-from dashboard.forms import * 
+from dashboard.forms import *
+from referral.models import * 
  
 
 User = get_user_model()
  
   
+#####################
+# Languages         #
+#####################
+
+def switch_to_italian(request):
+    activate('it')
+
+def switch_to_english(request):
+    activate('en')
 
 #####################
 # Hierarchy         #

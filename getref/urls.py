@@ -17,6 +17,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import include, path, re_path as url
+from django.conf.urls.i18n import i18n_patterns
 from getref import settings
 from rest_framework import generics, permissions, serializers
 from oauth2_provider import urls as oauth2_urls
@@ -36,17 +37,25 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
- 
+
+
 urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
+
+    # language
+    path('i18n/', include('django.conf.urls.i18n')),
+    
+    # API 
+    path('api/v0/', include('dashboard.api.urls'), name='api_profile'),
+    path('api/v0/affiliate/', include('affiliate.api.urls'), name='api_affiliate_v0'),
+    path('api/v0/referral/', include('referral.api.urls'), name='api_referral'),
+
+    ## social django
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     
     # accounts 
     path('', include('accounts.urls')),
-    # apps   
-    path('', include('dashboard.urls')),
-    path('', include('affiliate.urls')), 
-    path('', include('referral.urls')), 
     
     # stripe
     path('', include('payments.urls')),
@@ -58,9 +67,18 @@ urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-
 ]
+
+urlpatterns += i18n_patterns(
+    
+    # apps   
+    path('', include('dashboard.urls')),
+    path('', include('affiliate.urls')), 
+    path('', include('referral.urls')), 
+
+
+
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

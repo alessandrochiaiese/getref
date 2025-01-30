@@ -384,7 +384,7 @@ class IncompleteRegistrationsView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class MyIBsView(TemplateView):
     model = get_user_model()  # Usa il modello User di default
-    template_name = 'dashboard/my_ibs.html'
+    template_name = 'dashboard/my_network.html'
 
     def get_object(self, queryset=None):
         # Ritorna l'oggetto corrispondente all'utente autenticato
@@ -477,7 +477,7 @@ class MyIBsView(TemplateView):
         print(tree_referred)
         print(list_referred)
         print(investor_accounts)
-        context['my_ibs'] = investor_accounts+referreds
+        context['my_network'] = investor_accounts+referreds
         
         return context
     

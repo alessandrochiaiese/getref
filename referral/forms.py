@@ -74,7 +74,7 @@ class ReferralTransactionForm(forms.ModelForm):
     class Meta:
         model = ReferralTransaction
         #fields = ['id', 'referred_user', 'transaction_date', 'order_id', 'transaction_amount', 'currency', 'status', 'conversion_value', 'discount_value', 'coupon_code_used', 'channel']# '__all__' #
-        fields = ['id', 'referred_user', 'order_id', 'transaction_amount', 'currency', 'status', 'conversion_value', 'discount_value', 'coupon_code_used', 'channel']# '__all__' #
+        fields = ['id', 'referred_user', 'order', 'transaction_amount', 'currency', 'status', 'conversion_value', 'discount_value', 'coupon_code_used', 'channel']# '__all__' #
 
 class ReferralUserForm(forms.ModelForm):
     class Meta:

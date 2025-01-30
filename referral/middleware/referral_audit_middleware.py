@@ -1,9 +1,10 @@
+from django.http import HttpRequest
 from django.utils.deprecation import MiddlewareMixin
 from datetime import datetime
 from referral.models import Referral, ReferralAudit
 
 class ReferralAuditMiddleware(MiddlewareMixin):
-    def process_request(self, request):
+    def process_request(self, request: HttpRequest):
         # Ottieni i cookie
         user = request.user
         user_id = request.COOKIES.get('user_id') 

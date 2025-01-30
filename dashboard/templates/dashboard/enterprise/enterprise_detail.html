@@ -1,6 +1,7 @@
-{% extends "dashboard/layout.html" %}
+{% extends 'dashboard/layout.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block title %}Dettaglio Azienda{% endblock %}
 
@@ -27,6 +28,7 @@
             <a href="{{ profile.insurance_policy_certificate.url }}" target="_blank">Visualizza documento</a>
         </div>
     </div>
+    <a href="{% url 'update_enterprise' profile.id %}" class="btn btn-warning mr-3">Modifica</a>
     <a href="{% url 'enterprise_list' %}" class="btn btn-secondary">Torna alla lista</a>
 </div>
 {% endblock %}

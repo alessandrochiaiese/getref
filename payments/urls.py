@@ -43,4 +43,5 @@ urlpatterns = [
     path('track/<int:referral_code>/', track_referral_code, name=''),
      
     path('webhook/stripe/', views.stripe_webhook),
+
 ]

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from decimal import Decimal 
+from decimal import Decimal
+from django.utils.translation import gettext_lazy as _
 
 class AffiliateIncentive(models.Model):
     INCENTIVE_STATUS_CHOICES = [
@@ -16,21 +17,21 @@ class AffiliateIncentive(models.Model):
         ('purchase', 'Purchase'),
     ]
 
-    affiliate = models.OneToOneField('Affiliate', on_delete=models.CASCADE, related_name='affiliate_incentive_affiliate')
-    program = models.OneToOneField('AffiliateProgram', on_delete=models.CASCADE, related_name='affiliate_incentive_program')
-    incentive_type = models.CharField(max_length=20, choices=INCENTIVE_TYPE_CHOICES)
-    date = models.DateTimeField(default=timezone.now)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
-    currency = models.CharField(max_length=10, default='USD')
-    status = models.CharField(max_length=20, choices=INCENTIVE_STATUS_CHOICES, default='pending')
-    description = models.TextField(blank=True, null=True)
+    affiliate = models.OneToOneField('Affiliate', on_delete=models.CASCADE, verbose_name=_("Affiliate"), related_name='affiliate_incentive_affiliate')
+    program = models.OneToOneField('AffiliateProgram', on_delete=models.CASCADE, verbose_name=_("Program"), related_name='affiliate_incentive_program')
+    incentive_type = models.CharField(max_length=20, choices=INCENTIVE_TYPE_CHOICES, verbose_name=_("Incentive Type"))
+    date = models.DateTimeField(default=timezone.now, verbose_name=_("Date"))
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'), verbose_name=_("Amount"))
+    currency = models.CharField(max_length=10, default='USD', verbose_name=_("Currency"))
+    status = models.CharField(max_length=20, choices=INCENTIVE_STATUS_CHOICES, default='pending', verbose_name=_("Status"))
+    description = models.TextField(blank=True, null=True, verbose_name=_("Description"))
 
     # Campi addizionali di tracciamento e gestione dell'incentivo
-    ip_address = models.GenericIPAddressField(null=True, blank=True)
-    device_info = models.CharField(max_length=255, blank=True, null=True)
-    tracking_id = models.CharField(max_length=50, blank=True, null=True)
-    expiration_date = models.DateTimeField(null=True, blank=True)
-    is_incentive_active = models.BooleanField(default=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name=_("IP Address"))
+    device_info = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Device Info"))
+    tracking_id = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Tracking ID"))
+    expiration_date = models.DateTimeField(null=True, blank=True, verbose_name=_("Expiration Date"))
+    is_incentive_active = models.BooleanField(default=True, verbose_name=_("Is Incentive Active"))
     
     def __str__(self):
         return f"Incentive {self.id} - {self.affiliate} for Program {self.program}"

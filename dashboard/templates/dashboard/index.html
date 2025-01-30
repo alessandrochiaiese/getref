@@ -1,5 +1,6 @@
-{% extends "dashboard/layout.html" %}
+{% extends 'dashboard/layout.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Dashboard - Referral Program{% endblock %}
 
@@ -149,7 +150,7 @@
     <div class="col-md-12">
         <div class="card shadow-lg rounded-3">
             <div class="card-body">
-                <h4 class="section-title">I miei invitati</h4>
+                <h4 class="section-title">La mia rete</h4>
                 <table class="table table-striped" id="user-table">
                     <thead>
                         <tr>
@@ -392,7 +393,7 @@
                 /*let referral_code = document.getElementById('referral-code');
                 let referral_code_url = document.getElementById('referral-link');
                 console.debug(referral_code);
-                $.get(`${window.location.protocol}//${window.location.host}/profile/data/`, function (data) {
+                $.get(`${window.location.protocol}//${window.location.host}/api/v0/profile/data/`, function (data) {
                     // Visualizza il codice referral direttamente dal JSON ricevuto
                     console.debug(data.referral_code);
                     referral_code.value = data.referral_code;
@@ -410,7 +411,7 @@
             try {
                 console.log('Inizio caricamento dati referral...');
 
-                const response = await fetch(`${window.location.origin}/profile/data/`); // L'endpoint dell'API
+                const response = await fetch(`${window.location.origin}/api/v0/profile/data/`); // L'endpoint dell'API
                 console.log('Risposta API ricevuta:', response);
 
                 // Verifica se la risposta è valida

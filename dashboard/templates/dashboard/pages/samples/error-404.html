@@ -1,6 +1,6 @@
 {% extends "dashboard/base.html" %}
 {% load static %}
-{% load static %}
+{% load i18n %}
 {% block title %}Error 404{% endblock %}
 
 {% block styles %}
@@ -32,7 +32,7 @@
         </div>
         <div class="row mt-5">
           <div class="col-12 text-center mt-xl-2">
-            <a class="text-white font-weight-medium" href="{% url 'home' %}">Back to home</a>
+            <a class="text-white font-weight-medium" href="{% url 'core_home' %}">Back to home</a>
           </div>
         </div>
         <div class="row mt-5">

@@ -91,8 +91,8 @@
       </a>
       <div class="collapse" id="error">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'error-404' %}"> 404 </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'error-500' %}"> 500 </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url '404' %}"> 404 </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url '500' %}"> 500 </a></li>
         </ul>
       </div>
     </li>
@@ -104,14 +104,8 @@
     </li>
     {% endif %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'create_enterprise' %}">
-        <i class="bi bi-shop menu-icon"></i>
-        <span class="menu-title">Signup Enterprise</span>
-      </a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#enterprise" aria-expanded="false" aria-controls="enterprise">
-        <i class="icon-layout menu-icon"></i>
+        <i class="bi bi-building menu-icon"></i>
         <span class="menu-title">Enterprise</span>
         <i class="menu-arrow"></i>
       </a>
@@ -130,6 +124,7 @@
       </a>
       <div class="collapse" id="referred-accounts">
         <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'my_network' %}">My Network</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'master_accounts' %}">Master Accounts</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'investor_accounts' %}">Investor Accounts</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'incomplete_registrations' %}">Incomplete Registrations</a></li>
@@ -142,12 +137,12 @@
         <span class="menu-title">Prodotti</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'my_ibs' %}">
+    <!--<li class="nav-item">
+      <a class="nav-link" href="{#% url 'my_network' %#}">
         <i class="bi bi-people menu-icon"></i>
-        <span class="menu-title">My IBs</span>
+        <span class="menu-title">My Network</span>
       </a>
-    </li>
+    </li>-->
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#finances" aria-expanded="false" aria-controls="finances">
         <i class="bi bi-bank menu-icon"></i>
@@ -167,7 +162,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'schema-swagger-ui' %}">
+      <a class="nav-link" href="{% url 'schema-redoc' %}">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">API Documentation</span>
       </a>

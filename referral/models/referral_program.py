@@ -2,24 +2,25 @@
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 from dashboard.models.region import Region
 
 User = get_user_model()
 
 class ReferralProgram(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    reward_type = models.CharField(max_length=50)
-    reward_value = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=10)
-    min_referral_count = models.IntegerField(default=0)
-    max_referrals_per_user = models.IntegerField(default=100)
-    date_created = models.DateField()
-    is_active = models.BooleanField(default=True)
-    program_duration = models.IntegerField()
-    allowed_regions = models.ManyToManyField(Region, related_name='engagement_program_regions')
-    target_industry = models.CharField(max_length=100)
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    description = models.TextField(verbose_name=_("Description"))
+    reward_type = models.CharField(max_length=50, verbose_name=_("Reward Type"))
+    reward_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Reward Value"))
+    currency = models.CharField(max_length=10, verbose_name=_("Currency"))
+    min_referral_count = models.IntegerField(default=0, verbose_name=_("Min Referral Count"))
+    max_referrals_per_user = models.IntegerField(default=100, verbose_name=_("Max Referrals Per User"))
+    date_created = models.DateField(verbose_name=_("Date Created"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    program_duration = models.IntegerField(verbose_name=_("Program Duration"))
+    allowed_regions = models.ManyToManyField(Region, verbose_name=_("Allowed Regions"), related_name='engagement_program_regions')
+    target_industry = models.CharField(max_length=100, verbose_name=_("Target Industry"))
 
     class Meta:
         ordering = ['-date_created']

@@ -1,5 +1,5 @@
-
 {% load static %}
+{% load i18n %}
 <div class="theme-setting-wrapper">
   <div id="settings-trigger"><i class="ti-settings"></i></div>
   <div id="theme-settings" class="settings-panel">
@@ -32,6 +32,10 @@
     <li class="nav-item">
       <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab"
         aria-controls="chats-section">CHATS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="language-tab" data-toggle="tab" href="#language-section" role="tab"
+        aria-controls="language-section">LANGUAGES</a>
     </li>
   </ul>
   <div class="tab-content" id="setting-content">
@@ -121,7 +125,8 @@
       </div>
       <ul class="chat-list">
         <li class="list active">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face1.jpg' %}" alt="image"><span class="online"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face1.jpg' %}" alt="image"><span
+              class="online"></span></div>
           <div class="info">
             <p>Thomas Douglas</p>
             <p>Available</p>
@@ -129,7 +134,8 @@
           <small class="text-muted my-auto">19 min</small>
         </li>
         <li class="list">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face2.jpg' %}" alt="image"><span class="offline"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face2.jpg' %}" alt="image"><span
+              class="offline"></span></div>
           <div class="info">
             <div class="wrapper d-flex">
               <p>Catherine</p>
@@ -140,7 +146,8 @@
           <small class="text-muted my-auto">23 min</small>
         </li>
         <li class="list">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face3.jpg' %}" alt="image"><span class="online"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face3.jpg' %}" alt="image"><span
+              class="online"></span></div>
           <div class="info">
             <p>Daniel Russell</p>
             <p>Available</p>
@@ -148,7 +155,8 @@
           <small class="text-muted my-auto">14 min</small>
         </li>
         <li class="list">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face4.jpg' %}" alt="image"><span class="offline"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face4.jpg' %}" alt="image"><span
+              class="offline"></span></div>
           <div class="info">
             <p>James Richardson</p>
             <p>Away</p>
@@ -156,7 +164,8 @@
           <small class="text-muted my-auto">2 min</small>
         </li>
         <li class="list">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face5.jpg' %}" alt="image"><span class="online"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face5.jpg' %}" alt="image"><span
+              class="online"></span></div>
           <div class="info">
             <p>Madeline Kennedy</p>
             <p>Available</p>
@@ -164,7 +173,8 @@
           <small class="text-muted my-auto">5 min</small>
         </li>
         <li class="list">
-          <div class="profile"><img src="{% static 'dashboard/images/faces/face6.jpg' %}" alt="image"><span class="online"></span></div>
+          <div class="profile"><img src="{% static 'dashboard/images/faces/face6.jpg' %}" alt="image"><span
+              class="online"></span></div>
           <div class="info">
             <p>Sarah Graves</p>
             <p>Available</p>
@@ -174,5 +184,31 @@
       </ul>
     </div>
     <!-- chat tab ends -->
+    <div class="tab-pane fade" id="language-section" role="tabpanel" aria-labelledby="language-section">
+      <div class="d-flex align-items-center justify-content-between border-bottom">
+        {% get_current_language as LANGUAGE_CODE %}
+        <div class="form-row">
+          <div class="col-md-12">
+            <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Current language: 
+            <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">
+              {{LANGUAGE_CODE }}</small></p>
+          </div>
+          <div class="col-md-12">
+            <form action="{% url 'set_language' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="small mb-3 pl-3 pt-0" for="languages">Languages</label>
+                <select class="form-control" name="language" id="languages">
+                  <option value="en">English</option>
+                  <option value="it">Italiano</option>
+                </select>
+                <button class="btn btn-primary" type="submit">{% trans "Change Language" %}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- language tab ends -->
   </div>
 </div>

@@ -1,5 +1,9 @@
 import logging
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views import View 
+from django.db.models import Sum 
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import JSONRenderer
@@ -11,6 +15,7 @@ from drf_yasg import openapi
 from dashboard.api.services.profile_service import ProfileService
 from dashboard.models.profile import Profile
 from dashboard.api.serializers import ProfileSerializer
+from referral.models import *
 
 # Set up a logger
 logger = logging.getLogger(__name__)
@@ -123,3 +128,63 @@ class ProfileAPIView(APIView):
         except Exception as e:
             logger.error(f"Error deleting profile: {str(e)}")
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@method_decorator(login_required, name='dispatch')
+class UserProfileDataView(View):
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+ 
+        
+        # Dati generali di referral
+        referral_data = {
+            # Totale delle commissioni: supponendo che siano in ReferralTransaction o ReferralReward
+            'total_commission': ReferralTransaction.objects.filter(referral_codes__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
+            
+            # Totale delle ricompense (bonus e premi)
+            #'total_rewards': (ReferralBonus.objects.filter(user=user).aggregate(Sum('bonus_value'))['bonus_value__sum'] or 0) + 
+            #                (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
+            
+            'total_rewards': (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
+            
+            # Numero di referral attivi
+            'active_referrals': Referral.objects.filter(referrer=user).count(),
+            
+            # Conversioni totali da ReferralConversion
+            'total_conversions': ReferralConversion.objects.filter(referral_codes__user=user).count(),
+
+            # Totale delle transazioni da ReferralTransaction
+            'total_transactions': ReferralTransaction.objects.filter(referral_codes__user=user).aggregate(Sum('transaction_amount'))['transaction_amount__sum'] or 0,
+        }
+
+
+        # Dati per i codici referral
+        referral_codes = ReferralCode.objects.filter(user=user).values('code', 'usage_count')
+
+        # Dati per le campagne attive
+        #active_campaigns = ReferralCampaign.objects.filter(is_active=True).values('id', 'campaign_name', 'start_date', 'end_date', 'goal', 'budget', 'spending_to_date', 'target_audience')
+
+        # Statistiche dei referral
+        referral_stats = list(ReferralStats.objects.filter(referral_codes__user=user).values('period', 'click_count', 'conversion_count', 'total_rewards', 'average_conversion_value', 'highest_referral_earning'))
+
+        # Transazioni dei referral
+        #referral_transactions = list(ReferralTransaction.objects.filter(referral_codes__in__referral_codes=referral_codes).values('referred_user', 'transaction_date', 'order_id', 'transaction_amount', 'currency', 'status', 'conversion_value', 'discount_value', 'coupon_code_used', 'channel'))
+
+        # Audit dei referral
+        recent_audits = list(ReferralAudit.objects.filter(user=user).values('referral_codes', 'action_taken', 'action_date', 'user', 'ip_address', 'device_info', 'location'))
+
+        # Codice referral unico dell'utente
+        referral_code = ReferralCode.objects.filter(user=user).first()
+
+        data = {
+            'referral_data': referral_data,
+            'referral_codes': list(referral_codes),
+            #'referral_campaigns': list(active_campaigns),
+            'referral_stats': referral_stats,
+            #'referral_transactions': referral_transactions, 
+            'recent_audits': recent_audits,
+            'referral_code': referral_code.code if referral_code else ''
+        }
+
+        return JsonResponse(data, status=200)
+    

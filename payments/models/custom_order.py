@@ -1,13 +1,14 @@
 from django.urls import reverse
 from getref import settings
-from django.db import models 
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.models import User
 
 class CustomOrder(models.Model):
-    amount = models.DecimalField(decimal_places=2, max_digits=8)
-    description = models.CharField(max_length=128)
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(decimal_places=2, max_digits=8, verbose_name=_("Amount"))
+    description = models.CharField(max_length=128, verbose_name=_("Description"))
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Buyer"))
 
     def get_absolute_url(self):
         return reverse('order-detail', kwargs={"pk": self.pk})

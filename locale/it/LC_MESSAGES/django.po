@@ -1,0 +1,905 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-30 14:33+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\affiliate\models\affiliate.py:12 .\dashboard\models\enterprise.py:52
+#: .\dashboard\models\profile.py:15 .\referral\models\referral_audit.py:11
+#: .\referral\models\referral_code.py:8
+#: .\referral\models\referral_conversion.py:9
+#: .\referral\models\referral_engagement.py:10
+#: .\referral\models\referral_notification.py:8
+#: .\referral\models\referral_reward.py:12
+#: .\referral\models\referral_settings.py:9
+#: .\referral\models\referral_transaction.py:11
+msgid "User"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:13 .\affiliate\models\affiliate_program.py:6
+#: .\dashboard\models\country.py:5 .\dashboard\models\municipality.py:8
+#: .\dashboard\models\province.py:8 .\dashboard\models\region.py:6
+#: .\payments\models\product.py:20 .\payments\models\product_tag.py:8
+#: .\referral\models\referral_program.py:12
+msgid "Name"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:14 .\dashboard\models\enterprise.py:85
+msgid "Email"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:15
+msgid "Phone"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:16
+#: .\affiliate\models\affiliate_program_partecipation.py:7
+#: .\referral\models\referral_program_partecipation.py:7
+msgid "Date Joined"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:17
+#: .\affiliate\models\affiliate_commission.py:10
+#: .\affiliate\models\affiliate_incentive.py:26
+#: .\affiliate\models\affiliate_program_partecipation.py:9
+#: .\affiliate\models\affiliate_support_ticket.py:9
+#: .\affiliate\models\affiliate_transaction.py:14 .\payments\models\order.py:17
+#: .\referral\models\referral_code.py:13
+#: .\referral\models\referral_conversion.py:12
+#: .\referral\models\referral_program_partecipation.py:9
+#: .\referral\models\referral_reward.py:16
+#: .\referral\models\referral_transaction.py:16
+msgid "Status"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:18
+msgid "Total Earning"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:19
+msgid "Country"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:20
+msgid "Profile Picture"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:21
+msgid "Account Balance"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:22
+msgid "Last Login"
+msgstr ""
+
+#: .\affiliate\models\affiliate.py:23
+msgid "Referral Source"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:5
+#: .\affiliate\models\affiliate_commission.py:5
+#: .\affiliate\models\affiliate_link.py:8
+#: .\affiliate\models\affiliate_notification.py:5
+#: .\affiliate\models\affiliate_payout.py:5
+#: .\affiliate\models\affiliate_performance.py:11
+#: .\affiliate\models\affiliate_settings.py:5
+#: .\affiliate\models\affiliate_support_ticket.py:5
+#: .\affiliate\models\affiliate_transaction.py:9
+msgid "Affiliates"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:6
+#: .\referral\models\referral_audit.py:9
+msgid "Action Taken"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:7
+#: .\referral\models\referral_audit.py:10
+msgid "Action Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:8
+#: .\affiliate\models\affiliate_incentive.py:30
+#: .\referral\models\referral_audit.py:12
+msgid "IP Address"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:9
+#: .\affiliate\models\affiliate_incentive.py:31
+#: .\referral\models\referral_audit.py:13
+msgid "Device Info"
+msgstr ""
+
+#: .\affiliate\models\affiliate_audit.py:10
+#: .\referral\models\referral_audit.py:14
+msgid "Location"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:5
+#: .\affiliate\models\affiliate_commission.py:6
+#: .\affiliate\models\affiliate_link.py:9
+#: .\affiliate\models\affiliate_tier.py:5 .\referral\models\referral_bonus.py:5
+#: .\referral\models\referral_campaign.py:5
+#: .\referral\models\referral_code.py:9
+#: .\referral\models\referral_program_partecipation.py:6
+msgid "Programs"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:6
+#: .\referral\models\referral_campaign.py:6
+msgid "Campaign Name"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:7
+#: .\referral\models\referral_campaign.py:7
+msgid "Start Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:8
+#: .\referral\models\referral_campaign.py:8
+msgid "End Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:9
+#: .\referral\models\referral_campaign.py:9
+msgid "Goal"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:10
+#: .\referral\models\referral_campaign.py:10
+msgid "Budget"
+msgstr ""
+
+#: .\affiliate\models\affiliate_campaign.py:11
+#: .\referral\models\referral_campaign.py:11
+msgid "Spending To Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:7
+#: .\affiliate\models\affiliate_incentive.py:24
+#: .\affiliate\models\affiliate_payout.py:6
+#: .\affiliate\models\affiliate_reward.py:9 .\payments\models\custom_order.py:9
+#: .\referral\models\referral_transaction.py:14
+msgid "Amount"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:8
+#: .\affiliate\models\affiliate_incentive.py:25
+#: .\affiliate\models\affiliate_payout.py:7
+#: .\affiliate\models\affiliate_program.py:9
+#: .\referral\models\referral_program.py:16
+#: .\referral\models\referral_transaction.py:15
+msgid "Currency"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:9
+#: .\referral\models\referral_reward.py:15
+msgid "Date Awarded"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:11
+msgid "Approved By"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:12
+msgid "Commission Type"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:13
+#: .\affiliate\models\affiliate_incentive.py:27
+#: .\affiliate\models\affiliate_program.py:7
+#: .\affiliate\models\affiliate_support_ticket.py:8
+#: .\payments\models\custom_order.py:10 .\payments\models\product.py:22
+#: .\referral\models\referral_program.py:13
+msgid "Description"
+msgstr ""
+
+#: .\affiliate\models\affiliate_commission.py:14
+msgid "Tier"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:20
+#: .\affiliate\models\affiliate_program_partecipation.py:5
+#: .\affiliate\models\affiliate_reward.py:8
+msgid "Affiliate"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:21
+#: .\affiliate\models\affiliate_program_partecipation.py:6
+#: .\referral\models\referral.py:11
+msgid "Program"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:22
+msgid "Incentive Type"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:23
+msgid "Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:32
+msgid "Tracking ID"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:33
+msgid "Expiration Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_incentive.py:34
+msgid "Is Incentive Active"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:10 .\payments\models\product.py:24
+msgid "URL"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:11
+#: .\referral\models\referral_stats.py:7
+msgid "Click Count"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:12
+#: .\referral\models\referral_stats.py:8
+msgid "Conversion Count"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:13
+#: .\affiliate\models\affiliate_program.py:12
+#: .\affiliate\models\affiliate_support_ticket.py:10
+#: .\referral\models\referral.py:17 .\referral\models\referral_code.py:12
+#: .\referral\models\referral_program.py:19
+msgid "Date Created"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:14
+msgid "Last Used"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:15
+msgid "Link Status"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:16
+msgid "Landing Page"
+msgstr ""
+
+#: .\affiliate\models\affiliate_link.py:17
+msgid "Custom Tracking ID"
+msgstr ""
+
+#: .\affiliate\models\affiliate_notification.py:6
+#: .\referral\models\referral_notification.py:9
+msgid "Message"
+msgstr ""
+
+#: .\affiliate\models\affiliate_notification.py:7
+#: .\referral\models\referral_notification.py:10
+msgid "Date Sent"
+msgstr ""
+
+#: .\affiliate\models\affiliate_notification.py:8
+#: .\referral\models\referral_notification.py:11
+msgid "Is Read"
+msgstr ""
+
+#: .\affiliate\models\affiliate_notification.py:9
+#: .\affiliate\models\affiliate_support_ticket.py:12
+#: .\referral\models\referral_notification.py:13
+msgid "Priority"
+msgstr ""
+
+#: .\affiliate\models\affiliate_notification.py:10
+#: .\referral\models\referral_notification.py:12
+msgid "Notification Type"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:8
+msgid "Payout Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:9
+msgid "Payout Method"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:10
+msgid "Payout Status"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:11
+msgid "Transaction"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:12
+msgid "Processing Fee"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:13
+msgid "Net Amount"
+msgstr ""
+
+#: .\affiliate\models\affiliate_payout.py:14
+msgid "Payout Provider"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:12
+#: .\referral\models\referral_stats.py:6
+msgid "Period"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:13
+msgid "Total Clicks"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:14
+msgid "Total Conversions"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:15
+msgid "Conversion Rate"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:16
+msgid "Total Earnings"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:17
+#: .\referral\models\referral_user.py:14
+msgid "Average Order Value"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:18
+msgid "Refund Rate"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:19
+msgid "Customer Lifetime Value"
+msgstr ""
+
+#: .\affiliate\models\affiliate_performance.py:20
+msgid "Top Product"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:8
+#: .\affiliate\models\affiliate_tier.py:8
+#: .\affiliate\models\affiliate_transaction.py:16
+msgid "Commission Rate"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:10
+msgid "Min Payout Threshould"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:11
+msgid "Min Payout Limit"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:13
+#: .\referral\models\referral_program.py:20
+msgid "Is Active"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:14
+msgid "Duration"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:15
+msgid "Allowed Countries"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program.py:16
+#: .\referral\models\referral_program.py:23
+msgid "Target Industry"
+msgstr ""
+
+#: .\affiliate\models\affiliate_program_partecipation.py:8
+msgid "Commission Earned"
+msgstr ""
+
+#: .\affiliate\models\affiliate_reward.py:10 .\payments\models\order.py:16
+#: .\payments\models\price.py:11 .\payments\models\product.py:28
+#: .\payments\models\product_tag.py:10
+msgid "Created At"
+msgstr ""
+
+#: .\affiliate\models\affiliate_settings.py:6
+msgid "Preferred Currency"
+msgstr ""
+
+#: .\affiliate\models\affiliate_settings.py:7
+msgid "Preferred Payment Method"
+msgstr ""
+
+#: .\affiliate\models\affiliate_settings.py:8
+msgid "Payout Schedule"
+msgstr ""
+
+#: .\affiliate\models\affiliate_settings.py:9
+#: .\referral\models\referral_settings.py:12
+msgid "Notification Preference"
+msgstr ""
+
+#: .\affiliate\models\affiliate_settings.py:10
+msgid "Dashboard Layout"
+msgstr ""
+
+#: .\affiliate\models\affiliate_support_ticket.py:6
+msgid "Ticket Number"
+msgstr ""
+
+#: .\affiliate\models\affiliate_support_ticket.py:7
+msgid "Subject"
+msgstr ""
+
+#: .\affiliate\models\affiliate_support_ticket.py:11
+msgid "Date Closed"
+msgstr ""
+
+#: .\affiliate\models\affiliate_support_ticket.py:13
+msgid "Assigned Agent"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:6
+msgid "Tier Name"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:7
+msgid "Min Sales"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:9
+msgid "Tier Benefits"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:10
+msgid "Access Level"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:11
+msgid "Next Tier Threshold"
+msgstr ""
+
+#: .\affiliate\models\affiliate_tier.py:12
+msgid "Tier Expiration"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:10
+msgid "Transaction Amount"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:11
+#: .\referral\models\referral_transaction.py:12
+msgid "Transaction Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:12
+#: .\referral\models\referral_transaction.py:13
+msgid "Order"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:13 .\payments\models\price.py:8
+msgid "Product"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:15
+msgid "Payment Date"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:17
+msgid "Discount Applied"
+msgstr ""
+
+#: .\affiliate\models\affiliate_transaction.py:18
+msgid "Coupon Code"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:53
+msgid "Number Job Request Desidered Per Week"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:54
+msgid "Have Office Shop To Receive Customers"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:55
+msgid "Link Google Maps"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:56
+msgid "Conctac Number"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:61
+msgid "Chamber Commerce Certificate"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:68
+msgid "Insurance Policy Certificate"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:75 .\dashboard\models\municipality.py:6
+#: .\dashboard\models\province.py:6
+msgid "Region"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:81
+msgid "Sectors"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:83
+msgid "Holder"
+msgstr ""
+
+#: .\dashboard\models\enterprise.py:84
+msgid "Company Name"
+msgstr ""
+
+#: .\dashboard\models\municipality.py:7
+msgid "Province"
+msgstr ""
+
+#: .\dashboard\models\municipality.py:9
+msgid "Is Capital Province"
+msgstr ""
+
+#: .\dashboard\models\municipality.py:10
+msgid "Cadastral Code"
+msgstr ""
+
+#: .\dashboard\models\municipality.py:11 .\dashboard\models\province.py:10
+#: .\dashboard\models\region.py:7
+msgid "Latitude"
+msgstr ""
+
+#: .\dashboard\models\municipality.py:12 .\dashboard\models\province.py:11
+#: .\dashboard\models\region.py:8
+msgid "Longitude"
+msgstr ""
+
+#: .\dashboard\models\profile.py:16
+msgid "Avatar"
+msgstr ""
+
+#: .\dashboard\models\profile.py:17
+msgid "Bio"
+msgstr ""
+
+#: .\dashboard\models\profile.py:20
+msgid "Birth Date"
+msgstr ""
+
+#: .\dashboard\models\profile.py:21
+msgid "City"
+msgstr ""
+
+#: .\dashboard\models\profile.py:22
+msgid "Street"
+msgstr ""
+
+#: .\dashboard\models\profile.py:23
+msgid "CAP"
+msgstr ""
+
+#: .\dashboard\models\profile.py:24
+msgid "Phone Number"
+msgstr ""
+
+#: .\dashboard\models\profile.py:28
+msgid "Is Business"
+msgstr ""
+
+#: .\dashboard\models\profile.py:29
+msgid "Is Buyer"
+msgstr ""
+
+#: .\dashboard\models\profile.py:32
+msgid "Name Business"
+msgstr ""
+
+#: .\dashboard\models\profile.py:33
+msgid "Is Owner"
+msgstr ""
+
+#: .\dashboard\models\profile.py:34
+msgid "User Owner"
+msgstr ""
+
+#: .\dashboard\models\profile.py:35
+msgid "IVA"
+msgstr ""
+
+#: .\dashboard\models\profile.py:36
+msgid "Office Number"
+msgstr ""
+
+#: .\dashboard\models\province.py:7
+msgid "Metropolitan City Code"
+msgstr ""
+
+#: .\dashboard\models\province.py:9
+msgid "Automotive Acronym"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\partials\_settings-panel.html:205
+msgid "Change Language"
+msgstr ""
+
+#: .\payments\models\custom_order.py:11
+msgid "Buyer"
+msgstr ""
+
+#: .\payments\models\order.py:15
+msgid "Customer"
+msgstr ""
+
+#: .\payments\models\order.py:18
+msgid "Total Price"
+msgstr ""
+
+#: .\payments\models\order.py:19
+msgid "Products"
+msgstr ""
+
+#: .\payments\models\price.py:9 .\payments\models\product.py:25
+msgid "Price"
+msgstr ""
+
+#: .\payments\models\price.py:12 .\payments\models\product.py:29
+#: .\payments\models\product_tag.py:11
+msgid "Updated At"
+msgstr ""
+
+#: .\payments\models\product.py:23
+msgid "Thumbnail"
+msgstr ""
+
+#: .\payments\models\product.py:26
+msgid "Quantity"
+msgstr ""
+
+#: .\payments\models\product_tag.py:7
+msgid "Designates the name of the tag."
+msgstr ""
+
+#: .\referral\models\referral.py:12 .\referral\models\referral_level.py:9
+msgid "Referrer"
+msgstr ""
+
+#: .\referral\models\referral.py:13 .\referral\models\referral_level.py:10
+msgid "Referred"
+msgstr ""
+
+#: .\referral\models\referral.py:16
+msgid "Reward Given"
+msgstr ""
+
+#: .\referral\models\referral_audit.py:8
+#: .\referral\models\referral_conversion.py:8
+#: .\referral\models\referral_engagement.py:9
+#: .\referral\models\referral_program_partecipation.py:5
+#: .\referral\models\referral_reward.py:11
+#: .\referral\models\referral_stats.py:5
+#: .\referral\models\referral_transaction.py:10
+msgid "Referral Codes"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:6
+msgid "Bonus Type"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:7
+msgid "Bonus Value"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:8
+msgid "Min Referrals Required"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:9
+msgid "Bonus Date"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:10 .\referral\models\referral_code.py:14
+#: .\referral\models\referral_reward.py:17
+msgid "Expiry Date"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:11
+msgid "Max Usage"
+msgstr ""
+
+#: .\referral\models\referral_bonus.py:12
+msgid "Eligibility Criteria"
+msgstr ""
+
+#: .\referral\models\referral_campaign.py:12
+msgid "Target Audience"
+msgstr ""
+
+#: .\referral\models\referral_code.py:10
+msgid "Code"
+msgstr ""
+
+#: .\referral\models\referral_code.py:11
+msgid "Usage Count"
+msgstr ""
+
+#: .\referral\models\referral_code.py:15
+msgid "Referred User Count"
+msgstr ""
+
+#: .\referral\models\referral_code.py:16
+msgid "Unique URL"
+msgstr ""
+
+#: .\referral\models\referral_code.py:17
+msgid "Campaign Source"
+msgstr ""
+
+#: .\referral\models\referral_code.py:18
+msgid "Campaign Medium"
+msgstr ""
+
+#: .\referral\models\referral_conversion.py:10
+msgid "Conversion Date"
+msgstr ""
+
+#: .\referral\models\referral_conversion.py:11
+#: .\referral\models\referral_transaction.py:17
+msgid "Conversion Value"
+msgstr ""
+
+#: .\referral\models\referral_conversion.py:13
+msgid "Reward Issued"
+msgstr ""
+
+#: .\referral\models\referral_conversion.py:14
+msgid "Conversion Source"
+msgstr ""
+
+#: .\referral\models\referral_conversion.py:15
+msgid "Referral Type"
+msgstr ""
+
+#: .\referral\models\referral_engagement.py:11
+msgid "Email Opened"
+msgstr ""
+
+#: .\referral\models\referral_engagement.py:12
+msgid "Email Clicked"
+msgstr ""
+
+#: .\referral\models\referral_engagement.py:13
+msgid "Social Share Count"
+msgstr ""
+
+#: .\referral\models\referral_engagement.py:14
+msgid "Last Interaction Date"
+msgstr ""
+
+#: .\referral\models\referral_level.py:11
+msgid "Level"
+msgstr ""
+
+#: .\referral\models\referral_notification.py:14
+msgid "Action Required"
+msgstr ""
+
+#: .\referral\models\referral_program.py:14
+#: .\referral\models\referral_reward.py:13
+msgid "Reward Type"
+msgstr ""
+
+#: .\referral\models\referral_program.py:15
+#: .\referral\models\referral_reward.py:14
+msgid "Reward Value"
+msgstr ""
+
+#: .\referral\models\referral_program.py:17
+msgid "Min Referral Count"
+msgstr ""
+
+#: .\referral\models\referral_program.py:18
+msgid "Max Referrals Per User"
+msgstr ""
+
+#: .\referral\models\referral_program.py:21
+msgid "Program Duration"
+msgstr ""
+
+#: .\referral\models\referral_program.py:22
+msgid "Allowed Regions"
+msgstr ""
+
+#: .\referral\models\referral_program_partecipation.py:8
+msgid "Reward Earned"
+msgstr ""
+
+#: .\referral\models\referral_reward.py:18
+msgid "Reward Description"
+msgstr ""
+
+#: .\referral\models\referral_reward.py:19
+msgid "Reward Source"
+msgstr ""
+
+#: .\referral\models\referral_settings.py:10
+msgid "Default Reward Type"
+msgstr ""
+
+#: .\referral\models\referral_settings.py:11
+msgid "Max Referrals Allowed"
+msgstr ""
+
+#: .\referral\models\referral_settings.py:13
+msgid "Auto Share Setting"
+msgstr ""
+
+#: .\referral\models\referral_settings.py:14
+msgid "Social Share Message"
+msgstr ""
+
+#: .\referral\models\referral_stats.py:9
+msgid "Total Rewards"
+msgstr ""
+
+#: .\referral\models\referral_stats.py:10
+msgid "Average Conversione Value"
+msgstr ""
+
+#: .\referral\models\referral_stats.py:11
+msgid "Highest Referral Earning"
+msgstr ""
+
+#: .\referral\models\referral_transaction.py:18
+msgid "Discount Value"
+msgstr ""
+
+#: .\referral\models\referral_transaction.py:19
+msgid "Coupon Code Used"
+msgstr ""
+
+#: .\referral\models\referral_transaction.py:20
+msgid "Channel"
+msgstr ""
+
+#: .\referral\models\referral_user.py:8
+msgid "user"
+msgstr ""
+
+#: .\referral\models\referral_user.py:9
+msgid "Total Referrals"
+msgstr ""
+
+#: .\referral\models\referral_user.py:10
+msgid "Active Referrals"
+msgstr ""
+
+#: .\referral\models\referral_user.py:11
+msgid "Inactive Referrals"
+msgstr ""
+
+#: .\referral\models\referral_user.py:12
+msgid "Total Rewards Earned"
+msgstr ""
+
+#: .\referral\models\referral_user.py:13
+msgid "Total Spent By Referred Users"
+msgstr ""
+
+#: .\referral\models\referral_user.py:15
+msgid "Loyalty Points Earned"
+msgstr ""

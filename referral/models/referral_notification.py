@@ -1,17 +1,17 @@
-from django.db import models 
-
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class ReferralNotification(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='engagement_notification_user')
-    message = models.TextField()
-    date_sent = models.DateField()
-    is_read = models.BooleanField(default=False)
-    notification_type = models.CharField(max_length=50)
-    priority = models.CharField(max_length=50)
-    action_required = models.BooleanField(default=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("User"), related_name='engagement_notification_user')
+    message = models.TextField(verbose_name=_("Message"))
+    date_sent = models.DateField(verbose_name=_("Date Sent"))
+    is_read = models.BooleanField(default=False, verbose_name=_("Is Read"))
+    notification_type = models.CharField(max_length=50, verbose_name=_("Notification Type"))
+    priority = models.CharField(max_length=50, verbose_name=_("Priority"))
+    action_required = models.BooleanField(default=False, verbose_name=_("Action Required"))
 
     class Meta:
         ordering = ['-date_sent']

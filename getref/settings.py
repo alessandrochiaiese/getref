@@ -35,6 +35,14 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 
+# social auth configs for github
+SOCIAL_AUTH_GITHUB_KEY = str(config('GITHUB_KEY', ""))
+SOCIAL_AUTH_GITHUB_SECRET = str(config('GITHUB_SECRET', ""))
+
+# social auth configs for google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(config('GOOGLE_KEY', ""))
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(config('GOOGLE_SECRET', ""))
+
 # Stripe configuration 
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
@@ -69,9 +77,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
-    'dashboard', 
-    'referral', 
-    'affiliate',
     'health_check',                             # the default health check
     'health_check.db',                          # stock Django health checkers
     'health_check.cache',                       # required if you use cache
@@ -81,13 +86,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders', 
     'drf_yasg',
-    "accounts",                                 # Django users
     'social_django', 
+    "accounts",                                 # Django users
+    'dashboard', 
+    'referral', 
+    'affiliate',
     # Local
     'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -100,20 +109,23 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # ... custom middleware ...
+    #'dashboard.middleware.check_valid_endpoint_middleware.CheckValidEndpointMiddleware',
     'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allows requests from all origins
 
 CORS_ALLOWED_ORIGINS = [
+    'https://addiliate.getcall.it', 
+    'https://www.affiliate.getcall.it', 
     #'https://getcall.pythonanywhere.com',
-    'http://localhost:3000',  # Add your frontend's URL
-    'http://0.0.0.0:8000'
+    #'http://localhost:3000', 
+    #'http://0.0.0.0:8000'
 ]
 
 ROOT_URLCONF = 'getref.urls'
 
-APPEND_SLASH=False
+APPEND_SLASH=True
 
 
 TEMPLATES = [
@@ -143,12 +155,12 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 MAX_CONN_AGE = 600
 
 # Local DB
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # MySQL DB
 #DATABASES = {
@@ -164,16 +176,16 @@ MAX_CONN_AGE = 600
 #}
 
 # AWS RDS
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': '5432',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': config('DATABASE_NAME'),
+#        'USER': config('DATABASE_USER'),
+#        'PASSWORD': config('DATABASE_PASSWORD'),
+#        'HOST': config('DATABASE_HOST'),
+#        'PORT': '5432',
+#    }
+#}
 
 
 # Password validation
@@ -206,16 +218,25 @@ AUTHENTICATION_BACKENDS = (
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'it' #'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = True # Deprecated
 
 USE_TZ = True
 
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('it', 'Italian'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # cartella per i file di traduzione
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -232,7 +253,6 @@ UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
  
 
-
 #LOGIN_URL = '/admin/login/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/'
@@ -241,20 +261,14 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# social auth configs for github
-SOCIAL_AUTH_GITHUB_KEY = str(config('GITHUB_KEY', ""))
-SOCIAL_AUTH_GITHUB_SECRET = str(config('GITHUB_SECRET', ""))
-
-# social auth configs for google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(config('GOOGLE_KEY', ""))
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(config('GOOGLE_SECRET', ""))
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if not DEBUG:
+    DOMAIN = config('DOMAIN')
+
     # email configs
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
@@ -275,28 +289,41 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     CSRF_TRUSTED_ORIGINS = [
-        '*', #'getcall.pythonanywhere.com',
+        'addiliate.getcall.it', 
+        'www.affiliate.getcall.it' 
+        #'*', 
+        # #'getcall.pythonanywhere.com',
     ]
 
     # Aggiungere automaticamente lo schema a ogni dominio
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
+else:
+    DOMAIN = '127.0.0.1:8000'
+
+CLIENT_ID = config('CLIENT_ID')
+CLIENT_SECRET = config('CLIENT_SECRET')
+APP_NAME = config('APP_NAME')
 
 # AWS Provider
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
-AWS_S3_SIGNATURE_NAME = 's3v4',
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  None
-AWS_S3_VERIFY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
+#AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
+#AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
+#AWS_S3_SIGNATURE_NAME = 's3v4',
+#AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
+#AWS_S3_FILE_OVERWRITE = False
+#AWS_DEFAULT_ACL =  None
+#AWS_S3_VERIFY = True
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000, 
     # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+    'SCOPES': {
+        'read': 'Read scope', 
+        'write': 'Write scope', 
+        'groups': 'Access to your groups'
+    }
 }
 
 REST_FRAMEWORK = {
@@ -321,21 +348,21 @@ SWAGGER_SETTINGS = {
                 'name': 'Authorization',
                 'in': 'header'
         },
-        'Get Call API - Swagger': {
+        'GetCall API - Swagger': {
             'type': 'oauth2',
-            'authorizationUrl': '/getref/o/authorize',
-            'tokenUrl': '/getref/o/token/',
+            'authorizationUrl': f"{DOMAIN}/o/authorize",
+            'tokenUrl': f"{DOMAIN}/o/token/",
             'flow': 'accessCode',
             'scopes': {
                 'read groups': 'read groups',
             }
         }
     },
-    'OAUTH2_REDIRECT_URL': 'http://localhost/static/drf-yasg/swagger-ui-dist/oauth2-redirect.html',
+    'OAUTH2_REDIRECT_URL': f"{DOMAIN}/static/drf-yasg/swagger-ui-dist/oauth2-redirect.html",
     'OAUTH2_CONFIG': {
-        'clientId':  'GetCallClientId',
-        'clientSecret': 'GetCallClientSecret',
-        'appName': 'GetCall'
+        'clientId':  f"{CLIENT_ID}",
+        'clientSecret': f"{CLIENT_SECRET}",
+        'appName': f"{APP_NAME}"
 
     },
 }

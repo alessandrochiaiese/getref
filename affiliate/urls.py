@@ -21,6 +21,7 @@ from  affiliate.views.views_affiliate_setting import *
 from  affiliate.views.views_affiliate_support_ticket import * 
 from  affiliate.views.views_affiliate_tier import * 
 from  affiliate.views.views_affiliate_transaction import * 
+
 urlpatterns = [   
     path('affiliate/audits/', affiliate_audit_list, name='affiliate_audit_list'),
     path('affiliate/audits/<int:affiliate_audit_id>/', affiliate_audit_detail, name='affiliate_audit_detail'),
@@ -114,8 +115,5 @@ urlpatterns = [
 
 
 
-
-
-
-    path('api/v0/affiliate/', include('affiliate.api.urls'), name='api_affiliate_v0'),
 ]  + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+

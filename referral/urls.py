@@ -1,6 +1,7 @@
 
 from django.conf.urls.static import static
 from django.urls import include, path, re_path as url
+from django.conf.urls.i18n import i18n_patterns
  
 from getref import settings   
 from dashboard.utils import *
@@ -20,6 +21,7 @@ from referral.views.views_referral_stat import *
 from referral.views.views_referral_transaction import *
 
 urlpatterns = [ 
+
     ## referral
     path('referral/audits/', referral_audit_list, name='referral_audit_list'),
     path('referral/audits/<int:referral_audit_id>/', referral_audit_detail, name='referral_audit_detail'),
@@ -99,6 +101,4 @@ urlpatterns = [
     path('referral/transactions/update/<str:referral_transaction_id>/', update_referral_transaction, name='referral_update_transaction'),
     path('referral/transactions/delete/<str:referral_transaction_id>/', delete_referral_transaction, name='referral_delete_transaction'),
  
-    path('api/v0/referral/', include('referral.api.urls'), name='api_referral'),
-
 ]  + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

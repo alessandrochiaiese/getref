@@ -17,8 +17,8 @@ class BasicElementsView(TemplateView):
 class IconsView(TemplateView):
     template_name = 'dashboard/pages/icons/mdi.html'
 
-class Error400View(TemplateView):
-    template_name = 'dashboard/pages/samples/error-400.html'
+class Error500View(TemplateView):
+    template_name = 'dashboard/pages/samples/error-500.html'
 
 class Error404View(TemplateView):
     template_name = 'dashboard/pages/samples/error-404.html'

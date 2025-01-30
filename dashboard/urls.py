@@ -1,5 +1,6 @@
 
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 from django.urls import include, path, re_path as url
  
 from getref import settings   
@@ -8,9 +9,9 @@ from dashboard.utils import *
 from django.contrib.auth import views as auth_views 
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
-from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView, UserProfileDataView,)
+from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
 from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyIBsView, ParticipateCampaignView, WithdrawalView, )
-from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error400View, Error404View, TableView, DropdownsView, TypographyView,)
+from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
 from referral.views.views_referral_audit import *
@@ -28,13 +29,14 @@ from referral.views.views_referral_stat import *
 from referral.views.views_referral_transaction import *
 
 urlpatterns = [
+
     ## dashboard
     path('', HomeView.as_view(), name='core_home'),
     path('dashboard/', HomeView.as_view(), name='dashboard'),
     path('accounts/master/', MasterAccountsView.as_view(), name='master_accounts'),
     path('accounts/investor/', InvestorAccountsView.as_view(), name='investor_accounts'),
     path('accounts/incomplete/', IncompleteRegistrationsView.as_view(), name='incomplete_registrations'),
-    path('my-ibs/', MyIBsView.as_view(), name='my_ibs'),
+    path('my-ibs/', MyIBsView.as_view(), name='my_network'),
 
     # get users referred with level
     #path('get-level-users/', UserReferredLevelView.as_view(), name='get_user_table'), #get_user_table, name='get_user_table'),
@@ -45,8 +47,11 @@ urlpatterns = [
     
     # Registrazione
     path('register/', RegisterView.as_view(), name='core_register'),    
-    path('referral-code/<str:referral_code>/', ReferralRedirectView.as_view(), name='referral_redirect'),
-    path('register/<str:referral_code>/', RegisterView.as_view(), name='core_register_with_referral'),
+    path('referral-code/', ReferralRedirectView.as_view(), name='referral_redirect'),
+    # Registrazione di prima
+    # #path('register/', RegisterView.as_view(), name='core_register'),    
+    #path('referral-code/<str:referral_code>/', ReferralRedirectView.as_view(), name='referral_redirect'),
+    #path('register/<str:referral_code>/', RegisterView.as_view(), name='core_register_with_referral'),
     #path('referral-code/', ReferralRedirectView.as_view(), name='referral_redirect'),
     
     # Login e Logout
@@ -70,14 +75,13 @@ urlpatterns = [
     ## profile
     path('profile/', ProfileView.as_view(), name='core_profile'),
     
-    # Dati profilo utente (API JSON)
-    path('profile/data/', UserProfileDataView.as_view(), name='core_profile_data'),
     
     # Partecipazione a campagne di referral
     path('campaign/participate/', ParticipateCampaignView.as_view(), name='core_participate_campaign'),
     
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
+    # enterprise
     path('create-enterprise/', EnterpriseCreateView.as_view(), name='create_enterprise'),  # Aggiungi azienda
     path('update-enterprise/<int:pk>/', EnterpriseUpdateView.as_view(), name='update_enterprise'),  # Modifica azienda
     path('enterprise-list/', EnterpriseListView.as_view(), name='enterprise_list'),  # Elenco di tutte le aziende
@@ -88,8 +92,8 @@ urlpatterns = [
     path('documentation/', DocumentationView.as_view(), name='documentation'),
     path('forms/basic_elements/', BasicElementsView.as_view(), name='forms_basic_elements'),
     path('icons/', IconsView.as_view(), name='icons_mdi'),
-    path('error/404/', Error400View.as_view(), name='error-404'),
-    path('error/500/', Error404View.as_view(), name='error-500'),
+    path('404/', Error500View.as_view(), name='404'),
+    path('500/', Error404View.as_view(), name='500'),
     path('login/', LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),
     path('tables/basic-table/', TableView.as_view(), name='basic_table'),
@@ -97,11 +101,6 @@ urlpatterns = [
     path('ui-features/dropdowns/', DropdownsView.as_view(), name='ui_features_dropdowns'),
     path('ui-features/typography/', TypographyView.as_view(), name='ui_features_typography'),
     
-    ## api
-    path('api/v0/', include('dashboard.api.urls'), name='api_profile'),
-
-    ## social django
-    url(r'^oauth/', include('social_django.urls', namespace='social')),
     
     ## referral
     path('referral/audits/', referral_audit_list, name='referral_audit_list'),
@@ -181,5 +180,5 @@ urlpatterns = [
     path('referral/transactions/create/', create_referral_transaction, name='referral_create_transaction'),
     path('referral/transactions/update/<str:referral_transaction_id>/', update_referral_transaction, name='referral_update_transaction'),
     path('referral/transactions/delete/<str:referral_transaction_id>/', delete_referral_transaction, name='referral_delete_transaction'),
- 
+
 ]  + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

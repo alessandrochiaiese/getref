@@ -1,6 +1,7 @@
 
-{% extends "dashboard/layout.html" %}
+{% extends 'dashboard/layout.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Dashboard - Referred IBs {% endblock %}
 
@@ -26,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody id="user-table-tbody ">
-                        {% for referred_user in my_ibs %}
+                        {% for referred_user in my_network %}
                         <tr>
                             <th>{{ referred_user.first_name }}</th>
                             <th>{{ referred_user.last_name }}</th>

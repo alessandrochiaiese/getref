@@ -49,7 +49,9 @@ class RegisterView(View):
         return render(request, self.template_name, {'form': form})"""
 
     def get(self, request, *args, **kwargs):
-        referral_code_used = kwargs.get('referral_code')  # Codice referral da URL
+        # Verifica se c'è un referral code nei parametri GET
+        referral_code_used = self.request.GET.get('referral_code') # aggiunto
+        #referral_code_used = kwargs.get('referral_code')  # Codice referral da URL # di prima
         form = self.form_class(initial=self.initial)
 
         if referral_code_used:
@@ -61,11 +63,18 @@ class RegisterView(View):
             except ReferralCode.DoesNotExist:
                 messages.warning(request, 'Il codice referral non è valido.')
 
-        return render(request, self.template_name, {'form': form})
+        #return render(request, self.template_name, {'form': form})
+        response = render(request, self.template_name, {'form': form})
+
+        if referral_code_used:
+            response.set_cookie('referral_code', referral_code_used, max_age=60*60*24*30)  # 30 giorni
+
+        return response
     
     def post(self, request, *args, **kwargs):        
         # Estrai referral_code direttamente dai kwargs, dato che è passato come parte dell'URL
-        referral_code_used = kwargs.get('referral_code', None)  # Codice referral passato nel percorso URL
+        referral_code_used = self.request.POST.get('referral_code') or request.COOKIES.get('referral_code')
+        #referral_code_used = kwargs.get('referral_code', None)  # Codice referral passato nel percorso URL # di prima
         print('Referral code from URL:', referral_code_used)
 
         form = self.form_class(self.request.POST)
@@ -145,13 +154,16 @@ class RegisterView(View):
                 status="active",
                 referred_user_count=0,
                 expiry_date=self.request.POST.get('expiry_date'),
-                unique_url=self.request.build_absolute_uri("/referral-code/" + code + "/"), # request.get_host() + '/referral-code/' + code + '/'#,
+                unique_url=self.request.build_absolute_uri(f'?referral_code={code}'), # request.get_host() + '/referral-code/' + code + '/'#,
                 #campaign_source=campaign_source,  # Now we ensure it's not None
                 #campaign_medium=campaign_medium
             )
 
-
-            return redirect(to='core_login')
+    
+            #return redirect(to='core_login') # di prima
+            response = redirect(to='core_login')
+            response.delete_cookie('referral_code')  # Una volta usato, rimuoviamo il cookie
+            return response
 
         return render(request, self.template_name, {'form': form})
 
