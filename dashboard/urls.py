@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
-from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyIBsView, ParticipateCampaignView, WithdrawalView, )
+from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, ParticipateCampaignView, WithdrawalView, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
@@ -36,7 +36,7 @@ urlpatterns = [
     path('accounts/master/', MasterAccountsView.as_view(), name='master_accounts'),
     path('accounts/investor/', InvestorAccountsView.as_view(), name='investor_accounts'),
     path('accounts/incomplete/', IncompleteRegistrationsView.as_view(), name='incomplete_registrations'),
-    path('my-ibs/', MyIBsView.as_view(), name='my_network'),
+    path('my-ibs/', MyNetworkView.as_view(), name='my_network'),
 
     # get users referred with level
     #path('get-level-users/', UserReferredLevelView.as_view(), name='get_user_table'), #get_user_table, name='get_user_table'),

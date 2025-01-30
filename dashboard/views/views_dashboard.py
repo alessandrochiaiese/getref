@@ -382,9 +382,9 @@ class IncompleteRegistrationsView(TemplateView):
         return context
     
 @method_decorator(login_required, name='dispatch')
-class MyIBsView(TemplateView):
+class MyNetworkView(TemplateView):
     model = get_user_model()  # Usa il modello User di default
-    template_name = 'dashboard/my_network.html'
+    template_name = 'dashboard/referred_accounts/my_network.html'
 
     def get_object(self, queryset=None):
         # Ritorna l'oggetto corrispondente all'utente autenticato
