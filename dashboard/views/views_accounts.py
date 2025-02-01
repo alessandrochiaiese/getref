@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy 
 from django.utils.crypto import get_random_string 
 from dashboard.models import *   
+from getref import settings
 from referral.models import *   
 from dashboard.forms import * 
 
@@ -200,6 +201,11 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
                       "please make sure you've entered the address you registered with, and check your spam folder."
     success_url = reverse_lazy('core_home')
 
+    def form_valid(self, form):
+        form.save(
+            from_email=settings.EMAIL_HOST_USER  # Assicura che il mittente sia quello corretto
+        )
+        return super().form_valid(form)
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'core/change_password.html'
