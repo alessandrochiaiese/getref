@@ -41,10 +41,23 @@ def home(request):
                 authorization_grant_type=Application.GRANT_CLIENT_CREDENTIALS,
                 name=name
             )
-            return redirect("home")
+            return redirect("subscription-home")
     api_keys = APIKey.objects.filter(user=request.user)
     return render(request, "subscriptions/home.html", {"api_keys": api_keys})
 
+
+@login_required
+def api_keys(request):
+    return render(request, "subscriptions/api_keys.html")
+
+@login_required
+def api_usage_dashboard(request):
+    logs = APIUsageLog.objects.filter(api_key__user=request.user).order_by("-timestamp")[:20]
+    return render(request, "subscriptions/api_usage_dashboard.html", {"logs": logs})
+
+@login_required
+def email_subscription_success(request):
+    return render(request, "subscriptions/email_subscription_success.html")
 
 class APIKeyViewSet(viewsets.ModelViewSet):
     queryset = APIKey.objects.all()
@@ -69,11 +82,6 @@ class APIKeyUsageViewSet(viewsets.ViewSet):
         return Response(data)
     from django.views.decorators.csrf import csrf_exempt
 
-
-@login_required
-def api_usage_dashboard(request):
-    logs = APIUsageLog.objects.filter(api_key__user=request.user).order_by("-timestamp")[:20]
-    return render(request, "subscriptions/api_usage_dashboard.html", {"logs": logs})
 
 
 @csrf_exempt

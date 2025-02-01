@@ -1,29 +1,32 @@
-{% extends "base.html" %}
+{% extends "dashboard/layout.html" %}
+{% load i18n %}
 {% block content %}
 <h2>{% trans "Le tue API Keys" %}</h2>
 <form method="POST">
     {% csrf_token %}
-    <input type="text" name="name" placeholder="Nome API Key" required>
-    <button type="submit">{% trans "Crea API Key" %}</button>
+    <input class="form-control" type="text" name="name" placeholder="Nome API Key" required>
+    <button class="btn btn-primary pt-3" type="submit">{% trans "Crea API Key" %}</button>
 </form>
-<table>
-    <thead>
-        <tr>
-            <th>{% trans "Nome" %}</th>
-            <th>{% trans "Client ID" %}</th>
-            <th>{% trans "Ultimo Uso" %}</th>
-            <th>{% trans "Richieste" %}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for key in api_keys %}
-        <tr>
-            <td>{{ key.name }}</td>
-            <td>{{ key.client_id }}</td>
-            <td>{{ key.last_used_at|default:"Mai" }}</td>
-            <td>{{ key.request_count }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{% trans "Nome" %}</th>
+                <th>{% trans "Client ID" %}</th>
+                <th>{% trans "Ultimo Uso" %}</th>
+                <th>{% trans "Richieste" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in api_keys %}
+            <tr>
+                <td>{{ key.name }}</td>
+                <td>{{ key.client_id }}</td>
+                <td>{{ key.last_used_at|default:"Mai" }}</td>
+                <td>{{ key.request_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

@@ -482,6 +482,7 @@ class MyNetworkView(TemplateView):
         
         return context
     
+@method_decorator(login_required, name='dispatch')
 class WithdrawalView(TemplateView):
     template_name = 'dashboard/withdrawals.html'
 

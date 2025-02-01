@@ -1,33 +1,36 @@
-{% extends "base.html" %}
+{% extends "dashboard/layout.html" %}
 {% block content %}
+{% load i18n %}
 <h2>{% trans "Gestione API Keys" %}</h2>
-<table>
-    <thead>
-        <tr>
-            <th>{% trans "Nome" %}</th>
-            <th>{% trans "Client ID" %}</th>
-            <th>{% trans "Ultimo Uso" %}</th>
-            <th>{% trans "Richieste" %}</th>
-            <th>{% trans "Azioni" %}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for key in api_keys %}
-        <tr>
-            <td>{{ key.name }}</td>
-            <td>{{ key.client_id }}</td>
-            <td>{{ key.last_used_at|default:"Mai" }}</td>
-            <td>{{ key.request_count }}</td>
-            <td>
-                <button onclick="deleteKey('{{ key.id }}')">{% trans "Elimina" %}</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>{% trans "Nome" %}</th>
+                <th>{% trans "Client ID" %}</th>
+                <th>{% trans "Ultimo Uso" %}</th>
+                <th>{% trans "Richieste" %}</th>
+                <th>{% trans "Azioni" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in api_keys %}
+            <tr>
+                <td>{{ key.name }}</td>
+                <td>{{ key.client_id }}</td>
+                <td>{{ key.last_used_at|default:"Mai" }}</td>
+                <td>{{ key.request_count }}</td>
+                <td>
+                    <button class="btn btn-primary" onclick="deleteKey('{{ key.id }}')">{% trans "Elimina" %}</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <script>
     function deleteKey(id) {
-        fetch(`/api/api_keys/${id}/`, { method: 'DELETE', headers: { 'Authorization': 'Bearer {{ token }}' } })
+        fetch(`${window.location.origin}/api/v0/api-keys/${id}/`, { method: 'DELETE', headers: { 'Authorization': 'Bearer {{ token }}' } })
             .then(() => location.reload());
     }
 </script>

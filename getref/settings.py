@@ -134,7 +134,6 @@ ROOT_URLCONF = 'getref.urls'
 
 APPEND_SLASH=True
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -146,7 +145,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
+                # Social Django
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -163,7 +162,6 @@ MAX_CONN_AGE = 600
 
 DATABASE_PROVIDERS = config('DATABASE_PROVIDERS').split(",")  # Converte in lista
 DATABASE_PROVIDER_ID = int(config('DATABASE_PROVIDER_ID'))
-
 match DATABASE_PROVIDERS[DATABASE_PROVIDER_ID]:
     case 'localhost':
         # Local DB
@@ -281,7 +279,6 @@ match DATABASE_PROVIDERS[DATABASE_PROVIDER_ID]:
         DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-#LOGIN_URL = '/admin/login/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
@@ -294,35 +291,33 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if not DEBUG:
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
+EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
+if DEBUG:
     DOMAIN = config('DOMAIN')
-
-    # email configs
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
-    EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
+    # Email settings
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = True
-
+    # Session settings
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
-
     # Security settings 
+    SESSION_COOKIE_SECURE = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
     CSRF_TRUSTED_ORIGINS = [
-        'addiliate.getcall.it', 
+        'affiliate.getcall.it', 
         'www.affiliate.getcall.it' 
         #'*', 
         # #'getcall.pythonanywhere.com',
     ]
-
     # Aggiungere automaticamente lo schema a ogni dominio
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 else:

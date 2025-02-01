@@ -6,8 +6,8 @@ from rest_framework.routers import DefaultRouter
 from subscriptions.views import APIKeyUsageViewSet, APIKeyViewSet
 
 router = DefaultRouter()
-router.register(r'api_keys', APIKeyViewSet)
-router.register(r'api_usage', APIKeyUsageViewSet, basename='api_usage')
+router.register(r'api-keys', APIKeyViewSet)
+router.register(r'api-usage', APIKeyUsageViewSet, basename='api_usage')
 
 urlpatterns = [
     path('', include(router.urls)),

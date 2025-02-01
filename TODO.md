@@ -82,7 +82,8 @@ DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/
 
 30.01.2025
 [ ] Create Page to create and manage API KEY
-[ ] Make all Html with Internationalization and Localization
+[X] Make all Html with Internationalization and Localization
+[ ] Translation of msgid in msgstr in .po files 
 [ ] The pages of Affiliates and Referral Systems needs restyling
 [ ] Create App to subscription for different plan about API
 [ ]
@@ -97,7 +98,7 @@ DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/
 [ ] Creazione di Form a fasi tipo 4 fasi, la prima registrazione, seconda registrazione dell'azienda, terza per la aggiunta di un metodo di pagamento
 [ ] sistema dell'email, anche nela registrazione per confermare, ma anche un email del cliente prerogativa per chiedere di fare un azione un pagamento o per le condizioni da confermare
 
-[ ] Plan Subscription for API Services (Affiliate & Referral)
+[/] Plan Subscription for API Services (Affiliate & Referral)
 [ ] Stripe, Create i prodotti o servizi (piani di affiliazione sys e piani di referral sys)
 
 
