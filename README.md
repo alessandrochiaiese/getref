@@ -75,6 +75,20 @@ python manage.py populate_sectors
 env\scripts\activate
 python manage.py runserver
 ```
+
+```bash
+from django.core.mail import send_mail
+from django.conf import settings
+
+send_mail(
+    'Test Email',
+    'Questa è una mail di test.',
+    settings.EMAIL_HOST_USER,  # Mittente
+    ['<email>@gmail.com'],  # Destinatario
+    fail_silently=False,
+)
+```
+
 ## Usage
 Registra un nuovo utente.
 
