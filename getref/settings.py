@@ -336,7 +336,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'django_email.log',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django_email.log'),
         },
     },
     'loggers': {
