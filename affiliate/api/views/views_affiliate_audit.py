@@ -1,6 +1,5 @@
 import logging
 from django.http import JsonResponse
-from rest_framework_api_key.permissions import HasAPIKey
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import JSONRenderer
