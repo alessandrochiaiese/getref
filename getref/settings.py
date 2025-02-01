@@ -329,6 +329,8 @@ else:
 
 
 import logging
+LOGS_PATH= os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOGS_PATH, exist_ok=True)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -336,7 +338,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'django_email.log'),
+            'filename': os.path.join(LOGS_PATH, 'django_email.log'),
         },
     },
     'loggers': {
