@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% translate "Referral Detail" %}</h1>
+        <h1>{% trans "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,15 +38,15 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralCodeDetail');
                 const details = `
-                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>{% translate "Code:" %}</strong> ${referral.code}</li>
-                    <li class="list-group-item"><strong>{% translate "Usage Count:" %}</strong> ${referral.usage_count}</li>
-                    <li class="list-group-item"><strong>{% translate "Date Created:" %}</strong> ${referral.date_created}</li>
-                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${referral.status}</li>
-                    <li class="list-group-item"><strong>{% translate "Referred User Count:" %}</strong> ${referral.referred_user_count}</li>
-                    <li class="list-group-item"><strong>{% translate "Unique Url:" %}</strong> ${referral.unique_url}</li>
-                    <li class="list-group-item"><strong>{% translate "Campaign Source:" %}</strong> ${referral.campaign_source}</li>
-                    <li class="list-group-item"><strong>{% translate "Campaign Medium:" %}</strong> ${referral.campaign_medium}</li>`;
+                    <li class="list-group-item"><strong>{% trans "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% trans "Code:" %}</strong> ${referral.code}</li>
+                    <li class="list-group-item"><strong>{% trans "Usage Count:" %}</strong> ${referral.usage_count}</li>
+                    <li class="list-group-item"><strong>{% trans "Date Created:" %}</strong> ${referral.date_created}</li>
+                    <li class="list-group-item"><strong>{% trans "Status:" %}</strong> ${referral.status}</li>
+                    <li class="list-group-item"><strong>{% trans "Referred User Count:" %}</strong> ${referral.referred_user_count}</li>
+                    <li class="list-group-item"><strong>{% trans "Unique Url:" %}</strong> ${referral.unique_url}</li>
+                    <li class="list-group-item"><strong>{% trans "Campaign Source:" %}</strong> ${referral.campaign_source}</li>
+                    <li class="list-group-item"><strong>{% trans "Campaign Medium:" %}</strong> ${referral.campaign_medium}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral code detail:', error);

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{% translate "Gestione API Keys" %}</h2>
+<h2>{% trans "Gestione API Keys" %}</h2>
 <table>
     <thead>
         <tr>
-            <th>{% translate "Nome" %}</th>
-            <th>{% translate "Client ID" %}</th>
-            <th>{% translate "Ultimo Uso" %}</th>
-            <th>{% translate "Richieste" %}</th>
-            <th>{% translate "Azioni" %}</th>
+            <th>{% trans "Nome" %}</th>
+            <th>{% trans "Client ID" %}</th>
+            <th>{% trans "Ultimo Uso" %}</th>
+            <th>{% trans "Richieste" %}</th>
+            <th>{% trans "Azioni" %}</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
             <td>{{ key.last_used_at|default:"Mai" }}</td>
             <td>{{ key.request_count }}</td>
             <td>
-                <button onclick="deleteKey('{{ key.id }}')">{% translate "Elimina" %}</button>
+                <button onclick="deleteKey('{{ key.id }}')">{% trans "Elimina" %}</button>
             </td>
         </tr>
         {% endfor %}

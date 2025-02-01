@@ -4,25 +4,25 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Affiliate Reward" %}</h5>
+                <h5 class="modal-title" id="createModalLabel">{% trans "Create New Affiliate Reward" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm"> 
                     <div class="mb-3">
-                        <label for="createActionTaken" class="form-label">{% translate "Amount" %}</label>
+                        <label for="createActionTaken" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="createActionTaken" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createActionDate" class="form-label">{% translate "Created At" %}</label>
+                        <label for="createActionDate" class="form-label">{% trans "Created At" %}</label>
                         <input type="date" class="form-control" data-field="created_at" id="createActionDate" required>
                     </div> 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
+                    onclick="saveNewAffiliate()">{% trans "Create" %}</button>
             </div>
         </div>
     </div>
@@ -33,24 +33,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Affiliate Reward" %}</h5>
+                <h5 class="modal-title" id="editModalLabel">{% trans "Edit Affiliate Reward" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editActionTaken" class="form-label">{% translate "Amount" %}</label>
+                        <label for="editActionTaken" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="editActionTaken" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editActionDate" class="form-label">{% translate "Created At" %}</label>
+                        <label for="editActionDate" class="form-label">{% trans "Created At" %}</label>
                         <input type="date" class="form-control" data-field="created_at" id="editActionDate" required>
                     </div> 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

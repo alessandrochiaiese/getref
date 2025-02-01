@@ -4,45 +4,45 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Affiliate Tier" %}</h5>
+                <h5 class="modal-title" id="createModalLabel">{% trans "Create New Affiliate Tier" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm">
                     <div class="mb-3">
-                        <label for="createTierName" class="form-label">{% translate "Tier Name" %}</label>
+                        <label for="createTierName" class="form-label">{% trans "Tier Name" %}</label>
                         <input type="text" class="form-control" data-field="tier_name" id="createTierName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createMinSales" class="form-label">{% translate "Min Sales" %}</label>
+                        <label for="createMinSales" class="form-label">{% trans "Min Sales" %}</label>
                         <input type="text" class="form-control" data-field="min_sales" id="createMinSales" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createCommissionRate" class="form-label">{% translate "Commission Rate" %}</label>
+                        <label for="createCommissionRate" class="form-label">{% trans "Commission Rate" %}</label>
                         <input type="text" class="form-control" data-field="commission_rate" id="createCommissionRate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createTierBenefits" class="form-label">{% translate "Tier Benefits" %}</label>
+                        <label for="createTierBenefits" class="form-label">{% trans "Tier Benefits" %}</label>
                         <input type="text" class="form-control" data-field="tier_benefits" id="createTierBenefits" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createAccessLevel" class="form-label">{% translate "Access Level" %}</label>
+                        <label for="createAccessLevel" class="form-label">{% trans "Access Level" %}</label>
                         <input type="text" class="form-control" data-field="access_level" id="createAccessLevel" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createNextTierThreshold" class="form-label">{% translate "Next Tier Threshold" %}</label>
+                        <label for="createNextTierThreshold" class="form-label">{% trans "Next Tier Threshold" %}</label>
                         <input type="text" class="form-control" data-field="next_tier_threshold" id="createNextTierThreshold" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createTierExpiration" class="form-label">{% translate "Tier Expiration" %}</label>
+                        <label for="createTierExpiration" class="form-label">{% trans "Tier Expiration" %}</label>
                         <input type="text" class="form-control" data-field="tier_expiration" id="createTierExpiration" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
+                    onclick="saveNewAffiliate()">{% trans "Create" %}</button>
             </div>
         </div>
     </div>
@@ -53,44 +53,44 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Affiliate Tier" %}</h5>
+                <h5 class="modal-title" id="editModalLabel">{% trans "Edit Affiliate Tier" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editTierName" class="form-label">{% translate "Tier Name" %}</label>
+                        <label for="editTierName" class="form-label">{% trans "Tier Name" %}</label>
                         <input type="text" class="form-control" data-field="tier_name" id="editTierName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editMinSales" class="form-label">{% translate "Min Sales" %}</label>
+                        <label for="editMinSales" class="form-label">{% trans "Min Sales" %}</label>
                         <input type="text" class="form-control" data-field="min_sales" id="editMinSales" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editCommissionRate" class="form-label">{% translate "Commission Rate" %}</label>
+                        <label for="editCommissionRate" class="form-label">{% trans "Commission Rate" %}</label>
                         <input type="text" class="form-control" data-field="commission_rate" id="editCommissionRate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editTierBenefits" class="form-label">{% translate "Tier Benefits" %}</label>
+                        <label for="editTierBenefits" class="form-label">{% trans "Tier Benefits" %}</label>
                         <input type="text" class="form-control" data-field="tier_benefits" id="editTierBenefits" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editAccessLevel" class="form-label">{% translate "Access Level" %}</label>
+                        <label for="editAccessLevel" class="form-label">{% trans "Access Level" %}</label>
                         <input type="text" class="form-control" data-field="access_level" id="editAccessLevel" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editNextTierThreshold" class="form-label">{% translate "Next Tier Threshold" %}</label>
+                        <label for="editNextTierThreshold" class="form-label">{% trans "Next Tier Threshold" %}</label>
                         <input type="text" class="form-control" data-field="next_tier_threshold" id="editNextTierThreshold" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editTierExpiration" class="form-label">{% translate "Tier Expiration" %}</label>
+                        <label for="editTierExpiration" class="form-label">{% trans "Tier Expiration" %}</label>
                         <input type="text" class="form-control" data-field="tier_expiration" id="editTierExpiration" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

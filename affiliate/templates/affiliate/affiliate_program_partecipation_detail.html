@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>{% translate "Program Partecipation Affiliate Detail" %}</h1>
+    <h1>{% trans "Program Partecipation Affiliate Detail" %}</h1>
 
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -33,10 +33,10 @@
             const affiliate = await response.json();
             const detailList = document.getElementById('affiliateProgramPartecipationDetail');
             const details = `
-                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>{% translate "Date Joined:" %}</strong> ${affiliate.date_joined}</li>
-                    <li class="list-group-item"><strong>{% translate "Commission Earned:" %}</strong> ${affiliate.commission_earned}</li> 
-                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${affiliate.status}</li> `;
+                    <li class="list-group-item"><strong>{% trans "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% trans "Date Joined:" %}</strong> ${affiliate.date_joined}</li>
+                    <li class="list-group-item"><strong>{% trans "Commission Earned:" %}</strong> ${affiliate.commission_earned}</li> 
+                    <li class="list-group-item"><strong>{% trans "Status:" %}</strong> ${affiliate.status}</li> `;
             detailList.innerHTML = details;
         } catch (error) {
             console.error('Error fetching affiliate programs/partecipation detail:', error);

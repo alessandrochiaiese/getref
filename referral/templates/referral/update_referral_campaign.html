@@ -6,12 +6,12 @@
 {% block title %}Edit Campaign{% endblock %}
 
 {% block content %}
-    <h2>{% translate "Edit Campaign" %}</h2>
+    <h2>{% trans "Edit Campaign" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">{% translate "Update Campaign" %}</button>
+        <button type="submit">{% trans "Update Campaign" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_campaign_list' %}">{% translate "Back to Campaign List" %}</a>
+    <a href="{% url 'referral_campaign_list' %}">{% trans "Back to Campaign List" %}</a>
 {% endblock %}

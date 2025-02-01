@@ -11,7 +11,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-header">
-                    <h2>{% translate "Create Order" %}</h2>
+                    <h2>{% trans "Create Order" %}</h2>
                 </div>
                 <form method="POST">
                     <div class="card-body">
@@ -19,8 +19,8 @@
                         {{ form.as_p }}
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary mt-3" type="submit">{% translate "Create Order" %}</button>
-                        <a class="btn btn-primary mt-3" href="{% url 'product_list' %}">{% translate "Torna all'elenco" %}</a>
+                        <button class="btn btn-primary mt-3" type="submit">{% trans "Create Order" %}</button>
+                        <a class="btn btn-primary mt-3" href="{% url 'product_list' %}">{% trans "Torna all'elenco" %}</a>
                     </div>
                 </form>
             </div>

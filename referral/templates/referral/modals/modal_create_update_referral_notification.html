@@ -4,37 +4,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Referral Notification" %}</h5>
+                <h5 class="modal-title" id="createModalLabel">{% trans "Create New Referral Notification" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm">
                     <div class="mb-3">
-                        <label for="createMessage" class="form-label">{% translate "Message" %}</label>
+                        <label for="createMessage" class="form-label">{% trans "Message" %}</label>
                         <input type="text" class="form-control" data-field="message" id="createMessage" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDateSent" class="form-label">{% translate "DateSent" %}</label>
+                        <label for="createDateSent" class="form-label">{% trans "DateSent" %}</label>
                         <input type="date" class="form-control" data-field="date_sent" id="createDateSent" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createIsRead" class="form-label">{% translate "Is Read" %}</label>
+                        <label for="createIsRead" class="form-label">{% trans "Is Read" %}</label>
                         <input type="text" class="form-control" data-field="is_read" id="createIsRead" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createPriority" class="form-label">{% translate "Priority" %}</label>
+                        <label for="createPriority" class="form-label">{% trans "Priority" %}</label>
                         <input type="text" class="form-control" data-field="priority" id="createPriority" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createNotificationType" class="form-label">{% translate "Notification Type" %}</label>
+                        <label for="createNotificationType" class="form-label">{% trans "Notification Type" %}</label>
                         <input type="text" class="form-control" data-field="notification_type" id="createNotificationType" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
+                    onclick="saveNewAffiliate()">{% trans "Create" %}</button>
             </div>
         </div>
     </div>
@@ -45,36 +45,36 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Referral Notification" %}</h5>
+                <h5 class="modal-title" id="editModalLabel">{% trans "Edit Referral Notification" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editMessage" class="form-label">{% translate "Message" %}</label>
+                        <label for="editMessage" class="form-label">{% trans "Message" %}</label>
                         <input type="text" class="form-control" data-field="message" id="editMessage" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDateSent" class="form-label">{% translate "DateSent" %}</label>
+                        <label for="editDateSent" class="form-label">{% trans "DateSent" %}</label>
                         <input type="date" class="form-control" data-field="date_sent" id="editDateSent" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editIsRead" class="form-label">{% translate "Is Read" %}</label>
+                        <label for="editIsRead" class="form-label">{% trans "Is Read" %}</label>
                         <input type="text" class="form-control" data-field="is_read" id="editIsRead" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editPriority" class="form-label">{% translate "Priority" %}</label>
+                        <label for="editPriority" class="form-label">{% trans "Priority" %}</label>
                         <input type="text" class="form-control" data-field="priority" id="editPriority" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editNotificationType" class="form-label">{% translate "Notification Type" %}</label>
+                        <label for="editNotificationType" class="form-label">{% trans "Notification Type" %}</label>
                         <input type="text" class="form-control" data-field="notification_type" id="editNotificationType" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

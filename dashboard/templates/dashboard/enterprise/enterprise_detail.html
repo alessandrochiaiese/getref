@@ -11,25 +11,25 @@
     <h2>{{ profile.company_name }}</h2>
     <div class="row">
         <div class="col-md-6">
-            <p><strong>{% translate "Numero richieste di lavoro per settimana:" %}</strong> {{ profile.number_job_request_desidered_per_week }}</p>
-            <p><strong>{% translate "Contatto:" %}</strong> {{ profile.contact_number }}</p>
-            <p><strong>{% translate "Email:" %}</strong> {{ profile.email }}</p>
-            <p><strong>{% translate "Link Google Maps:" %}</strong>{% translate " " %}<a href="{{ profile.link_google_maps }}" target="_blank">{{ profile.link_google_maps }}</a></p>
-            <p><strong>{% translate "Settori:" %}</strong> {{ profile.sectors.all|join:", " }}</p>
-            <p><strong>{% translate "Regione:" %}</strong> {{ profile.region.name }}</p>
-            <p><strong>{% translate "Comunicazione dell'ufficio:" %}</strong> {{ profile.have_office_shop_to_receive_customers|yesno:"Sì,No" }}</p>
+            <p><strong>{% trans "Numero richieste di lavoro per settimana:" %}</strong> {{ profile.number_job_request_desidered_per_week }}</p>
+            <p><strong>{% trans "Contatto:" %}</strong> {{ profile.contact_number }}</p>
+            <p><strong>{% trans "Email:" %}</strong> {{ profile.email }}</p>
+            <p><strong>{% trans "Link Google Maps:" %}</strong>{% trans " " %}<a href="{{ profile.link_google_maps }}" target="_blank">{{ profile.link_google_maps }}</a></p>
+            <p><strong>{% trans "Settori:" %}</strong> {{ profile.sectors.all|join:", " }}</p>
+            <p><strong>{% trans "Regione:" %}</strong> {{ profile.region.name }}</p>
+            <p><strong>{% trans "Comunicazione dell'ufficio:" %}</strong> {{ profile.have_office_shop_to_receive_customers|yesno:"Sì,No" }}</p>
         </div>
         <div class="col-md-6">
-            <p><strong>{% translate "Certificato della Camera di Commercio:" %}</strong></p>
+            <p><strong>{% trans "Certificato della Camera di Commercio:" %}</strong></p>
             <img src="{{ profile.chamber_commerce_certificate.url }}" alt="chamber_commerce_certificate" class="img-fluid">
-            <a href="{{ profile.chamber_commerce_certificate.url }}" target="_blank">{% translate "Visualizza documento" %}</a>
-            <p><strong>{% translate "Certificato Polizza Assicurativa:" %}</strong></p>
+            <a href="{{ profile.chamber_commerce_certificate.url }}" target="_blank">{% trans "Visualizza documento" %}</a>
+            <p><strong>{% trans "Certificato Polizza Assicurativa:" %}</strong></p>
             <img src="{{ profile.insurance_policy_certificate.url }}" alt="chamber_commerce_certificate" class="img-fluid">
-            <a href="{{ profile.insurance_policy_certificate.url }}" target="_blank">{% translate "Visualizza documento" %}</a>
+            <a href="{{ profile.insurance_policy_certificate.url }}" target="_blank">{% trans "Visualizza documento" %}</a>
         </div>
     </div>
-    <a href="{% url 'update_enterprise' profile.id %}" class="btn btn-warning mr-3">{% translate "Modifica" %}</a>
-    <a href="{% url 'enterprise_list' %}" class="btn btn-secondary">{% translate "Torna alla lista" %}</a>
+    <a href="{% url 'update_enterprise' profile.id %}" class="btn btn-warning mr-3">{% trans "Modifica" %}</a>
+    <a href="{% url 'enterprise_list' %}" class="btn btn-secondary">{% trans "Torna alla lista" %}</a>
 </div>
 {% endblock %}
 

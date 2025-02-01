@@ -6,7 +6,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Benvenuto, {{ user.first_name.title|default:'Guest' }}</h1>
         <p class="lead">
-            Questo è un <b>{% translate "sistema di registrazione, login, affiliati e referral" %}</b> 
+            Questo è un <b>{% trans "sistema di registrazione, login, affiliati e referral" %}</b> 
             costruito con Django, un framework web open-source basato su Python che segue 
             il pattern architetturale Model–Template–View (MTV).
         </p>
@@ -14,37 +14,37 @@
         <p class="lead">
             {% if user.is_authenticated %}
                 <!-- Pulsante Logout -->
-                <a class="btn btn-danger btn-lg" href="{% url 'logout' %}" role="button">{% translate "Logout" %}</a>
+                <a class="btn btn-danger btn-lg" href="{% url 'logout' %}" role="button">{% trans "Logout" %}</a>
                 <!-- Pulsante per il Sistema di Referral -->
-                <a class="btn btn-success btn-lg" href="{#% url 'referral_dashboard' %#}" role="button">{% translate "Gestisci Referral" %}</a>
+                <a class="btn btn-success btn-lg" href="{#% url 'referral_dashboard' %#}" role="button">{% trans "Gestisci Referral" %}</a>
                 <!-- Pulsante per il Sistema di Affiliate -->
-                <a class="btn btn-info btn-lg" href="{#% url 'affiliate_dashboard' %#}" role="button">{% translate "Gestisci Affiliati" %}</a>
+                <a class="btn btn-info btn-lg" href="{#% url 'affiliate_dashboard' %#}" role="button">{% trans "Gestisci Affiliati" %}</a>
             {% else %}
                 <!-- Pulsante Login -->
-                <a class="btn btn-primary btn-lg" href="{% url 'core_login' %}" role="button">{% translate "Accedi" %}</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'core_login' %}" role="button">{% trans "Accedi" %}</a>
                 <!-- Pulsante Signup -->
-                <a class="btn btn-secondary btn-lg" href="{% url 'core_register' %}" role="button">{% translate "Registrati" %}</a>
+                <a class="btn btn-secondary btn-lg" href="{% url 'core_register' %}" role="button">{% trans "Registrati" %}</a>
             {% endif %}
         </p>
     </div>
 
     <!-- Sezione Informativa -->
 <div class="container mt-4">
-    <h1 class="text-center text-primary">{% translate "Affiliate & Referral Dashboard" %}</h1>
-    <p class="text-center text-muted">{% translate "Gestisci e monitora le tue attività di affiliazione e referral." %}</p>
+    <h1 class="text-center text-primary">{% trans "Affiliate & Referral Dashboard" %}</h1>
+    <p class="text-center text-muted">{% trans "Gestisci e monitora le tue attività di affiliazione e referral." %}</p>
     
     <!-- Sezione Affiliate -->
     <div class="mt-5">
-        <h2 class="text-secondary">{% translate "Sistema Affiliate" %}</h2>
+        <h2 class="text-secondary">{% trans "Sistema Affiliate" %}</h2>
         <div class="row mt-3">
             <!-- Performance -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{% translate "Performance" %}</h5>
-                        <p class="card-text">{% translate "Visualizza le tue commissioni, payout e performance." %}</p>
-                        <a href="{% url 'affiliate_performance_list' %}" class="btn btn-primary btn-sm">{% translate "Vai a Performance" %}</a>
-                        <a href="{% url 'affiliate_commission_list' %}" class="btn btn-primary btn-sm">{% translate "Vai a Commissioni" %}</a>
+                        <h5 class="card-title text-primary">{% trans "Performance" %}</h5>
+                        <p class="card-text">{% trans "Visualizza le tue commissioni, payout e performance." %}</p>
+                        <a href="{% url 'affiliate_performance_list' %}" class="btn btn-primary btn-sm">{% trans "Vai a Performance" %}</a>
+                        <a href="{% url 'affiliate_commission_list' %}" class="btn btn-primary btn-sm">{% trans "Vai a Commissioni" %}</a>
                     </div>
                 </div>
             </div>
@@ -52,10 +52,10 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{% translate "Gestione Programmi" %}</h5>
-                        <p class="card-text">{% translate "Monitora campagne e partecipazioni." %}</p>
-                        <a href="{% url 'affiliate_campaign_list' %}" class="btn btn-primary btn-sm">{% translate "Campagne" %}</a>
-                        <a href="{#% url 'affiliate_program_partecipation_list' %#}" class="btn btn-primary btn-sm">{% translate "Partecipazione" %}</a>
+                        <h5 class="card-title text-primary">{% trans "Gestione Programmi" %}</h5>
+                        <p class="card-text">{% trans "Monitora campagne e partecipazioni." %}</p>
+                        <a href="{% url 'affiliate_campaign_list' %}" class="btn btn-primary btn-sm">{% trans "Campagne" %}</a>
+                        <a href="{#% url 'affiliate_program_partecipation_list' %#}" class="btn btn-primary btn-sm">{% trans "Partecipazione" %}</a>
                     </div>
                 </div>
             </div>
@@ -63,10 +63,10 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{% translate "Strumenti" %}</h5>
-                        <p class="card-text">{% translate "Gestisci link, notifiche e impostazioni." %}</p>
-                        <a href="{% url 'affiliate_link_list' %}" class="btn btn-primary btn-sm">{% translate "Link" %}</a>
-                        <a href="{% url 'affiliate_setting_list' %}" class="btn btn-primary btn-sm">{% translate "Impostazioni" %}</a>
+                        <h5 class="card-title text-primary">{% trans "Strumenti" %}</h5>
+                        <p class="card-text">{% trans "Gestisci link, notifiche e impostazioni." %}</p>
+                        <a href="{% url 'affiliate_link_list' %}" class="btn btn-primary btn-sm">{% trans "Link" %}</a>
+                        <a href="{% url 'affiliate_setting_list' %}" class="btn btn-primary btn-sm">{% trans "Impostazioni" %}</a>
                     </div>
                 </div>
             </div>
@@ -75,16 +75,16 @@
 
     <!-- Sezione Referral -->
     <div class="mt-5">
-        <h2 class="text-secondary">{% translate "Sistema Referral" %}</h2>
+        <h2 class="text-secondary">{% trans "Sistema Referral" %}</h2>
         <div class="row mt-3">
             <!-- Codici e Programmi -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-success">{% translate "Codici e Programmi" %}</h5>
-                        <p class="card-text">{% translate "Gestisci i tuoi codici e la partecipazione ai programmi." %}</p>
-                        <a href="{% url 'referral_code_list' %}" class="btn btn-success btn-sm">{% translate "Codici" %}</a>
-                        <a href="{#% url 'referral_program_partecipation_list' %#}" class="btn btn-success btn-sm">{% translate "Partecipazione" %}</a>
+                        <h5 class="card-title text-success">{% trans "Codici e Programmi" %}</h5>
+                        <p class="card-text">{% trans "Gestisci i tuoi codici e la partecipazione ai programmi." %}</p>
+                        <a href="{% url 'referral_code_list' %}" class="btn btn-success btn-sm">{% trans "Codici" %}</a>
+                        <a href="{#% url 'referral_program_partecipation_list' %#}" class="btn btn-success btn-sm">{% trans "Partecipazione" %}</a>
                     </div>
                 </div>
             </div>
@@ -92,10 +92,10 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-success">{% translate "Conversioni e Transazioni" %}</h5>
-                        <p class="card-text">{% translate "Monitora conversioni e transazioni." %}</p>
-                        <a href="{% url 'referral_conversion_list' %}" class="btn btn-success btn-sm">{% translate "Conversioni" %}</a>
-                        <a href="{% url 'referral_transaction_list' %}" class="btn btn-success btn-sm">{% translate "Transazioni" %}</a>
+                        <h5 class="card-title text-success">{% trans "Conversioni e Transazioni" %}</h5>
+                        <p class="card-text">{% trans "Monitora conversioni e transazioni." %}</p>
+                        <a href="{% url 'referral_conversion_list' %}" class="btn btn-success btn-sm">{% trans "Conversioni" %}</a>
+                        <a href="{% url 'referral_transaction_list' %}" class="btn btn-success btn-sm">{% trans "Transazioni" %}</a>
                     </div>
                 </div>
             </div>
@@ -103,10 +103,10 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-success">{% translate "Impostazioni" %}</h5>
-                        <p class="card-text">{% translate "Gestisci le impostazioni e visualizza le statistiche." %}</p>
-                        <a href="{% url 'referral_setting_list' %}" class="btn btn-success btn-sm">{% translate "Impostazioni" %}</a>
-                        <a href="{% url 'referral_stat_list' %}" class="btn btn-success btn-sm">{% translate "Statistiche" %}</a>
+                        <h5 class="card-title text-success">{% trans "Impostazioni" %}</h5>
+                        <p class="card-text">{% trans "Gestisci le impostazioni e visualizza le statistiche." %}</p>
+                        <a href="{% url 'referral_setting_list' %}" class="btn btn-success btn-sm">{% trans "Impostazioni" %}</a>
+                        <a href="{% url 'referral_stat_list' %}" class="btn btn-success btn-sm">{% trans "Statistiche" %}</a>
                     </div>
                 </div>
             </div>
@@ -116,20 +116,20 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h2>{% translate "Sistema Affiliate" %}</h2>
+                <h2>{% trans "Sistema Affiliate" %}</h2>
                 <p>
                     Il sistema di affiliazione consente di guadagnare commissioni invitando nuovi utenti 
                     a registrarsi tramite il tuo link di affiliazione. Accedi per monitorare le tue performance.
                 </p>
-                <a class="btn btn-info" href="{#% url 'affiliate_dashboard' %#}">{% translate "Esplora Sistema Affiliate" %}</a>
+                <a class="btn btn-info" href="{#% url 'affiliate_dashboard' %#}">{% trans "Esplora Sistema Affiliate" %}</a>
             </div>
             <div class="col-md-6">
-                <h2>{% translate "Sistema Referral" %}</h2>
+                <h2>{% trans "Sistema Referral" %}</h2>
                 <p>
                     Con il sistema di referral, puoi invitare amici o colleghi e ottenere ricompense. 
                     Gestisci i tuoi inviti e visualizza i progressi del tuo network.
                 </p>
-                <a class="btn btn-success" href="{#% url 'referral_dashboard' %#}">{% translate "Esplora Sistema Referral" %}</a>
+                <a class="btn btn-success" href="{#% url 'referral_dashboard' %#}">{% trans "Esplora Sistema Referral" %}</a>
             </div>
         </div>
     </div>

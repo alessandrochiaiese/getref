@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% translate "Setting Affiliate Detail" %}</h1>
+        <h1>{% trans "Setting Affiliate Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,12 +38,12 @@
                 const affiliate = await response.json();
                 const detailList = document.getElementById('affiliateSettingDetail');
                 const details = `
-                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>{% translate "Preferred Currency:" %}</strong> ${affiliate.preferred_currency}</li>
-                    <li class="list-group-item"><strong>{% translate "Preferred Payment Method:" %}</strong> ${affiliate.preferred_payment_method}</li>
-                    <li class="list-group-item"><strong>{% translate "payout Schedule:" %}</strong> ${affiliate.payout_schedule}</li>
-                    <li class="list-group-item"><strong>{% translate "Notification Preference:" %}</strong> ${affiliate.notification_preference}</li>
-                    <li class="list-group-item"><strong>{% translate "Dashboard Layout:" %}</strong> ${affiliate.dashboard_layout}</li>`;
+                    <li class="list-group-item"><strong>{% trans "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% trans "Preferred Currency:" %}</strong> ${affiliate.preferred_currency}</li>
+                    <li class="list-group-item"><strong>{% trans "Preferred Payment Method:" %}</strong> ${affiliate.preferred_payment_method}</li>
+                    <li class="list-group-item"><strong>{% trans "payout Schedule:" %}</strong> ${affiliate.payout_schedule}</li>
+                    <li class="list-group-item"><strong>{% trans "Notification Preference:" %}</strong> ${affiliate.notification_preference}</li>
+                    <li class="list-group-item"><strong>{% trans "Dashboard Layout:" %}</strong> ${affiliate.dashboard_layout}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching affiliate setting detail:', error);

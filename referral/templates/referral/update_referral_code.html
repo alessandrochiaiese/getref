@@ -6,12 +6,12 @@
 {% block title %}Edit Code{% endblock %}
 
 {% block content %}
-    <h2>{% translate "Edit Code" %}</h2>
+    <h2>{% trans "Edit Code" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">{% translate "Update Code" %}</button>
+        <button type="submit">{% trans "Update Code" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_code_list' %}">{% translate "Back to Code List" %}</a>
+    <a href="{% url 'referral_code_list' %}">{% trans "Back to Code List" %}</a>
 {% endblock %}

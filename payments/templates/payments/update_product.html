@@ -20,7 +20,7 @@
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-header">
-          <h2>{% translate "Update a product" %}</h2>
+          <h2>{% trans "Update a product" %}</h2>
         </div>
         <form method="POST">
           <div class="card-body">
@@ -28,8 +28,8 @@
             {{ form.as_p }}
           </div>
           <div class="card-footer">
-            <button type="submit">{% translate "Update Product" %}</button>
-            <a href="{% url 'product_list' %}">{% translate "Annulla" %}</a>
+            <button type="submit">{% trans "Update Product" %}</button>
+            <a href="{% url 'product_list' %}">{% trans "Annulla" %}</a>
           </div>
         </form>
       </div>

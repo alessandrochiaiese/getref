@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{% translate "Le tue API Keys" %}</h2>
+<h2>{% trans "Le tue API Keys" %}</h2>
 <form method="POST">
     {% csrf_token %}
     <input type="text" name="name" placeholder="Nome API Key" required>
-    <button type="submit">{% translate "Crea API Key" %}</button>
+    <button type="submit">{% trans "Crea API Key" %}</button>
 </form>
 <table>
     <thead>
         <tr>
-            <th>{% translate "Nome" %}</th>
-            <th>{% translate "Client ID" %}</th>
-            <th>{% translate "Ultimo Uso" %}</th>
-            <th>{% translate "Richieste" %}</th>
+            <th>{% trans "Nome" %}</th>
+            <th>{% trans "Client ID" %}</th>
+            <th>{% trans "Ultimo Uso" %}</th>
+            <th>{% trans "Richieste" %}</th>
         </tr>
     </thead>
     <tbody>

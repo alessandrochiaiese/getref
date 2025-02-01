@@ -12,16 +12,16 @@
 
 {% block content %}
 <div class="container">
-    <h1>{% translate "Elenco Prodotti" %}</h1>
+    <h1>{% trans "Elenco Prodotti" %}</h1>
 
-    <a class="btn btn-primary mt-3" href="{% url 'create_product' %}">{% translate "Crea Prodotto" %}</a>
+    <a class="btn btn-primary mt-3" href="{% url 'create_product' %}">{% trans "Crea Prodotto" %}</a>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>{% translate "Nome" %}</th>
-                <th>{% translate "Quantità" %}</th>
-                <th>{% translate "Prezzo" %}</th>
-                <th>{% translate "Azioni" %}</th>
+                <th>{% trans "Nome" %}</th>
+                <th>{% trans "Quantità" %}</th>
+                <th>{% trans "Prezzo" %}</th>
+                <th>{% trans "Azioni" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -31,15 +31,15 @@
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <a class="btn btn-primary mt-3" href="{% url 'product_detail' product.pk %}">{% translate "Visualizza" %}</a>
-                    <a class="btn btn-secondary mt-3" href="{% url 'update_product' product.pk %}">{% translate "Modifica" %}</a>
-                    <a class="btn btn-warning mt-3" href="{% url 'create_order' %}">{% translate "Ordina" %}</a>
-                    <a class="btn btn-danger mt-3" href="{#% url 'product_delate' product.pk %#}">{% translate "Cancella" %}</a>
+                    <a class="btn btn-primary mt-3" href="{% url 'product_detail' product.pk %}">{% trans "Visualizza" %}</a>
+                    <a class="btn btn-secondary mt-3" href="{% url 'update_product' product.pk %}">{% trans "Modifica" %}</a>
+                    <a class="btn btn-warning mt-3" href="{% url 'create_order' %}">{% trans "Ordina" %}</a>
+                    <a class="btn btn-danger mt-3" href="{#% url 'product_delate' product.pk %#}">{% trans "Cancella" %}</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="3">{% translate "Nessun prodotto disponibile." %}</td>
+                <td colspan="3">{% trans "Nessun prodotto disponibile." %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -50,12 +50,12 @@
         <span class="step-links">
             {% if page_obj.has_previous %}
             <a href="?page=1">&laquo; prima</a>
-            <a href="?page={{ page_obj.previous_page_number }}">{% translate "precedente" %}</a>
+            <a href="?page={{ page_obj.previous_page_number }}">{% trans "precedente" %}</a>
             {% endif %}
             <span>Pagina {{ page_obj.number }} di {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">{% translate "successiva" %}</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">{% translate "ultima &raquo;" %}</a>
+            <a href="?page={{ page_obj.next_page_number }}">{% trans "successiva" %}</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">{% trans "ultima &raquo;" %}</a>
             {% endif %}
         </span>
         {% endif %}

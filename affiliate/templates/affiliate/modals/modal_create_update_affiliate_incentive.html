@@ -4,61 +4,61 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Affiliate Incentive" %}</h5>
+                <h5 class="modal-title" id="createModalLabel">{% trans "Create New Affiliate Incentive" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm">
                     <div class="mb-3">
-                        <label for="createIncentiveType" class="form-label">{% translate "Incentive Type" %}</label>
+                        <label for="createIncentiveType" class="form-label">{% trans "Incentive Type" %}</label>
                         <input type="text" class="form-control" data-field="incentive_type" id="incentiveType" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDate" class="form-label">{% translate "Date" %}</label>
+                        <label for="createDate" class="form-label">{% trans "Date" %}</label>
                         <input type="date" class="form-control" data-field="date" id="createDate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createAmount" class="form-label">{% translate "Amount" %}</label>
+                        <label for="createAmount" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="createAmount" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createCurrency" class="form-label">{% translate "Currency" %}</label>
+                        <label for="createCurrency" class="form-label">{% trans "Currency" %}</label>
                         <input type="text" class="form-control" data-field="action_taken" id="createCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDescription" class="form-label">{% translate "Description" %}</label>
+                        <label for="createDescription" class="form-label">{% trans "Description" %}</label>
                         <input type="text" class="form-control" data-field="description" id="createDescription" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createStatus" class="form-label">{% translate "Status" %}</label>
+                        <label for="createStatus" class="form-label">{% trans "Status" %}</label>
                         <input type="text" class="form-control" data-field="status" id="createStatus" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createIpAddress" class="form-label">{% translate "IP Address" %}</label>
+                        <label for="createIpAddress" class="form-label">{% trans "IP Address" %}</label>
                         <input type="text" class="form-control" data-field="ip_address" id="createIpAddress" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDeviceInfo" class="form-label">{% translate "Device Info" %}</label>
+                        <label for="createDeviceInfo" class="form-label">{% trans "Device Info" %}</label>
                         <input type="text" class="form-control" data-field="device_info" id="createDeviceInfo" required>
                     </div>
                     <div class="mb-3">
-                        <label for="tracking_id" class="form-label">{% translate "Tracking Id" %}</label>
+                        <label for="tracking_id" class="form-label">{% trans "Tracking Id" %}</label>
                         <input type="text" class="form-control" data-field="tracking_id" id="tracking_id" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createExpirationDate" class="form-label">{% translate "Expiration Date" %}</label>
+                        <label for="createExpirationDate" class="form-label">{% trans "Expiration Date" %}</label>
                         <input type="text" class="form-control" data-field="expiration_date" id="createExpirationDate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createIsIncentiveActive" class="form-label">{% translate "Is Incentive Active" %}</label>
+                        <label for="createIsIncentiveActive" class="form-label">{% trans "Is Incentive Active" %}</label>
                         <input type="text" class="form-control" data-field="is_incentive_active" id="createIsIncentiveActive" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
+                    onclick="saveNewAffiliate()">{% trans "Create" %}</button>
             </div>
         </div>
     </div>
@@ -69,60 +69,60 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Affiliate Incentive" %}</h5>
+                <h5 class="modal-title" id="editModalLabel">{% trans "Edit Affiliate Incentive" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editIncentiveType" class="form-label">{% translate "Incentive Type" %}</label>
+                        <label for="editIncentiveType" class="form-label">{% trans "Incentive Type" %}</label>
                         <input type="text" class="form-control" data-field="incentive_type" id="editIncentiveType" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDate" class="form-label">{% translate "Date" %}</label>
+                        <label for="editDate" class="form-label">{% trans "Date" %}</label>
                         <input type="date" class="form-control" data-field="date" id="editDate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editAmount" class="form-label">{% translate "Amount" %}</label>
+                        <label for="editAmount" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="editAmount" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editCurrency" class="form-label">{% translate "Currency" %}</label>
+                        <label for="editCurrency" class="form-label">{% trans "Currency" %}</label>
                         <input type="text" class="form-control" data-field="currency" id="editCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editStatus" class="form-label">{% translate "Status" %}</label>
+                        <label for="editStatus" class="form-label">{% trans "Status" %}</label>
                         <input type="text" class="form-control" data-field="status" id="editStatus" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDescription" class="form-label">{% translate "Description" %}</label>
+                        <label for="editDescription" class="form-label">{% trans "Description" %}</label>
                         <input type="text" class="form-control" data-field="description" id="editDescription" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editIpAddress" class="form-label">{% translate "IP Address" %}</label>
+                        <label for="editIpAddress" class="form-label">{% trans "IP Address" %}</label>
                         <input type="text" class="form-control" data-field="ip_address" id="editIpAddress" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDeviceInfo" class="form-label">{% translate "Device Info" %}</label>
+                        <label for="editDeviceInfo" class="form-label">{% trans "Device Info" %}</label>
                         <input type="text" class="form-control" data-field="device_info" id="editDeviceInfo" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editExpirationDate" class="form-label">{% translate "Expiration Date" %}</label>
+                        <label for="editExpirationDate" class="form-label">{% trans "Expiration Date" %}</label>
                         <input type="text" class="form-control" data-field="expiration_date" id="editExpirationDate" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editTrackingId" class="form-label">{% translate "Tracking Id" %}</label>
+                        <label for="editTrackingId" class="form-label">{% trans "Tracking Id" %}</label>
                         <input type="text" class="form-control" data-field="tracking_id" id="editTrackingId" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editIsIncentiveActive" class="form-label">{% translate "Is Incentive Active" %}</label>
+                        <label for="editIsIncentiveActive" class="form-label">{% trans "Is Incentive Active" %}</label>
                         <input type="text" class="form-control" data-field="is_incentive_active" id="editIsIncentiveActive" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

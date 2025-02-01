@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% translate "Affiliate Detail" %}</h1>
+        <h1>{% trans "Affiliate Detail" %}</h1>
         <ul class="list-group" id="affiliateDetail">
             <!-- Affiliate details will be displayed here -->
         </ul>
@@ -27,12 +27,12 @@
                 const affiliate = await response.json();
                 const detailList = document.getElementById('affiliateDetail');
                 const details = `
-                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>{% translate "Name:" %}</strong> ${affiliate.name}</li>
-                    <li class="list-group-item"><strong>{% translate "Email:" %}</strong> ${affiliate.email}</li>
-                    <li class="list-group-item"><strong>{% translate "Country:" %}</strong> ${affiliate.country}</li>
-                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${affiliate.status}</li>
-                    <li class="list-group-item"><strong>{% translate "Total Earnings:" %}</strong> ${affiliate.total_earnings}</li>`;
+                    <li class="list-group-item"><strong>{% trans "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% trans "Name:" %}</strong> ${affiliate.name}</li>
+                    <li class="list-group-item"><strong>{% trans "Email:" %}</strong> ${affiliate.email}</li>
+                    <li class="list-group-item"><strong>{% trans "Country:" %}</strong> ${affiliate.country}</li>
+                    <li class="list-group-item"><strong>{% trans "Status:" %}</strong> ${affiliate.status}</li>
+                    <li class="list-group-item"><strong>{% trans "Total Earnings:" %}</strong> ${affiliate.total_earnings}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching affiliate detail:', error);

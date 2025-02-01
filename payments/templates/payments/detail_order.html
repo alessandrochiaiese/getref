@@ -19,7 +19,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-header">
-                    <h2>{% translate "Choose payment broker" %}</h2>
+                    <h2>{% trans "Choose payment broker" %}</h2>
                 </div>
                 <!--<form action="{#% url 'getpaid:create-payment' %#}" method="POST"></form>-->
                 <form action="{% url 'payment' %}" method="POST">
@@ -28,8 +28,8 @@
                         {{ form.as_p }}
                     </div>
                     <div class="card-footer"> 
-                        <button class="btn btn-primary mt-3" type="submit">{% translate "Checkout" %}</button>
-                        <a class="btn btn-secondary mt-3" href="{% url 'product_list' %}">{% translate "Annulla" %}</a>
+                        <button class="btn btn-primary mt-3" type="submit">{% trans "Checkout" %}</button>
+                        <a class="btn btn-secondary mt-3" href="{% url 'product_list' %}">{% trans "Annulla" %}</a>
                     </div>
                 </form>
             </div>

@@ -4,45 +4,45 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Affiliate Commission" %}</h5>
+                <h5 class="modal-title" id="createModalLabel">{% trans "Create New Affiliate Commission" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm">
                     <div class="mb-3">
-                        <label for="createAmount" class="form-label">{% translate "Amount" %}</label>
+                        <label for="createAmount" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="createAmount" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createCurrency" class="form-label">{% translate "Currency" %}</label>
+                        <label for="createCurrency" class="form-label">{% trans "Currency" %}</label>
                         <input type="date" class="form-control" data-field="currency" id="createCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDateAwarded" class="form-label">{% translate "Date Awarded" %}</label>
+                        <label for="createDateAwarded" class="form-label">{% trans "Date Awarded" %}</label>
                         <input type="text" class="form-control" data-field="date_awarded" id="createDateAwarded" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createStatus" class="form-label">{% translate "Status" %}</label>
+                        <label for="createStatus" class="form-label">{% trans "Status" %}</label>
                         <input type="text" class="form-control" data-field="status" id="createStatus" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createCommissionType" class="form-label">{% translate "Commission Type" %}</label>
+                        <label for="createCommissionType" class="form-label">{% trans "Commission Type" %}</label>
                         <input type="text" class="form-control" data-field="commission_type" id="createCommissionType" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createDescription" class="form-label">{% translate "Description" %}</label>
+                        <label for="createDescription" class="form-label">{% trans "Description" %}</label>
                         <input type="text" class="form-control" data-field="description" id="createDescription" required>
                     </div>
                     <div class="mb-3">
-                        <label for="tier" class="form-label">{% translate "Tier" %}</label>
+                        <label for="tier" class="form-label">{% trans "Tier" %}</label>
                         <input type="text" class="form-control" data-field="tier" id="createTier" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
+                    onclick="saveNewAffiliate()">{% trans "Create" %}</button>
             </div>
         </div>
     </div>
@@ -53,44 +53,44 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Affiliate Commission" %}</h5>
+                <h5 class="modal-title" id="editModalLabel">{% trans "Edit Affiliate Commission" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editAmount" class="form-label">{% translate "Amount" %}</label>
+                        <label for="editAmount" class="form-label">{% trans "Amount" %}</label>
                         <input type="text" class="form-control" data-field="amount" id="editAmount" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editCurrency" class="form-label">{% translate "Currency" %}</label>
+                        <label for="editCurrency" class="form-label">{% trans "Currency" %}</label>
                         <input type="date" class="form-control" data-field="currency" id="editCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDateAwarded" class="form-label">{% translate "Date Awarded" %}</label>
+                        <label for="editDateAwarded" class="form-label">{% trans "Date Awarded" %}</label>
                         <input type="text" class="form-control" data-field="date_awarded" id="editDateAwarded" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editStatus" class="form-label">{% translate "Status" %}</label>
+                        <label for="editStatus" class="form-label">{% trans "Status" %}</label>
                         <input type="text" class="form-control" data-field="status" id="editStatus" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editCommissionType" class="form-label">{% translate "Commission Type" %}</label>
+                        <label for="editCommissionType" class="form-label">{% trans "Commission Type" %}</label>
                         <input type="text" class="form-control" data-field="commission_type" id="editCommissionType" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editDescription" class="form-label">{% translate "Description" %}</label>
+                        <label for="editDescription" class="form-label">{% trans "Description" %}</label>
                         <input type="text" class="form-control" data-field="description" id="editDescription" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editTier" class="form-label">{% translate "Tier" %}</label>
+                        <label for="editTier" class="form-label">{% trans "Tier" %}</label>
                         <input type="text" class="form-control" data-field="tier" id="editTier" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

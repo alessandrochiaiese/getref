@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ profile.company_name }}</h5>
                     <p class="card-text">{{ profile.sectors.all|join:", " }}</p>
-                    <a href="{% url 'enterprise_detail' pk=profile.pk %}" class="btn btn-primary">{% translate "Dettagli" %}</a>
+                    <a href="{% url 'enterprise_detail' pk=profile.pk %}" class="btn btn-primary">{% trans "Dettagli" %}</a>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <span class="step-links">
             {% if profiles.has_previous %}
                 <a href="?page=1">&laquo; primo</a>
-                <a href="?page={{ profiles.previous_page_number }}">{% translate "precedente" %}</a>
+                <a href="?page={{ profiles.previous_page_number }}">{% trans "precedente" %}</a>
             {% endif %}
 
             <span class="current">
@@ -36,8 +36,8 @@
             </span>
 
             {% if profiles.has_next %}
-                <a href="?page={{ profiles.next_page_number }}">{% translate "successivo" %}</a>
-                <a href="?page={{ profiles.paginator.num_pages }}">{% translate "ultimo &raquo;" %}</a>
+                <a href="?page={{ profiles.next_page_number }}">{% trans "successivo" %}</a>
+                <a href="?page={{ profiles.paginator.num_pages }}">{% trans "ultimo &raquo;" %}</a>
             {% endif %}
         </span>
     </div>

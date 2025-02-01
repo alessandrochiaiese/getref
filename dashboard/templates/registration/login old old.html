@@ -9,7 +9,7 @@
                 <div class="col-lg-5">
                     <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
                         <div class="card-header justify-content-center">
-                          <h3 class="font-weight-light my-1 text-center">{% translate "Sign In" %}</h3>
+                          <h3 class="font-weight-light my-1 text-center">{% trans "Sign In" %}</h3>
                         </div>
                         {% if form.errors %}
                             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -30,13 +30,13 @@
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
                                             <a href="{% url 'social:begin' 'github' %}"
-                                                   class="btn btn-link btn-lg active btn-block">{% translate "Sign in with GitHub" %}</a>
+                                                   class="btn btn-link btn-lg active btn-block">{% trans "Sign in with GitHub" %}</a>
                                             <a href="{% url 'social:begin' 'google-oauth2' %}"
-                                                   class="btn btn-link btn-lg active btn-block">{% translate "Sign in with Google" %}</a>
+                                                   class="btn btn-link btn-lg active btn-block">{% trans "Sign in with Google" %}</a>
                                             <hr>
-                                            <p class="text-center"><strong>{% translate "OR" %}</strong></p>
+                                            <p class="text-center"><strong>{% trans "OR" %}</strong></p>
                                             <hr>
-                                            <label class="small mb-1">{% translate "Username" %}</label>
+                                            <label class="small mb-1">{% trans "Username" %}</label>
                                             {{ form.username }}
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="form-row">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
-                                          <label class="small mb-1">{% translate "Password" %}</label>
+                                          <label class="small mb-1">{% trans "Password" %}</label>
                                           {{ form.password }}
                                         </div>
                                     </div>
@@ -54,14 +54,14 @@
                                         <div class="form-group">
                                             <!-- Add a Remember me functionality -->
                                             {{ form.remember_me }}
-                                            <label>{% translate " Remember me" %}</label>
+                                            <label>{% trans " Remember me" %}</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group mt-0 mb-1">
-                                          <button name="login" class="col-md-12 btn btn-dark" id="login">{% translate "Sign in" %}</button>
+                                          <button name="login" class="col-md-12 btn btn-dark" id="login">{% trans "Sign in" %}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -69,8 +69,8 @@
                         </div>
                         <div class="card-footer text-center">
                             <div class="small">
-                                <a href="{% url 'core_register' %}">{% translate "Don't have an account yet? Go to signup" %}</a><br>
-                                <a href="{% url 'password_reset' %}"><i>{% translate "Forgot Password?" %}</i></a>
+                                <a href="{% url 'core_register' %}">{% trans "Don't have an account yet? Go to signup" %}</a><br>
+                                <a href="{% url 'password_reset' %}"><i>{% trans "Forgot Password?" %}</i></a>
                             </div>
                         </div>
                     </div>

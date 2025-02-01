@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% translate "Referral Detail" %}</h1>
+        <h1>{% trans "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,12 +38,12 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralAuditDetail');
                 const details = `
-                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>{% translate "Action Taken:" %}</strong> ${referral.action_taken}</li>
-                    <li class="list-group-item"><strong>{% translate "Action Date:" %}</strong> ${referral.action_date}</li>
-                    <li class="list-group-item"><strong>{% translate "IP Address:" %}</strong> ${referral.ip_address}</li>
-                    <li class="list-group-item"><strong>{% translate "Device Info:" %}</strong> ${referral.device_info}</li>
-                    <li class="list-group-item"><strong>{% translate "Location:" %}</strong> ${referral.location}</li>`;
+                    <li class="list-group-item"><strong>{% trans "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% trans "Action Taken:" %}</strong> ${referral.action_taken}</li>
+                    <li class="list-group-item"><strong>{% trans "Action Date:" %}</strong> ${referral.action_date}</li>
+                    <li class="list-group-item"><strong>{% trans "IP Address:" %}</strong> ${referral.ip_address}</li>
+                    <li class="list-group-item"><strong>{% trans "Device Info:" %}</strong> ${referral.device_info}</li>
+                    <li class="list-group-item"><strong>{% trans "Location:" %}</strong> ${referral.location}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral audit detail:', error);

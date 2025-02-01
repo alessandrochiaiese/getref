@@ -5,12 +5,12 @@
 {% block title %}Add New Campaign{% endblock %}
 
 {% block content %}
-    <h2>{% translate "Add New Campaign" %}</h2>
+    <h2>{% trans "Add New Campaign" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">{% translate "Add Campaign" %}</button>
+        <button type="submit">{% trans "Add Campaign" %}</button>
     </form>
     <br>
-    <a href="{% url 'affiliate_campaign_list' %}">{% translate "Back to Campaign List" %}</a>
+    <a href="{% url 'affiliate_campaign_list' %}">{% trans "Back to Campaign List" %}</a>
 {% endblock %}
