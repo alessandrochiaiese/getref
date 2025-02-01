@@ -52,8 +52,12 @@ STRIPE_VERSION = config('STRIPE_VERSION')
 # This is only required when using webhooks
 STRIPE_ENDPOINT_SECRET = config('STRIPE_ENDPOINT_SECRET')
 
-OAUTH2_CLIENT_ID=config('OAUTH2_CLIENT_ID')
-OAUTH2_CLIENT_SECRET=config('OAUTH2_CLIENT_SECRET')
+#OAUTH2_CLIENT_ID=config('OAUTH2_CLIENT_ID')
+#OAUTH2_CLIENT_SECRET=config('OAUTH2_CLIENT_SECRET')
+
+CLIENT_ID = config('CLIENT_ID')
+CLIENT_SECRET = config('CLIENT_SECRET')
+APP_NAME = config('APP_NAME')
 
 OAUTH2_PROVIDER_APPLICATION_MODEL = "oauth2_provider.Application"
 #OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.CustomApplication"
@@ -322,10 +326,6 @@ else:
     DOMAIN = '127.0.0.1:8000'
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-
-CLIENT_ID = config('CLIENT_ID')
-CLIENT_SECRET = config('CLIENT_SECRET')
-APP_NAME = config('APP_NAME')
 
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
