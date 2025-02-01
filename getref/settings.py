@@ -91,7 +91,7 @@ INSTALLED_APPS = [
     'dashboard', 
     'referral', 
     'affiliate',
-    'subscriptions',
+    #'subscriptions',
     # Local
     'payments.apps.PaymentsConfig',
 ]
