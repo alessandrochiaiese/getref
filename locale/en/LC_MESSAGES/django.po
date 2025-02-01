@@ -6,17 +6,19 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-01 01:06+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2025-02-01 12:40+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+
 #: .\affiliate\models\affiliate.py:12
 #: .\affiliate\templates\affiliate\sidebar.html:75
 #: .\dashboard\models\enterprise.py:52 .\dashboard\models\profile.py:15
@@ -28,7 +30,7 @@ msgstr ""
 #: .\referral\models\referral_settings.py:9
 #: .\referral\models\referral_transaction.py:11
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #: .\affiliate\models\affiliate.py:13 .\affiliate\models\affiliate_program.py:6
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:32
@@ -46,7 +48,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_list.html:16
 #: .\referral\templates\referral\referral_reward_list.html:35
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: .\affiliate\models\affiliate.py:14
 #: .\affiliate\templates\affiliate\affiliate_list.html:17
@@ -57,11 +59,11 @@ msgstr ""
 #: .\referral\templates\referral\referral_list.html:17
 #: .\referral\templates\referral\referral_reward_list.html:36
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: .\affiliate\models\affiliate.py:15
 msgid "Phone"
-msgstr ""
+msgstr "Telefono"
 
 #: .\affiliate\models\affiliate.py:16
 #: .\affiliate\models\affiliate_program_partecipation.py:7
@@ -78,7 +80,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_program_partecipation.html:47
 #: .\referral\templates\referral\referral_program_partecipation_list.html:35
 msgid "Date Joined"
-msgstr ""
+msgstr "Data Iscrizione"
 
 #: .\affiliate\models\affiliate.py:17
 #: .\affiliate\models\affiliate_commission.py:10
@@ -122,34 +124,34 @@ msgstr ""
 #: .\referral\templates\referral\referral_reward_list.html:38
 #: .\referral\templates\referral\referral_transaction_list.html:39
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #: .\affiliate\models\affiliate.py:18
 msgid "Total Earning"
-msgstr ""
+msgstr "Guadagno Totale"
 
 #: .\affiliate\models\affiliate.py:19
 #: .\affiliate\templates\affiliate\affiliate_list.html:18
 #: .\referral\templates\referral\referral_list.html:18
 #: .\referral\templates\referral\referral_reward_list.html:37
 msgid "Country"
-msgstr ""
+msgstr "Paese"
 
 #: .\affiliate\models\affiliate.py:20
 msgid "Profile Picture"
-msgstr ""
+msgstr "Immagine Profilo"
 
 #: .\affiliate\models\affiliate.py:21
 msgid "Account Balance"
-msgstr ""
+msgstr "Bilancio Utente"
 
 #: .\affiliate\models\affiliate.py:22
 msgid "Last Login"
-msgstr ""
+msgstr "Ultimo Accesso"
 
 #: .\affiliate\models\affiliate.py:23
 msgid "Referral Source"
-msgstr ""
+msgstr "Sorgente Referente"
 
 #: .\affiliate\models\affiliate_audit.py:5
 #: .\affiliate\models\affiliate_commission.py:5
@@ -164,7 +166,7 @@ msgstr ""
 #: .\affiliate\templates\affiliate\affiliate_list.html:11
 #: .\affiliate\templates\affiliate\affiliate_program_partecipation_list.html:14
 msgid "Affiliates"
-msgstr ""
+msgstr "Affiliati"
 
 #: .\affiliate\models\affiliate_audit.py:6
 #: .\affiliate\templates\affiliate\affiliate_audit_list.html:33
@@ -175,7 +177,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_audit.html:55
 #: .\referral\templates\referral\referral_audit_list.html:37
 msgid "Action Taken"
-msgstr ""
+msgstr "Azione Presa"
 
 #: .\affiliate\models\affiliate_audit.py:7
 #: .\affiliate\templates\affiliate\affiliate_audit_list.html:34
@@ -190,7 +192,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:75
 #: .\referral\templates\referral\referral_audit_list.html:38
 msgid "Action Date"
-msgstr ""
+msgstr "Azione Data"
 
 #: .\affiliate\models\affiliate_audit.py:8
 #: .\affiliate\models\affiliate_incentive.py:30
@@ -207,7 +209,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_audit.html:63
 #: .\referral\templates\referral\referral_audit_list.html:39
 msgid "IP Address"
-msgstr ""
+msgstr "Indirizzo IP"
 
 #: .\affiliate\models\affiliate_audit.py:9
 #: .\affiliate\models\affiliate_incentive.py:31
@@ -225,7 +227,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:95
 #: .\referral\templates\referral\referral_audit_list.html:40
 msgid "Device Info"
-msgstr ""
+msgstr "Informazioni Dispositivo"
 
 #: .\affiliate\models\affiliate_audit.py:10
 #: .\affiliate\templates\affiliate\affiliate_audit_list.html:37
@@ -241,7 +243,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_campaign.html:79
 #: .\referral\templates\referral\referral_audit_list.html:41
 msgid "Location"
-msgstr ""
+msgstr "Località"
 
 #: .\affiliate\models\affiliate_campaign.py:5
 #: .\affiliate\models\affiliate_commission.py:6
@@ -251,7 +253,7 @@ msgstr ""
 #: .\referral\models\referral_code.py:9
 #: .\referral\models\referral_program_partecipation.py:6
 msgid "Programs"
-msgstr ""
+msgstr "Programmi"
 
 #: .\affiliate\models\affiliate_campaign.py:6
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_campaign.html:13
@@ -260,7 +262,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_campaign.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_campaign.html:59
 msgid "Campaign Name"
-msgstr ""
+msgstr "Nome Campagna"
 
 #: .\affiliate\models\affiliate_campaign.py:7
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:33
@@ -272,7 +274,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_campaign_list.html:36
 #: .\referral\templates\referral\referral_conversion_list.html:36
 msgid "Start Date"
-msgstr ""
+msgstr "Data Inizio"
 
 #: .\affiliate\models\affiliate_campaign.py:8
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:34
@@ -284,7 +286,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_campaign_list.html:37
 #: .\referral\templates\referral\referral_conversion_list.html:37
 msgid "End Date"
-msgstr ""
+msgstr "Data Fine"
 
 #: .\affiliate\models\affiliate_campaign.py:9
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:35
@@ -296,7 +298,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_campaign_list.html:38
 #: .\referral\templates\referral\referral_conversion_list.html:38
 msgid "Goal"
-msgstr ""
+msgstr "Obiettivo"
 
 #: .\affiliate\models\affiliate_campaign.py:10
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:36
@@ -309,7 +311,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_campaign_list.html:39
 #: .\referral\templates\referral\referral_conversion_list.html:39
 msgid "Budget"
-msgstr ""
+msgstr "Budget"
 
 #: .\affiliate\models\affiliate_campaign.py:11
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:37
@@ -318,7 +320,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_campaign_list.html:40
 #: .\referral\templates\referral\referral_conversion_list.html:40
 msgid "Spending To Date"
-msgstr ""
+msgstr "Spendere Entro La Data"
 
 #: .\affiliate\models\affiliate_commission.py:7
 #: .\affiliate\models\affiliate_incentive.py:24
@@ -340,7 +342,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:43
 msgid "Amount"
-msgstr ""
+msgstr "Ammontare"
 
 #: .\affiliate\models\affiliate_commission.py:8
 #: .\affiliate\models\affiliate_incentive.py:25
@@ -362,7 +364,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:37
 #: .\referral\templates\referral\referral_program_list.html:37
 msgid "Currency"
-msgstr ""
+msgstr "Moneta"
 
 #: .\affiliate\models\affiliate_commission.py:9
 #: .\affiliate\templates\affiliate\affiliate_commission_list.html:34
@@ -370,19 +372,19 @@ msgstr ""
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:71
 #: .\referral\models\referral_reward.py:15
 msgid "Date Awarded"
-msgstr ""
+msgstr "Data"
 
 #: .\affiliate\models\affiliate_commission.py:11
 #: .\affiliate\templates\affiliate\affiliate_commission_list.html:36
 msgid "Approved By"
-msgstr ""
+msgstr "Approvato Da"
 
 #: .\affiliate\models\affiliate_commission.py:12
 #: .\affiliate\templates\affiliate\affiliate_commission_list.html:37
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:29
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:79
 msgid "Commission Type"
-msgstr ""
+msgstr "Tipo Commissione"
 
 #: .\affiliate\models\affiliate_commission.py:13
 #: .\affiliate\models\affiliate_incentive.py:27
@@ -407,7 +409,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:35
 #: .\referral\templates\referral\referral_program_list.html:35
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: .\affiliate\models\affiliate_commission.py:14
 #: .\affiliate\templates\affiliate\affiliate_commission_list.html:39
@@ -422,7 +424,7 @@ msgstr ""
 #: .\affiliate\templates\affiliate\sidebar.html:6
 #: .\referral\templates\referral\sidebar.html:7
 msgid "Affiliate"
-msgstr ""
+msgstr "Affiliato"
 
 #: .\affiliate\models\affiliate_incentive.py:21
 #: .\affiliate\models\affiliate_program_partecipation.py:6
@@ -436,43 +438,43 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:18
 #: .\referral\templates\referral\sidebar.html:37
 msgid "Program"
-msgstr ""
+msgstr "Programma"
 
 #: .\affiliate\models\affiliate_incentive.py:22
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:79
 msgid "Incentive Type"
-msgstr ""
+msgstr "Tipo Incentivo"
 
 #: .\affiliate\models\affiliate_incentive.py:23
 #: .\affiliate\templates\affiliate\index.html:45
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:17
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:83
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: .\affiliate\models\affiliate_incentive.py:32
 msgid "Tracking ID"
-msgstr ""
+msgstr "ID Tracciamento"
 
 #: .\affiliate\models\affiliate_incentive.py:33
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:49
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:111
 msgid "Expiration Date"
-msgstr ""
+msgstr "Data Scadenza"
 
 #: .\affiliate\models\affiliate_incentive.py:34
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:53
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:119
 msgid "Is Incentive Active"
-msgstr ""
+msgstr "Incentivo è Attivo"
 
 #: .\affiliate\models\affiliate_link.py:10
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:32
 #: .\affiliate\templates\affiliate\affiliate_link_list.html:32
 #: .\payments\models\product.py:24
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: .\affiliate\models\affiliate_link.py:11
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:33
@@ -480,7 +482,7 @@ msgstr ""
 #: .\referral\models\referral_stats.py:7
 #: .\referral\templates\referral\referral_stat_list.html:36
 msgid "Click Count"
-msgstr ""
+msgstr "Conteggio Click"
 
 #: .\affiliate\models\affiliate_link.py:12
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:34
@@ -488,7 +490,7 @@ msgstr ""
 #: .\referral\models\referral_stats.py:8
 #: .\referral\templates\referral\referral_stat_list.html:37
 msgid "Conversion Count"
-msgstr ""
+msgstr "Conteggio Convesione"
 
 #: .\affiliate\models\affiliate_link.py:13
 #: .\affiliate\models\affiliate_program.py:12
@@ -511,20 +513,20 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:40
 #: .\referral\templates\referral\referral_program_list.html:40
 msgid "Date Created"
-msgstr ""
+msgstr "Data Creazione"
 
 #: .\affiliate\models\affiliate_link.py:14
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:36
 #: .\affiliate\templates\affiliate\affiliate_link_list.html:36
 msgid "Last Used"
-msgstr ""
+msgstr "Ultimo Utilizzo"
 
 #: .\affiliate\models\affiliate_link.py:15
 #: .\affiliate\templates\affiliate\affiliate_link_list.html:37
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:29
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:79
 msgid "Link Status"
-msgstr ""
+msgstr "Stato Link"
 
 #: .\affiliate\models\affiliate_link.py:16
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:38
@@ -538,7 +540,7 @@ msgstr ""
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:39
 #: .\affiliate\templates\affiliate\affiliate_link_list.html:39
 msgid "Custom Tracking ID"
-msgstr ""
+msgstr "ID Tracciamento Personalizzato"
 
 #: .\affiliate\models\affiliate_notification.py:6
 #: .\affiliate\templates\affiliate\affiliate_notification_list.html:32
@@ -549,14 +551,14 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:55
 #: .\referral\templates\referral\referral_notification_list.html:36
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 #: .\affiliate\models\affiliate_notification.py:7
 #: .\affiliate\templates\affiliate\affiliate_notification_list.html:33
 #: .\referral\models\referral_notification.py:10
 #: .\referral\templates\referral\referral_notification_list.html:37
 msgid "Date Sent"
-msgstr ""
+msgstr "Data Spedizione"
 
 #: .\affiliate\models\affiliate_notification.py:8
 #: .\affiliate\templates\affiliate\affiliate_notification_list.html:34
@@ -567,7 +569,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:63
 #: .\referral\templates\referral\referral_notification_list.html:38
 msgid "Is Read"
-msgstr ""
+msgstr "è Stato Letto"
 
 #: .\affiliate\models\affiliate_notification.py:9
 #: .\affiliate\models\affiliate_support_ticket.py:12
@@ -584,7 +586,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:91
 #: .\referral\templates\referral\referral_notification_list.html:39
 msgid "Priority"
-msgstr ""
+msgstr "Priorità"
 
 #: .\affiliate\models\affiliate_notification.py:10
 #: .\affiliate\templates\affiliate\affiliate_notification_list.html:36
@@ -593,46 +595,46 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:71
 #: .\referral\templates\referral\referral_notification_list.html:40
 msgid "Notification Type"
-msgstr ""
+msgstr "Tipo Notifica"
 
 #: .\affiliate\models\affiliate_payout.py:8
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:21
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:75
 msgid "Payout Date"
-msgstr ""
+msgstr "Data Pagamento"
 
 #: .\affiliate\models\affiliate_payout.py:9
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:25
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:79
 msgid "Payout Method"
-msgstr ""
+msgstr "Metodo Pagamento"
 
 #: .\affiliate\models\affiliate_payout.py:10
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:29
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:83
 msgid "Payout Status"
-msgstr ""
+msgstr "Stato Pagamento"
 
 #: .\affiliate\models\affiliate_payout.py:11
 #: .\affiliate\templates\affiliate\sidebar.html:66
 #: .\referral\templates\referral\sidebar.html:41
 msgid "Transaction"
-msgstr ""
+msgstr "Transazione"
 
 #: .\affiliate\models\affiliate_payout.py:12
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:91
 msgid "Processing Fee"
-msgstr ""
+msgstr "Processamento Commissione"
 
 #: .\affiliate\models\affiliate_payout.py:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:95
 msgid "Net Amount"
-msgstr ""
+msgstr "Utile Netto"
 
 #: .\affiliate\models\affiliate_payout.py:14
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:99
 msgid "Payout Provider"
-msgstr ""
+msgstr "Fornitore Pagamento"
 
 #: .\affiliate\models\affiliate_performance.py:12
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:13
@@ -642,7 +644,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:71
 #: .\referral\templates\referral\referral_stat_list.html:35
 msgid "Period"
-msgstr ""
+msgstr "Periodo"
 
 #: .\affiliate\models\affiliate_performance.py:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:17
@@ -650,13 +652,13 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:75
 msgid "Total Clicks"
-msgstr ""
+msgstr "Totale Click"
 
 #: .\affiliate\models\affiliate_performance.py:14
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:21
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:79
 msgid "Total Conversions"
-msgstr ""
+msgstr "Totale Conversioni"
 
 #: .\affiliate\models\affiliate_performance.py:15
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:21
@@ -668,7 +670,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:75
 msgid "Conversion Rate"
-msgstr ""
+msgstr "Percentuale Conversione"
 
 #: .\affiliate\models\affiliate_performance.py:16
 #: .\affiliate\templates\affiliate\affiliate_list.html:20
@@ -680,7 +682,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_list.html:20
 #: .\referral\templates\referral\referral_reward_list.html:39
 msgid "Total Earnings"
-msgstr ""
+msgstr "Guadagni Totali"
 
 #: .\affiliate\models\affiliate_performance.py:17
 #: .\referral\models\referral_user.py:14

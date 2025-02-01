@@ -73,9 +73,9 @@ urlpatterns += i18n_patterns(
     path('', include('dashboard.urls')),
     path('', include('affiliate.urls')), 
     path('', include('referral.urls')),
-    #path('', include('subscriptions.urls')),
     path('', include('payments.urls')),
-
+    path('', include('subscriptions.urls')),
+    
 
 )
 

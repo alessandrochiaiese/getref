@@ -10,9 +10,9 @@ router.register(r'api_keys', APIKeyViewSet)
 router.register(r'api_usage', APIKeyUsageViewSet, basename='api_usage')
 
 urlpatterns = [
-    path("api/", include(router.urls)),
-    path("api/protected/", ProtectedAPI.as_view(), name="protected-api"),
+    path('', include(router.urls)),
+    path('protected/', ProtectedAPI.as_view(), name="protected-api"),
 
-    path('purchase-subscription/', PurchaseSubscriptionAPIView.as_view(), name='purchase_subscription'),
-    path('purchase-tokens/', PurchaseTokensAPIView.as_view(), name='purchase_tokens'),
+    path('purchase-subscription/', PurchaseSubscriptionAPIView.as_view(), name='purchase-subscription'),
+    path('purchase-tokens/', PurchaseTokensAPIView.as_view(), name='purchase-tokens'),
 ]

@@ -55,6 +55,10 @@ STRIPE_ENDPOINT_SECRET = config('STRIPE_ENDPOINT_SECRET')
 OAUTH2_CLIENT_ID=config('OAUTH2_CLIENT_ID')
 OAUTH2_CLIENT_SECRET=config('OAUTH2_CLIENT_SECRET')
 
+OAUTH2_PROVIDER_APPLICATION_MODEL = "oauth2_provider.Application"
+#OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.CustomApplication"
+
+
 
 ALLOWED_HOSTS =  ['*']  # ["getcall.pythonanywhere.com", "127.0.0.1", "localhost"] # ["127.0.0.1", "localhost"]
 
@@ -91,7 +95,7 @@ INSTALLED_APPS = [
     'dashboard', 
     'referral', 
     'affiliate',
-    #'subscriptions',
+    'subscriptions',
     # Local
     'payments.apps.PaymentsConfig',
 ]
@@ -111,14 +115,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # ... custom middleware ...
-    #'dashboard.middleware.check_valid_endpoint_middleware.CheckValidEndpointMiddleware',
     'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
+if DEBUG == True:
+    MIDDLEWARE.append('dashboard.middleware.check_valid_endpoint_middleware.CheckValidEndpointMiddleware')
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allows requests from all origins
 
 CORS_ALLOWED_ORIGINS = [
-    'https://addiliate.getcall.it', 
+    'https://affiliate.getcall.it', 
     'https://www.affiliate.getcall.it', 
     #'https://getcall.pythonanywhere.com',
     #'http://localhost:3000', 
@@ -156,40 +161,44 @@ WSGI_APPLICATION = 'getref.wsgi.application'
 
 MAX_CONN_AGE = 600
 
-# Local DB
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
+DATABASE_PROVIDERS = config('DATABASE_PROVIDERS').split(",")  # Converte in lista
+DATABASE_PROVIDER_ID = int(config('DATABASE_PROVIDER_ID'))
 
-# MySQL DB
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': config('DATABASE_NAME'),
-#        'USER': config('DATABASE_USER'),
-#        'PASSWORD': config('DATABASE_PASSWORD'),
-#        'HOST': config('DATABASE_HOST'),
-#        'PORT': '3306',
-#        'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'" }
-#    }
-#}
-
-# AWS RDS
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': '5432',
-    }
-}
-
-
+match DATABASE_PROVIDERS[DATABASE_PROVIDER_ID]:
+    case 'localhost':
+        # Local DB
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+        }
+    case 'amazon':
+        # AWS RDS
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': config('DATABASE_NAME'),
+                'USER': config('DATABASE_USER'),
+                'PASSWORD': config('DATABASE_PASSWORD'),
+                'HOST': config('DATABASE_HOST'),
+                'PORT': '5432',
+            }
+        }
+    case 'pythonanywhere':
+        # MySQL DB
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': config('DATABASE_NAME'),
+                'USER': config('DATABASE_USER'),
+                'PASSWORD': config('DATABASE_PASSWORD'),
+                'HOST': config('DATABASE_HOST'),
+                'PORT': '3306',
+                'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION'" }
+            }
+        }
+    
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -255,6 +264,22 @@ UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 # Enable WhiteNoise's GZip compression of static assets.
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
  
+DATABASE_PROVIDERS = config('STATIC_PROVIDERS').split(",")  # Converte in lista
+DATABASE_PROVIDER_ID = int(config('STATIC_PROVIDER_ID'))
+
+match DATABASE_PROVIDERS[DATABASE_PROVIDER_ID]:
+    case 'amazon':
+        # AWS Provider
+        AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
+        AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
+        AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
+        AWS_S3_SIGNATURE_NAME = 's3v4',
+        AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
+        AWS_S3_FILE_OVERWRITE = False
+        AWS_DEFAULT_ACL =  None
+        AWS_S3_VERIFY = True
+        DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 #LOGIN_URL = '/admin/login/'
 LOGIN_URL = '/login/'
@@ -306,17 +331,6 @@ else:
 CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 APP_NAME = config('APP_NAME')
-
-# AWS Provider
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID') # 'AWS_ACCESS_KEY_ID '
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY') # 'AWS_SECRET_ACCESS_KEY'
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME') #'AWS_STORAGE_BUCKET_NAME'
-AWS_S3_SIGNATURE_NAME = 's3v4',
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME') #'AWS_S3_REGION_NAME'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  None
-AWS_S3_VERIFY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # OAuth2 Provider
 OAUTH2_PROVIDER = {

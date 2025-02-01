@@ -15,12 +15,27 @@ else:
     print("❌ Errore:", response.status_code, response.text)
 """
 
-from getref.settings import DOMAIN
+from getref.settings import CLIENT_ID, CLIENT_SECRET, DOMAIN
 import httpx
 import asyncio
 
-API_KEY = "YOUR_ACCESS_TOKEN"
-API_URL = f"{DOMAIN}/api/protected/"
+#CLIENT_ID = "YOUR_CLIENT_ID"
+#CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+
+def get_access_token():
+    response = httpx.post(f"{DOMAIN}/o/token/", data={
+        "grant_type": "client_credentials",
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET
+    })
+    return response.json().get("access_token")
+
+API_KEY = get_access_token()
+print("🔑 Access Token:", API_KEY)
+
+
+#API_KEY = "YOUR_ACCESS_TOKEN"
+API_URL = f"{DOMAIN}/api/v0/protected/"
 
 async def call_api():
     async with httpx.AsyncClient() as client:

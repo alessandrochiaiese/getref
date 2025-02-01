@@ -1,32 +1,25 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django.utils.timezone import now
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from rest_framework.views import APIView
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from getref.settings import STRIPE_SECRET_KEY, STRIPE_ENDPOINT_SECRET
 from rest_framework.decorators import action
+from oauth2_provider.models import Application
+from django.conf import settings
+from django.db import models
+import uuid
+from getref.settings import STRIPE_SECRET_KEY, STRIPE_ENDPOINT_SECRET
 
 from subscriptions.utils import send_subscription_email
 from subscriptions.models import *
 from subscriptions.api.serializers import APIKeySerializer
 
-from django.contrib.auth.decorators import login_required
 import stripe
 
-from django.http import JsonResponse
-from django.conf import settings
-
-
-from django.db import models
-from oauth2_provider.models import Application
-from django.utils.timezone import now
-import uuid
-
-#stripe.api_key = STRIPE_SECRET_KEY
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def create_stripe_subscription(user, plan):
@@ -50,69 +43,7 @@ def home(request):
             )
             return redirect("home")
     api_keys = APIKey.objects.filter(user=request.user)
-    return render(request, "home.html", {"api_keys": api_keys})
-
-class APIKey(Application):
-    created_at = models.DateTimeField(auto_now_add=True)
-    last_used_at = models.DateTimeField(null=True, blank=True)
-    request_count = models.PositiveIntegerField(default=0)
-
-    def update_usage(self):
-        self.last_used_at = now()
-        self.request_count += 1
-        self.save()
-
-class APIUsageLog(models.Model):
-    api_key = models.ForeignKey(APIKey, on_delete=models.CASCADE)
-    endpoint = models.CharField(max_length=255)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.api_key} -> {self.endpoint} at {self.timestamp}"
-    
-class MyLoggingView(APIView):
-    def get(self, request):
-        APIUsageLog.objects.create(
-            api_key=request.headers.get("Authorization", "unknown"),
-            endpoint=request.path
-        )
-        return Response({"message": "Logged successfully!"})
-    
-class PurchaseTokensAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        package_id = request.data.get('package_id')  # L'ID del pacchetto scelto dall'utente
-        user = request.user
-        package = get_object_or_404(TokenPackage, id=package_id)
-
-        try:
-            # Crea una sessione di pagamento Stripe
-            checkout_session = stripe.checkout.Session.create(
-                payment_method_types=['card'],
-                line_items=[{
-                    'price_data': {
-                        'currency': 'eur',
-                        'product_data': {
-                            'name': f'Acquisto {package.name} ({package.tokens} token)',
-                        },
-                        'unit_amount': package.price_in_cents,  # Prezzo del pacchetto in centesimi
-                    },
-                    'quantity': 1,
-                }],
-                mode='payment',
-                success_url='https://your-site.com/success/',  # URL di successo
-                cancel_url='https://your-site.com/cancel/',  # URL di cancellazione
-                client_reference_id=user.id,  # Passiamo l'ID dell'utente
-                metadata={'package_id': package.id},
-            )
-
-            return Response({
-                "session_id": checkout_session.id
-            })
-
-        except stripe.error.StripeError as e:
-            return Response({"error": str(e)}, status=400)
+    return render(request, "subscriptions/home.html", {"api_keys": api_keys})
 
 
 class APIKeyViewSet(viewsets.ModelViewSet):
@@ -128,11 +59,7 @@ class APIKeyViewSet(viewsets.ModelViewSet):
         api_key = self.get_object()
         api_key.delete()
         return Response({"message": "API Key revocata con successo!"}, status=200)
-@login_required
-def api_usage_dashboard(request):
-    logs = APIUsageLog.objects.filter(api_key__user=request.user).order_by("-timestamp")[:20]
-    return render(request, "api_usage_dashboard.html", {"logs": logs})
-
+    
 class APIKeyUsageViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -143,13 +70,17 @@ class APIKeyUsageViewSet(viewsets.ViewSet):
     from django.views.decorators.csrf import csrf_exempt
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+@login_required
+def api_usage_dashboard(request):
+    logs = APIUsageLog.objects.filter(api_key__user=request.user).order_by("-timestamp")[:20]
+    return render(request, "subscriptions/api_usage_dashboard.html", {"logs": logs})
+
 
 @csrf_exempt
-def stripe_webhook(request):
+def stripe_webhook_1(request):
     payload = request.body
     sig_header = request.headers.get("Stripe-Signature")
-    endpoint_secret = "whsec_XXXX"
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET  #  "whsec_XXXX"
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
