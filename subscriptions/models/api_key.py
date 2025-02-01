@@ -1,4 +1,4 @@
-from prompt_toolkit import Application
+from oauth2_provider.models import Application
 from django.db import models
 
 class APIKey(Application):
