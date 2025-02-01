@@ -294,14 +294,19 @@ LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+EMAIL_HOST = str((config('EMAIL_HOST', "")))
+EMAIL_HOST_USER = str((config('EMAIL_HOST_USER', "")))
+EMAIL_HOST_PASSWORD = str((config('EMAIL_HOST_PASSWORD', "")))
+
 if DEBUG == False:
     DOMAIN = config('DOMAIN')
     # Email settings
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = str(config('EMAIL_HOST')) #'smtp.gmail.com'
+    EMAIL_HOST = EMAIL_HOST #'smtp.gmail.com'
     EMAIL_PORT = 587 #465 # if EMAIL_USE_SSL=True
-    EMAIL_HOST_USER = str(config('EMAIL_HOST_USER', ""))
-    EMAIL_HOST_PASSWORD = str(config('EMAIL_HOST_PASSWORD', ""))
+    EMAIL_HOST_USER = EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
     EMAIL_USE_TLS = True #465
     EMAIL_USE_SSL = False #587
