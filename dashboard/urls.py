@@ -39,7 +39,7 @@ urlpatterns = [
     path('accounts/my-network/', MyNetworkView.as_view(), name='my_network'),
 
     # privacy policy & terms of service
-    path('privacy-policy/', privacyPolice, name='privacy_police'),
+    path('privacy-policy/', privacyPolice, name='privacy_policy'),
     path('terms-of-service/', termService, name='terms_service'),
 
     # get users referred with level
