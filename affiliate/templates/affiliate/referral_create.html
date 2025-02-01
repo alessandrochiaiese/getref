@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Crea Nuovo Referral</h2>
+<h2>{% translate "Crea Nuovo Referral" %}</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Invia Referral</button>
+    <button type="submit">{% translate "Invia Referral" %}</button>
 </form>
 {% endblock %}

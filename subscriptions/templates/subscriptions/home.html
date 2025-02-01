@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% translate "Le tue API Keys" %}</h2>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Nome API Key" required>
+    <button type="submit">{% translate "Crea API Key" %}</button>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>{% translate "Nome" %}</th>
+            <th>{% translate "Client ID" %}</th>
+            <th>{% translate "Ultimo Uso" %}</th>
+            <th>{% translate "Richieste" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key in api_keys %}
+        <tr>
+            <td>{{ key.name }}</td>
+            <td>{{ key.client_id }}</td>
+            <td>{{ key.last_used_at|default:"Mai" }}</td>
+            <td>{{ key.request_count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

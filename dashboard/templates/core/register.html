@@ -81,10 +81,10 @@
         <div class="text-center">
           <div class="brand-logo">
             <img src="{% static 'dashboard/images/logo.png' %}" alt="logo">
-            <h3 class="mt-3">- Costi pubblicitari</h3> 
-            <h3 class="mt-3">+ Recensioni positive</h3> 
-            <h3 class="mt-3">+ Autorevolezza =</h3>  
-            <h3 class="mt-3">+ FATTURATO</h3>  
+            <h3 class="mt-3">{% translate "- Costi pubblicitari" %}</h3> 
+            <h3 class="mt-3">{% translate "+ Recensioni positive" %}</h3> 
+            <h3 class="mt-3">{% translate "+ Autorevolezza =" %}</h3>  
+            <h3 class="mt-3">{% translate "+ FATTURATO" %}</h3>  
           </div>
         </div>
       </div>
@@ -92,8 +92,8 @@
       <!-- Right Section: Login Form -->
       <div class="col-lg-6 login-form-wrapper">
         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-          <h4>New here?</h4>
-          <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+          <h4>{% translate "New here?" %}</h4>
+          <h6 class="font-weight-light">{% translate "Signing up is easy. It only takes a few steps" %}</h6>
 
           <!-- Gestione errori del form -->
           {% if form.errors %}
@@ -115,13 +115,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">First Name</label>
+                  <label class="small mb-1">{% translate "First Name" %}</label>
                   {{ form.first_name }}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">Last Name</label>
+                  <label class="small mb-1">{% translate "Last Name" %}</label>
                   {{ form.last_name }}
                 </div>
               </div>
@@ -131,13 +131,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">Username</label>
+                  <label class="small mb-1">{% translate "Username" %}</label>
                   {{ form.username }}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">Email</label>
+                  <label class="small mb-1">{% translate "Email" %}</label>
                   {{ form.email }}
                 </div>
               </div>
@@ -147,13 +147,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">Password</label>
+                  <label class="small mb-1">{% translate "Password" %}</label>
                   {{ form.password1 }}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="small mb-1">Confirm Password</label>
+                  <label class="small mb-1">{% translate "Confirm Password" %}</label>
                   {{ form.password2 }}
                 </div>
               </div>
@@ -178,7 +178,7 @@
 
             <!-- Link per login -->
             <div class="text-center mt-4 font-weight-light">
-              Already have an account? <a href="{% url 'core_login' %}" class="text-primary">Login</a>
+              Already have an account? <a href="{% url 'core_login' %}" class="text-primary">{% translate "Login" %}</a>
             </div>
           </form>
         </div>

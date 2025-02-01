@@ -5,12 +5,12 @@
 {% block title %}Add New Stat{% endblock %}
 
 {% block content %}
-    <h2>Add New Stat</h2>
+    <h2>{% translate "Add New Stat" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Stat</button>
+        <button type="submit">{% translate "Add Stat" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_stat_list' %}">Back to Stat List</a>
+    <a href="{% url 'referral_stat_list' %}">{% translate "Back to Stat List" %}</a>
 {% endblock %}

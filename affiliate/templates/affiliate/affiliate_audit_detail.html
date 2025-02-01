@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Affiliate Audit Detail</h1>
+    <h1>{% translate "Affiliate Audit Detail" %}</h1>
 
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -39,12 +39,12 @@
             const affiliate = await response.json();
             const detailList = document.getElementById('affiliateAuditDetail');
             const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>Action Taken:</strong> ${affiliate.action_taken}</li>
-                    <li class="list-group-item"><strong>Action Date:</strong> ${affiliate.action_date}</li>
-                    <li class="list-group-item"><strong>IP Address:</strong> ${affiliate.ip_address}</li>
-                    <li class="list-group-item"><strong>Device Info:</strong> ${affiliate.device_info}</li>
-                    <li class="list-group-item"><strong>Location:</strong> ${affiliate.location}</li>
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Action Taken:" %}</strong> ${affiliate.action_taken}</li>
+                    <li class="list-group-item"><strong>{% translate "Action Date:" %}</strong> ${affiliate.action_date}</li>
+                    <li class="list-group-item"><strong>{% translate "IP Address:" %}</strong> ${affiliate.ip_address}</li>
+                    <li class="list-group-item"><strong>{% translate "Device Info:" %}</strong> ${affiliate.device_info}</li>
+                    <li class="list-group-item"><strong>{% translate "Location:" %}</strong> ${affiliate.location}</li>
                     <li class="list-group-item"> 
                         <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editAffiliate(${affiliate.id})">
                             <i class="bi bi-pencil"></i> Edit

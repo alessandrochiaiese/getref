@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Referral Detail</h1>
+        <h1>{% translate "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,12 +38,12 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralTransactionDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>Name:</strong> ${referral.name}</li>
-                    <li class="list-group-item"><strong>Email:</strong> ${referral.email}</li>
-                    <li class="list-group-item"><strong>Country:</strong> ${referral.country}</li>
-                    <li class="list-group-item"><strong>Status:</strong> ${referral.status}</li>
-                    <li class="list-group-item"><strong>Total Earnings:</strong> ${referral.total_earnings}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Name:" %}</strong> ${referral.name}</li>
+                    <li class="list-group-item"><strong>{% translate "Email:" %}</strong> ${referral.email}</li>
+                    <li class="list-group-item"><strong>{% translate "Country:" %}</strong> ${referral.country}</li>
+                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${referral.status}</li>
+                    <li class="list-group-item"><strong>{% translate "Total Earnings:" %}</strong> ${referral.total_earnings}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral transaction detail:', error);

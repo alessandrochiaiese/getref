@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Affiliate Reward Detail</h1>
+        <h1>{% translate "Affiliate Reward Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,9 +38,9 @@
                 const affiliate = await response.json();
                 const detailList = document.getElementById('affiliateRewardDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>amount:</strong> ${affiliate.amount}</li>
-                    <li class="list-group-item"><strong>created_at:</strong> ${affiliate.created_at}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% translate "amount:" %}</strong> ${affiliate.amount}</li>
+                    <li class="list-group-item"><strong>{% translate "created_at:" %}</strong> ${affiliate.created_at}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching affiliate reward detail:', error);

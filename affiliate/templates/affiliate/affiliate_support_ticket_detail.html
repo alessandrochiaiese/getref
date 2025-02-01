@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Support Ticket Affiliate Detail</h1>
+        <h1>{% translate "Support Ticket Affiliate Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,15 +38,15 @@
                 const affiliate = await response.json();
                 const detailList = document.getElementById('affiliateSupportTicketDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>Ticket Number:</strong> ${affiliate.ticket_number}</li>
-                    <li class="list-group-item"><strong>Subject:</strong> ${affiliate.subject}</li>
-                    <li class="list-group-item"><strong>Description:</strong> ${affiliate.description}</li>
-                    <li class="list-group-item"><strong>Status:</strong> ${affiliate.status}</li>
-                    <li class="list-group-item"><strong>Date Created:</strong> ${affiliate.date_created}</li>
-                    <li class="list-group-item"><strong>Date Closed:</strong> ${affiliate.date_closed}</li>
-                    <li class="list-group-item"><strong>Priority:</strong> ${affiliate.priority}</li>
-                    <li class="list-group-item"><strong>Assigned Agent:</strong> ${affiliate.assigned_agent}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Ticket Number:" %}</strong> ${affiliate.ticket_number}</li>
+                    <li class="list-group-item"><strong>{% translate "Subject:" %}</strong> ${affiliate.subject}</li>
+                    <li class="list-group-item"><strong>{% translate "Description:" %}</strong> ${affiliate.description}</li>
+                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${affiliate.status}</li>
+                    <li class="list-group-item"><strong>{% translate "Date Created:" %}</strong> ${affiliate.date_created}</li>
+                    <li class="list-group-item"><strong>{% translate "Date Closed:" %}</strong> ${affiliate.date_closed}</li>
+                    <li class="list-group-item"><strong>{% translate "Priority:" %}</strong> ${affiliate.priority}</li>
+                    <li class="list-group-item"><strong>{% translate "Assigned Agent:" %}</strong> ${affiliate.assigned_agent}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching affiliate support-ticket detail:', error);

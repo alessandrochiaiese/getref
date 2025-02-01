@@ -3,21 +3,21 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'core_home' %}">
         <i class="icon-grid menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">{% translate "Dashboard" %}</span>
       </a>
     </li>
     {% if user.is_superuser %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="icon-layout menu-icon"></i>
-        <span class="menu-title">UI Elements</span>
+        <span class="menu-title">{% translate "UI Elements" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'ui_features_buttons' %}">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'ui_features_dropdowns' %}">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'ui_features_typography' %}">Typography</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'ui_features_buttons' %}">{% translate "Buttons" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'ui_features_dropdowns' %}">{% translate "Dropdowns" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'ui_features_typography' %}">{% translate "Typography" %}</a></li>
         </ul>
       </div>
     </li>
@@ -25,146 +25,146 @@
       <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
         aria-controls="form-elements">
         <i class="icon-columns menu-icon"></i>
-        <span class="menu-title">Form elements</span>
+        <span class="menu-title">{% translate "Form elements" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="form-elements">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{% url 'forms_basic_elements' %}">Basic Elements</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'forms_basic_elements' %}">{% translate "Basic Elements" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
         <i class="icon-bar-graph menu-icon"></i>
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">{% translate "Charts" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="charts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'charts' %}">ChartJs</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'charts' %}">{% translate "ChartJs" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
         <i class="icon-grid-2 menu-icon"></i>
-        <span class="menu-title">Tables</span>
+        <span class="menu-title">{% translate "Tables" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'basic_table' %}">Basic table</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'basic_table' %}">{% translate "Basic table" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
         <i class="icon-contract menu-icon"></i>
-        <span class="menu-title">Icons</span>
+        <span class="menu-title">{% translate "Icons" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="icons">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'icons_mdi' %}">Mdi icons</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'icons_mdi' %}">{% translate "Mdi icons" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
         <i class="icon-head menu-icon"></i>
-        <span class="menu-title">User Pages</span>
+        <span class="menu-title">{% translate "User Pages" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'core_login' %}"> Login </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'core_register' %}"> Register </a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'core_login' %}">{% translate " Login " %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'core_register' %}">{% translate " Register " %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
         <i class="icon-ban menu-icon"></i>
-        <span class="menu-title">Error pages</span>
+        <span class="menu-title">{% translate "Error pages" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="error">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url '404' %}"> 404 </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url '500' %}"> 500 </a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url '404' %}">{% translate " 404 " %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url '500' %}">{% translate " 500 " %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'documentation' %}">
         <i class="icon-paper menu-icon"></i>
-        <span class="menu-title">Documentation</span>
+        <span class="menu-title">{% translate "Documentation" %}</span>
       </a>
     </li>
     {% endif %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#enterprise" aria-expanded="false" aria-controls="enterprise">
         <i class="bi bi-building menu-icon"></i>
-        <span class="menu-title">Enterprise</span>
+        <span class="menu-title">{% translate "Enterprise" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="enterprise">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_enterprise' %}">Create Enterprise</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'enterprise_list' %}">List Enterprise</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'create_enterprise' %}">{% translate "Create Enterprise" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'enterprise_list' %}">{% translate "List Enterprise" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#referred-accounts" aria-expanded="false" aria-controls="referred-accounts">
         <i class="icon-layout menu-icon"></i>
-        <span class="menu-title">Referred Accounts</span>
+        <span class="menu-title">{% translate "Referred Accounts" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="referred-accounts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'my_network' %}">My Network</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'master_accounts' %}">Master Accounts</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'investor_accounts' %}">Investor Accounts</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'incomplete_registrations' %}">Incomplete Registrations</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'my_network' %}">{% translate "My Network" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'master_accounts' %}">{% translate "Master Accounts" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'investor_accounts' %}">{% translate "Investor Accounts" %}</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'incomplete_registrations' %}">{% translate "Incomplete Registrations" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'product_list' %}">
         <i class="bi bi-shop menu-icon"></i>
-        <span class="menu-title">Prodotti</span>
+        <span class="menu-title">{% translate "Prodotti" %}</span>
       </a>
     </li>
     <!--<li class="nav-item">
       <a class="nav-link" href="{#% url 'my_network' %#}">
         <i class="bi bi-people menu-icon"></i>
-        <span class="menu-title">My Network</span>
+        <span class="menu-title">{% translate "My Network" %}</span>
       </a>
     </li>-->
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#finances" aria-expanded="false" aria-controls="finances">
         <i class="bi bi-bank menu-icon"></i>
-        <span class="menu-title">Finances</span>
+        <span class="menu-title">{% translate "Finances" %}</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="finances">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'withdrawals' %}">Withdrawals</a></li>
+          <li class="nav-item">{% translate " " %}<a class="nav-link" href="{% url 'withdrawals' %}">{% translate "Withdrawals" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'core_profile' %}">
         <i class="bi bi-person menu-icon"></i>
-        <span class="menu-title">My Profile</span>
+        <span class="menu-title">{% translate "My Profile" %}</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'schema-redoc' %}">
         <i class="icon-paper menu-icon"></i>
-        <span class="menu-title">API Documentation</span>
+        <span class="menu-title">{% translate "API Documentation" %}</span>
       </a>
     </li>
   </ul>

@@ -11,13 +11,10 @@ TODO:
 [X] Creare page to create view products
 [X] Creare page to create view orders
 
-[ ] Track payment (Debit card In o OUT), se è completato è cliente 100% quindi la commissione va a chi l ha invitato
-[ ] Creazione di Form a fasi tipo 4 fasi, la prima registrazione, seconda registrazione dell'azienda, terza per la aggiunta di un metodo di pagamento
-[ ] sistema dell'email, anche nela registrazione per confermare, ma anche un email del cliente prerogativa per chiedere di fare un azione un pagamento o per le condizioni da confermare
 [/] Auth Github (NOT USEFUL)
 [/] Auth Google
 [ ] Wordpress + Stripe Plugin
-[ ]
+
 
 
 03.01.2025
@@ -44,9 +41,6 @@ TODO:
 [X] Referral Code in Dashboard [DON'T WORK]
 [X] Referral COde needs to be dispayed as URL
 [X] Statical [DON'T WORK]
-[ ] Flash List in Dashboard [DON'T DESERVE]
-[ ] Create Affiliation Program and Campaign [DON'T DESERVE]
-
 29.01.2025
 [X] nella dashboard la tabella "I miei invitati" non funziona, mancano le importazioni di referral.models
 [X] APPEND_SLASH=True
@@ -81,16 +75,30 @@ Errore:
 IntegrityError at /api/v0/referral/
 null value in column "ip_address" of relation "referral_referralaudit" violates not-null constraint
 DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KH..., <IP>, null).
-
-
-[ ] Nella sidebar i dropdown devono avere gli angoli inferiori a destra e sinistra arrotandati come quelli degli angoli opposti
 [X] Modify button in detail enterprise
+
+
+
+
+30.01.2025
+[ ] Create Page to create and manage API KEY
+[ ] Make all Html with Internationalization and Localization
+[ ] The pages of Affiliates and Referral Systems needs restyling
+[ ] Create App to subscription for different plan about API
+[ ]
+[ ]
+[ ] Nella sidebar i dropdown devono avere gli angoli inferiori a destra e sinistra arrotandati come quelli degli angoli opposti
 [ ] nel register page campo referral code
 
+[ ] Flash List in Dashboard [DON'T DESERVE]
+[ ] Create Affiliation Program and Campaign [DON'T DESERVE]
+
+[ ] Track payment (Debit card In o OUT), se è completato è cliente 100% quindi la commissione va a chi l ha invitato
+[ ] Creazione di Form a fasi tipo 4 fasi, la prima registrazione, seconda registrazione dell'azienda, terza per la aggiunta di un metodo di pagamento
+[ ] sistema dell'email, anche nela registrazione per confermare, ma anche un email del cliente prerogativa per chiedere di fare un azione un pagamento o per le condizioni da confermare
 
 [ ] Plan Subscription for API Services (Affiliate & Referral)
 [ ] Stripe, Create i prodotti o servizi (piani di affiliazione sys e piani di referral sys)
-
 
 
 

@@ -9,7 +9,8 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),   
     
     # rest framework
-    path('o/', include(oauth2_urls)),
+    #path('o/', include(oauth2_urls)),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('users/', UserList.as_view(), name='custom_users'),
     path('users/<pk>/', UserDetails.as_view(), name='custom_user'),
     path('groups/', GroupList.as_view(), name='custom_groups'),

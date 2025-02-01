@@ -5,12 +5,12 @@
 {% block title %}Add New Transcription{% endblock %}
 
 {% block content %}
-    <h2>Add New Transcription</h2>
+    <h2>{% translate "Add New Transcription" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Transcription</button>
+        <button type="submit">{% translate "Add Transcription" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_transcription_list' %}">Back to Transcription List</a>
+    <a href="{% url 'referral_transcription_list' %}">{% translate "Back to Transcription List" %}</a>
 {% endblock %}

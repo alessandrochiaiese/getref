@@ -6,12 +6,12 @@
 {% block title %}Edit Transaction{% endblock %}
 
 {% block content %}
-    <h2>Edit Transaction</h2>
+    <h2>{% translate "Edit Transaction" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update Transaction</button>
+        <button type="submit">{% translate "Update Transaction" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_transaction_list' %}">Back to Transaction List</a>
+    <a href="{% url 'referral_transaction_list' %}">{% translate "Back to Transaction List" %}</a>
 {% endblock %}

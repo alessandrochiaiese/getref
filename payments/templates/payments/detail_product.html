@@ -9,30 +9,30 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>Prodotto</h2>
+            <h2>{% translate "Prodotto" %}</h2>
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="product-name">Nome</label>
+                <label for="product-name">{% translate "Nome" %}</label>
                 <input type="text" class="form-control" id="product-name" value="{{ product.name }}">
             </div>
             <div class="form-group">
-                <label for="product-quantity">Quantità</label>
+                <label for="product-quantity">{% translate "Quantità" %}</label>
                 <input type="text" class="form-control" id="product-quantity" value="{{ product.quantity }}">
             </div>
             <div class="form-group">
-                <label for="product-price">Prezzo</label>
+                <label for="product-price">{% translate "Prezzo" %}</label>
                 <input type="text" class="form-control" id="product-price" value="{{ product.price }}">
             </div>
             <div class="form-group">
-                <label for="product-description">Descrizione</label>
+                <label for="product-description">{% translate "Descrizione" %}</label>
                 <input type="text" class="form-control" rows="3" id="product-description"
                     value="{{ product.description }}">
             </div>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary mt-3" href="{% url 'create_order' %}">Ordina</a>
-            <a class="btn btn-primary mt-3" href="{% url 'product_list' %}">Torna all'elenco</a>
+            <a class="btn btn-primary mt-3" href="{% url 'create_order' %}">{% translate "Ordina" %}</a>
+            <a class="btn btn-primary mt-3" href="{% url 'product_list' %}">{% translate "Torna all'elenco" %}</a>
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Referral Detail</h1>
+        <h1>{% translate "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,10 +38,10 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralProgramPartecipationDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>Date Joined:</strong> ${referral.date_joined}</li>
-                    <li class="list-group-item"><strong>Commission Earned:</strong> ${referral.commission_earned}</li> 
-                    <li class="list-group-item"><strong>Status:</strong> ${referral.status}</li> `;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Date Joined:" %}</strong> ${referral.date_joined}</li>
+                    <li class="list-group-item"><strong>{% translate "Commission Earned:" %}</strong> ${referral.commission_earned}</li> 
+                    <li class="list-group-item"><strong>{% translate "Status:" %}</strong> ${referral.status}</li> `;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral program detail:', error);

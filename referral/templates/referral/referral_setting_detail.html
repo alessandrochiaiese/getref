@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Referral Detail</h1>
+        <h1>{% translate "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,12 +38,12 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralSettingDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>Preferred Currency:</strong> ${referral.preferred_currency}</li>
-                    <li class="list-group-item"><strong>Preferred Payment Method:</strong> ${referral.preferred_payment_method}</li>
-                    <li class="list-group-item"><strong>payout Schedule:</strong> ${referral.payout_schedule}</li>
-                    <li class="list-group-item"><strong>Notification Preference:</strong> ${referral.notification_preference}</li>
-                    <li class="list-group-item"><strong>Dashboard Layout:</strong> ${referral.dashboard_layout}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Preferred Currency:" %}</strong> ${referral.preferred_currency}</li>
+                    <li class="list-group-item"><strong>{% translate "Preferred Payment Method:" %}</strong> ${referral.preferred_payment_method}</li>
+                    <li class="list-group-item"><strong>{% translate "payout Schedule:" %}</strong> ${referral.payout_schedule}</li>
+                    <li class="list-group-item"><strong>{% translate "Notification Preference:" %}</strong> ${referral.notification_preference}</li>
+                    <li class="list-group-item"><strong>{% translate "Dashboard Layout:" %}</strong> ${referral.dashboard_layout}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral setting detail:', error);

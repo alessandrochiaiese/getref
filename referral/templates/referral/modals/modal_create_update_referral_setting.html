@@ -4,37 +4,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Create New Referral Setting</h5>
+                <h5 class="modal-title" id="createModalLabel">{% translate "Create New Referral Setting" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="createForm">
                     <div class="mb-3">
-                        <label for="createPreferredCurrency" class="form-label">Preferred Currency</label>
+                        <label for="createPreferredCurrency" class="form-label">{% translate "Preferred Currency" %}</label>
                         <input type="text" class="form-control" data-field="preferred_currency" id="createPreferredCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createPreferredPaymentMethod" class="form-label">Preferred Payment Method</label>
+                        <label for="createPreferredPaymentMethod" class="form-label">{% translate "Preferred Payment Method" %}</label>
                         <input type="text" class="form-control" data-field="preferred_payment_method" id="createPreferredPaymentMethod" required>
                     </div>
                     <div class="mb-3">
-                        <label for="createPayoutSchedule" class="form-label">Payout Schedule</label>
+                        <label for="createPayoutSchedule" class="form-label">{% translate "Payout Schedule" %}</label>
                         <input type="date" class="form-control" data-field="payout_schedule" id="createPayoutSchedule" required>
                     </div> 
                     <div class="mb-3">
-                        <label for="createNotificationPreference" class="form-label">Notification Preference</label>
+                        <label for="createNotificationPreference" class="form-label">{% translate "Notification Preference" %}</label>
                         <input type="date" class="form-control" data-field="notification_preference" id="createNotificationPreference" required>
                     </div> 
                     <div class="mb-3">
-                        <label for="createDashboardLayout" class="form-label">Dashboard Layout</label>
+                        <label for="createDashboardLayout" class="form-label">{% translate "Dashboard Layout" %}</label>
                         <input type="date" class="form-control" data-field="dashboard_layout" id="createDashboardLayout" required>
                     </div> 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="createSubmitBtn"
-                    onclick="saveNewAffiliate()">Create</button>
+                    onclick="saveNewAffiliate()">{% translate "Create" %}</button>
             </div>
         </div>
     </div>
@@ -45,36 +45,36 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Referral Setting</h5>
+                <h5 class="modal-title" id="editModalLabel">{% translate "Edit Referral Setting" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <div class="mb-3">
-                        <label for="editPreferredCurrency" class="form-label">Preferred Currency</label>
+                        <label for="editPreferredCurrency" class="form-label">{% translate "Preferred Currency" %}</label>
                         <input type="text" class="form-control" data-field="preferred_currency" id="editPreferredCurrency" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editPreferredPaymentMethod" class="form-label">Preferred Payment Method</label>
+                        <label for="editPreferredPaymentMethod" class="form-label">{% translate "Preferred Payment Method" %}</label>
                         <input type="text" class="form-control" data-field="preferred_payment_method" id="editPreferredPaymentMethod" required>
                     </div>
                     <div class="mb-3">
-                        <label for="editPayoutSchedule" class="form-label">Payout Schedule</label>
+                        <label for="editPayoutSchedule" class="form-label">{% translate "Payout Schedule" %}</label>
                         <input type="date" class="form-control" data-field="payout_schedule" id="editPayoutSchedule" required>
                     </div> 
                     <div class="mb-3">
-                        <label for="editNotificationPreference" class="form-label">Notification Preference</label>
+                        <label for="editNotificationPreference" class="form-label">{% translate "Notification Preference" %}</label>
                         <input type="date" class="form-control" data-field="notification_preference" id="editNotificationPreference" required>
                     </div> 
                     <div class="mb-3">
-                        <label for="editDashboardLayout" class="form-label">Dashboard Layout</label>
+                        <label for="editDashboardLayout" class="form-label">{% translate "Dashboard Layout" %}</label>
                         <input type="date" class="form-control" data-field="dashboard_layout" id="editDashboardLayout" required>
                     </div> 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Close" %}</button>
                 <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveAffiliateChanges()">Save
                     Changes</button>
             </div>

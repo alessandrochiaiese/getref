@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Affiliate Incentive Detail</h1>
+        <h1>{% translate "Affiliate Incentive Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,15 +38,15 @@
                 const affiliate = await response.json();
                 const detailList = document.getElementById('affiliateIncentiveDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${affiliate.id}</li>
-                    <li class="list-group-item"><strong>URL:</strong> ${affiliate.url}</li>
-                    <li class="list-group-item"><strong>Click Count:</strong> ${affiliate.click_count}</li>
-                    <li class="list-group-item"><strong>Conversion Count:</strong> ${affiliate.conversion_count}</li>
-                    <li class="list-group-item"><strong>Date Created:</strong> ${affiliate.date_created}</li>
-                    <li class="list-group-item"><strong>Last Used:</strong> ${affiliate.last_used}</li>
-                    <li class="list-group-item"><strong>Incentive Status:</strong> ${affiliate.incentive_status}</li>
-                    <li class="list-group-item"><strong>Landing Page:</strong> ${affiliate.landing_page}</li>
-                    <li class="list-group-item"><strong>Custom Tracking ID:</strong> ${affiliate.custom_tracking_id}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${affiliate.id}</li>
+                    <li class="list-group-item"><strong>{% translate "URL:" %}</strong> ${affiliate.url}</li>
+                    <li class="list-group-item"><strong>{% translate "Click Count:" %}</strong> ${affiliate.click_count}</li>
+                    <li class="list-group-item"><strong>{% translate "Conversion Count:" %}</strong> ${affiliate.conversion_count}</li>
+                    <li class="list-group-item"><strong>{% translate "Date Created:" %}</strong> ${affiliate.date_created}</li>
+                    <li class="list-group-item"><strong>{% translate "Last Used:" %}</strong> ${affiliate.last_used}</li>
+                    <li class="list-group-item"><strong>{% translate "Incentive Status:" %}</strong> ${affiliate.incentive_status}</li>
+                    <li class="list-group-item"><strong>{% translate "Landing Page:" %}</strong> ${affiliate.landing_page}</li>
+                    <li class="list-group-item"><strong>{% translate "Custom Tracking ID:" %}</strong> ${affiliate.custom_tracking_id}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching affiliate incentive detail:', error);

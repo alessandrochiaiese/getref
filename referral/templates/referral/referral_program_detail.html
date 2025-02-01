@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Referral Detail</h1>
+        <h1>{% translate "Referral Detail" %}</h1>
         
     <!-- Filtraggio e bottoni di azione -->
     <div class="d-flex justify-content-between mb-4">
@@ -38,16 +38,16 @@
                 const referral = await response.json();
                 const detailList = document.getElementById('referralProgramDetail');
                 const details = `
-                    <li class="list-group-item"><strong>ID:</strong> ${referral.id}</li>
-                    <li class="list-group-item"><strong>Description:</strong> ${referral.description}</li>
-                    <li class="list-group-item"><strong>Commission Rate:</strong> ${referral.commission_rate}</li>
-                    <li class="list-group-item"><strong>Min Payout Threshold:</strong> ${referral.min_payout_threshold}</li>
-                    <li class="list-group-item"><strong>Max Payout Limit:</strong> ${referral.max_payout_limit}</li>
-                    <li class="list-group-item"><strong>Sate Created:</strong> ${referral.date_created}</li>
-                    <li class="list-group-item"><strong>Is Active:</strong> ${referral.is_active}</li>
-                    <li class="list-group-item"><strong>Duration:</strong> ${referral.duration}</li>
-                    <li class="list-group-item"><strong>Allowed Countries:</strong> ${referral.allowed_countries}</li>
-                    <li class="list-group-item"><strong>Target Industry:</strong> ${referral.target_industry}</li>`;
+                    <li class="list-group-item"><strong>{% translate "ID:" %}</strong> ${referral.id}</li>
+                    <li class="list-group-item"><strong>{% translate "Description:" %}</strong> ${referral.description}</li>
+                    <li class="list-group-item"><strong>{% translate "Commission Rate:" %}</strong> ${referral.commission_rate}</li>
+                    <li class="list-group-item"><strong>{% translate "Min Payout Threshold:" %}</strong> ${referral.min_payout_threshold}</li>
+                    <li class="list-group-item"><strong>{% translate "Max Payout Limit:" %}</strong> ${referral.max_payout_limit}</li>
+                    <li class="list-group-item"><strong>{% translate "Sate Created:" %}</strong> ${referral.date_created}</li>
+                    <li class="list-group-item"><strong>{% translate "Is Active:" %}</strong> ${referral.is_active}</li>
+                    <li class="list-group-item"><strong>{% translate "Duration:" %}</strong> ${referral.duration}</li>
+                    <li class="list-group-item"><strong>{% translate "Allowed Countries:" %}</strong> ${referral.allowed_countries}</li>
+                    <li class="list-group-item"><strong>{% translate "Target Industry:" %}</strong> ${referral.target_industry}</li>`;
                 detailList.innerHTML = details;
             } catch (error) {
                 console.error('Error fetching referral program detail:', error);

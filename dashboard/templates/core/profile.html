@@ -87,8 +87,8 @@
             <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="profile-header-img img-fluid rounded-circle"
                 sizes="150x150">
             <h2>{{ user.first_name|default:"Guest" }} {{ user.last_name|default:"" }}</h2>
-            <p class="text-muted">Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi referral.</p>
-            <p>Ti sei registrato con il codice referral:
+            <p class="text-muted">{% translate "Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi referral." %}</p>
+            <p>{% translate "Ti sei registrato con il codice referral" %}:
             <p>{% if referrer_code %}
                 {{ referrer_name }}
                 {% else %}
@@ -99,20 +99,20 @@
 
             {% if referral_code %}
             <br>
-            <h4>Il tuo codice referral</h4>
+            <h4>{% translate "Il tuo codice referral" %}</h4>
             <div class="input-group">
                 <input type="text" class="form-control" id="referral-code" value="{{ referral_code }}" readonly>
                 <button class="btn btn-primary ml-2" id="copy-code"><i class="bi bi-clipboard"></i></button>
             </div>
             <br>
-            <h4>Il tuo link referral</h4>
+            <h4>{% translate "Il tuo link referral" %}</h4>
             <div class="input-group">
                 <input type="text" class="form-control" id="referral-unique-url" value="{{ referral_unique_url }}"
                     readonly>
                 <button class="btn btn-primary ml-2" id="copy-url"><i class="bi bi-clipboard"></i></button>
             </div>
             {% else %}
-            <p class="text-muted">Non hai un codice referral disponibile.</p>
+            <p class="text-muted">{% translate "Non hai un codice referral disponibile." %}</p>
             {% endif %}
 
         </div>
@@ -133,7 +133,7 @@
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="section-title mb-4">Modifica Dati Personali</h4>
+                    <h4 class="section-title mb-4">{% translate "Modifica Dati Personali" %}</h4>
                     <form method="POST" action="{% url 'core_profile' %}" enctype="multipart/form-data">
                         {% csrf_token %}
 
@@ -151,8 +151,8 @@
 
                         <!-- Pulsanti -->
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary btn-lg mr-2">Salva Modifiche</button>
-                            <button type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                            <button type="submit" class="btn btn-primary btn-lg mr-2">{% translate "Salva Modifiche" %}</button>
+                            <button type="reset" class="btn btn-secondary btn-lg">{% translate "Reset" %}</button>
                         </div>
                     </form>
                 </div>

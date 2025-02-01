@@ -57,15 +57,15 @@
 
   <section class="section">
     <div class="container">
-      <button class="button is-primary" id="submitBtn">Purchase!</button>
+      <button class="button is-primary" id="submitBtn">{% translate "Purchase!" %}</button>
     </div>
   </section>
 
-  <h2>Make a Payment</h2>
+  <h2>{% translate "Make a Payment" %}</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Pay</button>
+    <button type="submit" class="btn btn-primary">{% translate "Pay" %}</button>
   </form>
 
   <div class="container p-3 my-3">

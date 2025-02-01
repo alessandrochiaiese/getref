@@ -96,6 +96,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -211,6 +212,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
+    'oauth2_provider.backends.OAuth2Backend',
 )
 
 #AUTH_USER_MODEL = 'accounts.User'

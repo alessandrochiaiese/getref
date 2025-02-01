@@ -6,12 +6,12 @@
 {% block title %}Edit Engagement{% endblock %}
 
 {% block content %}
-    <h2>Edit Engagement</h2>
+    <h2>{% translate "Edit Engagement" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update Engagement</button>
+        <button type="submit">{% translate "Update Engagement" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_engagement_list' %}">Back to Engagement List</a>
+    <a href="{% url 'referral_engagement_list' %}">{% translate "Back to Engagement List" %}</a>
 {% endblock %}

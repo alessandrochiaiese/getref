@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% translate "Uso delle API" %}</h2>
+<table>
+    <thead>
+        <tr>
+            <th>{% translate "Endpoint" %}</th>
+            <th>{% translate "Data" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.endpoint }}</td>
+            <td>{{ log.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<canvas id="usageChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+fetch('/api/api_usage/')
+    .then(response => response.json())
+    .then(data => {
+        let labels = data.map(d => d.timestamp);
+        let counts = data.map(() => 1); // Una richiesta per ogni log
+
+        new Chart(document.getElementById("usageChart"), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'API Usage',
+                    data: counts,
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            }
+        });
+    });
+</script>
+
+{% endblock %}

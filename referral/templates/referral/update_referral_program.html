@@ -6,12 +6,12 @@
 {% block title %}Edit Program{% endblock %}
 
 {% block content %}
-    <h2>Edit Program</h2>
+    <h2>{% translate "Edit Program" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update Program</button>
+        <button type="submit">{% translate "Update Program" %}</button>
     </form>
     <br>
-    <a href="{% url 'referral_program_list' %}">Back to Program List</a>
+    <a href="{% url 'referral_program_list' %}">{% translate "Back to Program List" %}</a>
 {% endblock %}
