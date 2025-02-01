@@ -3,29 +3,30 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404, redirect, render
-from subscriptions.utils import send_subscription_email
-from subscriptions.models import *
 from rest_framework.views import APIView
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from getref.settings import STRIPE_SECRET_KEY, STRIPE_ENDPOINT_SECRET
+from rest_framework.decorators import action
 
-from .models import APIKey, APIUsageLog
-from .serializers import APIKeySerializer
+from subscriptions.utils import send_subscription_email
+from subscriptions.models import *
+from subscriptions.api.serializers import APIKeySerializer
 
+from django.contrib.auth.decorators import login_required
 import stripe
 
+from django.http import JsonResponse
+from django.conf import settings
 
-stripe.api_key = STRIPE_SECRET_KEY
 
 from django.db import models
 from oauth2_provider.models import Application
 from django.utils.timezone import now
 import uuid
-import stripe
-from django.conf import settings
 
+#stripe.api_key = STRIPE_SECRET_KEY
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def create_stripe_subscription(user, plan):
@@ -140,9 +141,7 @@ class APIKeyUsageViewSet(viewsets.ViewSet):
         data = [{"api_key": log.api_key.name, "endpoint": log.endpoint, "timestamp": log.timestamp} for log in logs]
         return Response(data)
     from django.views.decorators.csrf import csrf_exempt
-import stripe
-from django.http import JsonResponse
-from django.conf import settings
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
