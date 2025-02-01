@@ -57,8 +57,6 @@ urlpatterns = [
     # accounts 
     path('', include('accounts.urls')),
     
-    # stripe
-    path('', include('payments.urls')),
     
     # health
     path('health/', include('health_check.urls')),
@@ -74,8 +72,9 @@ urlpatterns += i18n_patterns(
     # apps   
     path('', include('dashboard.urls')),
     path('', include('affiliate.urls')), 
-    path('', include('referral.urls')), 
-
+    path('', include('referral.urls')),
+    path('', include('subscriptions.urls')),
+    path('', include('payments.urls')),
 
 
 )
