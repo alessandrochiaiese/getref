@@ -15,11 +15,12 @@ else:
     print("❌ Errore:", response.status_code, response.text)
 """
 
+from getref.settings import DOMAIN
 import httpx
 import asyncio
 
 API_KEY = "YOUR_ACCESS_TOKEN"
-API_URL = "http://localhost:8000/api/protected/"
+API_URL = f"{DOMAIN}/api/protected/"
 
 async def call_api():
     async with httpx.AsyncClient() as client:

@@ -1,3 +1,6 @@
+from prompt_toolkit import Application
+from django.db import models
+
 class APIKey(Application):
     #...
     plan = models.CharField(max_length=20, choices=[("free", "Free"), ("pro", "Pro")], default="free")

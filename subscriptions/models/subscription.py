@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 
-from chat.models.user import User
+from django.contrib.auth.models import User
 
 class Subscription(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
