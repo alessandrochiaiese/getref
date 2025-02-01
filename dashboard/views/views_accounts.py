@@ -203,6 +203,7 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
 
     def form_valid(self, form):
         form.save(
+            request=self.request,
             from_email=settings.EMAIL_HOST_USER  # Assicura che il mittente sia quello corretto
         )
         return super().form_valid(form)
