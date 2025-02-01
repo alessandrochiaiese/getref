@@ -57,7 +57,6 @@ urlpatterns = [
     # accounts 
     path('', include('accounts.urls')),
     
-    
     # health
     path('health/', include('health_check.urls')),
     
@@ -68,15 +67,12 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    
     # apps   
     path('', include('dashboard.urls')),
     path('', include('affiliate.urls')), 
     path('', include('referral.urls')),
     path('', include('payments.urls')),
     path('', include('subscriptions.urls')),
-    
-
 )
 
 if settings.DEBUG:

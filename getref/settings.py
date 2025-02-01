@@ -117,7 +117,7 @@ MIDDLEWARE = [
     # ... custom middleware ...
     'referral.middleware.referral_audit_middleware.ReferralAuditMiddleware'
 ]
-if DEBUG == True:
+if DEBUG == False:
     MIDDLEWARE.append('dashboard.middleware.check_valid_endpoint_middleware.CheckValidEndpointMiddleware')
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allows requests from all origins
@@ -284,22 +284,20 @@ LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
-EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
-if DEBUG:
+if DEBUG == False:
     DOMAIN = config('DOMAIN')
     # Email settings
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
+    EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = True
     # Session settings
@@ -322,6 +320,8 @@ if DEBUG:
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 else:
     DOMAIN = '127.0.0.1:8000'
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')

@@ -12,7 +12,7 @@ urlpatterns = [
     path('subscriptions/email-subscription-success/', email_subscription_success, name='subscription-email-subscription-success'),
     path('subscriptions/create/<int:plan>/', create_stripe_subscription, name='subscription-create'),
     
-    path('stripe/webhook/', stripe_webhook, name='stripe-webhook'),
+    path('webhook/', stripe_webhook, name='stripe-webhook'),
 
     path('api/v0/', include('subscriptions.api.urls'), name='api-subscriptions'),
 ] 
