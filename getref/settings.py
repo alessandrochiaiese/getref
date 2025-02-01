@@ -298,12 +298,13 @@ if DEBUG == False:
     DOMAIN = config('DOMAIN')
     # Email settings
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = str(config('EMAIL_HOST')) #'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = str(config('EMAIL_USER', ""))
-    EMAIL_HOST_PASSWORD = str(config('EMAIL_PASSWORD', ""))
-    EMAIL_USE_TLS = True
-    EMAIL_USE_SSL = True
+    EMAIL_HOST_USER = str(config('EMAIL_HOST_USER', ""))
+    EMAIL_HOST_PASSWORD = str(config('EMAIL_HOST_PASSWORD', ""))
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
+    EMAIL_USE_TLS = True #465
+    EMAIL_USE_SSL = True #587
     # Session settings
     SESSION_ENGINE = 'django.contrib.sessions.backends.db'
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
@@ -320,11 +321,32 @@ if DEBUG == False:
         #'*', 
         # #'getcall.pythonanywhere.com',
     ]
-    # Aggiungere automaticamente lo schema a ogni dominio
+    # Add automatically schema to every domains
     CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 else:
     DOMAIN = '127.0.0.1:8000'
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+import logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'django_email.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 
 # OAuth2 Provider
