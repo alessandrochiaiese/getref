@@ -12,6 +12,10 @@ from dashboard.models import *
 from getref import settings
 from referral.models import *   
 from dashboard.forms import * 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 
 #####################
@@ -202,12 +206,21 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     success_url = reverse_lazy('core_home')
 
     def form_valid(self, form):
-        form.save(
-            request=self.request,
-            from_email=settings.EMAIL_HOST_USER  # Assicura che il mittente sia quello corretto
-        )
-        return super().form_valid(form)
+        if not self.request:
+            logger.error("Request is None in form_valid!")
+            return self.form_invalid(form)
 
+        try:
+            form.save(
+                request=self.request,
+                from_email=settings.EMAIL_HOST_USER,
+                    extra_email_context={'domain': settings.DOMAIN}
+            )
+            logger.info("Email di reset inviata con successo")
+        except Exception as e:
+            logger.error(f"Errore durante l'invio dell'email: {e}")
+        return super().form_valid(form)
+    
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'core/change_password.html'
     success_message = "Successfully Changed Your Password"
