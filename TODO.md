@@ -90,7 +90,7 @@ DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/
 [ ]
 [ ] Nella sidebar i dropdown devono avere gli angoli inferiori a destra e sinistra arrotandati come quelli degli angoli opposti
 [ ] nel register page campo referral code
-
+[X] Incomplete Registration page not work 
 [ ] Flash List in Dashboard [DON'T DESERVE]
 [ ] Create Affiliation Program and Campaign [DON'T DESERVE]
 
