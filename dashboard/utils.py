@@ -103,6 +103,7 @@ def get_tree_referred(user, level=1):# -> dict:
         referral = Referral.objects.filter(referrer=user).first()
     except Exception as e:
         print(e)
+        return tree
 
     if referral is None:
         print(f"No referral found for user {user.username}")

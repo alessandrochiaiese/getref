@@ -1,4 +1,5 @@
 
+import logging
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -272,115 +273,75 @@ class InvestorAccountsView(TemplateView):
         
         return context
     
+
+logger = logging.getLogger(__name__)
 @method_decorator(login_required, name='dispatch')
 class IncompleteRegistrationsView(TemplateView):
-    model = get_user_model()  # Usa il modello User di default
     template_name = 'dashboard/referred_accounts/incomplete_registrations.html'
 
     def get_object(self, queryset=None):
-        # Ritorna l'oggetto corrispondente all'utente autenticato
         return self.request.user
-    
-    
+
+    def get_referral_code(self, user):
+        try:
+            return ReferralCode.objects.filter(user=user).first().code
+        except AttributeError:
+            return None
+
+    def get_referred_users(self, user):
+        # Otteniamo gli utenti inviati da un utente
+        referral = Referral.objects.filter(referrer=user.id).first()
+        return referral.referred.all() if referral else []
+
+    def get_incomplete_registrations(self, user):
+        incomplete_registrations = []
+        # Otteniamo gli utenti inviati
+        referred_users = self.get_referred_users(user)
+        
+        for referred_user in referred_users:
+            # Verifica se il profilo dell'utente inviato è incompleto
+            profile = Profile.objects.filter(user=referred_user).first()
+            if profile:
+                # Controlla se ci sono attributi del profilo mancanti
+                if not all([profile.birth_date, profile.city, profile.street, profile.CAP, profile.phone_number]):
+                    incomplete_registrations.append(referred_user)
+
+        return incomplete_registrations
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Get the user 
-        user=self.request.user#user = User.objects.filter(user=self.request.user).first()
-
-        # Get the user's profile
-        profile = Profile.objects.filter(user=user).first()
-
-        # Get the referral code for the user
-        referral_code = ReferralCode.objects.filter(user=user).first()
- 
-        # Get the user's referral information
-        try:
-            referral = Referral.objects.filter(referrer=user).first()
-        except Exception:
-            referrer = None
-
-        referrer = None
+        user = self.request.user
+        referral_code = self.get_referral_code(user)
         referrer_code = None
-        # Get the referral code for the referrer
+
         try:
-            referrer = ReferralCode.objects.filter(user=referral.referrer.id).first()
-        except Exception:
-            referrer = None
+            # Recupera il codice del referrer (se esiste)
+            referral = Referral.objects.filter(referrer=user).first()
+            if referral:
+                referrer = ReferralCode.objects.filter(user=referral.referrer.id).first()
+                if referrer:
+                    referrer_code = referrer.code
+        except Exception as e:
+            logger.error(f"Error occurred: {e}")
 
-        # If the referrer exists, get the referrer code
-        if referrer:
-            referrer_code = referrer.code
-        else:
-            referrer_code = None
- 
-        # Add the referral code to the context
-        try: 
-            context['referral_code'] = referral_code.code
-        except AttributeError:
-            context['referral_code'] = None
-        
-        # Add the referrer code to the context
-        try: 
-            context['referrer_code'] = referrer_code
-        except AttributeError:
-            context['referrer_code'] = None
+        # Ottieni gli utenti inviati incompleti
+        incomplete_referred_users = self.get_incomplete_registrations(user)
 
-        
-        # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user.id).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
-
-        referreds = []
-        tree_referred = get_tree_referred(user, level=0)
-        list_referred = tree_to_list(tree_referred, referreds)
-        
-        incomplete_registrations = []
-        for referred_item in list_referred:
-            referred_id = referred_item.get('id')
-            referred_user = User.objects.filter(id=referred_id).first()  # Usa .filter() con .first() per evitare errori
-            profile = None
-            
-            if referred_user:  # Verifica che l'utente esista
-                referred = Profile.objects.filter(user=referred_user).first()
-                profile = Profile.objects.filter(user=referred.user).first()
-                #if not profile or \
-                if referred.birth_date is None or referred.birth_date == '' or \
-                    referred.city is None or referred.city == '' or \
-                    referred.street is None or referred.street == '' or \
-                    referred.CAP is None or referred.CAP == '' or \
-                    referred.phone_number is None or referred.phone_number == '': # or \
-                    #profile.is_business == False or \
-                    #profile.is_buyer == False:
-                    incomplete_registrations.append(referred_item)
-            else:
-                referred = None
-  
-        print(incomplete_registrations)
-        context['incomplete_registrations'] = incomplete_registrations
-        
+        context['referral_code'] = referral_code
+        context['referrer_code'] = referrer_code
+        print("X ", incomplete_referred_users)
+        context['incomplete_referred_users'] = [
+            {
+                'first_name': x.first_name,
+                'last_name': x.last_name,
+                'username': x.username,
+                'level': calculate_user_level(x),
+                'date_joined': x.date_joined
+            } for x in incomplete_referred_users]
+        print("X ", incomplete_referred_users)
         return context
+
     
 @method_decorator(login_required, name='dispatch')
 class MyNetworkView(TemplateView):
