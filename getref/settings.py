@@ -332,7 +332,7 @@ else:
     DOMAIN = '127.0.0.1:8000'
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-
+"""
 import logging
 LOGS_PATH= os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOGS_PATH, exist_ok=True)
@@ -364,7 +364,7 @@ LOGGING = {
     },
 }
 
-
+"""
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000, 
