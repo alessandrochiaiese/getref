@@ -27,6 +27,12 @@ class Order(models.Model):
         self.total_price = total
         self.save()
 
+    class Meta:
+        ordering = ("-created_at",)
+        db_table = 'my_orders'
+        verbose_name = 'MyCustomOrder'
+        verbose_name_plural = 'MyCustomOrders'
+
 class OrderItem(models.Model):
     # Modello intermedio per la relazione tra Order e Product
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -39,3 +45,9 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
 
+
+    class Meta:
+        ordering = ("-created_at",)
+        db_table = 'my_custom_order_items'
+        verbose_name = 'MyCustomOrderItem'
+        verbose_name_plural = 'MyCustomOrderItems'

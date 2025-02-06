@@ -24,3 +24,10 @@ class CustomOrder(models.Model):
 
     def get_description(self):
         return self.description
+    
+    
+    class Meta:
+        ordering = ("-created_at",)
+        db_table = 'custom_orders'
+        verbose_name = 'CustomOrder'
+        verbose_name_plural = 'CustomOrder'
