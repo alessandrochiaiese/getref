@@ -47,7 +47,6 @@ class OrderItem(models.Model):
 
 
     class Meta:
-        ordering = ("-created_at",)
         db_table = 'my_custom_order_items'
         verbose_name = 'MyCustomOrderItem'
         verbose_name_plural = 'MyCustomOrderItems'
