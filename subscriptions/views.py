@@ -103,7 +103,6 @@ def create_checkout_session(request):
     if request.method == 'GET':
         domain_url = DOMAIN
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        language_code = request.LANGUAGE_CODE 
         
         try:
             print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
@@ -125,8 +124,8 @@ def create_checkout_session(request):
             # Creating the checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + f'/{language_code}/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + f'/{language_code}/cancel/',
+                success_url=domain_url + '/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + '/cancel/',
                 payment_method_types=['card'],
                 mode='subscription',
                 line_items=[{
