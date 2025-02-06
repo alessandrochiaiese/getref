@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from dashboard.models.country import Country 
+from dashboard.models.region import Region 
 
 class AffiliateProgram(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Name"))
@@ -12,7 +12,7 @@ class AffiliateProgram(models.Model):
     date_created = models.DateField(verbose_name=_("Date Created"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     duration = models.IntegerField(verbose_name=_("Duration"))  # durata in giorni
-    allowed_countries = models.ManyToManyField(Country, verbose_name=_("Allowed Countries"), related_name='affiliate_program_countries')
+    allowed_regions = models.ManyToManyField(Region, verbose_name=_("Allowed Regions"), related_name='affiliate_program_countries')
     target_industry = models.CharField(max_length=100, verbose_name=_("Target Industry"))
 
     class Meta:
