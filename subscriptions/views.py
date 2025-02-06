@@ -9,6 +9,33 @@ from django.views.decorators.csrf import csrf_exempt
 
 from subscriptions.models import StripeCustomer  # new
 
+"""
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'GET':
+        domain_url = DOMAIN
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                client_reference_id=request.user.id if request.user.is_authenticated else None,
+                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'cancel/',
+                payment_method_types=['card'],
+                mode='subscription',
+                line_items=[
+                    {
+                        'price': settings.STRIPE_PRICE_ID,
+                        'quantity': 1,
+                    }
+                ]
+            )
+            return JsonResponse({'sessionId': checkout_session.id})
+        except stripe.error.StripeError as e:
+            # Gestisci errori specifici di Stripe
+            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+"""
 
 @login_required
 def home(request):
@@ -69,33 +96,6 @@ def list_stripe_products():
         print(f"Errore generico: {str(e)}")  # Log di errore generico
         return {'error': str(e)}
 
-"""
-@csrf_exempt
-def create_checkout_session(request):
-    if request.method == 'GET':
-        domain_url = DOMAIN
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        try:
-            checkout_session = stripe.checkout.Session.create(
-                client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancel/',
-                payment_method_types=['card'],
-                mode='subscription',
-                line_items=[
-                    {
-                        'price': settings.STRIPE_PRICE_ID,
-                        'quantity': 1,
-                    }
-                ]
-            )
-            return JsonResponse({'sessionId': checkout_session.id})
-        except stripe.error.StripeError as e:
-            # Gestisci errori specifici di Stripe
-            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-"""
 
 # Funzione principale per creare la sessione di checkout
 @csrf_exempt
@@ -124,7 +124,7 @@ def create_checkout_session(request):
             # Creating the checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + '/success?session_id={CHECKOUT_SESSION_ID}/',
+                success_url=domain_url + '/success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=domain_url + '/cancel/',
                 payment_method_types=['card'],
                 mode='subscription',
