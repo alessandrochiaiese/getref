@@ -11,7 +11,6 @@ class StripeCustomer(models.Model):
         return self.user.username
 
     class Meta:
-        ordering = ("-created_at",)
         db_table = 'stripe_customers'
         verbose_name = 'StripeCustomer'
         verbose_name_plural = 'StripeCustomers'
