@@ -38,7 +38,73 @@ def stripe_config(request):
         stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
 
+# Function to list Stripe products and their prices
+def list_stripe_products():
+    try:
+        # Retrieve the products from Stripe
+        products = stripe.Product.list()
 
+        product_list = []
+
+        for product in products.auto_paging_iter():
+            # Retrieve prices associated with this product
+            prices = stripe.Price.list(product=product.id)
+
+            # Append the product and its prices to the list
+            for price in prices.auto_paging_iter():
+                product_list.append({
+                    'product_name': product.name,
+                    'product_id': product.id,
+                    'price_id': price.id,
+                    'price_amount': price.unit_amount,
+                    'currency': price.currency,
+                    'billing_scheme': price.billing_scheme
+                })
+        
+        return product_list
+    except stripe.error.StripeError as e:
+        return {'error': f"Stripe Error: {str(e)}"}
+    except Exception as e:
+        return {'error': str(e)}
+
+# The main function to create a checkout session
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'GET':
+        domain_url = DOMAIN
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        
+        try:
+            # Get the list of products and prices
+            products = list_stripe_products()
+
+            if not products:
+                return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
+
+            # Select the first product's price_id (this could be dynamic based on your needs)
+            selected_price_id = products[0]['price_id']
+
+            # Create a checkout session with the selected price_id
+            checkout_session = stripe.checkout.Session.create(
+                client_reference_id=request.user.id if request.user.is_authenticated else None,
+                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'cancel/',
+                payment_method_types=['card'],
+                mode='subscription',
+                line_items=[{
+                    'price': selected_price_id,  # Use the dynamic price_id
+                    'quantity': 1,
+                }]
+            )
+
+            # Return the session ID in the response
+            return JsonResponse({'sessionId': checkout_session.id})
+
+        except stripe.error.StripeError as e:
+            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+"""
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -64,7 +130,7 @@ def create_checkout_session(request):
             return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
         except Exception as e:
             return JsonResponse({'error': str(e)})
-
+"""
 
 @login_required
 def success(request):
