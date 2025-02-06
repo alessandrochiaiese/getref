@@ -20,12 +20,12 @@ from .views import (
 )
 
 urlpatterns = [
-    path('config/', stripe_config),
-    path('create-checkout-session/', create_checkout_session),
+    #path('config/', stripe_config),
+    #path('create-checkout-session/', create_checkout_session),
     
     path('marketplace/', HomePageView.as_view(), name='marketplace'),
-    path('success/', SuccessView.as_view()),
-    path('cancelled/', CancelledView.as_view()),
+    #path('success/', SuccessView.as_view()),
+    #path('cancelled/', CancelledView.as_view()),
 
     path('payment/', views.payment, name='payment'),
     path('process_payment/<str:client_secret>/', views.process_payment, name='process_payment'),
@@ -42,6 +42,6 @@ urlpatterns = [
 
     path('track/<int:referral_code>/', track_referral_code, name=''),
      
-    path('webhook/stripe/', views.stripe_webhook),
+    #path('webhook/stripe/', views.stripe_webhook),
 
 ]

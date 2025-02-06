@@ -101,7 +101,6 @@ def list_stripe_products():
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
-        domain_url = DOMAIN
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
         try:
@@ -113,7 +112,7 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
             # Select the first product and its price_id
-            selected_price_id = products[0]['price_id']
+            selected_price_id = products[0]['price_id'] # or 'price_1PP6aqLA6EOGRbboQRdBlx27'
 
             if not selected_price_id:
                 print("Nessun price_id trovato per il prodotto selezionato.")  # Log if no price_id
@@ -124,8 +123,8 @@ def create_checkout_session(request):
             # Creating the checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + '/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + '/cancel/',
+                success_url=DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=DOMAIN + '/cancel/',
                 payment_method_types=['card'],
                 mode='subscription',
                 line_items=[{
