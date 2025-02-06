@@ -58,7 +58,10 @@ def create_checkout_session(request):
                     }
                 ]
             )
-            return JsonResponse({'sessionId': checkout_session['id']})
+            return JsonResponse({'sessionId': checkout_session.id})
+        except stripe.error.StripeError as e:
+            # Gestisci errori specifici di Stripe
+            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
         except Exception as e:
             return JsonResponse({'error': str(e)})
 
