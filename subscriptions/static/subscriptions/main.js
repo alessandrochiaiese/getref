@@ -1,4 +1,4 @@
-/*console.log("Sanity check!");
+console.log("Sanity check!");
 
 // Get Stripe publishable key
 fetch(`${window.location.origin}/config/`)
@@ -25,9 +25,8 @@ fetch(`${window.location.origin}/config/`)
     });
   }
 });
-*/
 
-
+/*
 console.log("Sanity check!");
 
 // Get Stripe publishable key
@@ -68,3 +67,4 @@ fetch(`${window.location.origin}/config/`)
     });
   }
 });
+*/
