@@ -97,7 +97,6 @@ def list_stripe_products():
         return {'error': str(e)}
 
 
-# Funzione principale per creare la sessione di checkout
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -112,7 +111,7 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
             # Select the first product and its price_id
-            selected_price_id = products[0]['price_id'] # or 'price_1PP6aqLA6EOGRbboQRdBlx27'
+            selected_price_id = products[0]['price_id']  # or 'price_1PP6aqLA6EOGRbboQRdBlx27'
 
             if not selected_price_id:
                 print("Nessun price_id trovato per il prodotto selezionato.")  # Log if no price_id
@@ -120,15 +119,15 @@ def create_checkout_session(request):
 
             print(f"Price ID selezionato: {selected_price_id}")  # Log selected price_id
 
-            # Creating the checkout session
+            # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}/',
+                success_url=DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',  # Corrected URL
                 cancel_url=DOMAIN + '/cancel/',
                 payment_method_types=['card'],
-                mode='subscription',
+                mode='subscription',  # Use 'payment' if it's a one-time payment
                 line_items=[{
-                    'price': selected_price_id,  # Use the dynamic price_id
+                    'price': selected_price_id,  # Use dynamic price_id
                     'quantity': 1,
                 }]
             )
