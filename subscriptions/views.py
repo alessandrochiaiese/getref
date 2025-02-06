@@ -125,7 +125,7 @@ def create_checkout_session(request):
                 success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN}/cancel/",
                 payment_method_types=['card'],
-                mode='subscription',  # Use 'payment' if it's a one-time payment
+                mode='payment', #'subscription',  # Use 'payment' if it's a one-time payment
                 line_items=[{
                     'price': selected_price_id,  # Use dynamic price_id
                     'quantity': 1,
