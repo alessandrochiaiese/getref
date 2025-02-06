@@ -61,6 +61,8 @@ urlpatterns = [
     # health
     path('health/', include('health_check.urls')),
     
+
+    # subscriptions
     path('config/', stripe_config),
     path('create-checkout-session/', create_checkout_session),
     path('webhook/', stripe_webhook),
