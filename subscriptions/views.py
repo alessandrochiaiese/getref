@@ -96,9 +96,9 @@ def list_stripe_products():
         print(f"Errore generico: {str(e)}")  # Log di errore generico
         return {'error': str(e)}
 
-from asgiref.sync import sync_to_async
+
 @csrf_exempt
-async def create_checkout_session(request):
+def create_checkout_session(request):
     if request.method == 'GET':
         stripe.api_key = settings.STRIPE_SECRET_KEY
         
@@ -120,7 +120,7 @@ async def create_checkout_session(request):
             print(f"Price ID selezionato: {selected_price_id}")  # Log selected price_id
 
             # Create checkout session
-            checkout_session = await sync_to_async(stripe.checkout.Session.create)(
+            checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
                 success_url=DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',  # Corrected URL
                 cancel_url=DOMAIN + '/cancel/',
