@@ -15,6 +15,6 @@ class ProductTag(models.Model):
 
     class Meta:
         ordering = ("-created_at",)
-        db_table = 'product_tags'
-        verbose_name = 'ProductTag'
-        verbose_name_plural = 'ProductTags'
+        db_table = 'custom_product_tags'
+        verbose_name = 'CustomProductTag'
+        verbose_name_plural = 'CustomProductTags'
