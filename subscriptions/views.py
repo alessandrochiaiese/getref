@@ -84,6 +84,12 @@ def create_checkout_session(request):
             # Select the first product's price_id (this could be dynamic based on your needs)
             selected_price_id = products[0]['price_id']
 
+            if not selected_price_id:
+                return JsonResponse({'error': 'No price ID found for selected product.'}, status=404)
+
+            # Log the selected price ID to ensure it's being passed correctly
+            print(f"Selected price ID: {selected_price_id}")
+
             # Create a checkout session with the selected price_id
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
@@ -96,6 +102,11 @@ def create_checkout_session(request):
                     'quantity': 1,
                 }]
             )
+
+            print("checkout_session: ", checkout_session)
+            # Ensure checkout_session is created and has a session ID
+            if not checkout_session or 'id' not in checkout_session:
+                return JsonResponse({'error': 'Failed to create checkout session.'}, status=500)
 
             # Return the session ID in the response
             return JsonResponse({'sessionId': checkout_session.id})
