@@ -30,8 +30,11 @@ fetch(`${window.location.origin}/config/`)
 
 console.log("Sanity check!");
 
+// Get the user's current language
+const languageCode = document.documentElement.lang || 'en'; // Default to 'en' if no language is set
+
 // Get Stripe publishable key
-fetch(`${window.location.origin}/en/config/`)
+fetch(`${window.location.origin}/${languageCode}/config/`)
 .then((result) => { return result.json(); })
 .then((data) => {
   // Initialize Stripe.js
@@ -42,7 +45,7 @@ fetch(`${window.location.origin}/en/config/`)
   if (submitBtn !== null) {
     submitBtn.addEventListener("click", () => {
       // Get Checkout Session ID from the backend
-      fetch(`${window.location.origin}/en/create-checkout-session/`)
+      fetch(`${window.location.origin}/${languageCode}/create-checkout-session/`)
       .then((result) => result.json())
       .then((data) => {
         console.log(data);
