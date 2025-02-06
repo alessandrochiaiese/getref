@@ -11,3 +11,8 @@ class PaymentMethod(models.Model):
     
     def __str__(self):
         return f'{self.user.username} - {self.description}'
+
+    class Meta:
+        db_table = 'my_payment_methods'
+        verbose_name = 'MyPaymentMethod'
+        verbose_name_plural = 'MyPaymentMethods'
