@@ -24,6 +24,7 @@ from oauth2_provider import urls as oauth2_urls
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from subscriptions.views import create_checkout_session, stripe_config, stripe_webhook
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -60,6 +61,10 @@ urlpatterns = [
     # health
     path('health/', include('health_check.urls')),
     
+    path('config/', stripe_config),
+    path('create-checkout-session/', create_checkout_session),
+    path('webhook/', stripe_webhook),
+
     # swagger 
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
