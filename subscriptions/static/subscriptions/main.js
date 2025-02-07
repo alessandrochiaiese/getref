@@ -8,7 +8,7 @@ fetch(`${window.location.origin}/config/`)
     const stripe = Stripe(data.publicKey);
 
     // Event handler for subscribe button
-    const subscribeButtons = document.querySelectorAll('.subscribeBtn');
+    const subscribeButtons = document.querySelectorAll('.subscribe-btn');
     
     // Loop through all subscribe buttons and add event listeners
     subscribeButtons.forEach(function(button) {
