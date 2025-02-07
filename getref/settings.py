@@ -295,7 +295,7 @@ LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-DOMAIN = str(config('DOMAIN')) if DEBUG == False else '127.0.0.1:8000'
+DOMAIN = str(config('DOMAIN')) or 'https://affiliate.getcall.it' #if DEBUG == False else '127.0.0.1:8000'
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' \
     if DEBUG == False else 'django.core.mail.backends.console.EmailBackend'
