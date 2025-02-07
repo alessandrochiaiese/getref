@@ -2,69 +2,44 @@ console.log("Sanity check!");
 
 // Get Stripe publishable key
 fetch(`${window.location.origin}/config/`)
-.then((result) => { return result.json(); })
-.then((data) => {
-  // Initialize Stripe.js
-  const stripe = Stripe(data.publicKey);
+  .then((result) => { return result.json(); })
+  .then((data) => {
+    // Initialize Stripe.js with the public key
+    const stripe = Stripe(data.publicKey);
 
-  // Event handler
-  let submitBtn = document.querySelector("#submitBtn");
-  if (submitBtn !== null) {
-    submitBtn.addEventListener("click", () => {
-    // Get Checkout Session ID
-    fetch(`${window.location.origin}/create-checkout-session/`)
-      .then((result) => { return result.json(); })
-      .then((data) => {
-        console.log(data);
-        // Redirect to Stripe Checkout
-        return stripe.redirectToCheckout({sessionId: data.sessionId})
-      })
-      .then((res) => {
-        console.log(res);
-      });
-    });
-  }
-});
+    // Event handler for subscribe button
+    const subscribeButtons = document.querySelectorAll('.subscribeBtn');
+    
+    // Loop through all subscribe buttons and add event listeners
+    subscribeButtons.forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default button action
 
-/*
-console.log("Sanity check!");
-
-// Get Stripe publishable key
-fetch(`${window.location.origin}/config/`)
-.then((result) => { return result.json(); })
-.then((data) => {
-  // Initialize Stripe.js
-  const stripe = Stripe(data.publicKey);
-
-  // Event handler for the button click
-  let submitBtn = document.querySelector("#submitBtn");
-  if (submitBtn !== null) {
-    submitBtn.addEventListener("click", () => {
-      // Get Checkout Session ID from the backend
-      fetch(`${window.location.origin}/create-checkout-session/`)
-      .then((result) => result.json())
-      .then((data) => {
-        console.log(data);
-
-        // Verifica che il sessionId sia presente nella risposta
-        if (data.sessionId) {
-          // Reindirizza all'Checkout di Stripe usando sessionId
-          stripe.redirectToCheckout({ sessionId: data.sessionId })
-            .then((res) => {
-              if (res.error) {
-                console.error("Error during redirect: ", res.error.message);
+        const priceId = button.getAttribute('data-price-id'); // Get the price ID for this product
+        
+        if (priceId) {
+          // Create a checkout session
+          fetch(`${window.location.origin}/create-checkout-session/?priceId=${priceId}`)
+            .then((result) => result.json())
+            .then((data) => {
+              console.log(data); // Log response data for debugging
+              if (data.sessionId) {
+                // Redirect to Stripe Checkout with the session ID
+                return stripe.redirectToCheckout({ sessionId: data.sessionId });
               } else {
-                console.log("Successfully redirected to Checkout");
+                alert("Error: Failed to create checkout session.");
               }
+            })
+            .catch((error) => {
+              console.error("Error during checkout session creation:", error);
+              alert("An error occurred while creating the checkout session.");
             });
         } else {
-          console.error("Session ID non ricevuto dal backend");
+          alert("Error: No price ID found.");
         }
-      })
-      .catch((error) => {
-        console.error("Errore durante la creazione della sessione:", error);
       });
     });
-  }
-});
-*/
+  })
+  .catch((error) => {
+    console.error("Error fetching Stripe public key:", error);
+  });

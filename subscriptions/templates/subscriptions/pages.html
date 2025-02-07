@@ -1,0 +1,15 @@
+{% extends 'dashboard/layout.html' %}
+{% block title %}{% trans "Purchased Products" %}{% endblock %}
+
+<div class="container mt-5">
+  <h4>Purchased Products:</h4>
+  {% if subscriptions %}
+    <ul>
+      {% for subscription in subscriptions %}
+        <li>{{ subscription.product.name }} - Status: {{ subscription.status }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No products purchased yet.</p>
+  {% endif %}
+</div>

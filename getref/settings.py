@@ -295,44 +295,37 @@ LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_HOST = str((config('EMAIL_HOST', "")))
+DOMAIN = str(config('DOMAIN')) if DEBUG == False else '127.0.0.1:8000'
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' \
+    if DEBUG == False else 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = str((config('EMAIL_HOST', ""))) #'smtp.gmail.com'
+EMAIL_PORT = 587 #465 # if EMAIL_USE_SSL=True
 EMAIL_HOST_USER = str((config('EMAIL_HOST_USER', "")))
 EMAIL_HOST_PASSWORD = str((config('EMAIL_HOST_PASSWORD', "")))
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
+EMAIL_USE_TLS = True #465
+EMAIL_USE_SSL = False #587
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+# Security settings 
+SESSION_COOKIE_SECURE = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = [
+    'affiliate.getcall.it', 
+    'www.affiliate.getcall.it' 
+    #'*', 
+    # #'getcall.pythonanywhere.com',
+]
+# Add automatically schema to every domains
+CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 
-if DEBUG == False:
-    DOMAIN = config('DOMAIN')
-    # Email settings
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = EMAIL_HOST #'smtp.gmail.com'
-    EMAIL_PORT = 587 #465 # if EMAIL_USE_SSL=True
-    EMAIL_HOST_USER = EMAIL_HOST_USER
-    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
-    EMAIL_USE_TLS = True #465
-    EMAIL_USE_SSL = False #587
-    # Session settings
-    SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-    SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
-    # Security settings 
-    SESSION_COOKIE_SECURE = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    CSRF_COOKIE_SECURE = True
-    CSRF_TRUSTED_ORIGINS = [
-        'affiliate.getcall.it', 
-        'www.affiliate.getcall.it' 
-        #'*', 
-        # #'getcall.pythonanywhere.com',
-    ]
-    # Add automatically schema to every domains
-    CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
-else:
-    DOMAIN = '127.0.0.1:8000'
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-"""
 import logging
 LOGS_PATH= os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOGS_PATH, exist_ok=True)
@@ -364,7 +357,7 @@ LOGGING = {
     },
 }
 
-"""
+
 # OAuth2 Provider
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000, 

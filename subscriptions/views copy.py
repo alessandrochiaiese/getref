@@ -8,10 +8,38 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from subscriptions.models import StripeCustomer  # new
- 
+
+"""
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'GET':
+        domain_url = DOMAIN
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                client_reference_id=request.user.id if request.user.is_authenticated else None,
+                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'cancel/',
+                payment_method_types=['card'],
+                mode='subscription',
+                line_items=[
+                    {
+                        'price': settings.STRIPE_PRICE_ID,
+                        'quantity': 1,
+                    }
+                ]
+            )
+            return JsonResponse({'sessionId': checkout_session.id})
+        except stripe.error.StripeError as e:
+            # Gestisci errori specifici di Stripe
+            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+"""
 
 @login_required
-def plans(request):
+def home(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
@@ -23,21 +51,13 @@ def plans(request):
         # https://stripe.com/docs/api/subscriptions/object
         # https://stripe.com/docs/api/products/object
 
-        # Retrieve all available products
-        products = list_stripe_products()
-
-        return render(request, 'subscriptions/plans.html', {
+        return render(request, 'home.html', {
             'subscription': subscription,
             'product': product,
-            'products': products,  # Pass the list of products to the template
         })
 
     except StripeCustomer.DoesNotExist:
-        # If the user doesn't have an active subscription
-        products = list_stripe_products()
-        return render(request, 'subscriptions/plans.html', {
-            'products': products,
-        })
+        return render(request, 'subscriptions/home.html')
 
 
 @csrf_exempt
@@ -77,50 +97,62 @@ def list_stripe_products():
         print(f"Errore generico: {str(e)}")  # Log di errore generico
         return {'error': str(e)}
 
+
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        price_id = request.GET.get('priceId')
-
+        
         try:
-            if not price_id:
-                return JsonResponse({'error': 'No price ID found.'}, status=400)
+            print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
+            products = list_stripe_products()
 
+            if not products:
+                print("Nessun prodotto trovato in Stripe.")  # Log if no products found
+                return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
+
+            # Select the first product and its price_id
+            selected_price_id = 'price_1PP6aqLA6EOGRbboQRdBlx27' #products[0]['price_id']  # or 
+
+            if not selected_price_id:
+                print("Nessun price_id trovato per il prodotto selezionato.")  # Log if no price_id
+                return JsonResponse({'error': 'No price ID found for selected product.'}, status=404)
+
+            print(f"Price ID selezionato: {selected_price_id}")  # Log selected price_id
+
+            print(f"Success URL: {DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}'}")
+            print(f"Cancel URL: {DOMAIN + '/cancel/'}")
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
                 success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN}/cancel/",
                 payment_method_types=['card'],
-                mode='payment',
+                mode='payment', #'subscription',  # Use 'payment' if it's a one-time payment
                 line_items=[{
-                    'price': price_id,
+                    'price': selected_price_id,  # Use dynamic price_id
                     'quantity': 1,
                 }]
             )
+            print("Sessione di checkout:", checkout_session)  # Log the checkout session
 
+            if not checkout_session or 'id' not in checkout_session:
+                print("Errore: la sessione di checkout non è stata creata correttamente.")  # Log if session creation fails
+                return JsonResponse({'error': 'Failed to create checkout session.'}, status=500)
+
+            print(f"Sessione di checkout creata con successo. Session ID: {checkout_session.id}")  # Log success
+
+            # Return the sessionId as a response
             return JsonResponse({'sessionId': checkout_session.id})
 
         except stripe.error.StripeError as e:
+            print(f"Errore Stripe: {str(e)}")  # Log Stripe errors
             return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            print(f"Errore generale: {str(e)}")  # Log general errors
+            return JsonResponse({'error': str(e)})
 
-@login_required
-def purchased_products(request):
-    try:
-        stripe_customer = StripeCustomer.objects.get(user=request.user)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId)
 
-        return render(request, 'subscriptions/pages.html', {
-            'subscriptions': subscriptions,
-        })
-    except StripeCustomer.DoesNotExist:
-        return render(request, 'subscriptions/pages.html', {
-            'subscriptions': [],
-        })
 
 @login_required
 def success(request):
