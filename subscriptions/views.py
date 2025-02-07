@@ -1,22 +1,23 @@
-#DOMAIN='https://affiliate.getcall.it'
-from getref.settings import DOMAIN
+DOMAIN='https://affiliate.getcall.it'
+#from getref.settings import DOMAIN
 import stripe
 from getref import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User  # new
-from django.http.response import JsonResponse, HttpResponse  # updated
+from django.contrib.auth.models import User
+from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from subscriptions.models import StripeCustomer  # new
- 
+from subscriptions.models import StripeCustomer 
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required
 def test(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # load stipe secret key here
         subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
         product = stripe.Product.retrieve(subscription.plan.product)
 
@@ -38,7 +39,7 @@ def plans(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # load stipe secret key here
         subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
         product = stripe.Product.retrieve(subscription.plan.product)
 
@@ -103,7 +104,7 @@ def list_stripe_products():
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # load stipe secret key here
         price_id = request.GET.get('priceId')
 
         try:
@@ -134,7 +135,7 @@ def create_checkout_session(request):
 def purchased_products(request):
     try:
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # load stipe secret key here
         subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId)
 
         return render(request, 'subscriptions/pages.html', {
@@ -157,7 +158,7 @@ def cancel(request):
 
 @csrf_exempt
 def stripe_webhook(request):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+    # load stipe secret key here
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
