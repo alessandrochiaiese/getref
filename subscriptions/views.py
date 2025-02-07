@@ -1,5 +1,5 @@
-DOMAIN='https://affiliate.getcall.it'
-#from getref.settings import DOMAIN
+#DOMAIN='https://affiliate.getcall.it'
+from getref.settings import DOMAIN
 import stripe
 from getref import settings
 from django.contrib.auth.decorators import login_required
@@ -87,7 +87,7 @@ def list_stripe_products():
                     'product_name': product.name,
                     'product_id': product.id,
                     'price_id': price.id,
-                    'price_amount': price.unit_amount,
+                    'price_amount': str(round(price.unit_amount / 100, 2)),
                     'currency': price.currency,
                     'billing_scheme': price.billing_scheme
                 })
