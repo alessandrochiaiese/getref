@@ -111,7 +111,7 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
             # Select the first product and its price_id
-            selected_price_id = products[0]['price_id']  # or 'price_1PP6aqLA6EOGRbboQRdBlx27'
+            selected_price_id = 'price_1PP6aqLA6EOGRbboQRdBlx27' #products[0]['price_id']  # or 
 
             if not selected_price_id:
                 print("Nessun price_id trovato per il prodotto selezionato.")  # Log if no price_id
@@ -119,6 +119,8 @@ def create_checkout_session(request):
 
             print(f"Price ID selezionato: {selected_price_id}")  # Log selected price_id
 
+            print(f"Success URL: {DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}'}")
+            print(f"Cancel URL: {DOMAIN + '/cancel/'}")
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
@@ -131,8 +133,6 @@ def create_checkout_session(request):
                     'quantity': 1,
                 }]
             )
-            print(f"Success URL: {DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}'}")
-            print(f"Cancel URL: {DOMAIN + '/cancel/'}")
             print("Sessione di checkout:", checkout_session)  # Log the checkout session
 
             if not checkout_session or 'id' not in checkout_session:
