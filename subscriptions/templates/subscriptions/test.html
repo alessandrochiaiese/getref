@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
   integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 {% endblock %}
+
+{% block content %}
 <div class="container mt-5">
   {% if subscription.status == "active" %}
   <h4>Your subscription:</h4>
@@ -23,6 +25,7 @@
   {% endif %}
 </div>
 {% endblock %}
+
 {% block scripts %}
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
