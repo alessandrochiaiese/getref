@@ -1,4 +1,5 @@
-DOMAIN='https://affiliate.getcall.it'#from getref.settings import DOMAIN
+#DOMAIN='https://affiliate.getcall.it'
+from getref.settings import DOMAIN
 import stripe
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
