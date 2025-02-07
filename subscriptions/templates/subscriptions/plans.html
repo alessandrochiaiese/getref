@@ -12,37 +12,43 @@
 <div class="container mt-5">
   <!-- Active Subscription -->
   {% if subscription.status == "active" %}
-    <h4>Your active subscription:</h4>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">
-          {{ product.description }}
-        </p>
-      </div>
+  <h4>Your active subscription:</h4>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">
+        {{ product.description }}
+      </p>
     </div>
+  </div>
   {% else %}
-    <h4>No active subscription. Choose a plan to subscribe to:</h4>
+  <h4>No active subscription. Choose a plan to subscribe to:</h4>
   {% endif %}
+  
+  <hr>
 
   <!-- Display All Available Products -->
+  <h4>Test Response:</h4>
+  <code>
+    {{products}}
+  </code>
   <h4>Available Products:</h4>
   <div class="row">
     {% for product in products %}
-  <div class="col-md-4 mb-4">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.product_name }}</h5>
-        <p class="card-text">Price: {{ product.price_amount }} {{ product.currency|upper }}</p>
-        <p class="card-text">{{ product.billing_scheme|default:"Unknown billing scheme" }}</p>
-        <!-- Changed from id to class -->
-        <a href="#" class="btn btn-primary subscribe-btn" data-price-id="{{ product.price_id }}">
-          {% trans "Subscribe" %}
-        </a>
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.product_name }}</h5>
+          <p class="card-text">Price: {{ product.price_amount }} {{ product.currency|upper }}</p>
+          <p class="card-text">{{ product.billing_scheme|default:"Unknown billing scheme" }}</p>
+          <!-- Changed from id to class -->
+          <a href="#" class="btn btn-primary subscribe-btn" data-price-id="{{ product.price_id }}">
+            {% trans "Subscribe" %}
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-{% endfor %}
+    {% endfor %}
 
   </div>
 
