@@ -175,16 +175,13 @@ def cancel(request):
 
 @csrf_exempt
 def stripe_webhook(request):
-    # load stipe secret key here
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
 
     try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -195,41 +192,47 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-
-        # Fetch all the required data from session
+        
         client_reference_id = session.get('client_reference_id')
         stripe_customer_id = session.get('customer')
         stripe_subscription_id = session.get('subscription')
 
-        # Get the user and create a new StripeCustomer
-        user = User.objects.get(id=client_reference_id)
-        
-        # Recupera l'abbonamento associato alla sessione
-        subscription = stripe.Subscription.retrieve(stripe_subscription_id)
-        
-        # Associa il prodotto all'abbonamento
-        product_id = subscription.plan.product
-        product = stripe.Product.retrieve(product_id)
+        try:
+            # Log per il debug
+            print(f"Received session for user ID {client_reference_id}, customer ID {stripe_customer_id}, subscription ID {stripe_subscription_id}")
 
-        # Log per vedere se il prodotto è stato recuperato correttamente
-        print(f"Product retrieved: {product.name}, ID: {product.id}")
+            user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
-        stripe_customer = StripeCustomer.objects.create(
-            user=user,
-            stripeCustomerId=stripe_customer_id,
-            stripeSubscriptionId=stripe_subscription_id,
-        )
+            # Verifica se il customer esiste o lo crea
+            stripe_customer, created = StripeCustomer.objects.get_or_create(
+                user=user,
+                stripeCustomerId=stripe_customer_id,
+                stripeSubscriptionId=stripe_subscription_id,
+            )
 
+            if created:
+                print(f"StripeCustomer for user {user.username} created.")
+            else:
+                print(f"StripeCustomer for user {user.username} already exists.")
 
-        # Crea un nuovo record di Subscription
-        Subscription.objects.create(
-            stripe_customer=stripe_customer,
-            stripe_subscription_id=stripe_subscription_id,
-            product_name=product.name,
-            product_id=product.id,
-            status=subscription.status,
-        )
+            # Recupere la subscription
+            subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+            
+            # Log della subscription
+            print(f"Subscription details: {subscription}")
+            
+            # Salva la subscription (modifica come necessario)
+            Subscription.objects.create(
+                stripe_customer=stripe_customer,
+                stripe_subscription_id=stripe_subscription_id,
+                product_name=subscription.plan.product.name,
+                product_id=subscription.plan.product.id,
+                status=subscription.status,
+            )
+            print(f"Subscription saved for {user.username}.")
 
-        print(f"{user.username} just subscribed to {product.name}.")
+        except Exception as e:
+            print(f"Error while processing Stripe webhook: {str(e)}")
+            return HttpResponse(status=400)
 
     return HttpResponse(status=200)
