@@ -192,10 +192,15 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        
+        print(session)
         client_reference_id = session.get('client_reference_id')
         stripe_customer_id = session.get('customer')
         stripe_subscription_id = session.get('subscription')
+
+        # Verifica che i valori non siano nulli
+        if not stripe_customer_id or not stripe_subscription_id:
+            print(f"Error: Missing customer ID or subscription ID. session: {session}")
+            return HttpResponse(status=400)
 
         try:
             # Log per il debug
@@ -238,3 +243,13 @@ def stripe_webhook(request):
             return HttpResponse(status=400)
 
     return HttpResponse(status=200)
+
+    """
+    Current Errors:
+    Bad Request: /webhook/
+    Received session for user ID 1, customer ID None, subscription ID None
+    Error while processing Stripe webhook: null value in column "stripeCustomerId" of relation "stripe_customers"
+    DETAIL:  Failing row contains (25, null, null, 1).
+     "POST /webhook/ HTTP/1.0" 400 0 
+     
+    """
