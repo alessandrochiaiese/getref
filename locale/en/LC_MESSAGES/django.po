@@ -3208,7 +3208,7 @@ msgstr "Name"
 
 #: .\dashboard\templates\dashboard\index.html:158
 msgid "Cognome"
-msgstr "Surname"
+msgstr "Last Name"
 
 #: .\dashboard\templates\dashboard\index.html:160
 #: .\dashboard\templates\dashboard\referred_accounts\incomplete_registrations.html:24
