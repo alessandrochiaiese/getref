@@ -204,32 +204,34 @@ def stripe_webhook(request):
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
             # Verifica se il customer esiste o lo crea
-            stripe_customer, created = StripeCustomer.objects.get_or_create(
+            stripe_customer = StripeCustomer(
                 user=user,
                 stripeCustomerId=stripe_customer_id,
                 stripeSubscriptionId=stripe_subscription_id,
             )
+            stripe_customer.save()
 
-            if created:
+            if stripe_customer:
                 print(f"StripeCustomer for user {user.username} created.")
             else:
                 print(f"StripeCustomer for user {user.username} already exists.")
 
             # Recupere la subscription
-            subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+            stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
             
             # Log della subscription
             print(f"Subscription details: {subscription}")
             
             # Salva la subscription (modifica come necessario)
-            Subscription.objects.create(
+            subscription = Subscription(
                 stripe_customer=stripe_customer,
                 stripe_subscription_id=stripe_subscription_id,
-                product_name=subscription.plan.product.name,
-                product_id=subscription.plan.product.id,
-                status=subscription.status,
+                product_name=stripe_subscription.plan.product.name,
+                product_id=stripe_subscription.plan.product.id,
+                status=stripe_subscription.status,
             )
             print(f"Subscription saved for {user.username}.")
+            subscription.save()
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")
