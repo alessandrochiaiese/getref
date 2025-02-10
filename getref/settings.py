@@ -33,7 +33,7 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(config("DEBUG"))
+DEBUG = bool(config("DEBUG", default=False))
 
 # social auth configs for github
 SOCIAL_AUTH_GITHUB_KEY = str(config('GITHUB_KEY', ""))
