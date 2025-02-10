@@ -111,6 +111,14 @@ def create_checkout_session(request):
             if not price_id:
                 return JsonResponse({'error': 'No price ID found.'}, status=400)
 
+            # Retrieve the Stripe customer ID (from your user model or Stripe data)
+            stripe_customer_id = request.user.stripecustomer.stripeCustomerId if request.user.is_authenticated else None
+
+            # Optionally, retrieve the subscription ID if you have it available
+            stripe_subscription_id = None  # Retrieve from your logic if needed
+
+            print(f"Creating session with customer_id={stripe_customer_id} and subscription_id={stripe_subscription_id}")
+
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
@@ -121,7 +129,11 @@ def create_checkout_session(request):
                 line_items=[{
                     'price': price_id,
                     'quantity': 1,
-                }]
+                }],
+                metadata={
+                    'stripe_customer_id': stripe_customer_id,
+                    'stripe_subscription_id': stripe_subscription_id,
+                }
             )
 
             return JsonResponse({'sessionId': checkout_session.id})
@@ -193,11 +205,15 @@ def stripe_webhook(request):
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         print(session)
-        client_reference_id = session.get('client_reference_id')
-        stripe_customer_id = session.get('customer')
-        stripe_subscription_id = session.get('subscription')
+        # Retrieve metadata
+        metadata = session.get('metadata', {})
+        client_reference_id = metadata.get('client_reference_id')
+        stripe_customer_id = metadata.get('stripe_customer_id')
+        stripe_subscription_id = metadata.get('stripe_subscription_id')
 
-        # Verifica che i valori non siano nulli
+        print(f"Received metadata: customer_id={stripe_customer_id}, subscription_id={stripe_subscription_id}")
+
+        # Log for debugging
         if not stripe_customer_id or not stripe_subscription_id:
             print(f"Error: Missing customer ID or subscription ID. session: {session}")
             return HttpResponse(status=400)
@@ -209,14 +225,14 @@ def stripe_webhook(request):
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
             # Verifica se il customer esiste o lo crea
-            stripe_customer = StripeCustomer(
+            stripe_customer, created = StripeCustomer.objects.get_or_create(
                 user=user,
                 stripeCustomerId=stripe_customer_id,
                 stripeSubscriptionId=stripe_subscription_id,
             )
             stripe_customer.save()
 
-            if stripe_customer:
+            if created:
                 print(f"StripeCustomer for user {user.username} created.")
             else:
                 print(f"StripeCustomer for user {user.username} already exists.")
