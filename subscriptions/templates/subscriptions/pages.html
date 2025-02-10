@@ -12,6 +12,7 @@
 {% block content %}
 <div class="container mt-5">
   <h4>Purchased Products:</h4>
+  <code> {{ subscriptions }} </code>
   {% if subscriptions %}
     <ul>
       {% for subscription in subscriptions %}
