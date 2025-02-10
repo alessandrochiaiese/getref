@@ -8,7 +8,7 @@ from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from subscriptions.models import StripeCustomer 
+from subscriptions.models import StripeCustomer, Subscription 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -135,16 +135,25 @@ def create_checkout_session(request):
 def purchased_products(request):
     try:
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        # load stipe secret key here
-        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId)
+        subscriptions = stripe_customer.subscriptions.all()  # Recupera tutti gli abbonamenti dell'utente
+
+        purchased_products = []
+        for subscription in subscriptions:
+            purchased_products.append({
+                'product_name': subscription.product_name,
+                'product_id': subscription.product_id,
+                'status': subscription.status,
+                'subscription_date': subscription.subscription_date,
+            })
 
         return render(request, 'subscriptions/pages.html', {
-            'subscriptions': subscriptions,
+            'purchased_products': purchased_products,
         })
     except StripeCustomer.DoesNotExist:
         return render(request, 'subscriptions/pages.html', {
-            'subscriptions': [],
+            'purchased_products': [],
         })
+
 
 @login_required
 def success(request):
@@ -186,11 +195,29 @@ def stripe_webhook(request):
 
         # Get the user and create a new StripeCustomer
         user = User.objects.get(id=client_reference_id)
-        StripeCustomer.objects.create(
+        
+        # Recupera l'abbonamento associato alla sessione
+        subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+        
+        stripe_customer = StripeCustomer.objects.create(
             user=user,
             stripeCustomerId=stripe_customer_id,
             stripeSubscriptionId=stripe_subscription_id,
         )
-        print(user.username + ' just subscribed.')
+
+        # Associa il prodotto all'abbonamento
+        product_id = subscription.plan.product
+        product = stripe.Product.retrieve(product_id)
+
+        # Crea un nuovo record di Subscription
+        Subscription.objects.create(
+            stripe_customer=stripe_customer,
+            stripe_subscription_id=stripe_subscription_id,
+            product_name=product.name,
+            product_id=product.id,
+            status=subscription.status,
+        )
+
+        print(f"{user.username} just subscribed to {product.name}.")
 
     return HttpResponse(status=200)

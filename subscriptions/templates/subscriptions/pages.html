@@ -11,17 +11,18 @@
 {% block content %}
 <div class="container mt-5">
   <h4>Purchased Products:</h4>
-  {% if subscriptions %}
+  {% if purchased_products %}
     <ul>
-      {% for subscription in subscriptions %}
-        <li>{{ subscription.product.name }} - Status: {{ subscription.status }}</li>
+      {% for product in purchased_products %}
+        <li>
+          {{ product.product_name }} - Status: {{ product.status }} - Subscribed on: {{ product.subscription_date|date:"Y-m-d H:i" }}
+        </li>
       {% endfor %}
     </ul>
   {% else %}
     <p>No products purchased yet.</p>
   {% endif %}
 </div>
-
 {% endblock %}
 
 {% block scripts %}
