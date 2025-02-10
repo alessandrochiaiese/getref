@@ -196,7 +196,7 @@
           <div class="col-md-12">
             <form action="{% url 'set_language' %}" method="post">
               {% csrf_token %}
-              <div class="form-group border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">
+              <div class="form-group border-top-0 mb-3 pl-3 pt-0 pr-3 border-bottom-0 pb-0">
                 <label class="small" for="languages">{% trans "Languages" %}</label>
                 <select class="form-control" name="language" id="languages">
                   <option value="en">{% trans "English" %}</option>
