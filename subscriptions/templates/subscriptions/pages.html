@@ -8,14 +8,17 @@
   integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 {% endblock %}
 
+
 {% block content %}
 <div class="container mt-5">
   <h4>Purchased Products:</h4>
-  {% if purchased_products %}
+  {% if subscriptions %}
     <ul>
-      {% for product in purchased_products %}
+      {% for subscription in subscriptions %}
         <li>
-          {{ product.product_name }} - Status: {{ product.status }} - Subscribed on: {{ product.subscription_date|date:"Y-m-d H:i" }}
+          Product: {{ subscription.product_name }} <br>
+          Status: {{ subscription.status }} <br>
+          Subscribed on: {{ subscription.subscription_date|date:"Y-m-d H:i" }}
         </li>
       {% endfor %}
     </ul>

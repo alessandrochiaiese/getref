@@ -135,9 +135,9 @@ def create_checkout_session(request):
 def purchased_products(request):
     try:
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        subscriptions = stripe_customer.subscriptions.all()  # Recupera tutti gli abbonamenti dell'utente
+        #subscriptions = stripe_customer.subscriptions.all()  # Recupera tutti gli abbonamenti dell'utente
 
-        purchased_products = []
+        """purchased_products = []
         for subscription in subscriptions:
             purchased_products.append({
                 'product_name': subscription.product_name,
@@ -148,10 +148,18 @@ def purchased_products(request):
 
         return render(request, 'subscriptions/pages.html', {
             'purchased_products': purchased_products,
+        })"""
+
+        # Recupera tutte le sottoscrizioni per questo cliente
+        subscriptions = Subscription.objects.filter(stripe_customer=stripe_customer)
+
+        # Passa i dati al template
+        return render(request, 'subscriptions/pages.html', {
+            'subscriptions': subscriptions,  # Passa le sottoscrizioni al template
         })
     except StripeCustomer.DoesNotExist:
         return render(request, 'subscriptions/pages.html', {
-            'purchased_products': [],
+            'subscriptions': [],
         })
 
 
@@ -199,15 +207,19 @@ def stripe_webhook(request):
         # Recupera l'abbonamento associato alla sessione
         subscription = stripe.Subscription.retrieve(stripe_subscription_id)
         
+        # Associa il prodotto all'abbonamento
+        product_id = subscription.plan.product
+        product = stripe.Product.retrieve(product_id)
+
+        # Log per vedere se il prodotto è stato recuperato correttamente
+        print(f"Product retrieved: {product.name}, ID: {product.id}")
+
         stripe_customer = StripeCustomer.objects.create(
             user=user,
             stripeCustomerId=stripe_customer_id,
             stripeSubscriptionId=stripe_subscription_id,
         )
 
-        # Associa il prodotto all'abbonamento
-        product_id = subscription.plan.product
-        product = stripe.Product.retrieve(product_id)
 
         # Crea un nuovo record di Subscription
         Subscription.objects.create(
