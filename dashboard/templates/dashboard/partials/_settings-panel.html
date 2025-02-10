@@ -198,11 +198,11 @@
               {% csrf_token %}
               <div class="form-group">
                 <label class="small mb-3 pl-3 pt-0" for="languages">{% trans "Languages" %}</label>
-                <select class="form-control mb-3 pl-3 pt-0" name="language" id="languages">
+                <select class="form-control mb-3 pl-3 pt-0 pb-0 pr-3" name="language" id="languages">
                   <option value="en">{% trans "English" %}</option>
                   <option value="it">{% trans "Italiano" %}</option>
                 </select>
-                <button class="btn btn-primary mb-3 pl-3 pt-0" type="submit">{% trans "Change Language" %}</button>
+                <button class="btn btn-primary mb-3 pl-3 pt-0 pb-0 pr-3" type="submit">{% trans "Change Language" %}</button>
               </div>
             </form>
           </div>
