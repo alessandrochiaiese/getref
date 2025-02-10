@@ -23,7 +23,8 @@ logger = logging.getLogger(__name__)
 #####################
 class ReferralRedirectView(View):
     def get(self, request, *args, **kwargs):
-        referral_code = kwargs.get('referral_code') #path('referral/<str:referral_code>/')
+        referral_code = kwargs.get('code')
+        #referral_code = kwargs.get('referral_code') #path('referral/<str:referral_code>/')
         #referral_code = request.GET.get('referral_code') #path('referral/')
 
         # Verifica che il codice referral esista
@@ -55,7 +56,8 @@ class RegisterView(View):
 
     def get(self, request, *args, **kwargs):
         # Verifica se c'è un referral code nei parametri GET
-        referral_code_used = self.request.GET.get('referral_code') # aggiunto
+        referral_code_used = self.request.GET.get('code')
+        #referral_code_used = self.request.GET.get('referral_code')
         #referral_code_used = kwargs.get('referral_code')  # Codice referral da URL # di prima
         form = self.form_class(initial=self.initial)
 
@@ -72,13 +74,15 @@ class RegisterView(View):
         response = render(request, self.template_name, {'form': form})
 
         if referral_code_used:
-            response.set_cookie('referral_code', referral_code_used, max_age=60*60*24*30)  # 30 giorni
+            response.set_cookie('code', referral_code_used, max_age=60*60*24*30)
+            #response.set_cookie('referral_code', referral_code_used, max_age=60*60*24*30)  # 30 giorni
 
         return response
     
     def post(self, request, *args, **kwargs):        
         # Estrai referral_code direttamente dai kwargs, dato che è passato come parte dell'URL
-        referral_code_used = self.request.POST.get('referral_code') or request.COOKIES.get('referral_code')
+        referral_code_used = self.request.POST.get('code') or request.COOKIES.get('code')
+        #referral_code_used = self.request.POST.get('referral_code') or request.COOKIES.get('referral_code')
         #referral_code_used = kwargs.get('referral_code', None)  # Codice referral passato nel percorso URL # di prima
         print('Referral code from URL:', referral_code_used)
 
@@ -159,7 +163,8 @@ class RegisterView(View):
                 status="active",
                 referred_user_count=0,
                 expiry_date=self.request.POST.get('expiry_date'),
-                unique_url=self.request.build_absolute_uri(f'?referral_code={code}'), # request.get_host() + '/referral-code/' + code + '/'#,
+                unique_url=self.request.build_absolute_uri(f'?code={code}'),
+                #unique_url=self.request.build_absolute_uri(f'?referral_code={code}'), # request.get_host() + '/referral-code/' + code + '/'#,
                 #campaign_source=campaign_source,  # Now we ensure it's not None
                 #campaign_medium=campaign_medium
             )
@@ -167,7 +172,8 @@ class RegisterView(View):
     
             #return redirect(to='core_login') # di prima
             response = redirect(to='core_login')
-            response.delete_cookie('referral_code')  # Una volta usato, rimuoviamo il cookie
+            response.delete_cookie('code') 
+            #response.delete_cookie('referral_code')  # Una volta usato, rimuoviamo il cookie
             return response
 
         return render(request, self.template_name, {'form': form})

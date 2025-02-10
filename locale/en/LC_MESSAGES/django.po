@@ -32,7 +32,8 @@ msgstr ""
 msgid "User"
 msgstr "Utente"
 
-#: .\affiliate\models\affiliate.py:13 .\affiliate\models\affiliate_program.py:6
+#: .\affiliate\models\affiliate.py:13
+#: .\affiliate\models\affiliate_program.py:6
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:32
 #: .\affiliate\templates\affiliate\affiliate_list.html:16
 #: .\dashboard\models\country.py:5 .\dashboard\models\municipality.py:8
@@ -248,7 +249,8 @@ msgstr "Località"
 #: .\affiliate\models\affiliate_campaign.py:5
 #: .\affiliate\models\affiliate_commission.py:6
 #: .\affiliate\models\affiliate_link.py:9
-#: .\affiliate\models\affiliate_tier.py:5 .\referral\models\referral_bonus.py:5
+#: .\affiliate\models\affiliate_tier.py:5
+#: .\referral\models\referral_bonus.py:5
 #: .\referral\models\referral_campaign.py:5
 #: .\referral\models\referral_code.py:9
 #: .\referral\models\referral_program_partecipation.py:6
@@ -416,7 +418,7 @@ msgstr "Descrizione"
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:37
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:87
 msgid "Tier"
-msgstr ""
+msgstr "Tier"
 
 #: .\affiliate\models\affiliate_incentive.py:20
 #: .\affiliate\models\affiliate_program_partecipation.py:5
@@ -534,7 +536,7 @@ msgstr "Stato Link"
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:33
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:83
 msgid "Landing Page"
-msgstr ""
+msgstr "Landing Page"
 
 #: .\affiliate\models\affiliate_link.py:17
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:39
@@ -689,7 +691,7 @@ msgstr "Guadagni Totali"
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:33
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:91
 msgid "Average Order Value"
-msgstr ""
+msgstr "Average Order Value"
 
 #: .\affiliate\models\affiliate_performance.py:18
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:33
@@ -697,7 +699,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:37
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:95
 msgid "Refund Rate"
-msgstr ""
+msgstr "Refund Rate"
 
 #: .\affiliate\models\affiliate_performance.py:19
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:37
@@ -705,7 +707,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:41
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:99
 msgid "Customer Lifetime Value"
-msgstr ""
+msgstr "Customer Lifetime Value"
 
 #: .\affiliate\models\affiliate_performance.py:20
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:41
@@ -713,7 +715,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:45
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:103
 msgid "Top Product"
-msgstr ""
+msgstr "Top Product"
 
 #: .\affiliate\models\affiliate_program.py:8
 #: .\affiliate\models\affiliate_tier.py:8
@@ -730,11 +732,11 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:36
 #: .\referral\templates\referral\referral_program_list.html:36
 msgid "Commission Rate"
-msgstr ""
+msgstr "Commission Rate"
 
 #: .\affiliate\models\affiliate_program.py:10
 msgid "Min Payout Threshould"
-msgstr ""
+msgstr "Min Payout Three Should"
 
 #: .\affiliate\models\affiliate_program.py:11
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:29
@@ -742,7 +744,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:29
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:87
 msgid "Min Payout Limit"
-msgstr ""
+msgstr "Min Payout Limit"
 
 #: .\affiliate\models\affiliate_program.py:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:37
@@ -753,13 +755,13 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:41
 #: .\referral\templates\referral\referral_program_list.html:41
 msgid "Is Active"
-msgstr ""
+msgstr "Is Active"
 
 #: .\affiliate\models\affiliate_program.py:14
 #: .\referral\templates\referral\referral_performance_list.html:42
 #: .\referral\templates\referral\referral_program_list.html:42
 msgid "Duration"
-msgstr ""
+msgstr "Duration"
 
 #: .\affiliate\models\affiliate_program.py:15
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:41
@@ -769,7 +771,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:43
 #: .\referral\templates\referral\referral_program_list.html:43
 msgid "Allowed Countries"
-msgstr ""
+msgstr "Allowed Countries"
 
 #: .\affiliate\models\affiliate_program.py:16
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:45
@@ -780,11 +782,11 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:44
 #: .\referral\templates\referral\referral_program_list.html:44
 msgid "Target Industry"
-msgstr ""
+msgstr "Target Industry"
 
 #: .\affiliate\models\affiliate_program_partecipation.py:8
 msgid "Commission Earned"
-msgstr ""
+msgstr "Commission Earned"
 
 #: .\affiliate\models\affiliate_reward.py:10
 #: .\affiliate\templates\affiliate\affiliate_reward_list.html:34
@@ -795,7 +797,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:47
 msgid "Created At"
-msgstr ""
+msgstr "Created At"
 
 #: .\affiliate\models\affiliate_settings.py:6
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:33
@@ -805,7 +807,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:55
 #: .\referral\templates\referral\referral_setting_list.html:35
 msgid "Preferred Currency"
-msgstr ""
+msgstr "Preferred Currency"
 
 #: .\affiliate\models\affiliate_settings.py:7
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:34
@@ -815,7 +817,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:59
 #: .\referral\templates\referral\referral_setting_list.html:36
 msgid "Preferred Payment Method"
-msgstr ""
+msgstr "Preferred Payment Method"
 
 #: .\affiliate\models\affiliate_settings.py:8
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:35
@@ -825,7 +827,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:63
 #: .\referral\templates\referral\referral_setting_list.html:37
 msgid "Payout Schedule"
-msgstr ""
+msgstr "Scheduled Payout"
 
 #: .\affiliate\models\affiliate_settings.py:9
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:36
@@ -836,7 +838,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:67
 #: .\referral\templates\referral\referral_setting_list.html:38
 msgid "Notification Preference"
-msgstr ""
+msgstr "Notification Preference"
 
 #: .\affiliate\models\affiliate_settings.py:10
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:37
@@ -846,7 +848,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:71
 #: .\referral\templates\referral\referral_setting_list.html:39
 msgid "Dashboard Layout"
-msgstr ""
+msgstr "Dashboard Layout"
 
 #: .\affiliate\models\affiliate_support_ticket.py:6
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_list.html:33
@@ -855,7 +857,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:67
 msgid "Ticket Number"
-msgstr ""
+msgstr "Ticket Number"
 
 #: .\affiliate\models\affiliate_support_ticket.py:7
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_list.html:34
@@ -864,7 +866,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:71
 msgid "Subject"
-msgstr ""
+msgstr "Subject"
 
 #: .\affiliate\models\affiliate_support_ticket.py:11
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_list.html:38
@@ -873,7 +875,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:33
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:87
 msgid "Date Closed"
-msgstr ""
+msgstr "Closed Dates"
 
 #: .\affiliate\models\affiliate_support_ticket.py:13
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_list.html:40
@@ -882,7 +884,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:41
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:95
 msgid "Assigned Agent"
-msgstr ""
+msgstr "Assigned Agent"
 
 #: .\affiliate\models\affiliate_tier.py:6
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:33
@@ -891,7 +893,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:63
 msgid "Tier Name"
-msgstr ""
+msgstr "Tier"
 
 #: .\affiliate\models\affiliate_tier.py:7
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:34
@@ -900,7 +902,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:67
 msgid "Min Sales"
-msgstr ""
+msgstr "Min Sales"
 
 #: .\affiliate\models\affiliate_tier.py:9
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_tier.html:25
@@ -908,7 +910,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:25
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:75
 msgid "Tier Benefits"
-msgstr ""
+msgstr "Tier Benefits"
 
 #: .\affiliate\models\affiliate_tier.py:10
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:36
@@ -917,7 +919,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:29
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:79
 msgid "Access Level"
-msgstr ""
+msgstr "Access Level"
 
 #: .\affiliate\models\affiliate_tier.py:11
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:37
@@ -926,7 +928,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:33
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:83
 msgid "Next Tier Threshold"
-msgstr ""
+msgstr "Next Tier Threshold"
 
 #: .\affiliate\models\affiliate_tier.py:12
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:38
@@ -935,13 +937,13 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:37
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:87
 msgid "Tier Expiration"
-msgstr ""
+msgstr "Tier Exploration"
 
 #: .\affiliate\models\affiliate_transaction.py:10
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:32
 #: .\referral\templates\referral\referral_transaction_list.html:35
 msgid "Transaction Amount"
-msgstr ""
+msgstr "Transactions Amount"
 
 #: .\affiliate\models\affiliate_transaction.py:11
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:33
@@ -950,16 +952,16 @@ msgstr ""
 #: .\referral\models\referral_transaction.py:12
 #: .\referral\templates\referral\referral_transaction_list.html:36
 msgid "Transaction Date"
-msgstr ""
+msgstr "Transactions Date"
 
 #: .\affiliate\models\affiliate_transaction.py:12
 #: .\referral\models\referral_transaction.py:13
 msgid "Order"
-msgstr ""
+msgstr "Order"
 
 #: .\affiliate\models\affiliate_transaction.py:13 .\payments\models\price.py:8
 msgid "Product"
-msgstr ""
+msgstr "Product"
 
 #: .\affiliate\models\affiliate_transaction.py:15
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:37
@@ -969,7 +971,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:91
 #: .\referral\templates\referral\referral_transaction_list.html:40
 msgid "Payment Date"
-msgstr ""
+msgstr "Payment Dates"
 
 #: .\affiliate\models\affiliate_transaction.py:17
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:39
@@ -977,7 +979,7 @@ msgstr ""
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:99
 #: .\referral\templates\referral\referral_transaction_list.html:42
 msgid "Discount Applied"
-msgstr ""
+msgstr "Discount Applied"
 
 #: .\affiliate\models\affiliate_transaction.py:18
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:40
@@ -987,11 +989,11 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:103
 #: .\referral\templates\referral\referral_transaction_list.html:43
 msgid "Coupon Code"
-msgstr ""
+msgstr "Coupon Code"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:9
 msgid "Affiliate Audit Detail"
-msgstr ""
+msgstr "Affiliate Audit Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:41
@@ -1027,32 +1029,32 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:41
 #: .\referral\templates\referral\referral_transaction_detail.html:41
 msgid "ID:"
-msgstr ""
+msgstr "ID:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:43
 #: .\referral\templates\referral\referral_audit_detail.html:42
 msgid "Action Taken:"
-msgstr ""
+msgstr "Action Taken:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:44
 #: .\referral\templates\referral\referral_audit_detail.html:43
 msgid "Action Date:"
-msgstr ""
+msgstr "Action Date:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:45
 #: .\referral\templates\referral\referral_audit_detail.html:44
 msgid "IP Address:"
-msgstr ""
+msgstr "IP Address:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:46
 #: .\referral\templates\referral\referral_audit_detail.html:45
 msgid "Device Info:"
-msgstr ""
+msgstr "Device Info:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_detail.html:47
 #: .\referral\templates\referral\referral_audit_detail.html:46
 msgid "Location:"
-msgstr ""
+msgstr "Location:"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_list.html:32
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:31
@@ -1084,7 +1086,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_list.html:34
 #: .\referral\templates\referral\referral_transaction_list.html:34
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: .\affiliate\templates\affiliate\affiliate_audit_list.html:38
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:38
@@ -1116,11 +1118,11 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_list.html:41
 #: .\referral\templates\referral\referral_transaction_list.html:44
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:9
 msgid "Affiliate Campaign Detail"
-msgstr ""
+msgstr "Affiliate Campaign Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_detail.html:31
@@ -1132,61 +1134,61 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:42
 #: .\referral\templates\referral\referral_transaction_detail.html:42
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:43
 #: .\referral\templates\referral\referral_campaign_detail.html:43
 #: .\referral\templates\referral\referral_conversion_detail.html:43
 msgid "Start Date:"
-msgstr ""
+msgstr "Start Date:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:44
 #: .\referral\templates\referral\referral_campaign_detail.html:44
 #: .\referral\templates\referral\referral_conversion_detail.html:44
 msgid "End Date:"
-msgstr ""
+msgstr "End Date:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:45
 #: .\referral\templates\referral\referral_campaign_detail.html:45
 #: .\referral\templates\referral\referral_conversion_detail.html:45
 msgid "Goal:"
-msgstr ""
+msgstr "Goal:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:46
 #: .\referral\templates\referral\referral_campaign_detail.html:46
 #: .\referral\templates\referral\referral_conversion_detail.html:46
 msgid "Budget:"
-msgstr ""
+msgstr "Budget:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_detail.html:47
 #: .\referral\templates\referral\referral_campaign_detail.html:47
 #: .\referral\templates\referral\referral_conversion_detail.html:47
 msgid "Spending To Date:"
-msgstr ""
+msgstr "Spending To Date:"
 
 #: .\affiliate\templates\affiliate\affiliate_campaign_list.html:13
 msgid "Campaign Affiliates"
-msgstr ""
+msgstr "Campaign Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:9
 msgid "Affiliate Commission Detail"
-msgstr ""
+msgstr "Affiliate Commission Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:32
 msgid "Amount:"
-msgstr ""
+msgstr "Amount:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:43
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:43
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:33
 msgid "Currency:"
-msgstr ""
+msgstr "Currency:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:44
 msgid "Date Awarded:"
-msgstr ""
+msgstr "Date Awarded:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_detail.html:34
@@ -1201,15 +1203,15 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:45
 #: .\referral\templates\referral\referral_transaction_detail.html:45
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:46
 msgid "Approved By:"
-msgstr ""
+msgstr "Approved By:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:47
 msgid "Commission Type:"
-msgstr ""
+msgstr "Commission Type:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:48
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:42
@@ -1217,19 +1219,19 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_detail.html:42
 #: .\referral\templates\referral\referral_program_detail.html:42
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_detail.html:49
 msgid "Tier:"
-msgstr ""
+msgstr "Tier:"
 
 #: .\affiliate\templates\affiliate\affiliate_commission_list.html:13
 msgid "Commission Affiliates"
-msgstr ""
+msgstr "Commission Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_detail.html:9
 msgid "Affiliate Detail"
-msgstr ""
+msgstr "Affiliate Details"
 
 #: .\affiliate\templates\affiliate\affiliate_detail.html:32
 #: .\affiliate\templates\affiliate\affiliate_transaction_detail.html:43
@@ -1239,7 +1241,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:43
 #: .\referral\templates\referral\referral_transaction_detail.html:43
 msgid "Email:"
-msgstr ""
+msgstr "Email:"
 
 #: .\affiliate\templates\affiliate\affiliate_detail.html:33
 #: .\affiliate\templates\affiliate\affiliate_transaction_detail.html:44
@@ -1248,7 +1250,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:44
 #: .\referral\templates\referral\referral_transaction_detail.html:44
 msgid "Country:"
-msgstr ""
+msgstr "Country:"
 
 #: .\affiliate\templates\affiliate\affiliate_detail.html:35
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:46
@@ -1260,423 +1262,423 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:46
 #: .\referral\templates\referral\referral_transaction_detail.html:46
 msgid "Total Earnings:"
-msgstr ""
+msgstr "Total Earnings:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:9
 msgid "Affiliate Incentive Detail"
-msgstr ""
+msgstr "Affiliate Incentive Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:42
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:43
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:43
 msgid "Click Count:"
-msgstr ""
+msgstr "Click Count:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:44
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:44
 msgid "Conversion Count:"
-msgstr ""
+msgstr "Conversion Count:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:46
 #: .\referral\templates\referral\referral_code_detail.html:44
 msgid "Date Created:"
-msgstr ""
+msgstr "Date Created:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:46
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:46
 msgid "Last Used:"
-msgstr ""
+msgstr "Last Used:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:47
 msgid "Incentive Status:"
-msgstr ""
+msgstr "Incentive Status:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:48
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:48
 msgid "Landing Page:"
-msgstr ""
+msgstr "Landing Page:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_detail.html:49
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:49
 msgid "Custom Tracking ID:"
-msgstr ""
+msgstr "Custom Tracking ID:"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:13
 msgid "Incentive Affiliates"
-msgstr ""
+msgstr "Incentive Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_incentive_list.html:37
 msgid "Incentive Status"
-msgstr ""
+msgstr "Incentive Status"
 
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:9
 msgid "Affiliate Link Detail"
-msgstr ""
+msgstr "Affiliate Link Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_link_detail.html:47
 msgid "Link Status:"
-msgstr ""
+msgstr "Link Status:"
 
 #: .\affiliate\templates\affiliate\affiliate_link_list.html:13
 msgid "Link Affiliates"
-msgstr ""
+msgstr "Link Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:9
 msgid "Affiliate Notification Detail"
-msgstr ""
+msgstr "Affiliate Notification Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:42
 #: .\referral\templates\referral\referral_notification_detail.html:42
 msgid "Message:"
-msgstr ""
+msgstr "Message:"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:43
 #: .\referral\templates\referral\referral_notification_detail.html:43
 msgid "Date Sent:"
-msgstr ""
+msgstr "Date Sent:"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:44
 #: .\referral\templates\referral\referral_notification_detail.html:44
 msgid "Is Read:"
-msgstr ""
+msgstr "Is Read:"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:48
 #: .\referral\templates\referral\referral_notification_detail.html:45
 msgid "Priority:"
-msgstr ""
+msgstr "Priority:"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_detail.html:46
 #: .\referral\templates\referral\referral_notification_detail.html:46
 msgid "Notification Type:"
-msgstr ""
+msgstr "Notification Type:"
 
 #: .\affiliate\templates\affiliate\affiliate_notification_list.html:13
 msgid "Notification Affiliates"
-msgstr ""
+msgstr "Notification Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:9
 msgid "Payout Affiliate Detail"
-msgstr ""
+msgstr "Payout Affiliate Details"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:44
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:34
 msgid "Payout Date:"
-msgstr ""
+msgstr "Payout Date:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:35
 msgid "Payout Method:"
-msgstr ""
+msgstr "Payout Method:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:46
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:36
 msgid "Payout Status:"
-msgstr ""
+msgstr "Payout Status:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:47
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:37
 msgid "Transaction Id:"
-msgstr ""
+msgstr "Transaction Id:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:48
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:38
 msgid "Processing Fee:"
-msgstr ""
+msgstr "Processing Fee:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:49
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:39
 msgid "Net Amount:"
-msgstr ""
+msgstr "Net Amount:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_detail.html:50
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:40
 msgid "Payout Provider:"
-msgstr ""
+msgstr "Payout Provider:"
 
 #: .\affiliate\templates\affiliate\affiliate_payout_list.html:13
 msgid "Payout Affiliates"
-msgstr ""
+msgstr "Payout Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:9
 msgid "Performance Affiliate Detail"
-msgstr ""
+msgstr "Performance Affiliate Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:42
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:33
 msgid "Period:"
-msgstr ""
+msgstr "Period:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:43
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:34
 msgid "Total Clicks:"
-msgstr ""
+msgstr "Total Clicks:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:44
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:35
 msgid "Total Conversions:"
-msgstr ""
+msgstr "Total Conversions:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:45
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:36
 msgid "Conversion Rate:"
-msgstr ""
+msgstr "Conversion Rate:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:47
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:38
 msgid "Average Order Value:"
-msgstr ""
+msgstr "Average Order Value:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:48
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:39
 msgid "Refund Rate:"
-msgstr ""
+msgstr "Refund Rate:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:49
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:40
 msgid "Customer Lifetime Value:"
-msgstr ""
+msgstr "Customer Lifetime Value:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_detail.html:50
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:41
 msgid "Top Product:"
-msgstr ""
+msgstr "Top Product:"
 
 #: .\affiliate\templates\affiliate\affiliate_performance_list.html:14
 msgid "Performance Affiliates"
-msgstr ""
+msgstr "Performance Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:9
 msgid "Affiliate Program Detail"
-msgstr ""
+msgstr "Affiliate Program Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:43
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:44
 #: .\referral\templates\referral\referral_performance_detail.html:43
 #: .\referral\templates\referral\referral_program_detail.html:43
 msgid "Commission Rate:"
-msgstr ""
+msgstr "Commission Rate:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:44
 #: .\referral\templates\referral\referral_performance_detail.html:44
 #: .\referral\templates\referral\referral_program_detail.html:44
 msgid "Min Payout Threshold:"
-msgstr ""
+msgstr "Min Payout Threshold:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:45
 #: .\referral\templates\referral\referral_performance_detail.html:45
 #: .\referral\templates\referral\referral_program_detail.html:45
 msgid "Max Payout Limit:"
-msgstr ""
+msgstr "Max Payout Limit:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:46
 #: .\referral\templates\referral\referral_performance_detail.html:46
 #: .\referral\templates\referral\referral_program_detail.html:46
 msgid "Sate Created:"
-msgstr ""
+msgstr "Sate Created:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:47
 #: .\referral\templates\referral\referral_performance_detail.html:47
 #: .\referral\templates\referral\referral_program_detail.html:47
 msgid "Is Active:"
-msgstr ""
+msgstr "Is Active:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:48
 #: .\referral\templates\referral\referral_performance_detail.html:48
 #: .\referral\templates\referral\referral_program_detail.html:48
 msgid "Duration:"
-msgstr ""
+msgstr "Duration:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:49
 #: .\referral\templates\referral\referral_performance_detail.html:49
 #: .\referral\templates\referral\referral_program_detail.html:49
 msgid "Allowed Countries:"
-msgstr ""
+msgstr "Allowed Countries:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_detail.html:50
 #: .\referral\templates\referral\referral_performance_detail.html:50
 #: .\referral\templates\referral\referral_program_detail.html:50
 msgid "Target Industry:"
-msgstr ""
+msgstr "Target Industry:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:14
 msgid "Program Affiliates"
-msgstr ""
+msgstr "Program Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:33
 msgid "description"
-msgstr ""
+msgstr "description"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:34
 msgid "commission_rate"
-msgstr ""
+msgstr "commit_rate"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:35
 msgid "currency"
-msgstr ""
+msgstr "currency"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:36
 msgid "min_payout_threshold"
-msgstr ""
+msgstr "min_payout_threshold"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:37
 msgid "max_payout_limit"
-msgstr ""
+msgstr "max_payout_limit"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:38
 #: .\referral\templates\referral\referral_code_list.html:37
 msgid "date_created"
-msgstr ""
+msgstr "date_created"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:39
 msgid "is_active"
-msgstr ""
+msgstr "is_active"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:40
 msgid "duration"
-msgstr ""
+msgstr "duration"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:41
 msgid "allowed_countries"
-msgstr ""
+msgstr "allowed_country"
 
 #: .\affiliate\templates\affiliate\affiliate_program_list.html:42
 msgid "target_industry"
-msgstr ""
+msgstr "target_industry"
 
 #: .\affiliate\templates\affiliate\affiliate_program_partecipation_detail.html:9
 msgid "Program Partecipation Affiliate Detail"
-msgstr ""
+msgstr "Program Participation Affiliate Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_program_partecipation_detail.html:37
 #: .\referral\templates\referral\referral_program_partecipation_detail.html:42
 msgid "Date Joined:"
-msgstr ""
+msgstr "Date Joined:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_partecipation_detail.html:38
 #: .\referral\templates\referral\referral_program_partecipation_detail.html:43
 msgid "Commission Earned:"
-msgstr ""
+msgstr "Commission Earned:"
 
 #: .\affiliate\templates\affiliate\affiliate_program_partecipation_list.html:34
 #: .\referral\templates\referral\referral_program_partecipation_list.html:36
 msgid "CommissioN Earned"
-msgstr ""
+msgstr "Commission Earned"
 
 #: .\affiliate\templates\affiliate\affiliate_reward_detail.html:9
 msgid "Affiliate Reward Detail"
-msgstr ""
+msgstr "Affiliate Reward Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_reward_detail.html:42
 msgid "amount:"
-msgstr ""
+msgstr "amount:"
 
 #: .\affiliate\templates\affiliate\affiliate_reward_detail.html:43
 msgid "created_at:"
-msgstr ""
+msgstr "created_at:"
 
 #: .\affiliate\templates\affiliate\affiliate_reward_list.html:14
 msgid "Reward Affiliates"
-msgstr ""
+msgstr "Reward Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:9
 msgid "Setting Affiliate Detail"
-msgstr ""
+msgstr "Setting Affiliate Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:42
 #: .\referral\templates\referral\referral_setting_detail.html:42
 msgid "Preferred Currency:"
-msgstr ""
+msgstr "Preferred Currency:"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:43
 #: .\referral\templates\referral\referral_setting_detail.html:43
 msgid "Preferred Payment Method:"
-msgstr ""
+msgstr "Preferred Payment Method:"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:44
 #: .\referral\templates\referral\referral_setting_detail.html:44
 msgid "payout Schedule:"
-msgstr ""
+msgstr "Payout Schedule:"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:45
 #: .\referral\templates\referral\referral_setting_detail.html:45
 msgid "Notification Preference:"
-msgstr ""
+msgstr "Notification Preference:"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_detail.html:46
 #: .\referral\templates\referral\referral_setting_detail.html:46
 msgid "Dashboard Layout:"
-msgstr ""
+msgstr "Dashboard Layout:"
 
 #: .\affiliate\templates\affiliate\affiliate_setting_list.html:14
 msgid "Setting Affiliates"
-msgstr ""
+msgstr "Setting Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:9
 msgid "Support Ticket Affiliate Detail"
-msgstr ""
+msgstr "Support Ticket Affiliates Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:42
 msgid "Ticket Number:"
-msgstr ""
+msgstr "Ticket Number:"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:43
 msgid "Subject:"
-msgstr ""
+msgstr "Subject:"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:47
 msgid "Date Closed:"
-msgstr ""
+msgstr "Date Closed:"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_detail.html:49
 msgid "Assigned Agent:"
-msgstr ""
+msgstr "Assigned Agent:"
 
 #: .\affiliate\templates\affiliate\affiliate_support_ticket_list.html:14
 msgid "Support Ticket Affiliates"
-msgstr ""
+msgstr "Support Ticket Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:9
 msgid "Affiliate Tier Detail"
-msgstr ""
+msgstr "Affiliate Tier Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:42
 msgid "Tier Name:"
-msgstr ""
+msgstr "Tier Name:"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:43
 msgid "Min Sales:"
-msgstr ""
+msgstr "Min Sales:"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:45
 msgid "Tier Benefits:"
-msgstr ""
+msgstr "Tier Benefits:"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:46
 msgid "Next Tier Threshold:"
-msgstr ""
+msgstr "Next Tier Threshold:"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_detail.html:47
 msgid "Tier Expiration:"
-msgstr ""
+msgstr "Tier Expiration:"
 
 #: .\affiliate\templates\affiliate\affiliate_tier_list.html:14
 msgid "Tier Affiliates"
-msgstr ""
+msgstr "Tier Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_transaction_detail.html:9
 msgid "Transaction Affiliate Detail"
-msgstr ""
+msgstr "Transaction Affiliate Detail"
 
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:13
 msgid "Transaction Affiliates"
-msgstr ""
+msgstr "Transactions Affiliates"
 
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:34
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:21
@@ -1685,7 +1687,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:79
 #: .\referral\templates\referral\referral_transaction_list.html:37
 msgid "Order ID"
-msgstr ""
+msgstr "Order ID"
 
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:35
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:25
@@ -1694,144 +1696,144 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:83
 #: .\referral\templates\referral\referral_transaction_list.html:38
 msgid "Product ID"
-msgstr ""
+msgstr "Product ID"
 
 #: .\affiliate\templates\affiliate\affiliate_transaction_list.html:38
 #: .\referral\templates\referral\referral_transaction_list.html:41
 msgid "Commission Rate "
-msgstr ""
+msgstr "Commission Rate"
 
 #: .\affiliate\templates\affiliate\base.html:9
 msgid "GetREF - Affiliate & Referral Dashboard"
-msgstr ""
+msgstr "GetREF - Affiliates & Referral Dashboard"
 
 #: .\affiliate\templates\affiliate\create_affiliate_audit.html:8
 #: .\referral\templates\referral\create_referral_audit.html:8
 msgid "Add New Audit"
-msgstr ""
+msgstr "Add New Audit"
 
 #: .\affiliate\templates\affiliate\create_affiliate_audit.html:12
 #: .\referral\templates\referral\create_referral_audit.html:12
 msgid "Add Audit"
-msgstr ""
+msgstr "Add Audit"
 
 #: .\affiliate\templates\affiliate\create_affiliate_audit.html:15
 #: .\affiliate\templates\affiliate\update_referral_audit.html:16
 #: .\referral\templates\referral\create_referral_audit.html:15
 #: .\referral\templates\referral\update_referral_audit.html:16
 msgid "Back to Audit List"
-msgstr ""
+msgstr "Back to Audit List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_campaign.html:8
 #: .\referral\templates\referral\create_referral_campaign.html:8
 msgid "Add New Campaign"
-msgstr ""
+msgstr "Add New Campaign"
 
 #: .\affiliate\templates\affiliate\create_affiliate_campaign.html:12
 #: .\referral\templates\referral\create_referral_campaign.html:12
 msgid "Add Campaign"
-msgstr ""
+msgstr "Add Campaign"
 
 #: .\affiliate\templates\affiliate\create_affiliate_campaign.html:15
 #: .\affiliate\templates\affiliate\update_referral_campaign.html:16
 #: .\referral\templates\referral\create_referral_campaign.html:15
 #: .\referral\templates\referral\update_referral_campaign.html:16
 msgid "Back to Campaign List"
-msgstr ""
+msgstr "Back to Campaign List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_notification.html:8
 #: .\referral\templates\referral\create_referral_notification.html:8
 msgid "Add New Transcription"
-msgstr ""
+msgstr "Add New Transcription"
 
 #: .\affiliate\templates\affiliate\create_affiliate_notification.html:12
 #: .\referral\templates\referral\create_referral_notification.html:12
 msgid "Add Transcription"
-msgstr ""
+msgstr "Add Transcription"
 
 #: .\affiliate\templates\affiliate\create_affiliate_notification.html:15
 #: .\referral\templates\referral\create_referral_notification.html:15
 #: .\referral\templates\referral\update_referral_reward.html:16
 msgid "Back to Transcription List"
-msgstr ""
+msgstr "Back to Transcription List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program.html:8
 #: .\referral\templates\referral\create_referral_program.html:8
 msgid "Add New Program"
-msgstr ""
+msgstr "Add New Program"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program.html:12
 #: .\referral\templates\referral\create_referral_program.html:12
 msgid "Add Program"
-msgstr ""
+msgstr "Add Program"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program.html:15
 #: .\affiliate\templates\affiliate\update_referral_program.html:16
 #: .\referral\templates\referral\create_referral_program.html:15
 #: .\referral\templates\referral\update_referral_program.html:16
 msgid "Back to Program List"
-msgstr ""
+msgstr "Back to Program List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program_partecipation.html:8
 #: .\referral\templates\referral\create_referral_program_partecipation.html:8
 msgid "Add New Program Partecipation"
-msgstr ""
+msgstr "Add New Program Participation"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program_partecipation.html:12
 #: .\referral\templates\referral\create_referral_program_partecipation.html:12
 msgid "Add Program Partecipation"
-msgstr ""
+msgstr "Add Program Participation"
 
 #: .\affiliate\templates\affiliate\create_affiliate_program_partecipation.html:15
 #: .\affiliate\templates\affiliate\update_referral_program_partecipation.html:16
 #: .\referral\templates\referral\create_referral_program_partecipation.html:15
 #: .\referral\templates\referral\update_referral_program_partecipation.html:16
 msgid "Back to Program Partecipation List"
-msgstr ""
+msgstr "Back to Program Participation List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_setting.html:8
 #: .\referral\templates\referral\create_referral_setting.html:8
 msgid "Add New Setting"
-msgstr ""
+msgstr "Add New Setting"
 
 #: .\affiliate\templates\affiliate\create_affiliate_setting.html:12
 #: .\referral\templates\referral\create_referral_setting.html:12
 msgid "Add Setting"
-msgstr ""
+msgstr "Add Setting"
 
 #: .\affiliate\templates\affiliate\create_affiliate_setting.html:15
 #: .\affiliate\templates\affiliate\update_referral_setting.html:16
 #: .\referral\templates\referral\create_referral_setting.html:15
 #: .\referral\templates\referral\update_referral_setting.html:16
 msgid "Back to Setting List"
-msgstr ""
+msgstr "Back to Setting List"
 
 #: .\affiliate\templates\affiliate\create_affiliate_transaction.html:8
 #: .\referral\templates\referral\create_referral_transaction.html:8
 msgid "Add New Transaction"
-msgstr ""
+msgstr "Add New Transaction"
 
 #: .\affiliate\templates\affiliate\create_affiliate_transaction.html:12
 #: .\referral\templates\referral\create_referral_transaction.html:12
 msgid "Add Transaction"
-msgstr ""
+msgstr "Add Transaction"
 
 #: .\affiliate\templates\affiliate\create_affiliate_transaction.html:15
 #: .\affiliate\templates\affiliate\update_referral_transaction.html:16
 #: .\referral\templates\referral\create_referral_transaction.html:15
 #: .\referral\templates\referral\update_referral_transaction.html:16
 msgid "Back to Transaction List"
-msgstr ""
+msgstr "Back to Transaction List"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_audit.html:9
 #: .\referral\templates\referral\delete_referral_audit.html:9
 msgid "Delete Audit"
-msgstr ""
+msgstr "Delete Audit"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_audit.html:10
 #: .\referral\templates\referral\delete_referral_audit.html:10
 msgid "Are you sure you want to delete this audit?"
-msgstr ""
+msgstr "Are you sure you want to delete this audit?"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_audit.html:13
 #: .\affiliate\templates\affiliate\delete_affiliate_campaign.html:13
@@ -1848,7 +1850,7 @@ msgstr ""
 #: .\referral\templates\referral\delete_referral_stat.html:13
 #: .\referral\templates\referral\delete_referral_transaction.html:13
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Confirm Delete"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_audit.html:14
 #: .\affiliate\templates\affiliate\delete_affiliate_campaign.html:14
@@ -1867,102 +1869,102 @@ msgstr ""
 #: .\referral\templates\referral\delete_referral_stat.html:14
 #: .\referral\templates\referral\delete_referral_transaction.html:14
 msgid "Cancel"
-msgstr ""
+msgstr "Delete"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_campaign.html:9
 #: .\referral\templates\referral\delete_referral_campaign.html:9
 msgid "Delete Campaign"
-msgstr ""
+msgstr "Delete Campaign"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_campaign.html:10
 #: .\referral\templates\referral\delete_referral_campaign.html:10
 msgid "Are you sure you want to delete this campaign?"
-msgstr ""
+msgstr "Are you sure you want to delete this campaign?"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_program.html:9
 #: .\referral\templates\referral\delete_referral_program.html:9
 msgid "Delete Program"
-msgstr ""
+msgstr "Delete Program"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_program.html:10
 #: .\referral\templates\referral\delete_referral_program.html:10
 msgid "Are you sure you want to delete this program?"
-msgstr ""
+msgstr "Are you sure you want to delete this program?"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_program_partecipation.html:9
 #: .\referral\templates\referral\delete_referral_program_partecipation.html:9
 msgid "Delete Program Partecipation"
-msgstr ""
+msgstr "Delete Program Participation"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_program_partecipation.html:10
 #: .\referral\templates\referral\delete_referral_program_partecipation.html:10
 msgid "Are you sure you want to delete this program_partecipation?"
-msgstr ""
+msgstr "Are you sure you want to delete this program_participation?"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_setting.html:9
 #: .\referral\templates\referral\delete_referral_setting.html:9
 msgid "Delete Setting"
-msgstr ""
+msgstr "Delete Setting"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_setting.html:10
 #: .\referral\templates\referral\delete_referral_setting.html:10
 msgid "Are you sure you want to delete this setting?"
-msgstr ""
+msgstr "Are you sure you want to delete this setting?"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_setting.html:13
 #: .\affiliate\templates\affiliate\delete_affiliate_transaction.html:13
 msgid "Confirm Delete Referral"
-msgstr ""
+msgstr "Confirm Delete Referral"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_transaction.html:9
 #: .\referral\templates\referral\delete_referral_transaction.html:9
 msgid "Delete Transcription"
-msgstr ""
+msgstr "Delete Transcription"
 
 #: .\affiliate\templates\affiliate\delete_affiliate_transaction.html:10
 #: .\referral\templates\referral\delete_referral_transaction.html:10
 msgid "Are you sure you want to delete this transaction?"
-msgstr ""
+msgstr "Are you sure you want to delete this transaction?"
 
 #: .\affiliate\templates\affiliate\footer.html:3
 msgid "GetREF Dashboard | All Rights Reserved"
-msgstr ""
+msgstr "GetREF Dashboard - All Rights Reserved"
 
 #: .\affiliate\templates\affiliate\index.html:9
 msgid "Affiliate Dashboard"
-msgstr ""
+msgstr "Affiliate Dashboard"
 
 #: .\affiliate\templates\affiliate\index.html:23
 msgid "Clicks"
-msgstr ""
+msgstr "Clicks"
 
 #: .\affiliate\templates\affiliate\index.html:31
 msgid "Conversions"
-msgstr ""
+msgstr "Conversions"
 
 #: .\affiliate\templates\affiliate\index.html:40
 msgid "Recent Transactions"
-msgstr ""
+msgstr "Recent Transactions"
 
 #: .\affiliate\templates\affiliate\index.html:44
 msgid "Transaction ID"
-msgstr ""
+msgstr "Transaction ID"
 
 #: .\affiliate\templates\affiliate\index.html:55
 msgid "Approved"
-msgstr ""
+msgstr "Approved"
 
 #: .\affiliate\templates\affiliate\index.html:61
 msgid "Pending"
-msgstr ""
+msgstr "Pending"
 
 #: .\affiliate\templates\affiliate\index.html:67
 msgid "Declined"
-msgstr ""
+msgstr "Declined"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_audit.html:7
 msgid "Create New Affiliate Audit"
-msgstr ""
+msgstr "Create New Affiliate Audit"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_audit.html:36
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_audit.html:80
@@ -2025,7 +2027,7 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:51
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:109
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_audit.html:38
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_campaign.html:41
@@ -2061,107 +2063,107 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:45
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:53
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_audit.html:49
 msgid "Edit Affiliate Audit"
-msgstr ""
+msgstr "Edit Affiliate Audit"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_campaign.html:7
 msgid "Create New Affiliate Campaign"
-msgstr ""
+msgstr "Create New Affiliate Campaign"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_campaign.html:52
 msgid "Edit Affiliate Campaign"
-msgstr ""
+msgstr "Edit Affiliate Campaign"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:7
 msgid "Create New Affiliate Commission"
-msgstr ""
+msgstr "Create New Affiliate Commission"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_commission.html:56
 msgid "Edit Affiliate Commission"
-msgstr ""
+msgstr "Edit Affiliate Commission"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:7
 msgid "Create New Affiliate Incentive"
-msgstr ""
+msgstr "Create New Affiliate Incentive"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:45
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:115
 msgid "Tracking Id"
-msgstr ""
+msgstr "Tracking Id"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_incentive.html:72
 msgid "Edit Affiliate Incentive"
-msgstr ""
+msgstr "Edit Incentive Affiliates"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:7
 msgid "Create New Affiliate Link"
-msgstr ""
+msgstr "Create New Affiliate Link"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:63
 msgid "url"
-msgstr ""
+msgstr "url"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:37
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:87
 msgid "Custom Tracking Id"
-msgstr ""
+msgstr "Custom Tracking Id"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_link.html:56
 msgid "Edit Affiliate Link"
-msgstr ""
+msgstr "Edit Affiliate Link"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:7
 msgid "Create New Affiliate Notification"
-msgstr ""
+msgstr "Create New Affiliate Notification"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:17
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:59
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:59
 msgid "DateSent"
-msgstr ""
+msgstr "DateSent"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:29
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:71
 msgid "NotificationType"
-msgstr ""
+msgstr "NotificationType"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_notification.html:48
 msgid "Edit Affiliate Notification"
-msgstr ""
+msgstr "Edit Affiliate Notification"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:7
 msgid "Create New Affiliate Payout"
-msgstr ""
+msgstr "Create New Affiliate Payout"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:37
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:87
 msgid "Transaction Id"
-msgstr ""
+msgstr "Transactions Id"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:41
 msgid "ProcessingFee"
-msgstr ""
+msgstr "ProcessingFee"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_payout.html:60
 msgid "Edit Affiliate Payout"
-msgstr ""
+msgstr "Edit Affiliate Payout"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:7
 msgid "Create New Affiliate Performance"
-msgstr ""
+msgstr "Create New Affiliate Performance"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_performance.html:60
 msgid "Edit Affiliate Performance"
-msgstr ""
+msgstr "Edit Affiliate Performance"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:7
 msgid "Create New Affiliate Program"
-msgstr ""
+msgstr "Create New Affiliate Program"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:25
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:83
@@ -2170,96 +2172,96 @@ msgstr ""
 #: .\referral\templates\referral\referral_performance_list.html:38
 #: .\referral\templates\referral\referral_program_list.html:38
 msgid "Min Payout Threshold"
-msgstr ""
+msgstr "Min Payout Threshold"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program.html:64
 msgid "Edit Affiliate Program"
-msgstr ""
+msgstr "Edit Affiliate Program"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program_partecipation.html:7
 msgid "Create New Affiliate Program Partecipation"
-msgstr ""
+msgstr "Create New Affiliate Program Participation"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program_partecipation.html:17
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program_partecipation.html:51
 #: .\referral\templates\referral\modals\modal_create_update_referral_program_partecipation.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_program_partecipation.html:51
 msgid "Conversion Earned"
-msgstr ""
+msgstr "Conversion Earned"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_program_partecipation.html:40
 msgid "Edit Affiliate Program Partecipation"
-msgstr ""
+msgstr "Edit Affiliate Program Participation"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_reward.html:7
 msgid "Create New Affiliate Reward"
-msgstr ""
+msgstr "Create New Affiliate Reward"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_reward.html:36
 msgid "Edit Affiliate Reward"
-msgstr ""
+msgstr "Edit Affiliate Reward"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_setting.html:7
 msgid "Create New Affiliate Setting"
-msgstr ""
+msgstr "Create New Affiliate Setting"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_setting.html:48
 msgid "Edit Affiliate Setting"
-msgstr ""
+msgstr "Edit Affiliate Setting"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_support_ticket.html:7
 msgid "Create New Affiliate Support Ticket"
-msgstr ""
+msgstr "Create New Affiliate Support Ticket"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_support_ticket.html:60
 msgid "Edit Affiliate Support Ticket"
-msgstr ""
+msgstr "Edit Affiliate Support Ticket"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_tier.html:7
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:7
 msgid "Create New Affiliate Tier"
-msgstr ""
+msgstr "Create New Affiliate Tier"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_tier.html:56
 #: .\referral\templates\referral\modals\modal_create_update_referral_tier.html:56
 msgid "Edit Affiliate Tier"
-msgstr ""
+msgstr "Edit Affiliate Tier"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:7
 msgid "Create New Affiliate Transaction"
-msgstr ""
+msgstr "Create New Affiliate Transactions"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:13
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:71
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:71
 msgid "Action Amount"
-msgstr ""
+msgstr "Action Amount"
 
 #: .\affiliate\templates\affiliate\modals\modal_create_update_affiliate_transaction.html:64
 msgid "Edit Affiliate Transaction"
-msgstr ""
+msgstr "Edit Affiliate Transactions"
 
 #: .\affiliate\templates\affiliate\navbar.html:3
 #: .\referral\templates\referral\navbar.html:3
 msgid "GetREF"
-msgstr ""
+msgstr "GETREF"
 
 #: .\affiliate\templates\affiliate\navbar.html:12
 #: .\dashboard\templates\core\base.html:54
 #: .\referral\templates\referral\navbar.html:12
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: .\affiliate\templates\affiliate\navbar.html:15
 #: .\referral\templates\referral\navbar.html:15
 msgid "Features"
-msgstr ""
+msgstr "Features"
 
 #: .\affiliate\templates\affiliate\navbar.html:18
 #: .\referral\templates\referral\navbar.html:18
 msgid "Pricing"
-msgstr ""
+msgstr "Pricing"
 
 #: .\affiliate\templates\affiliate\navbar.html:28
 #: .\affiliate\templates\affiliate\navbar.html:50
@@ -2270,7 +2272,7 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:9
 #: .\referral\templates\referral\sidebar.html:29
 msgid "Audit"
-msgstr ""
+msgstr "Audits"
 
 #: .\affiliate\templates\affiliate\navbar.html:29
 #: .\affiliate\templates\affiliate\navbar.html:52
@@ -2281,7 +2283,7 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:10
 #: .\referral\templates\referral\sidebar.html:31
 msgid "Campaign"
-msgstr ""
+msgstr "Campaign"
 
 #: .\affiliate\templates\affiliate\navbar.html:30
 #: .\affiliate\templates\affiliate\navbar.html:53
@@ -2290,7 +2292,7 @@ msgstr ""
 #: .\referral\templates\referral\navbar.html:53
 #: .\referral\templates\referral\sidebar.html:11
 msgid "Commission"
-msgstr ""
+msgstr "Commission"
 
 #: .\affiliate\templates\affiliate\navbar.html:31
 #: .\affiliate\templates\affiliate\navbar.html:54
@@ -2299,7 +2301,7 @@ msgstr ""
 #: .\referral\templates\referral\navbar.html:54
 #: .\referral\templates\referral\sidebar.html:12
 msgid "Incentive"
-msgstr ""
+msgstr "Incentives"
 
 #: .\affiliate\templates\affiliate\navbar.html:32
 #: .\affiliate\templates\affiliate\sidebar.html:17
@@ -2307,7 +2309,7 @@ msgstr ""
 #: .\referral\templates\referral\navbar.html:32
 #: .\referral\templates\referral\sidebar.html:13
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: .\affiliate\templates\affiliate\navbar.html:33
 #: .\affiliate\templates\affiliate\navbar.html:56
@@ -2318,14 +2320,14 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:14
 #: .\referral\templates\referral\sidebar.html:35
 msgid "Notification"
-msgstr ""
+msgstr "Notification"
 
 #: .\affiliate\templates\affiliate\navbar.html:35
 #: .\affiliate\templates\affiliate\sidebar.html:21
 #: .\referral\templates\referral\navbar.html:35
 #: .\referral\templates\referral\sidebar.html:15
 msgid "Payout"
-msgstr ""
+msgstr "Payout"
 
 #: .\affiliate\templates\affiliate\navbar.html:36
 #: .\affiliate\templates\affiliate\sidebar.html:23
@@ -2333,7 +2335,7 @@ msgstr ""
 #: .\referral\templates\referral\navbar.html:36
 #: .\referral\templates\referral\sidebar.html:16
 msgid "Performance"
-msgstr ""
+msgstr "Performance"
 
 #: .\affiliate\templates\affiliate\navbar.html:38
 #: .\affiliate\templates\affiliate\navbar.html:58
@@ -2344,7 +2346,7 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:19
 #: .\referral\templates\referral\sidebar.html:38
 msgid "Reward"
-msgstr ""
+msgstr "Reward"
 
 #: .\affiliate\templates\affiliate\navbar.html:39
 #: .\affiliate\templates\affiliate\navbar.html:59
@@ -2355,7 +2357,7 @@ msgstr ""
 #: .\referral\templates\referral\sidebar.html:20
 #: .\referral\templates\referral\sidebar.html:39
 msgid "Setting"
-msgstr ""
+msgstr "Setting"
 
 #: .\affiliate\templates\affiliate\navbar.html:40
 #: .\affiliate\templates\affiliate\navbar.html:61
@@ -2364,48 +2366,48 @@ msgstr ""
 #: .\referral\templates\referral\navbar.html:61
 #: .\referral\templates\referral\sidebar.html:21
 msgid "Support Ticket"
-msgstr ""
+msgstr "Support Ticket"
 
 #: .\affiliate\templates\affiliate\navbar.html:51
 #: .\affiliate\templates\affiliate\sidebar.html:44
 #: .\referral\templates\referral\navbar.html:51
 #: .\referral\templates\referral\sidebar.html:30
 msgid "Bonus"
-msgstr ""
+msgstr "Bonus"
 
 #: .\affiliate\templates\affiliate\navbar.html:55
 #: .\affiliate\templates\affiliate\sidebar.html:52
 #: .\referral\templates\referral\navbar.html:55
 #: .\referral\templates\referral\sidebar.html:34
 msgid "Engagement"
-msgstr ""
+msgstr "Engagement"
 
 #: .\affiliate\templates\affiliate\navbar.html:60
 #: .\affiliate\templates\affiliate\sidebar.html:64
 #: .\referral\templates\referral\navbar.html:60
 #: .\referral\templates\referral\sidebar.html:40
 msgid "Stat"
-msgstr ""
+msgstr "Stat"
 
 #: .\affiliate\templates\affiliate\referral_create.html:4
 msgid "Crea Nuovo Referral"
-msgstr ""
+msgstr "Create New Referral"
 
 #: .\affiliate\templates\affiliate\referral_create.html:8
 msgid "Invia Referral"
-msgstr ""
+msgstr "Send Referral"
 
 #: .\affiliate\templates\affiliate\sidebar.html:25
 #: .\affiliate\templates\affiliate\sidebar.html:56
 #: .\referral\templates\referral\sidebar.html:17
 #: .\referral\templates\referral\sidebar.html:36
 msgid "Program Partecipation"
-msgstr ""
+msgstr "Program Participation"
 
 #: .\affiliate\templates\affiliate\sidebar.html:39
 #: .\referral\templates\referral\sidebar.html:27
 msgid "Referral"
-msgstr ""
+msgstr "Referral"
 
 #: .\affiliate\templates\affiliate\sidebar.html:48
 #: .\referral\models\referral_code.py:10
@@ -2413,422 +2415,422 @@ msgstr ""
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:75
 #: .\referral\templates\referral\sidebar.html:32
 msgid "Code"
-msgstr ""
+msgstr "Codes"
 
 #: .\affiliate\templates\affiliate\sidebar.html:50
 #: .\referral\templates\referral\sidebar.html:33
 msgid "Conversion"
-msgstr ""
+msgstr "Conversion"
 
 #: .\affiliate\templates\affiliate\sidebar.html:72
 msgid "Community"
-msgstr ""
+msgstr "Community"
 
 #: .\affiliate\templates\affiliate\sidebar.html:77
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 #: .\affiliate\templates\affiliate\update_referral_audit.html:9
 #: .\referral\templates\referral\update_referral_audit.html:9
 msgid "Edit Audit"
-msgstr ""
+msgstr "Edit Audit"
 
 #: .\affiliate\templates\affiliate\update_referral_audit.html:13
 #: .\referral\templates\referral\update_referral_audit.html:13
 msgid "Update Audit"
-msgstr ""
+msgstr "Update Audit"
 
 #: .\affiliate\templates\affiliate\update_referral_campaign.html:9
 #: .\referral\templates\referral\update_referral_campaign.html:9
 msgid "Edit Campaign"
-msgstr ""
+msgstr "Edit Campaign"
 
 #: .\affiliate\templates\affiliate\update_referral_campaign.html:13
 #: .\referral\templates\referral\update_referral_campaign.html:13
 msgid "Update Campaign"
-msgstr ""
+msgstr "Update Campaign"
 
 #: .\affiliate\templates\affiliate\update_referral_program.html:9
 #: .\referral\templates\referral\update_referral_program.html:9
 msgid "Edit Program"
-msgstr ""
+msgstr "Edit Program"
 
 #: .\affiliate\templates\affiliate\update_referral_program.html:13
 #: .\referral\templates\referral\update_referral_program.html:13
 msgid "Update Program"
-msgstr ""
+msgstr "Update Program"
 
 #: .\affiliate\templates\affiliate\update_referral_program_partecipation.html:9
 #: .\referral\templates\referral\update_referral_program_partecipation.html:9
 msgid "Edit Program Partecipation"
-msgstr ""
+msgstr "Edit Program Participation"
 
 #: .\affiliate\templates\affiliate\update_referral_program_partecipation.html:13
 #: .\referral\templates\referral\update_referral_program_partecipation.html:13
 msgid "Update Program Partecipation"
-msgstr ""
+msgstr "Update Program Participation"
 
 #: .\affiliate\templates\affiliate\update_referral_setting.html:9
 #: .\referral\templates\referral\update_referral_setting.html:9
 msgid "Edit Setting"
-msgstr ""
+msgstr "Edit Setting"
 
 #: .\affiliate\templates\affiliate\update_referral_setting.html:13
 #: .\referral\templates\referral\update_referral_setting.html:13
 msgid "Update Setting"
-msgstr ""
+msgstr "Update Setting"
 
 #: .\affiliate\templates\affiliate\update_referral_transaction.html:9
 #: .\referral\templates\referral\update_referral_transaction.html:9
 msgid "Edit Transaction"
-msgstr ""
+msgstr "Edit Transaction"
 
 #: .\affiliate\templates\affiliate\update_referral_transaction.html:13
 #: .\referral\templates\referral\update_referral_transaction.html:13
 msgid "Update Transaction"
-msgstr ""
+msgstr "Update Transactions"
 
 #: .\dashboard\models\enterprise.py:53
 msgid "Number Job Request Desidered Per Week"
-msgstr ""
+msgstr "Number Job Request Desired Per Week"
 
 #: .\dashboard\models\enterprise.py:54
 msgid "Have Office Shop To Receive Customers"
-msgstr ""
+msgstr "Have Office Shop To Receive Customers"
 
 #: .\dashboard\models\enterprise.py:55
 msgid "Link Google Maps"
-msgstr ""
+msgstr "Google Maps link"
 
 #: .\dashboard\models\enterprise.py:56
 msgid "Conctac Number"
-msgstr ""
+msgstr "Contractac Number"
 
 #: .\dashboard\models\enterprise.py:61
 msgid "Chamber Commerce Certificate"
-msgstr ""
+msgstr "Chamber Commerce Certificate"
 
 #: .\dashboard\models\enterprise.py:68
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:53
 msgid "Insurance Policy Certificate"
-msgstr ""
+msgstr "Insurance Policy Certificate"
 
 #: .\dashboard\models\enterprise.py:75 .\dashboard\models\municipality.py:6
 #: .\dashboard\models\province.py:6
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:60
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #: .\dashboard\models\enterprise.py:81
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:75
 msgid "Sectors"
-msgstr ""
+msgstr "Sectors"
 
 #: .\dashboard\models\enterprise.py:83
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:89
 msgid "Holder"
-msgstr ""
+msgstr "Holder"
 
 #: .\dashboard\models\enterprise.py:84
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:95
 msgid "Company Name"
-msgstr ""
+msgstr "Company"
 
 #: .\dashboard\models\municipality.py:7
 msgid "Province"
-msgstr ""
+msgstr "Province"
 
 #: .\dashboard\models\municipality.py:9
 msgid "Is Capital Province"
-msgstr ""
+msgstr "Is Capital Province"
 
 #: .\dashboard\models\municipality.py:10
 msgid "Cadastral Code"
-msgstr ""
+msgstr "Cadastral Code"
 
 #: .\dashboard\models\municipality.py:11 .\dashboard\models\province.py:10
 #: .\dashboard\models\region.py:7
 msgid "Latitude"
-msgstr ""
+msgstr "Latitude"
 
 #: .\dashboard\models\municipality.py:12 .\dashboard\models\province.py:11
 #: .\dashboard\models\region.py:8
 msgid "Longitude"
-msgstr ""
+msgstr "Longitude"
 
 #: .\dashboard\models\profile.py:16
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #: .\dashboard\models\profile.py:17
 msgid "Bio"
-msgstr ""
+msgstr "Bio"
 
 #: .\dashboard\models\profile.py:20
 msgid "Birth Date"
-msgstr ""
+msgstr "Birth Date"
 
 #: .\dashboard\models\profile.py:21
 msgid "City"
-msgstr ""
+msgstr "City"
 
 #: .\dashboard\models\profile.py:22
 msgid "Street"
-msgstr ""
+msgstr "Street"
 
 #: .\dashboard\models\profile.py:23
 msgid "CAP"
-msgstr ""
+msgstr "CAP"
 
 #: .\dashboard\models\profile.py:24
 msgid "Phone Number"
-msgstr ""
+msgstr "Phone Number"
 
 #: .\dashboard\models\profile.py:28
 msgid "Is Business"
-msgstr ""
+msgstr "Is Business"
 
 #: .\dashboard\models\profile.py:29
 msgid "Is Buyer"
-msgstr ""
+msgstr "Is Buyer"
 
 #: .\dashboard\models\profile.py:32
 msgid "Name Business"
-msgstr ""
+msgstr "Business"
 
 #: .\dashboard\models\profile.py:33
 msgid "Is Owner"
-msgstr ""
+msgstr "Is Owner"
 
 #: .\dashboard\models\profile.py:34
 msgid "User Owner"
-msgstr ""
+msgstr "User Owner"
 
 #: .\dashboard\models\profile.py:35
 msgid "IVA"
-msgstr ""
+msgstr "VAT"
 
 #: .\dashboard\models\profile.py:36
 msgid "Office Number"
-msgstr ""
+msgstr "Office Number"
 
 #: .\dashboard\models\province.py:7
 msgid "Metropolitan City Code"
-msgstr ""
+msgstr "Metropolitan City Code"
 
 #: .\dashboard\models\province.py:9
 msgid "Automotive Acronym"
-msgstr ""
+msgstr "Automotive Acronym"
 
 #: .\dashboard\templates\core\base.html:61
 msgid "Profile"
-msgstr ""
+msgstr "Profile"
 
 #: .\dashboard\templates\core\base.html:62
 #: .\dashboard\templates\core\landing_page.html:17
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: .\dashboard\templates\core\base.html:64
 msgid "Sign up"
-msgstr ""
+msgstr "Sign up"
 
 #: .\dashboard\templates\core\base.html:65
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:64
 msgid "Sign in"
-msgstr ""
+msgstr "Sign in"
 
 #: .\dashboard\templates\core\change_password.html:10
 msgid "Change Your Password"
-msgstr ""
+msgstr "Change Your Password"
 
 #: .\dashboard\templates\core\change_password.html:31
 msgid "Old Password"
-msgstr ""
+msgstr "Old Password"
 
 #: .\dashboard\templates\core\change_password.html:43
 #: .\dashboard\templates\core\password_reset_confirm.html:34
 msgid "New Password"
-msgstr ""
+msgstr "New Password"
 
 #: .\dashboard\templates\core\change_password.html:55
 #: .\dashboard\templates\core\password_reset_confirm.html:46
 msgid "New Password Confirmation"
-msgstr ""
+msgstr "New Password Confirmation"
 
 #: .\dashboard\templates\core\change_password.html:65
 msgid "Update Password"
-msgstr ""
+msgstr "Update Password"
 
 #: .\dashboard\templates\core\landing_page.html:9
 msgid "sistema di registrazione, login, affiliati e referral"
-msgstr ""
+msgstr "registration system, login, affiliates and referrals"
 
 #: .\dashboard\templates\core\landing_page.html:19
 msgid "Gestisci Referral"
-msgstr ""
+msgstr "Manage Referral"
 
 #: .\dashboard\templates\core\landing_page.html:21
 msgid "Gestisci Affiliati"
-msgstr ""
+msgstr "Manage Affiliates"
 
 #: .\dashboard\templates\core\landing_page.html:24
 msgid "Accedi"
-msgstr ""
+msgstr "Log in"
 
 #: .\dashboard\templates\core\landing_page.html:26
 msgid "Registrati"
-msgstr ""
+msgstr "Recorded"
 
 #: .\dashboard\templates\core\landing_page.html:33
 msgid "Affiliate & Referral Dashboard"
-msgstr ""
+msgstr "& Referral Dashboard Affiliates"
 
 #: .\dashboard\templates\core\landing_page.html:34
 msgid "Gestisci e monitora le tue attività di affiliazione e referral."
-msgstr ""
+msgstr "Manage and monitor your affiliate and referral activities."
 
 #: .\dashboard\templates\core\landing_page.html:38
 #: .\dashboard\templates\core\landing_page.html:119
 msgid "Sistema Affiliate"
-msgstr ""
+msgstr "Affiliate System"
 
 #: .\dashboard\templates\core\landing_page.html:45
 msgid "Visualizza le tue commissioni, payout e performance."
-msgstr ""
+msgstr "View your commissions, payouts and performance."
 
 #: .\dashboard\templates\core\landing_page.html:46
 msgid "Vai a Performance"
-msgstr ""
+msgstr "Go to Performance"
 
 #: .\dashboard\templates\core\landing_page.html:47
 msgid "Vai a Commissioni"
-msgstr ""
+msgstr "Go to Commissions"
 
 #: .\dashboard\templates\core\landing_page.html:55
 msgid "Gestione Programmi"
-msgstr ""
+msgstr "Program Management"
 
 #: .\dashboard\templates\core\landing_page.html:56
 msgid "Monitora campagne e partecipazioni."
-msgstr ""
+msgstr "Monitor campaigns and participations."
 
 #: .\dashboard\templates\core\landing_page.html:57
 msgid "Campagne"
-msgstr ""
+msgstr "Campaigns"
 
 #: .\dashboard\templates\core\landing_page.html:58
 #: .\dashboard\templates\core\landing_page.html:87
 msgid "Partecipazione"
-msgstr ""
+msgstr "Participation"
 
 #: .\dashboard\templates\core\landing_page.html:66
 msgid "Strumenti"
-msgstr ""
+msgstr "Tools"
 
 #: .\dashboard\templates\core\landing_page.html:67
 msgid "Gestisci link, notifiche e impostazioni."
-msgstr ""
+msgstr "Manage links, notifications, and settings."
 
 #: .\dashboard\templates\core\landing_page.html:69
 #: .\dashboard\templates\core\landing_page.html:106
 #: .\dashboard\templates\core\landing_page.html:108
 msgid "Impostazioni"
-msgstr ""
+msgstr "Settings"
 
 #: .\dashboard\templates\core\landing_page.html:78
 #: .\dashboard\templates\core\landing_page.html:127
 msgid "Sistema Referral"
-msgstr ""
+msgstr "Referral System"
 
 #: .\dashboard\templates\core\landing_page.html:84
 msgid "Codici e Programmi"
-msgstr ""
+msgstr "Codes and Programmes"
 
 #: .\dashboard\templates\core\landing_page.html:85
 msgid "Gestisci i tuoi codici e la partecipazione ai programmi."
-msgstr ""
+msgstr "Manage your codes and program participation."
 
 #: .\dashboard\templates\core\landing_page.html:86
 msgid "Codici"
-msgstr ""
+msgstr "Codes"
 
 #: .\dashboard\templates\core\landing_page.html:95
 msgid "Conversioni e Transazioni"
-msgstr ""
+msgstr "Conversions and Transactions"
 
 #: .\dashboard\templates\core\landing_page.html:96
 msgid "Monitora conversioni e transazioni."
-msgstr ""
+msgstr "Monitor conversions and transactions."
 
 #: .\dashboard\templates\core\landing_page.html:97
 msgid "Conversioni"
-msgstr ""
+msgstr "Conversions"
 
 #: .\dashboard\templates\core\landing_page.html:98
 msgid "Transazioni"
-msgstr ""
+msgstr "Transactions"
 
 #: .\dashboard\templates\core\landing_page.html:107
 msgid "Gestisci le impostazioni e visualizza le statistiche."
-msgstr ""
+msgstr "Manage settings and view statistics."
 
 #: .\dashboard\templates\core\landing_page.html:109
 msgid "Statistiche"
-msgstr ""
+msgstr "Statistics"
 
 #: .\dashboard\templates\core\landing_page.html:124
 msgid "Esplora Sistema Affiliate"
-msgstr ""
+msgstr "Explore Affiliate System"
 
 #: .\dashboard\templates\core\landing_page.html:132
 msgid "Esplora Sistema Referral"
-msgstr ""
+msgstr "Explore Reference System"
 
 #: .\dashboard\templates\core\login.html:79
 #: .\dashboard\templates\core\register.html:84
 msgid "- Costi pubblicitari"
-msgstr ""
+msgstr "- Advertising costs"
 
 #: .\dashboard\templates\core\login.html:80
 #: .\dashboard\templates\core\register.html:85
 msgid "+ Recensioni positive"
-msgstr ""
+msgstr "+ Positive reviews"
 
 #: .\dashboard\templates\core\login.html:81
 #: .\dashboard\templates\core\register.html:86
 msgid "+ Autorevolezza ="
-msgstr ""
+msgstr "+ Authority ="
 
 #: .\dashboard\templates\core\login.html:82
 #: .\dashboard\templates\core\register.html:87
 msgid "+ FATTURATO"
-msgstr ""
+msgstr "+ INVOLVED"
 
 #: .\dashboard\templates\core\login.html:89
 #: .\dashboard\templates\registration\login.html:94
 msgid "Hello! Let's get started"
-msgstr ""
+msgstr "Hello, let's get started."
 
 #: .\dashboard\templates\core\login.html:90
 #: ⁨.\dashboard\templates\registration\login old.html⁩:27
 #: .\dashboard\templates\registration\login.html:95
 msgid "Sign in to continue."
-msgstr ""
+msgstr "Sign in to continue."
 
 #: .\dashboard\templates\core\login.html:110
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:35
 #: ⁨.\dashboard\templates\registration\login old.html⁩:47
 #: .\dashboard\templates\registration\login.html:115
 msgid "Sign in with Google"
-msgstr ""
+msgstr "Sign in with Google"
 
 #: .\dashboard\templates\core\login.html:112
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:37
 #: ⁨.\dashboard\templates\registration\login old.html⁩:49
 #: .\dashboard\templates\registration\login.html:117
 msgid "OR"
-msgstr ""
+msgstr "OR"
 
 #: .\dashboard\templates\core\login.html:118
 #: .\dashboard\templates\core\register.html:134
@@ -2841,7 +2843,7 @@ msgstr ""
 #: ⁨.\dashboard\templates\registration\login old.html⁩:55
 #: .\dashboard\templates\registration\login.html:123
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: .\dashboard\templates\core\login.html:122
 #: .\dashboard\templates\core\register.html:150
@@ -2849,99 +2851,99 @@ msgstr ""
 #: ⁨.\dashboard\templates\registration\login old.html⁩:59
 #: .\dashboard\templates\registration\login.html:127
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: .\dashboard\templates\core\login.html:136
 #: ⁨.\dashboard\templates\registration\login old.html⁩:73
 #: .\dashboard\templates\registration\login.html:141
 msgid "Forgot password?"
-msgstr ""
+msgstr "Forgot password?"
 
 #: .\dashboard\templates\core\logout.html:8
 msgid "You have been logged out"
-msgstr ""
+msgstr "You have been logged out"
 
 #: .\dashboard\templates\core\logout.html:12
 msgid "Sign in again"
-msgstr ""
+msgstr "Sign in again"
 
 #: .\dashboard\templates\core\password_reset.html:18
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Forgot your password?"
 
 #: .\dashboard\templates\core\password_reset.html:19
 msgid "Enter your email address to reset your password."
-msgstr ""
+msgstr "Enter your email address to reset your password."
 
 #: .\dashboard\templates\core\password_reset.html:52
 msgid "Submit"
-msgstr ""
+msgstr "Submit"
 
 #: .\dashboard\templates\core\password_reset.html:60
 msgid "Create A New Account"
-msgstr ""
+msgstr "Create A New Account"
 
 #: .\dashboard\templates\core\password_reset.html:61
 msgid "Back To Login"
-msgstr ""
+msgstr "Back To Login"
 
 #: .\dashboard\templates\core\password_reset_complete.html:9
 msgid "Login Here"
-msgstr ""
+msgstr "Login Here"
 
 #: .\dashboard\templates\core\password_reset_confirm.html:13
 msgid "Reset Your Password"
-msgstr ""
+msgstr "Reset Your Password"
 
 #: .\dashboard\templates\core\password_reset_confirm.html:56
 msgid "Reset Password"
-msgstr ""
+msgstr "Reset Password"
 
 #: .\dashboard\templates\core\profile.html:90
 msgid ""
 "Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi "
 "referral."
-msgstr ""
+msgstr "Welcome to your profile. Manage your account and view your referrals."
 
 #: .\dashboard\templates\core\profile.html:91
 msgid "Ti sei registrato con il codice referral"
-msgstr ""
+msgstr "You've registered with the reference code."
 
 #: .\dashboard\templates\core\profile.html:102
 msgid "Il tuo codice referral"
-msgstr ""
+msgstr "Your reference code"
 
 #: .\dashboard\templates\core\profile.html:108
 msgid "Il tuo link referral"
-msgstr ""
+msgstr "Your referral link"
 
 #: .\dashboard\templates\core\profile.html:115
 msgid "Non hai un codice referral disponibile."
-msgstr ""
+msgstr "You don't have a reference code available."
 
 #: .\dashboard\templates\core\profile.html:136
 msgid "Modifica Dati Personali"
-msgstr ""
+msgstr "Edit Personal Data"
 
 #: .\dashboard\templates\core\profile.html:154
 msgid "Salva Modifiche"
-msgstr ""
+msgstr "Save Changes"
 
 #: .\dashboard\templates\core\profile.html:155
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: .\dashboard\templates\core\register.html:95
 msgid "New here?"
-msgstr ""
+msgstr "New here?"
 
 #: .\dashboard\templates\core\register.html:96
 msgid "Signing up is easy. It only takes a few steps"
-msgstr ""
+msgstr "Signing up is easy. It only takes a few steps"
 
 #: .\dashboard\templates\core\register.html:118
 msgid "First Name"
-msgstr ""
+msgstr "First"
 
 #: .\dashboard\templates\core\register.html:124
 #: .\dashboard\templates\dashboard\referred_accounts\incomplete_registrations.html:22
@@ -2949,68 +2951,71 @@ msgstr ""
 #: .\dashboard\templates\dashboard\referred_accounts\master_accounts.html:22
 #: .\dashboard\templates\dashboard\referred_accounts\my_network.html:23
 msgid "Last Name"
-msgstr ""
+msgstr "Last"
 
 #: .\dashboard\templates\core\register.html:156
 msgid "Confirm Password"
-msgstr ""
+msgstr "Confirm Password"
 
 #: .\dashboard\templates\core\register.html:181
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:7
 msgid "We value your privacy"
-msgstr ""
+msgstr "We value your privacy"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:10
 msgid ""
 "We use cookies on this website to enhance your user experience. By clicking "
 msgstr ""
+"We use cookies on this website to enhance your user experience. By clicking"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:11
 msgid ""
 "For more information on what data is contained in the cookies, please see "
 "our "
 msgstr ""
+"For more information on what data is contained in the cookies, please see "
+"our"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:11
 #: .\dashboard\templates\dashboard\privacy_policy.html:6
 #: .\dashboard\templates\dashboard\privacy_policy.html:11
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Privacy Policy"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:11
 msgid " page."
-msgstr ""
+msgstr "page."
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:14
 msgid "I decline"
-msgstr ""
+msgstr "The Declines"
 
 #: .\dashboard\templates\dashboard\cookie_modal.html:15
 msgid "I agree"
-msgstr ""
+msgstr "I agree"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:23
 msgid "Number of Job Requests Desired Per Week"
-msgstr ""
+msgstr "Number of Job Requests Desired Per Week"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:29
 msgid "Do you have an office/shop to receive customers?"
-msgstr ""
+msgstr "Do you have an office/shop to receive customers?"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:35
 msgid "Google Maps Link"
-msgstr ""
+msgstr "Google Maps Link"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:41
 msgid "Contact Number"
-msgstr ""
+msgstr "Contact Number"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:47
 msgid "Chamber of Commerce Certificate"
-msgstr ""
+msgstr "Chamber of Commerce Certificate"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:59
 msgid ""
@@ -3019,22 +3024,26 @@ msgid ""
 "Piemonte, Puglia, Sardegna, Sicilia, Toscana, Trentino-Alto Adige/Südtirol, "
 "Umbria, Valle d'Aosta/Vallée d'Aoste, Veneto)"
 msgstr ""
+"N.B.: Write the region (Abruzzo, Basilicata, Calabria, Campania, Emilia-"
+"Romagna, Friuli-Venezia Giulia, Lazio, Liguria, Lombardia, Marche, Molise, "
+"Piemonte, Puglia, Sardinia, Sicily, Tuscany, Trentino-Alto Adige/Südtirol, "
+"Umbria, Valle d'Aosta/Vallée d'Aoste, Veneto)"
 
 #: .\dashboard\templates\dashboard\enterprise\create_enterprise.html:106
 msgid "Salva"
-msgstr ""
+msgstr "Save"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:14
 msgid "Numero richieste di lavoro per settimana:"
-msgstr ""
+msgstr "Number of job requests per week:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:15
 msgid "Contatto:"
-msgstr ""
+msgstr "Contact:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:17
 msgid "Link Google Maps:"
-msgstr ""
+msgstr "Google Maps Link:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:17
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:18
@@ -3056,87 +3065,87 @@ msgstr ""
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:154
 #: .\dashboard\templates\registration\login.html:87
 msgid " "
-msgstr ""
+msgstr " "
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:18
 msgid "Settori:"
-msgstr ""
+msgstr "Sectors:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:19
 msgid "Regione:"
-msgstr ""
+msgstr "Region:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:20
 msgid "Comunicazione dell'ufficio:"
-msgstr ""
+msgstr "Office communication:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:23
 msgid "Certificato della Camera di Commercio:"
-msgstr ""
+msgstr "Chamber of Commerce Certificate:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:25
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:28
 msgid "Visualizza documento"
-msgstr ""
+msgstr "View Document"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:26
 msgid "Certificato Polizza Assicurativa:"
-msgstr ""
+msgstr "Insurance Police Certificate:"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:31
 #: .\payments\templates\payments\list_product.html:35
 msgid "Modifica"
-msgstr ""
+msgstr "Amendment"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:32
 msgid "Torna alla lista"
-msgstr ""
+msgstr "Back to List"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_list.html:19
 #: .\dashboard\templates\dashboard\index.html:218
 msgid "Dettagli"
-msgstr ""
+msgstr "Details"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_list.html:31
 #: .\payments\templates\payments\list_product.html:53
 msgid "precedente"
-msgstr ""
+msgstr "previous"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_list.html:39
 msgid "successivo"
-msgstr ""
+msgstr "next"
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_list.html:40
 msgid "ultimo &raquo;"
-msgstr ""
+msgstr "last &raquo;"
 
 #: .\dashboard\templates\dashboard\index.html:16
 msgid "I tuoi Programmi di Affiliazione"
-msgstr ""
+msgstr "Your Affiliate Programs"
 
 #: .\dashboard\templates\dashboard\index.html:19
 msgid "Crea Nuovo Programma"
-msgstr ""
+msgstr "Create New Program"
 
 #: .\dashboard\templates\dashboard\index.html:33
 msgid "Campagne Attive"
-msgstr ""
+msgstr "Active Campaigns"
 
 #: .\dashboard\templates\dashboard\index.html:36
 msgid "Lancia Nuova Campagna"
-msgstr ""
+msgstr "Lancia New Campaign"
 
 #: .\dashboard\templates\dashboard\index.html:51
 msgid "Il Tuo Code Referral"
-msgstr ""
+msgstr "Your Code Referral"
 
 #: .\dashboard\templates\dashboard\index.html:78
 msgid "Statistiche del Profilo"
-msgstr ""
+msgstr "Profile Statistics"
 
 #: .\dashboard\templates\dashboard\index.html:79
 msgid "Totale Guadagni (€):"
-msgstr ""
+msgstr "Total Earnings (€):"
 
 #: .\dashboard\templates\dashboard\index.html:80
 #: .\dashboard\templates\dashboard\index.html:82
@@ -3146,48 +3155,48 @@ msgstr ""
 #: .\dashboard\templates\dashboard\index.html:199
 #: .\dashboard\templates\dashboard\index.html:201
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: .\dashboard\templates\dashboard\index.html:81
 msgid "Referral Attivi:"
-msgstr ""
+msgstr "Referral Active:"
 
 #: .\dashboard\templates\dashboard\index.html:83
 msgid "Commissioni Totali (€):"
-msgstr ""
+msgstr "Total Commissions (€):"
 
 #: .\dashboard\templates\dashboard\index.html:100
 msgid "Il Tuo Codice Referral"
-msgstr ""
+msgstr "Your Reference Code"
 
 #: .\dashboard\templates\dashboard\index.html:101
 msgid "Codice Referral:"
-msgstr ""
+msgstr "Reference Code:"
 
 #: .\dashboard\templates\dashboard\index.html:103
 msgid "Link Referral Unico:"
-msgstr ""
+msgstr "Unique Reference Link:"
 
 #: .\dashboard\templates\dashboard\index.html:106
 msgid "Copia Link"
-msgstr ""
+msgstr "Copy Link"
 
 #: .\dashboard\templates\dashboard\index.html:116
 msgid "Utenti invitati"
-msgstr ""
+msgstr "Users invited"
 
 #: .\dashboard\templates\dashboard\index.html:124
 #: .\dashboard\templates\dashboard\index.html:139
 msgid "Non hai ancora invitato nessuno."
-msgstr ""
+msgstr "You haven't invited anyone yet."
 
 #: .\dashboard\templates\dashboard\index.html:129
 msgid "Utenti Invitati"
-msgstr ""
+msgstr "Invited Users"
 
 #: .\dashboard\templates\dashboard\index.html:153
 msgid "La mia rete"
-msgstr ""
+msgstr "My network"
 
 #: .\dashboard\templates\dashboard\index.html:157
 #: .\payments\templates\payments\detail_product.html:16
@@ -3195,11 +3204,11 @@ msgstr ""
 #: .\subscriptions\templates\subscriptions\api_keys.html:7
 #: .\subscriptions\templates\subscriptions\home.html:12
 msgid "Nome"
-msgstr ""
+msgstr "Name"
 
 #: .\dashboard\templates\dashboard\index.html:158
 msgid "Cognome"
-msgstr ""
+msgstr "Surname"
 
 #: .\dashboard\templates\dashboard\index.html:160
 #: .\dashboard\templates\dashboard\referred_accounts\incomplete_registrations.html:24
@@ -3208,434 +3217,440 @@ msgstr ""
 #: .\dashboard\templates\dashboard\referred_accounts\my_network.html:25
 #: .\referral\models\referral_level.py:11
 msgid "Level"
-msgstr ""
+msgstr "Level"
 
 #: .\dashboard\templates\dashboard\index.html:187
 msgid "Bonus Referral (€):"
-msgstr ""
+msgstr "Referral Bonus (€):"
 
 #: .\dashboard\templates\dashboard\index.html:189
 msgid "Programmi Bonus:"
-msgstr ""
+msgstr "Bonus Programs:"
 
 #: .\dashboard\templates\dashboard\index.html:198
 msgid "Codici Referral"
-msgstr ""
+msgstr "Reference Codes"
 
 #: .\dashboard\templates\dashboard\index.html:200
 msgid "Codici Attivi:"
-msgstr ""
+msgstr "Active Codes:"
 
 #: .\dashboard\templates\dashboard\index.html:212
 msgid "Attività Recenti"
-msgstr ""
+msgstr "Recent Activities"
 
 #: .\dashboard\templates\dashboard\index.html:216
 #: .\subscriptions\templates\subscriptions\api_usage_dashboard.html:8
 msgid "Data"
-msgstr ""
+msgstr "Date"
 
 #: .\dashboard\templates\dashboard\index.html:217
 msgid "Tipo"
-msgstr ""
+msgstr "Type"
 
 #: .\dashboard\templates\dashboard\index.html:219
 msgid "Importo"
-msgstr ""
+msgstr "Amount"
 
 #: .\dashboard\templates\dashboard\index.html:238
 msgid "Crea Programma di Affiliazione"
-msgstr ""
+msgstr "Create Affiliate Program"
 
 #: .\dashboard\templates\dashboard\index.html:246
 msgid "Nome Programma"
-msgstr ""
+msgstr "Program Name"
 
 #: .\dashboard\templates\dashboard\index.html:250
 #: .\payments\templates\payments\detail_product.html:28
 msgid "Descrizione"
-msgstr ""
+msgstr "Description"
 
 #: .\dashboard\templates\dashboard\index.html:254
 msgid "Tipo di Ricompensa"
-msgstr ""
+msgstr "Reward Type"
 
 #: .\dashboard\templates\dashboard\index.html:256
 msgid "Sconto"
-msgstr ""
+msgstr "Discount"
 
 #: .\dashboard\templates\dashboard\index.html:257
 msgid "Cashback"
-msgstr ""
+msgstr "Cashback"
 
 #: .\dashboard\templates\dashboard\index.html:258
 msgid "Punti"
-msgstr ""
+msgstr "Points"
 
 #: .\dashboard\templates\dashboard\index.html:262
 msgid "Valore Ricompensa"
-msgstr ""
+msgstr "Reward Value"
 
 #: .\dashboard\templates\dashboard\index.html:266
 msgid "Numero Minimo di Referral"
-msgstr ""
+msgstr "Minimum number of Referral"
 
 #: .\dashboard\templates\dashboard\index.html:270
 msgid "Durata Programma (giorni)"
-msgstr ""
+msgstr "Duration Programme (days)"
 
 #: .\dashboard\templates\dashboard\index.html:273
 msgid "Crea Programma"
-msgstr ""
+msgstr "Create Program"
 
 #: .\dashboard\templates\dashboard\index.html:287
 #: .\dashboard\templates\dashboard\index.html:320
 msgid "Lancia Campagna"
-msgstr ""
+msgstr "Lancia Campagna"
 
 #: .\dashboard\templates\dashboard\index.html:295
 msgid "Nome Campagna"
-msgstr ""
+msgstr "Country Name"
 
 #: .\dashboard\templates\dashboard\index.html:299
 msgid "Data Inizio"
-msgstr ""
+msgstr "Start Date"
 
 #: .\dashboard\templates\dashboard\index.html:303
 msgid "Data Fine"
-msgstr ""
+msgstr "End Date"
 
 #: .\dashboard\templates\dashboard\index.html:311
 msgid "Obiettivo"
-msgstr ""
+msgstr "Objective"
 
 #: .\dashboard\templates\dashboard\index.html:315
 msgid "Seleziona Programma di Affiliazione"
-msgstr ""
+msgstr "Select Affiliate Program"
 
 #: .\dashboard\templates\dashboard\index.html:352
 #: .\dashboard\templates\dashboard\index.html:476
 msgid "Codice Referral"
-msgstr ""
+msgstr "Reference Code"
 
 #: .\dashboard\templates\dashboard\index.html:353
 #: .\dashboard\templates\dashboard\index.html:477
 msgid "Utilizzazioni"
-msgstr ""
+msgstr "Uses"
 
 #: .\dashboard\templates\dashboard\index.html:367
 msgid "Campagna"
-msgstr ""
+msgstr "Campaign"
 
 #: .\dashboard\templates\dashboard\index.html:368
 msgid "Inizio"
-msgstr ""
+msgstr "Start"
 
 #: .\dashboard\templates\dashboard\index.html:369
 msgid "Partecipa"
-msgstr ""
+msgstr "Join"
 
 #: .\dashboard\templates\dashboard\partials\_footer.html:3
 msgid "Copyright © 2024. Premium "
-msgstr ""
+msgstr "Copyright © 2024. Premium"
 
 #: .\dashboard\templates\dashboard\partials\_footer.html:4
 msgid "Bootstrap admin template"
-msgstr ""
+msgstr "Bootstrap admin template"
 
 #: .\dashboard\templates\dashboard\partials\_footer.html:6
 msgid "Hand-crafted & made with "
-msgstr ""
+msgstr "Hand-crafted & made with"
 
 #: .\dashboard\templates\dashboard\partials\_navbar.html:40
 msgid "Notifications"
-msgstr ""
+msgstr "Notifications"
 
 #: .\dashboard\templates\dashboard\partials\_navbar.html:48
 msgid "Application Error"
-msgstr ""
+msgstr "Application Error"
 
 #: .\dashboard\templates\dashboard\partials\_navbar.html:61
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 #: .\dashboard\templates\dashboard\partials\_navbar.html:74
 msgid "New user registration"
-msgstr ""
+msgstr "New user registration"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:7
 msgid "SIDEBAR SKINS"
-msgstr ""
+msgstr "SIDEBAR SKINS"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:14
 msgid "HEADER SKINS"
-msgstr ""
+msgstr "HEADER SKINS"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:30
 msgid "TO DO LIST"
-msgstr ""
+msgstr "TO DO LIST"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:34
 msgid "CHATS"
-msgstr ""
+msgstr "CHATS"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:38
 msgid "LANGUAGES"
-msgstr ""
+msgstr "LANGUAGES"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:48
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:101
 msgid "Events"
-msgstr ""
+msgstr "Events"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:105
 msgid "Feb 11 2018"
-msgstr ""
+msgstr "Feb 11 2018"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:107
 msgid "Creating component page build a js"
-msgstr ""
+msgstr "Creating component page build a js"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:108
 msgid "The total number of sessions"
-msgstr ""
+msgstr "The total number of sessions"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:113
 msgid "Feb 7 2018"
-msgstr ""
+msgstr "Feb 7 2018"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:115
 msgid "Meeting with Alisa"
-msgstr ""
+msgstr "Meeting with Alisa"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:116
 msgid "Call Sarah Graves"
-msgstr ""
+msgstr "Call Sarah Graves"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:122
 msgid "Friends"
-msgstr ""
+msgstr "Friends"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:131
 msgid "Thomas Douglas"
-msgstr ""
+msgstr "Thomas Douglas"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:132
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:153
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:171
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:180
 msgid "Available"
-msgstr ""
+msgstr "Available"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:141
 msgid "Catherine"
-msgstr ""
+msgstr "Catherine"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:143
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:162
 msgid "Away"
-msgstr ""
+msgstr "Away"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:152
 msgid "Daniel Russell"
-msgstr ""
+msgstr "Daniel Russell"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:161
 msgid "James Richardson"
-msgstr ""
+msgstr "James Richardson"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:170
 msgid "Madeline Kennedy"
-msgstr ""
+msgstr "Madeline Kennedy"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:179
 msgid "Sarah Graves"
-msgstr ""
+msgstr "Sarah Graves"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:192
 msgid "Current language"
-msgstr ""
+msgstr "Current language"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:200
 msgid "Languages"
-msgstr ""
+msgstr "Languages"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:202
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:203
 msgid "Italiano"
-msgstr ""
+msgstr "Italian"
 
 #: .\dashboard\templates\dashboard\partials\_settings-panel.html:205
 msgid "Change Language"
-msgstr ""
+msgstr "Change Language"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:6
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:13
 msgid "UI Elements"
-msgstr ""
+msgstr "IU Elements"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:18
 msgid "Buttons"
-msgstr ""
+msgstr "Buttons"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:19
 msgid "Dropdowns"
-msgstr ""
+msgstr "Dropdowns"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:20
 msgid "Typography"
-msgstr ""
+msgstr "Typography"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:28
 msgid "Form elements"
-msgstr ""
+msgstr "Form elements"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:33
 msgid "Basic Elements"
-msgstr ""
+msgstr "Basic Elements"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:40
 msgid "Charts"
-msgstr ""
+msgstr "Charts"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:45
 msgid "ChartJs"
-msgstr ""
+msgstr "ChartJs"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:52
 msgid "Tables"
-msgstr ""
+msgstr "Tables"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:57
 msgid "Basic table"
-msgstr ""
+msgstr "Basic table"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:64
 msgid "Icons"
-msgstr ""
+msgstr "Icons"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:69
 msgid "Mdi icons"
-msgstr ""
+msgstr "Mdi icons"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:76
 msgid "User Pages"
-msgstr ""
+msgstr "User Pages"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:81
 msgid " Login "
-msgstr ""
+msgstr "Login"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:82
 msgid " Register "
-msgstr ""
+msgstr "Register"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:89
 msgid "Error pages"
-msgstr ""
+msgstr "Error pages"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:94
 msgid " 404 "
-msgstr ""
+msgstr "404"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:95
 msgid " 500 "
-msgstr ""
+msgstr "500"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:102
 msgid "Documentation"
-msgstr ""
+msgstr "Documentation"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:109
 msgid "Enterprise"
-msgstr ""
+msgstr "Enterprise"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:114
 msgid "Create Enterprise"
-msgstr ""
+msgstr "Create Enterprise"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:115
 msgid "List Enterprise"
-msgstr ""
+msgstr "Enterprise List"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:122
 msgid "Referred Accounts"
-msgstr ""
+msgstr "Refered Accounts"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:127
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:143
 msgid "My Network"
-msgstr ""
+msgstr "My Network"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:128
 msgid "Master Accounts"
-msgstr ""
+msgstr "Master Accounts"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:129
 msgid "Investor Accounts"
-msgstr ""
+msgstr "Investor Accounts"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:130
 msgid "Incomplete Registrations"
-msgstr ""
+msgstr "Incomplete Registrations"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:137
 msgid "Prodotti"
-msgstr ""
+msgstr "Products"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:149
 msgid "Finances"
-msgstr ""
+msgstr "Finances"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:154
 msgid "Withdrawals"
-msgstr ""
+msgstr "Withdrawals"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:161
 msgid "My Profile"
-msgstr ""
+msgstr "My Profile"
 
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:167
 msgid "API Documentation"
-msgstr ""
+msgstr "API Documentation"
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:12
 msgid ""
-"La nostra privacy policy è progettata per proteggere i tuoi dati personali e "
-"spiegare come raccogliamo, utilizziamo e proteggiamo i tuoi dati quando "
+"La nostra privacy policy è progettata per proteggere i tuoi dati personali e"
+" spiegare come raccogliamo, utilizziamo e proteggiamo i tuoi dati quando "
 "interagisci con il nostro sito web."
 msgstr ""
+"Our privacy policy is designed to protect your personal data and explain how"
+" we collect, use and protect your data when interacting with our website."
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:15
 msgid ""
 "Raccogliamo informazioni personali, come il tuo nome, indirizzo email e "
 "altre informazioni necessarie per fornirti il miglior servizio possibile."
 msgstr ""
+"We collect personal information, such as your name, email address and other "
+"information needed to provide you with the best possible service."
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:18
 msgid ""
 "Utilizziamo i cookie per migliorare l'esperienza dell'utente sul nostro "
 "sito. Per saperne di più sui cookie che utilizziamo, consulta la nostra "
 msgstr ""
+"We use cookies to improve your experience on our site. To learn more about "
+"the cookies we use, see our"
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:18
 msgid "Cookie Policy"
-msgstr ""
+msgstr "Cookie Policy"
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:18
 #: .\dashboard\templates\dashboard\privacy_policy.html:27
 #: .\dashboard\templates\dashboard\terms_of_service.html:27
 msgid "."
-msgstr ""
+msgstr "."
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:21
 msgid ""
@@ -3643,292 +3658,311 @@ msgid ""
 "personali e per garantire che siano trattati in conformità con le leggi "
 "sulla protezione dei dati."
 msgstr ""
+"We take appropriate security measures to protect your personal data and to "
+"ensure that they are processed in accordance with data protection laws."
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:24
 msgid ""
-"Hai il diritto di accedere, correggere o cancellare i tuoi dati personali in "
-"qualsiasi momento. Per esercitare questi diritti, contattaci tramite il "
+"Hai il diritto di accedere, correggere o cancellare i tuoi dati personali in"
+" qualsiasi momento. Per esercitare questi diritti, contattaci tramite il "
 "nostro supporto clienti."
 msgstr ""
+"You have the right to access, correct or delete your personal data at any "
+"time. To exercise these rights, contact us through our Customer Support."
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:26
 #: .\dashboard\templates\dashboard\terms_of_service.html:26
 msgid "Contatti"
-msgstr ""
+msgstr "Contacts"
 
 #: .\dashboard\templates\dashboard\privacy_policy.html:27
 msgid ""
-"Se hai domande o desideri maggiori informazioni sulla nostra Privacy Policy, "
-"puoi contattarci via email a "
+"Se hai domande o desideri maggiori informazioni sulla nostra Privacy Policy,"
+" puoi contattarci via email a "
 msgstr ""
+"If you have any questions or want more information about our Privacy Policy,"
+" you can contact us by email at"
 
 #: .\dashboard\templates\dashboard\referred_accounts\incomplete_registrations.html:17
 msgid "My incomplete registrations"
-msgstr ""
+msgstr "My incomplete registrations"
 
 #: .\dashboard\templates\dashboard\referred_accounts\investor_accounts.html:17
 msgid "My Investor Accounts"
-msgstr ""
+msgstr "My Investor Accounts"
 
 #: .\dashboard\templates\dashboard\referred_accounts\master_accounts.html:17
 msgid "My Master Accounts"
-msgstr ""
+msgstr "My Master Accounts"
 
 #: .\dashboard\templates\dashboard\referred_accounts\my_network.html:18
 msgid "My IBs"
-msgstr ""
+msgstr "My IBs"
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:6
 #: .\dashboard\templates\dashboard\terms_of_service.html:11
 msgid "Terms of Service"
-msgstr ""
+msgstr "Terms of Service"
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:12
 msgid ""
 "Questi termini di servizio regolano l'uso del nostro sito web. Ti invitiamo "
 "a leggere attentamente i seguenti termini."
 msgstr ""
+"These terms of service govern the use of our website. Please read the "
+"following terms carefully."
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:15
 msgid ""
 "Utilizzando il nostro sito, accetti di rispettare questi termini di "
 "servizio. Se non sei d'accordo, non utilizzare il sito."
 msgstr ""
+"By using our site, you agree to respect these terms of service. If you do "
+"not agree, do not use the site."
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:18
 msgid ""
 "Ci riserviamo il diritto di modificare questi termini in qualsiasi momento. "
-"Le modifiche saranno pubblicate su questa pagina e avranno effetto immediato."
+"Le modifiche saranno pubblicate su questa pagina e avranno effetto "
+"immediato."
 msgstr ""
+"We reserve the right to modify these terms at any time. The changes will be "
+"published on this page and will take effect immediately."
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:21
 msgid ""
 "Accetti di non utilizzare il sito per attività illegali o non autorizzate. "
 "Ogni abuso del sito potrebbe portare alla sospensione del tuo account."
 msgstr ""
+"You agree not to use the site for illegal or unauthorized activities. Any "
+"abuse of the site may lead to the suspension of your account."
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:24
 msgid ""
 "Non siamo responsabili per danni diretti, indiretti o consequenziali "
 "derivanti dall'uso del nostro sito."
 msgstr ""
+"We are not liable for direct, indirect or consequential damages arising from"
+" the use of our website."
 
 #: .\dashboard\templates\dashboard\terms_of_service.html:27
 msgid ""
 "Per qualsiasi domanda relativa ai termini di servizio, puoi contattarci via "
 "email a "
 msgstr ""
+"For any question related to the terms of service, you can contact us by "
+"email to"
 
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:12
 msgid "Sign In"
-msgstr ""
+msgstr "Sign In"
 
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:33
 msgid "Sign in with GitHub"
-msgstr ""
+msgstr "Sign in with GitHub"
 
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:57
 msgid " Remember me"
-msgstr ""
+msgstr "Remember me"
 
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:72
 msgid "Don't have an account yet? Go to signup"
-msgstr ""
+msgstr "Don't have an account yet? Go to signup"
 
 #: ⁨.\dashboard\templates\registration\login old old.html⁩:73
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Forgot Password?"
 
 #: ⁨.\dashboard\templates\registration\login old.html⁩:26
 msgid "Hello! let's get started"
-msgstr ""
+msgstr "Hello! let's get started"
 
 #: .\dashboard\templates\registration\login.html:87
 msgid "Your Motto Here"
-msgstr ""
+msgstr "Your Motto Here"
 
 #: .\payments\models\custom_order.py:11
 msgid "Buyer"
-msgstr ""
+msgstr "Buyer"
 
 #: .\payments\models\order.py:15
 msgid "Customer"
-msgstr ""
+msgstr "Customer"
 
 #: .\payments\models\order.py:18
 msgid "Total Price"
-msgstr ""
+msgstr "Total Price"
 
 #: .\payments\models\order.py:19
 msgid "Products"
-msgstr ""
+msgstr "Products"
 
 #: .\payments\models\price.py:9 .\payments\models\product.py:25
 msgid "Price"
-msgstr ""
+msgstr "Price"
 
 #: .\payments\models\price.py:12 .\payments\models\product.py:29
 #: .\payments\models\product_tag.py:11
 msgid "Updated At"
-msgstr ""
+msgstr "Updated At"
 
 #: .\payments\models\product.py:23
 msgid "Thumbnail"
-msgstr ""
+msgstr "Thumbnail"
 
 #: .\payments\models\product.py:26
 msgid "Quantity"
-msgstr ""
+msgstr "Quantity"
 
 #: .\payments\models\product_tag.py:7
 msgid "Designates the name of the tag."
-msgstr ""
+msgstr "Designates the name of the tag."
 
 #: .\payments\templates\payments\add_item_to_order.html:12
 #: .\payments\templates\payments\add_item_to_order.html:23
 msgid "Add Item to Order"
-msgstr ""
+msgstr "Add Item to Order"
 
 #: .\payments\templates\payments\add_item_to_order.html:24
 #: .\payments\templates\payments\create_order.html:23
 #: .\payments\templates\payments\detail_product.html:35
 msgid "Torna all'elenco"
-msgstr ""
+msgstr "Back to List"
 
 #: .\payments\templates\payments\cancelled.html:6
 #: .\payments\templates\payments\success.html:6
 msgid "Django + Stripe Checkout"
-msgstr ""
+msgstr "Django + Stripe Checkout"
 
 #: .\payments\templates\payments\cancelled.html:13
 msgid "Your payment was cancelled."
-msgstr ""
+msgstr "Your payment was cancelled."
 
 #: .\payments\templates\payments\create_order.html:14
 #: .\payments\templates\payments\create_order.html:22
 msgid "Create Order"
-msgstr ""
+msgstr "Create Order"
 
 #: .\payments\templates\payments\create_product.html:22
 msgid "Create a new product"
-msgstr ""
+msgstr "Create a new product"
 
 #: .\payments\templates\payments\create_product.html:30
 msgid "Create Product"
-msgstr ""
+msgstr "Create Product"
 
 #: .\payments\templates\payments\create_product.html:31
 #: .\payments\templates\payments\detail_order.html:32
 #: .\payments\templates\payments\update_product.html:32
 msgid "Annulla"
-msgstr ""
+msgstr "Cancel"
 
 #: .\payments\templates\payments\detail_order.html:22
 msgid "Choose payment broker"
-msgstr ""
+msgstr "Choose payment broker"
 
 #: .\payments\templates\payments\detail_order.html:31
 msgid "Checkout"
-msgstr ""
+msgstr "Checkout"
 
 #: .\payments\templates\payments\detail_product.html:12
 msgid "Prodotto"
-msgstr ""
+msgstr "Product"
 
 #: .\payments\templates\payments\detail_product.html:20
 #: .\payments\templates\payments\list_product.html:22
 msgid "Quantità"
-msgstr ""
+msgstr "Quantity"
 
 #: .\payments\templates\payments\detail_product.html:24
 #: .\payments\templates\payments\list_product.html:23
 msgid "Prezzo"
-msgstr ""
+msgstr "Price"
 
 #: .\payments\templates\payments\detail_product.html:34
 #: .\payments\templates\payments\list_product.html:36
 msgid "Ordina"
-msgstr ""
+msgstr "Sort"
 
 #: ⁨.\payments\templates\payments\home copy.html⁩:60
 #: .\payments\templates\payments\home.html:28
 msgid "Purchase!"
-msgstr ""
+msgstr "Purchase!"
 
 #: ⁨.\payments\templates\payments\home copy.html⁩:64
 #: .\payments\templates\payments\home.html:32
 msgid "Make a Payment"
-msgstr ""
+msgstr "Make a Payment"
 
 #: ⁨.\payments\templates\payments\home copy.html⁩:68
 #: .\payments\templates\payments\home.html:36
 msgid "Pay"
-msgstr ""
+msgstr "Pay"
 
 #: .\payments\templates\payments\list_product.html:15
 msgid "Elenco Prodotti"
-msgstr ""
+msgstr "Product List"
 
 #: .\payments\templates\payments\list_product.html:17
 msgid "Crea Prodotto"
-msgstr ""
+msgstr "Create Product"
 
 #: .\payments\templates\payments\list_product.html:24
 #: .\subscriptions\templates\subscriptions\api_keys.html:11
 msgid "Azioni"
-msgstr ""
+msgstr "Actions"
 
 #: .\payments\templates\payments\list_product.html:34
 msgid "Visualizza"
-msgstr ""
+msgstr "View"
 
 #: .\payments\templates\payments\list_product.html:37
 msgid "Cancella"
-msgstr ""
+msgstr "Delete"
 
 #: .\payments\templates\payments\list_product.html:42
 msgid "Nessun prodotto disponibile."
-msgstr ""
+msgstr "No products available."
 
 #: .\payments\templates\payments\list_product.html:57
 msgid "successiva"
-msgstr ""
+msgstr "next"
 
 #: .\payments\templates\payments\list_product.html:58
 msgid "ultima &raquo;"
-msgstr ""
+msgstr "last &raquo;"
 
 #: .\payments\templates\payments\process_payment.html:4
 msgid "Processing Payment..."
-msgstr ""
+msgstr "Processing Payment..."
 
 #: .\payments\templates\payments\process_payment.html:5
 msgid "Please wait while we process your payment."
-msgstr ""
+msgstr "Please wait while we process your payment."
 
 #: .\payments\templates\payments\success.html:13
 msgid "Your payment succeeded."
-msgstr ""
+msgstr "Your payment happened."
 
 #: .\payments\templates\payments\update_product.html:23
 msgid "Update a product"
-msgstr ""
+msgstr "Update a product"
 
 #: .\payments\templates\payments\update_product.html:31
 msgid "Update Product"
-msgstr ""
+msgstr "Update Product"
 
 #: .\referral\models\referral.py:12 .\referral\models\referral_level.py:9
 msgid "Referrer"
-msgstr ""
+msgstr "Referer"
 
 #: .\referral\models\referral.py:13 .\referral\models\referral_level.py:10
 msgid "Referred"
-msgstr ""
+msgstr "Referred"
 
 #: .\referral\models\referral.py:16
 msgid "Reward Given"
-msgstr ""
+msgstr "Reward Given"
 
 #: .\referral\models\referral_audit.py:8
 #: .\referral\models\referral_conversion.py:8
@@ -3938,471 +3972,472 @@ msgstr ""
 #: .\referral\models\referral_stats.py:5
 #: .\referral\models\referral_transaction.py:10
 msgid "Referral Codes"
-msgstr ""
+msgstr "Reference Codes"
 
 #: .\referral\models\referral_bonus.py:6
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:63
 #: .\referral\templates\referral\referral_bonus_list.html:36
 msgid "Bonus Type"
-msgstr ""
+msgstr "Bonus Type"
 
 #: .\referral\models\referral_bonus.py:7
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:67
 #: .\referral\templates\referral\referral_bonus_list.html:37
 msgid "Bonus Value"
-msgstr ""
+msgstr "Value Bonus"
 
 #: .\referral\models\referral_bonus.py:8
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:21
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:71
 #: .\referral\templates\referral\referral_bonus_list.html:38
 msgid "Min Referrals Required"
-msgstr ""
+msgstr "Min Referrals Required"
 
 #: .\referral\models\referral_bonus.py:9
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:25
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:75
 #: .\referral\templates\referral\referral_bonus_list.html:39
 msgid "Bonus Date"
-msgstr ""
+msgstr "Bonus Dates"
 
-#: .\referral\models\referral_bonus.py:10 .\referral\models\referral_code.py:14
+#: .\referral\models\referral_bonus.py:10
+#: .\referral\models\referral_code.py:14
 #: .\referral\models\referral_reward.py:17
 msgid "Expiry Date"
-msgstr ""
+msgstr "Expiry Date"
 
 #: .\referral\models\referral_bonus.py:11
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:33
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:83
 #: .\referral\templates\referral\referral_bonus_list.html:41
 msgid "Max Usage"
-msgstr ""
+msgstr "Max Usage"
 
 #: .\referral\models\referral_bonus.py:12
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:37
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:87
 #: .\referral\templates\referral\referral_bonus_list.html:42
 msgid "Eligibility Criteria"
-msgstr ""
+msgstr "Eligibility Criteria"
 
 #: .\referral\models\referral_campaign.py:12
 msgid "Target Audience"
-msgstr ""
+msgstr "Target Audience"
 
 #: .\referral\models\referral_code.py:11
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:79
 msgid "Usage Count"
-msgstr ""
+msgstr "Usage Count"
 
 #: .\referral\models\referral_code.py:15
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:37
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:99
 msgid "Referred User Count"
-msgstr ""
+msgstr "Refered User Count"
 
 #: .\referral\models\referral_code.py:16
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:41
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:103
 msgid "Unique URL"
-msgstr ""
+msgstr "Unique URL"
 
 #: .\referral\models\referral_code.py:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:45
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:107
 msgid "Campaign Source"
-msgstr ""
+msgstr "Campaign Source"
 
 #: .\referral\models\referral_code.py:18
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:49
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:111
 msgid "Campaign Medium"
-msgstr ""
+msgstr "Campaign Medium"
 
 #: .\referral\models\referral_conversion.py:10
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:59
 msgid "Conversion Date"
-msgstr ""
+msgstr "Conversion Date"
 
 #: .\referral\models\referral_conversion.py:11
 #: .\referral\models\referral_transaction.py:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:63
 msgid "Conversion Value"
-msgstr ""
+msgstr "Conversion Value"
 
 #: .\referral\models\referral_conversion.py:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:25
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:71
 msgid "Reward Issued"
-msgstr ""
+msgstr "Reward issued"
 
 #: .\referral\models\referral_conversion.py:14
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:29
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:75
 msgid "Conversion Source"
-msgstr ""
+msgstr "Conversion Source"
 
 #: .\referral\models\referral_conversion.py:15
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:33
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:79
 msgid "Referral Type"
-msgstr ""
+msgstr "Referral Type"
 
 #: .\referral\models\referral_engagement.py:11
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:51
 #: .\referral\templates\referral\referral_engagement_list.html:35
 msgid "Email Opened"
-msgstr ""
+msgstr "Opened Email"
 
 #: .\referral\models\referral_engagement.py:12
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:17
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:55
 #: .\referral\templates\referral\referral_engagement_list.html:36
 msgid "Email Clicked"
-msgstr ""
+msgstr "Email Clicked"
 
 #: .\referral\models\referral_engagement.py:13
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:21
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:59
 #: .\referral\templates\referral\referral_engagement_list.html:37
 msgid "Social Share Count"
-msgstr ""
+msgstr "Social Share Count"
 
 #: .\referral\models\referral_engagement.py:14
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:25
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:63
 #: .\referral\templates\referral\referral_engagement_list.html:38
 msgid "Last Interaction Date"
-msgstr ""
+msgstr "Last Interaction Date"
 
 #: .\referral\models\referral_notification.py:14
 msgid "Action Required"
-msgstr ""
+msgstr "Action Required"
 
 #: .\referral\models\referral_program.py:14
 #: .\referral\models\referral_reward.py:13
 msgid "Reward Type"
-msgstr ""
+msgstr "Reward Type"
 
 #: .\referral\models\referral_program.py:15
 #: .\referral\models\referral_reward.py:14
 msgid "Reward Value"
-msgstr ""
+msgstr "Reward Value"
 
 #: .\referral\models\referral_program.py:17
 msgid "Min Referral Count"
-msgstr ""
+msgstr "Min Referral Count"
 
 #: .\referral\models\referral_program.py:18
 msgid "Max Referrals Per User"
-msgstr ""
+msgstr "Max Referrals For Users"
 
 #: .\referral\models\referral_program.py:21
 msgid "Program Duration"
-msgstr ""
+msgstr "Program Duration"
 
 #: .\referral\models\referral_program.py:22
 msgid "Allowed Regions"
-msgstr ""
+msgstr "Allowed Regions"
 
 #: .\referral\models\referral_program_partecipation.py:8
 msgid "Reward Earned"
-msgstr ""
+msgstr "Reward Earned"
 
 #: .\referral\models\referral_reward.py:18
 msgid "Reward Description"
-msgstr ""
+msgstr "Reward Description"
 
 #: .\referral\models\referral_reward.py:19
 msgid "Reward Source"
-msgstr ""
+msgstr "Reward Source"
 
 #: .\referral\models\referral_settings.py:10
 msgid "Default Reward Type"
-msgstr ""
+msgstr "Default Reward Type"
 
 #: .\referral\models\referral_settings.py:11
 msgid "Max Referrals Allowed"
-msgstr ""
+msgstr "Max Referrals Allowed"
 
 #: .\referral\models\referral_settings.py:13
 msgid "Auto Share Setting"
-msgstr ""
+msgstr "Auto Share Setting"
 
 #: .\referral\models\referral_settings.py:14
 msgid "Social Share Message"
-msgstr ""
+msgstr "Social Share Message"
 
 #: .\referral\models\referral_stats.py:9
 #: .\referral\templates\referral\referral_stat_list.html:38
 msgid "Total Rewards"
-msgstr ""
+msgstr "Total Rewards"
 
 #: .\referral\models\referral_stats.py:10
 msgid "Average Conversione Value"
-msgstr ""
+msgstr "Average Conversion Value"
 
 #: .\referral\models\referral_stats.py:11
 #: .\referral\templates\referral\referral_stat_list.html:40
 msgid "Highest Referral Earning"
-msgstr ""
+msgstr "Highest Referral Earning"
 
 #: .\referral\models\referral_transaction.py:18
 msgid "Discount Value"
-msgstr ""
+msgstr "Discount Value"
 
 #: .\referral\models\referral_transaction.py:19
 msgid "Coupon Code Used"
-msgstr ""
+msgstr "Coupon Code Used"
 
 #: .\referral\models\referral_transaction.py:20
 msgid "Channel"
-msgstr ""
+msgstr "Channel"
 
 #: .\referral\models\referral_user.py:8
 msgid "user"
-msgstr ""
+msgstr "user"
 
 #: .\referral\models\referral_user.py:9
 msgid "Total Referrals"
-msgstr ""
+msgstr "Total Referrals"
 
 #: .\referral\models\referral_user.py:10
 msgid "Active Referrals"
-msgstr ""
+msgstr "Active Referrals"
 
 #: .\referral\models\referral_user.py:11
 msgid "Inactive Referrals"
-msgstr ""
+msgstr "Inactive Referrals"
 
 #: .\referral\models\referral_user.py:12
 msgid "Total Rewards Earned"
-msgstr ""
+msgstr "Total Rewards Earned"
 
 #: .\referral\models\referral_user.py:13
 msgid "Total Spent By Referred Users"
-msgstr ""
+msgstr "Total Spent By Refered Users"
 
 #: .\referral\models\referral_user.py:15
 msgid "Loyalty Points Earned"
-msgstr ""
+msgstr "Loyalty Points Earned"
 
 #: .\referral\templates\referral\base.html:9
 msgid "GetREF - Referral Code System Dashboard"
-msgstr ""
+msgstr "GetREF - Reference Code System Dashboard"
 
 #: .\referral\templates\referral\create_referral_bonus.html:8
 msgid "Add New Bonus"
-msgstr ""
+msgstr "Add New Bonus"
 
 #: .\referral\templates\referral\create_referral_bonus.html:12
 msgid "Add Bonus"
-msgstr ""
+msgstr "Add Bonus"
 
 #: .\referral\templates\referral\create_referral_bonus.html:15
 #: .\referral\templates\referral\update_referral_bonus.html:16
 msgid "Back to Bonus List"
-msgstr ""
+msgstr "Back to Bonus List"
 
 #: .\referral\templates\referral\create_referral_code.html:8
 msgid "Add New Code"
-msgstr ""
+msgstr "Add New Code"
 
 #: .\referral\templates\referral\create_referral_code.html:12
 msgid "Add Code"
-msgstr ""
+msgstr "Add Code"
 
 #: .\referral\templates\referral\create_referral_code.html:15
 #: .\referral\templates\referral\update_referral_code.html:16
 msgid "Back to Code List"
-msgstr ""
+msgstr "Back to Code List"
 
 #: .\referral\templates\referral\create_referral_engagement.html:8
 msgid "Add New Engagement"
-msgstr ""
+msgstr "Add New Engagement"
 
 #: .\referral\templates\referral\create_referral_engagement.html:12
 msgid "Add Engagement"
-msgstr ""
+msgstr "Add Engagement"
 
 #: .\referral\templates\referral\create_referral_engagement.html:15
 #: .\referral\templates\referral\update_referral_engagement.html:16
 msgid "Back to Engagement List"
-msgstr ""
+msgstr "Back to Engagement List"
 
 #: .\referral\templates\referral\create_referral_stat.html:8
 msgid "Add New Stat"
-msgstr ""
+msgstr "Add New Stat"
 
 #: .\referral\templates\referral\create_referral_stat.html:12
 msgid "Add Stat"
-msgstr ""
+msgstr "Add Stat"
 
 #: .\referral\templates\referral\create_referral_stat.html:15
 #: .\referral\templates\referral\update_referral_stat.html:16
 msgid "Back to Stat List"
-msgstr ""
+msgstr "Back to Stat List"
 
 #: .\referral\templates\referral\delete_referral_bonus.html:9
 msgid "Delete Bonus"
-msgstr ""
+msgstr "Delete Bonus"
 
 #: .\referral\templates\referral\delete_referral_bonus.html:10
 msgid "Are you sure you want to delete this bonus?"
-msgstr ""
+msgstr "Are you sure you want to delete this bonus?"
 
 #: .\referral\templates\referral\delete_referral_code.html:9
 msgid "Delete Code"
-msgstr ""
+msgstr "Delete Code"
 
 #: .\referral\templates\referral\delete_referral_code.html:10
 msgid "Are you sure you want to delete this code?"
-msgstr ""
+msgstr "Are you sure you want to delete this code?"
 
 #: .\referral\templates\referral\delete_referral_engagement.html:9
 msgid "Delete Engagement"
-msgstr ""
+msgstr "Delete Engagement"
 
 #: .\referral\templates\referral\delete_referral_engagement.html:10
 msgid "Are you sure you want to delete this engagement?"
-msgstr ""
+msgstr "Are you sure you want to delete this engagement?"
 
 #: .\referral\templates\referral\delete_referral_stat.html:9
 msgid "Delete Stat"
-msgstr ""
+msgstr "Delete Stat"
 
 #: .\referral\templates\referral\delete_referral_stat.html:10
 msgid "Are you sure you want to delete this stat?"
-msgstr ""
+msgstr "Are you sure you want to delete this stat?"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_audit.html:7
 msgid "Create New Referral Audit"
-msgstr ""
+msgstr "Create New Referral Audit"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_audit.html:48
 msgid "Edit Referral Audit"
-msgstr ""
+msgstr "Edit Referral Audit"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:7
 msgid "Create New Referral Bonus"
-msgstr ""
+msgstr "Create New Referral Bonus"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:29
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:79
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:29
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:91
 msgid "Exipiry Date"
-msgstr ""
+msgstr "Expiry Date"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_bonus.html:56
 msgid "Edit Referral Bonus"
-msgstr ""
+msgstr "Edit Referral Bonus"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_campaign.html:7
 msgid "Create New Referral Campaign"
-msgstr ""
+msgstr "Create New Referral Campaign"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_campaign.html:52
 msgid "Edit Referral Campaign"
-msgstr ""
+msgstr "Edit Referral Campaign"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:7
 msgid "Create New Referral Code"
-msgstr ""
+msgstr "Create New Referral Code"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_code.html:68
 msgid "Edit Referral Code"
-msgstr ""
+msgstr "Edit Referral Code"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:7
 msgid "Create New Referral Conversion"
-msgstr ""
+msgstr "Create New Referral Conversion"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_conversion.html:52
 msgid "Edit Referral Conversion"
-msgstr ""
+msgstr "Edit Referral Conversion"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:7
 msgid "Create New Referral Engagement"
-msgstr ""
+msgstr "Create New Referral Engagement"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_engagement.html:44
 msgid "Edit Referral Engagement"
-msgstr ""
+msgstr "Edit Referral Engagement"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:7
 msgid "Create New Referral Notification"
-msgstr ""
+msgstr "Create New Referral Notification"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_notification.html:48
 msgid "Edit Referral Notification"
-msgstr ""
+msgstr "Edit Reference Notification"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:7
 msgid "Create New Referral Performance"
-msgstr ""
+msgstr "Create New Referral Performance"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_performance.html:64
 msgid "Edit Referral Performance"
-msgstr ""
+msgstr "Edit Reference Performance"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:7
 msgid "Create New Referral Program"
-msgstr ""
+msgstr "Create New Referral Program"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_program.html:64
 msgid "Edit Referral Program"
-msgstr ""
+msgstr "Edit Referral Program"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_program_partecipation.html:7
 msgid "Create New Referral ProgramPartecipation"
-msgstr ""
+msgstr "Create New Referral ProgramParticipation"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_program_partecipation.html:40
 msgid "Edit Referral ProgramPartecipation"
-msgstr ""
+msgstr "Edit Referral ProgramParticipation"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:7
 msgid "Create New Referral Reward"
-msgstr ""
+msgstr "Create New Referral Reward"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_reward.html:36
 msgid "Edit Referral Reward"
-msgstr ""
+msgstr "Edit Referral Reward"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:7
 msgid "Create New Referral Setting"
-msgstr ""
+msgstr "Create New Referral Setting"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_setting.html:48
 msgid "Edit Referral Setting"
-msgstr ""
+msgstr "Edit Referral Setting"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:7
 msgid "Create New Referral Stat"
-msgstr ""
+msgstr "Create New Referral Stat"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_stat.html:60
 msgid "Edit Referral Stat"
-msgstr ""
+msgstr "Edit Referral Stat"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:7
 msgid "Create New Referral Transaction"
-msgstr ""
+msgstr "Create New Referral Transaction"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:41
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:99
 msgid "discountApplied"
-msgstr ""
+msgstr "discountApplied"
 
 #: .\referral\templates\referral\modals\modal_create_update_referral_transaction.html:64
 msgid "Edit Referral Transaction"
-msgstr ""
+msgstr "Edit Referral Transaction"
 
 #: .\referral\templates\referral\referral_audit_detail.html:9
 #: .\referral\templates\referral\referral_bonus_detail.html:9
@@ -4420,7 +4455,7 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_detail.html:9
 #: .\referral\templates\referral\referral_transaction_detail.html:9
 msgid "Referral Detail"
-msgstr ""
+msgstr "Referral Detail"
 
 #: .\referral\templates\referral\referral_audit_list.html:16
 #: .\referral\templates\referral\referral_bonus_list.html:14
@@ -4438,192 +4473,192 @@ msgstr ""
 #: .\referral\templates\referral\referral_stat_list.html:14
 #: .\referral\templates\referral\referral_transaction_list.html:14
 msgid "Referrals"
-msgstr ""
+msgstr "Referrals"
 
 #: .\referral\templates\referral\referral_bonus_detail.html:42
 msgid "bonus_type:"
-msgstr ""
+msgstr "bonus_type:"
 
 #: .\referral\templates\referral\referral_bonus_detail.html:43
 msgid "bonus_value:"
-msgstr ""
+msgstr "bonus_value:"
 
 #: .\referral\templates\referral\referral_bonus_detail.html:44
 msgid "min_referrals_required:"
-msgstr ""
+msgstr "min_referrals_required:"
 
 #: .\referral\templates\referral\referral_bonus_list.html:40
 msgid "Rxpiry Date"
-msgstr ""
+msgstr "Rxpiry Date"
 
 #: .\referral\templates\referral\referral_code_detail.html:42
 msgid "Code:"
-msgstr ""
+msgstr "Code:"
 
 #: .\referral\templates\referral\referral_code_detail.html:43
 msgid "Usage Count:"
-msgstr ""
+msgstr "Usage Count:"
 
 #: .\referral\templates\referral\referral_code_detail.html:46
 msgid "Referred User Count:"
-msgstr ""
+msgstr "Reference User Count:"
 
 #: .\referral\templates\referral\referral_code_detail.html:47
 msgid "Unique Url:"
-msgstr ""
+msgstr "Unique Url:"
 
 #: .\referral\templates\referral\referral_code_detail.html:48
 msgid "Campaign Source:"
-msgstr ""
+msgstr "Campaign Source:"
 
 #: .\referral\templates\referral\referral_code_detail.html:49
 msgid "Campaign Medium:"
-msgstr ""
+msgstr "Campaign Medium:"
 
 #: .\referral\templates\referral\referral_code_list.html:35
 msgid "code"
-msgstr ""
+msgstr "queue"
 
 #: .\referral\templates\referral\referral_code_list.html:36
 msgid "usage_count"
-msgstr ""
+msgstr "use_count"
 
 #: .\referral\templates\referral\referral_code_list.html:38
 msgid "status"
-msgstr ""
+msgstr "status"
 
 #: .\referral\templates\referral\referral_code_list.html:39
 msgid "expiry_date"
-msgstr ""
+msgstr "expiry_date"
 
 #: .\referral\templates\referral\referral_code_list.html:40
 msgid "referred_user_count"
-msgstr ""
+msgstr "referred_user_count"
 
 #: .\referral\templates\referral\referral_code_list.html:41
 msgid "unique_url"
-msgstr ""
+msgstr "unique_url"
 
 #: .\referral\templates\referral\referral_code_list.html:42
 msgid "campaign_source"
-msgstr ""
+msgstr "campaign_source"
 
 #: .\referral\templates\referral\referral_code_list.html:43
 msgid "campaign_medium"
-msgstr ""
+msgstr "campaign_medium"
 
 #: .\referral\templates\referral\referral_engagement_detail.html:42
 msgid "Email Opened:"
-msgstr ""
+msgstr "Opened Email:"
 
 #: .\referral\templates\referral\referral_engagement_detail.html:43
 msgid "Email Clicked:"
-msgstr ""
+msgstr "Email Clicked:"
 
 #: .\referral\templates\referral\referral_engagement_detail.html:44
 msgid "Social Share Count:"
-msgstr ""
+msgstr "Social Share Count:"
 
 #: .\referral\templates\referral\referral_engagement_detail.html:45
 msgid "Last Interaction Date:"
-msgstr ""
+msgstr "Last Interaction Date:"
 
 #: .\referral\templates\referral\referral_performance_list.html:39
 #: .\referral\templates\referral\referral_program_list.html:39
 msgid "Max Payout Limit"
-msgstr ""
+msgstr "Max Payout Limit"
 
 #: .\referral\templates\referral\referral_stat_list.html:39
 msgid "Average Conversion Value"
-msgstr ""
+msgstr "Average Conversion Value"
 
 #: .\referral\templates\referral\update_referral_bonus.html:9
 msgid "Edit Bonus"
-msgstr ""
+msgstr "Edit Bonus"
 
 #: .\referral\templates\referral\update_referral_bonus.html:13
 msgid "Update Bonus"
-msgstr ""
+msgstr "Update Bonus"
 
 #: .\referral\templates\referral\update_referral_code.html:9
 msgid "Edit Code"
-msgstr ""
+msgstr "Edit Code"
 
 #: .\referral\templates\referral\update_referral_code.html:13
 msgid "Update Code"
-msgstr ""
+msgstr "Update Code"
 
 #: .\referral\templates\referral\update_referral_engagement.html:9
 msgid "Edit Engagement"
-msgstr ""
+msgstr "Edit Engagement"
 
 #: .\referral\templates\referral\update_referral_engagement.html:13
 msgid "Update Engagement"
-msgstr ""
+msgstr "Update Engagement"
 
 #: .\referral\templates\referral\update_referral_reward.html:9
 msgid "Edit Transcription"
-msgstr ""
+msgstr "Edit Transcription"
 
 #: .\referral\templates\referral\update_referral_reward.html:13
 msgid "Update Transcription"
-msgstr ""
+msgstr "Update Transcription"
 
 #: .\referral\templates\referral\update_referral_stat.html:9
 msgid "Edit Stat"
-msgstr ""
+msgstr "Edit Stat"
 
 #: .\referral\templates\referral\update_referral_stat.html:13
 msgid "Update Stat"
-msgstr ""
+msgstr "Update Stat"
 
 #: .\subscriptions\templates\subscriptions\api_keys.html:3
 msgid "Gestione API Keys"
-msgstr ""
+msgstr "Keys API Management"
 
 #: .\subscriptions\templates\subscriptions\api_keys.html:8
 #: .\subscriptions\templates\subscriptions\home.html:13
 msgid "Client ID"
-msgstr ""
+msgstr "ID Client"
 
 #: .\subscriptions\templates\subscriptions\api_keys.html:9
 #: .\subscriptions\templates\subscriptions\home.html:14
 msgid "Ultimo Uso"
-msgstr ""
+msgstr "Last Use"
 
 #: .\subscriptions\templates\subscriptions\api_keys.html:10
 #: .\subscriptions\templates\subscriptions\home.html:15
 msgid "Richieste"
-msgstr ""
+msgstr "Requests"
 
 #: .\subscriptions\templates\subscriptions\api_keys.html:22
 msgid "Elimina"
-msgstr ""
+msgstr "Delete"
 
 #: .\subscriptions\templates\subscriptions\api_usage_dashboard.html:3
 msgid "Uso delle API"
-msgstr ""
+msgstr "Use of APIs"
 
 #: .\subscriptions\templates\subscriptions\api_usage_dashboard.html:7
 msgid "Endpoint"
-msgstr ""
+msgstr "Endpoint"
 
 #: .\subscriptions\templates\subscriptions\email_subscription_success.html:5
 msgid "Abbonamento Attivato"
-msgstr ""
+msgstr "Activated Subscription"
 
 #: .\subscriptions\templates\subscriptions\email_subscription_success.html:11
 msgid "Grazie per aver scelto il nostro servizio!"
-msgstr ""
+msgstr "Thank you for choosing our service!"
 
 #: .\subscriptions\templates\subscriptions\email_subscription_success.html:12
 msgid "Se hai domande, non esitare a contattarci."
-msgstr ""
+msgstr "If you have any questions, please feel free to contact us."
 
 #: .\subscriptions\templates\subscriptions\home.html:3
 msgid "Le tue API Keys"
-msgstr ""
+msgstr "Your Keys API"
 
 #: .\subscriptions\templates\subscriptions\home.html:7
 msgid "Crea API Key"
-msgstr ""
+msgstr "Create Key API"

@@ -33,7 +33,7 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+DEBUG = bool(config("DEBUG"))
 
 # social auth configs for github
 SOCIAL_AUTH_GITHUB_KEY = str(config('GITHUB_KEY', ""))
@@ -294,68 +294,72 @@ LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+if DEBUG == False:
+    DOMAIN = str(config('DOMAIN'))
+    # Email settings
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = str((config('EMAIL_HOST', ""))) #'smtp.gmail.com'
+    EMAIL_PORT = 587 #465 # if EMAIL_USE_SSL=True
+    EMAIL_HOST_USER = str((config('EMAIL_HOST_USER', "")))
+    EMAIL_HOST_PASSWORD = str((config('EMAIL_HOST_PASSWORD', "")))
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
+    EMAIL_USE_TLS = True #465
+    EMAIL_USE_SSL = False #587
+    # Session settings
+    SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+    SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+    # Security settings 
+    SESSION_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = [
+        'affiliate.getcall.it', 
+        'www.affiliate.getcall.it' 
+        #'*', 
+        # #'getcall.pythonanywhere.com',
+    ]
+    # Add automatically schema to every domains
+    CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 
-DOMAIN = str(config('DOMAIN')) or 'https://affiliate.getcall.it' #if DEBUG == False else '127.0.0.1:8000'
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' \
-    if DEBUG == False else 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = str((config('EMAIL_HOST', ""))) #'smtp.gmail.com'
-EMAIL_PORT = 587 #465 # if EMAIL_USE_SSL=True
-EMAIL_HOST_USER = str((config('EMAIL_HOST_USER', "")))
-EMAIL_HOST_PASSWORD = str((config('EMAIL_HOST_PASSWORD', "")))
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    
-EMAIL_USE_TLS = True #465
-EMAIL_USE_SSL = False #587
-# Session settings
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
-# Security settings 
-SESSION_COOKIE_SECURE = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    'affiliate.getcall.it', 
-    'www.affiliate.getcall.it' 
-    #'*', 
-    # #'getcall.pythonanywhere.com',
-]
-# Add automatically schema to every domains
-CSRF_TRUSTED_ORIGINS = [f'https://{origin}' for origin in CSRF_TRUSTED_ORIGINS]
 
+    import logging
+    LOGS_PATH= os.path.join(BASE_DIR, 'logs')
+    os.makedirs(LOGS_PATH, exist_ok=True)
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': os.path.join(BASE_DIR, 'logs', 'email_errors.log'),
+            },
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file', 'console'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+            'django.request': {
+                'handlers': ['file', 'console'],
+                'level': 'DEBUG',
+                'propagate': False,
+            },
+        },
+    }
+else:
+    DOMAIN = '127.0.0.1:8000'
+    # Email settings
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-import logging
-LOGS_PATH= os.path.join(BASE_DIR, 'logs')
-os.makedirs(LOGS_PATH, exist_ok=True)
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'email_errors.log'),
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
-}
 
 
 # OAuth2 Provider
