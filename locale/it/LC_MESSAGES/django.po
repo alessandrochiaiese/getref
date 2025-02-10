@@ -3066,7 +3066,7 @@ msgstr "Collega Google Maps:"
 #: .\dashboard\templates\dashboard\partials\_sidebar.html:154
 #: .\dashboard\templates\registration\login.html:87
 msgid " "
-msgstr "- Oh, mio Dio."
+msgstr " "
 
 #: .\dashboard\templates\dashboard\enterprise\enterprise_detail.html:18
 msgid "Settori:"
