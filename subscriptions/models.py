@@ -17,7 +17,7 @@ class StripeCustomer(models.Model):
 
 
 
-class Subscription(models.Model):
+class StripeSubscription(models.Model):
     stripe_customer = models.ForeignKey(StripeCustomer, on_delete=models.CASCADE, related_name='subscriptions')
     stripe_subscription_id = models.CharField(max_length=255)
     product_name = models.CharField(max_length=255)

@@ -8,7 +8,7 @@ from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from subscriptions.models import StripeCustomer, Subscription 
+from subscriptions.models import StripeCustomer, StripeSubscription 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -151,7 +151,7 @@ def purchased_products(request):
         })"""
 
         # Recupera tutte le sottoscrizioni per questo cliente
-        subscriptions = Subscription.objects.filter(stripe_customer__user=request.user)
+        subscriptions = StripeSubscription.objects.filter(stripe_customer__user=request.user)
 
         # Passa i dati al template
         return render(request, 'subscriptions/pages.html', {
@@ -240,7 +240,7 @@ def stripe_webhook(request):
             print(f"Subscription details: {subscription}")
             
             # Salva la subscription (modifica come necessario)
-            subscription = Subscription(
+            subscription = StripeSubscription(
                 stripe_customer=stripe_customer,
                 stripe_subscription_id=stripe_subscription_id,
                 product_name=stripe_subscription.plan.product.name,
