@@ -190,19 +190,23 @@ def purchased_products(request):
 
         # Recupera tutte le sottoscrizioni dell'utente
         subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId, status='active')
-        
+        print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
+
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
         checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
-        
+        print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
+
         # Lista per i prodotti one-time acquistati
         purchased_one_time_products = []
 
         # Verifica ogni sessione di checkout per i prodotti acquistati
         for session in checkout_sessions:
             line_items = stripe.checkout.Session.list_line_items(session.id)
+            print(f"Line items for session {session.id}: {line_items}")  # Debug: visualizzare i line items della sessione
             for item in line_items:
                 # Verifica se il prodotto è one-time (non ha un prezzo ricorrente)
                 if 'recurring' not in item['price']:
+                    print(f"One-time product found: {item['product']}")  # Debug: visualizzare il prodotto one-time
                     product = stripe.Product.retrieve(item['product'])
                     purchased_one_time_products.append(product)
 
