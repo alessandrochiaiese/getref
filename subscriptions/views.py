@@ -134,7 +134,7 @@ def create_checkout_session(request):
 @login_required
 def purchased_products(request):
     try:
-        stripe_customer = StripeCustomer.objects.get(user=request.user)
+        #stripe_customer = StripeCustomer.objects.get(user=request.user)
         #subscriptions = stripe_customer.subscriptions.all()  # Recupera tutti gli abbonamenti dell'utente
 
         """purchased_products = []
@@ -151,7 +151,7 @@ def purchased_products(request):
         })"""
 
         # Recupera tutte le sottoscrizioni per questo cliente
-        subscriptions = Subscription.objects.filter(stripe_customer=stripe_customer)
+        subscriptions = Subscription.objects.filter(stripe_customer__user=request.user)
 
         # Passa i dati al template
         return render(request, 'subscriptions/pages.html', {
