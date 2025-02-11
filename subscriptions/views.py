@@ -151,7 +151,7 @@ def create_checkout_session(request):
             products = list_stripe_all_products()
             #plans = list_plans(products)            
 
-            if not plans:
+            if not products:
                 print("Nessun prodotto trovato in Stripe.") 
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
