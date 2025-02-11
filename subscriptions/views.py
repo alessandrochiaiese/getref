@@ -189,7 +189,8 @@ def purchased_products(request):
         stripe_customer = StripeCustomer.objects.get(user=request.user)
 
         # Recupera tutte le sottoscrizioni dell'utente
-        subscriptions = StripeSubscription.objects.filter(stripe_customer=stripe_customer)
+        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripe_customer_id, status='active')
+        #subscriptions = StripeSubscription.objects.filter(stripe_customer=stripe_customer)
 
         # Recupera tutti i prodotti da Stripe
         products = list_stripe_all_products()
@@ -200,7 +201,8 @@ def purchased_products(request):
         # Per ogni sottoscrizione, aggiungiamo il prodotto associato se non è ricorrente
         purchased_one_time_products = []
         for subscription in subscriptions:
-            product = next((prod for prod in one_time_products if prod['product_id'] == subscription.product_id), None)
+            #product = next((prod for prod in one_time_products if prod['product_id'] == subscription.product_id), None)
+            product = next((prod for prod in one_time_products if prod['product_id'] == subscription.plan.product), None)
             if product:
                 purchased_one_time_products.append(product)
 
