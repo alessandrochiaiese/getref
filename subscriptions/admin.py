@@ -12,9 +12,8 @@ class StripeCustomerAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'stripeCustomerId')  # Aggiungi un campo per cercare per nome utente
 
 
-"""@admin.register(StripeSubscription)
+@admin.register(StripeSubscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ('stripe_customer', 'product_name', 'status', 'subscription_date')
     search_fields = ('stripe_customer__user__username', 'product_name', 'status')
-    list_filter = ('status', 'stripe_customer')"""
-admin.site.register(StripeSubscription) #, SubscriptionAdmin)
+    list_filter = ('status', 'stripe_customer')

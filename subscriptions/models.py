@@ -29,7 +29,7 @@ class StripeSubscription(models.Model):
         return f"Subscription to {self.product_name} ({self.status})"
     
     class Meta:
-        db_table = 'stripe_subscriptions'
+        db_table = 'custom_stripe_subscriptions'
         verbose_name = 'StripeSubscription'
         verbose_name_plural = 'StripeSubscriptions'
 
