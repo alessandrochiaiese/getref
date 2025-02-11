@@ -48,7 +48,7 @@ def plans(request):
         # https://stripe.com/docs/api/products/object
 
         # Retrieve all available products
-        products = list_stripe_products()
+        products = list_stripe_all_products()
 
         return render(request, 'subscriptions/plans.html', {
             'subscription': subscription,
@@ -58,7 +58,7 @@ def plans(request):
 
     except StripeCustomer.DoesNotExist:
         # If the user doesn't have an active subscription
-        products = list_stripe_products()
+        products = list_stripe_all_products()
         return render(request, 'subscriptions/plans.html', {
             'products': products,
         })
@@ -71,7 +71,7 @@ def stripe_config(request):
         return JsonResponse(stripe_config, safe=False)
 
 # Funzione per recuperare i prodotti e i prezzi da Stripe
-def list_stripe_products():
+def list_stripe_all_products():
     try:
         print("Tentativo di recuperare i prodotti da Stripe...")  # Aggiungi log per il debug
         products = stripe.Product.list()
@@ -102,6 +102,21 @@ def list_stripe_products():
         print(f"Errore generico: {str(e)}")  # Log di errore generico
         return {'error': str(e)}
 
+def list_products(products):
+    product_list = []
+    for product in products:
+        if product.type == 'one_time':
+            product_list.append(product)
+    return product_list
+
+def list_plans(products):
+    product_list = []
+    for product in products:
+        if product.type == 'recurring':
+            product_list.append(product)
+    return product_list
+
+
 def get_product_by_price_id(products, price_id):
     return next((product for product in products if product['price_id'] == price_id), None)
 
@@ -113,9 +128,10 @@ def create_checkout_session(request):
 
         try:
             print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
-            products = list_stripe_products()
+            products = list_stripe_all_products()
+            #plans = list_plans(products)            
 
-            if not products:
+            if not plans:
                 print("Nessun prodotto trovato in Stripe.") 
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
