@@ -89,7 +89,8 @@ def list_stripe_products():
                     'price_id': price.id,
                     'price_amount': str(round(price.unit_amount / 100, 2)),
                     'currency': price.currency,
-                    'billing_scheme': price.billing_scheme
+                    'billing_scheme': price.billing_scheme,
+                    'type': price.type
                 })
         
         print(f"Prodotti recuperati: {product_list}")  # Log per vedere i prodotti recuperati
@@ -101,6 +102,9 @@ def list_stripe_products():
         print(f"Errore generico: {str(e)}")  # Log di errore generico
         return {'error': str(e)}
 
+def get_product_by_price_id(products, price_id):
+    return next((product for product in products if product['price_id'] == price_id), None)
+
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -108,16 +112,25 @@ def create_checkout_session(request):
         price_id = request.GET.get('priceId')
 
         try:
+            print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
+            products = list_stripe_products()
+
+            if not products:
+                print("Nessun prodotto trovato in Stripe.") 
+                return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
+
             if not price_id:
                 return JsonResponse({'error': 'No price ID found.'}, status=400)
-
+            
+            selected_product = get_product_by_price_id(products, price_id)
+            mode = 'subscription' if selected_product.get('type') == 'recurring' else 'payment'
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
                 success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN}/cancel/",
                 payment_method_types=['card'],
-                mode='subscription',
+                mode= mode, # 'subscription' if price is recurring type else 'payment'
                 line_items=[{
                     'price': price_id,
                     'quantity': 1,
