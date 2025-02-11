@@ -181,49 +181,32 @@ def create_checkout_session(request):
             return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
-
 @login_required
 def purchased_products(request):
     try:
         # Recupera il cliente Stripe per l'utente
         stripe_customer = StripeCustomer.objects.get(user=request.user)
 
-        # Recupera tutte le sottoscrizioni dell'utente
+        # Recupera tutte le sottoscrizioni attive del cliente (piani ricorrenti)
         subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId, status='active')
-        #subscriptions = StripeSubscription.objects.filter(stripe_customer=stripe_customer)
 
-        # Recupera tutti i prodotti da Stripe
-        products = list_stripe_all_products()
-
-        # Filtra solo i prodotti one-time acquistati (escludendo i piani ricorrenti)
-        one_time_products = list_products(products)
-
-        # Per ogni sottoscrizione, aggiungiamo il prodotto associato se non è ricorrente
-        purchased_one_time_products = []
-        for subscription in subscriptions:
-            #product = next((prod for prod in one_time_products if prod['product_id'] == subscription.product_id), None)
-            product = next((prod for prod in one_time_products if prod['product_id'] == subscription.plan.product), None)
-            if product:
-                purchased_one_time_products.append(product)
-
-        # Recupera tutte le sessioni di checkout completate
+        # Recupera tutte le sessioni di checkout completate per i prodotti one-time
         checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
 
         # Recupera tutti i prodotti da Stripe
         products = list_stripe_all_products()
 
         purchased_one_time_products = []
-
-        # Verifica ogni sessione di checkout per i prodotti acquistati
+        
+        # Recupera i prodotti one-time da sessioni di checkout completate
         for session in checkout_sessions:
             line_items = stripe.checkout.Session.list_line_items(session.id)
             for item in line_items:
-                product = stripe.Product.retrieve(item['product'])
-                
-                # Aggiungi solo i prodotti one-time
-                if item['price']['recurring'] is None:
+                # Verifica se il prodotto è one-time (non ricorrente)
+                if 'recurring' not in item['price']:
+                    product = stripe.Product.retrieve(item['product'])
                     purchased_one_time_products.append(product)
-        
+
         # Ora creiamo una lista per visualizzare anche i piani di abbonamento
         purchased_subscriptions = []
         for subscription in subscriptions:
@@ -232,11 +215,13 @@ def purchased_products(request):
                 'subscription': subscription,
                 'product': product,
             })
-            
+
+        # Passiamo i dati alla vista
         return render(request, 'subscriptions/purchased_products.html', {
-            'subscriptions': subscriptions,  # Passa tutte le sottoscrizioni
-            'purchased_one_time_products': purchased_one_time_products,  # Passa solo i prodotti one-time acquistati
+            'subscriptions': purchased_subscriptions,  # Passa i piani di abbonamento attivi
+            'purchased_one_time_products': purchased_one_time_products,  # Passa i prodotti one-time acquistati
         })
+
     except StripeCustomer.DoesNotExist:
         return render(request, 'subscriptions/purchased_products.html', {
             'subscriptions': [],
@@ -248,7 +233,6 @@ def purchased_products(request):
             'subscriptions': [],
             'purchased_one_time_products': [],
         })
-
 
 @login_required
 def success(request):
