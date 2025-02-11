@@ -13,41 +13,41 @@
 <div class="container mt-5">
   <h4>Your Active Subscriptions</h4>
   {% if subscriptions %}
-    <div class="row">
-      {% for subscription in subscriptions %}
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Subscription Plan: {{ subscription.plan.nickname }}</h5>
-              <p class="card-text">Status: {{ subscription.status }}</p>
-              <p class="card-text">Product: {{ subscription.plan.product }}</p>
-            </div>
-          </div>
+  <div class="row">
+    {% for subscription in subscriptions %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Subscription Plan: {{ subscription.plan.nickname }}</h5>
+          <p class="card-text">Status: {{ subscription.status }}</p>
+          <p class="card-text">Product: {{ subscription.plan.product }}</p>
         </div>
-      {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
   {% else %}
-    <p>You do not have any active subscriptions.</p>
+  <p>You do not have any active subscriptions.</p>
   {% endif %}
 
   <hr>
 
   <h4>Purchased One-Time Products</h4>
   {% if purchased_one_time_products %}
-    <div class="row">
-      {% for product in purchased_one_time_products %}
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ product.name }}</h5>
-              <p class="card-text">Price: {{ product.price }} {{ product.currency }}</p>
-            </div>
-          </div>
+  <div class="row">
+    {% for product in purchased_one_time_products %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">Price: {{ product.price_amount }} {{ product.currency }}</p>
         </div>
-      {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
   {% else %}
-    <p>You have not purchased any one-time products.</p>
+  <p>You have not purchased any one-time products.</p>
   {% endif %}
 </div>
 {% endblock %}
