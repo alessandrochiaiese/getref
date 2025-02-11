@@ -15,6 +15,7 @@
   {% if subscriptions %}
   <div class="row">
     {% for subscription in subscriptions %}
+    {{subscription}}
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
@@ -36,6 +37,7 @@
   {% if purchased_one_time_products %}
   <div class="row">
     {% for product in purchased_one_time_products %}
+    {{product}}
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
