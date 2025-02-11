@@ -21,7 +21,7 @@
                     <p class="card-text">Price: {{ product.price_amount }} {{ product.currency|upper }}</p>
                     <p class="card-text">{{ product.billing_scheme|default:"Unknown billing scheme" }}</p>
                     <!-- Subscribe button (will redirect to checkout) -->
-                    <a href="#" class="btn btn-primary subscribe-btn" data-price-id="{{ product.price_id }}">
+                    <a href="#" class="btn btn-primary buy-btn" data-price-id="{{ product.price_id }}">
                         {% trans "Subscribe" %}
                     </a>
                 </div>
@@ -45,5 +45,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
-<script src="{% static 'subscriptions/main.js' %}"></script>
+<script src="{% static 'subscriptions/products.js' %}"></script>
 {% endblock %}
