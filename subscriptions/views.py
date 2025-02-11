@@ -206,6 +206,33 @@ def purchased_products(request):
             if product:
                 purchased_one_time_products.append(product)
 
+        # Recupera tutte le sessioni di checkout completate
+        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
+
+        # Recupera tutti i prodotti da Stripe
+        products = list_stripe_all_products()
+
+        purchased_one_time_products = []
+
+        # Verifica ogni sessione di checkout per i prodotti acquistati
+        for session in checkout_sessions:
+            line_items = stripe.checkout.Session.list_line_items(session.id)
+            for item in line_items:
+                product = stripe.Product.retrieve(item['product'])
+                
+                # Aggiungi solo i prodotti one-time
+                if item['price']['recurring'] is None:
+                    purchased_one_time_products.append(product)
+        
+        # Ora creiamo una lista per visualizzare anche i piani di abbonamento
+        purchased_subscriptions = []
+        for subscription in subscriptions:
+            product = stripe.Product.retrieve(subscription.plan.product)
+            purchased_subscriptions.append({
+                'subscription': subscription,
+                'product': product,
+            })
+            
         return render(request, 'subscriptions/purchased_products.html', {
             'subscriptions': subscriptions,  # Passa tutte le sottoscrizioni
             'purchased_one_time_products': purchased_one_time_products,  # Passa solo i prodotti one-time acquistati
