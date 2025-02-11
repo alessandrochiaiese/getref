@@ -159,6 +159,7 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'No price ID found.'}, status=400)
             
             selected_product = get_product_by_price_id(products, price_id)
+            print('is selected the product: ', selected_product)
             mode = 'subscription' if selected_product.get('type') == 'recurring' else 'payment'
             # 
             # Create checkout session
