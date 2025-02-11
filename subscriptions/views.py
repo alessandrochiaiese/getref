@@ -189,7 +189,7 @@ def purchased_products(request):
         stripe_customer = StripeCustomer.objects.get(user=request.user)
 
         # Recupera tutte le sottoscrizioni dell'utente
-        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripe_customer_id, status='active')
+        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId, status='active')
         #subscriptions = StripeSubscription.objects.filter(stripe_customer=stripe_customer)
 
         # Recupera tutti i prodotti da Stripe
