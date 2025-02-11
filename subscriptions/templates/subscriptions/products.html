@@ -1,0 +1,49 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Plans" %}{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>One-Time Products</h2>
+    {% if one_time_products %}
+    <div class="row">
+        {% for product in one_time_products %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.product_name }}</h5>
+                    <p class="card-text">Price: {{ product.price_amount }} {{ product.currency|upper }}</p>
+                    <p class="card-text">{{ product.billing_scheme|default:"Unknown billing scheme" }}</p>
+                    <!-- Subscribe button (will redirect to checkout) -->
+                    <a href="#" class="btn btn-primary subscribe-btn" data-price-id="{{ product.price_id }}">
+                        {% trans "Subscribe" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No one-time products available.</p>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+<script src="{% static 'subscriptions/main.js' %}"></script>
+{% endblock %}

@@ -4,7 +4,7 @@ from dashboard.utils import track_referral_code
 
 from . import views
 
-from .views import (
+"""from .views import (
     AddItemToOrderView,
     CancelledView,
     HomePageView,
@@ -44,4 +44,5 @@ urlpatterns = [
      
     #path('webhook/stripe/', views.stripe_webhook),
 
-]
+]"""
+urlpatterns = []

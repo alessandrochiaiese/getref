@@ -43,6 +43,18 @@ SOCIAL_AUTH_GITHUB_SECRET = str(config('GITHUB_SECRET', ""))
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str(config('GOOGLE_KEY', ""))
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(config('GOOGLE_SECRET', ""))
 
+# social auth configs per Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = str(config('FACEBOOK_KEY', ""))
+SOCIAL_AUTH_FACEBOOK_SECRET = str(config('FACEBOOK_SECRET', ""))
+
+# social auth configs per Instagram
+SOCIAL_AUTH_INSTAGRAM_KEY = str(config('INSTAGRAM_KEY', ""))
+SOCIAL_AUTH_INSTAGRAM_SECRET = str(config('INSTAGRAM_SECRET', ""))
+
+# social auth configs per Twitter
+SOCIAL_AUTH_TWITTER_KEY = str(config('TWITTER_KEY', ""))
+SOCIAL_AUTH_TWITTER_SECRET = str(config('TWITTER_SECRET', ""))
+
 # Stripe configuration 
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
@@ -96,12 +108,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'social_django', 
     "accounts",                                 # Django users
+    # Local
     'dashboard', 
     'referral', 
     'affiliate',
     'subscriptions',
-    # Local
-    'payments.apps.PaymentsConfig',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -222,10 +234,17 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',  # Facebook backend
+    'social_core.backends.instagram.InstagramOAuth2',  # Instagram backend (se supportato)
+    'social_core.backends.twitter.TwitterOAuth',  # Twitter backend
 
     'django.contrib.auth.backends.ModelBackend',
     'oauth2_provider.backends.OAuth2Backend',
 )
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
+SOCIAL_AUTH_TWITTER_SCOPE = ['email']
+SOCIAL_AUTH_INSTAGRAM_SCOPE = ['basic', 'public_content']
 
 #AUTH_USER_MODEL = 'accounts.User'
 

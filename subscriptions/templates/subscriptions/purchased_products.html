@@ -11,21 +11,37 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h4>Purchased Products:</h4>
-  <code> {{ subscriptions }} </code>
-  {% if subscriptions %}
-    <ul>
-      {% for subscription in subscriptions %}
-        <li>
-          Product: {{ subscription.product_name }} <br>
-          Status: {{ subscription.status }} <br>
-          Subscribed on: {{ subscription.subscription_date|date:"Y-m-d H:i" }}
-        </li>
-      {% endfor %}
-    </ul>
+  <h2>Purchased Products</h2>
+  {% if one_time_products %}
+  <div class="row">
+    {% for product in one_time_products %}
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.product_name }}</h5>
+          <p class="card-text">Price: {{ product.price_amount }} {{ product.currency|upper }}</p>
+          <p class="card-text">{{ product.billing_scheme|default:"Unknown billing scheme" }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
   {% else %}
-    <p>No products purchased yet.</p>
+  <p>No purchased products available.</p>
   {% endif %}
+
+  <!-- Display active subscriptions -->
+  <h2>Purchased Subscription Plans</h2>
+  {% if subscriptions %}
+  <ul>
+    {% for subscription in subscriptions %}
+    <li>{{ subscription.product_name }} - {{ subscription.status }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No active subscriptions.</p>
+  {% endif %}
+
 </div>
 {% endblock %}
 

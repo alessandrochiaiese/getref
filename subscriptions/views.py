@@ -8,7 +8,7 @@ from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from subscriptions.models import StripeCustomer, StripeSubscription 
+from subscriptions.models import OneTimePurchase, StripeCustomer, StripeSubscription 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -48,7 +48,10 @@ def plans(request):
         # https://stripe.com/docs/api/products/object
 
         # Retrieve all available products
-        products = list_stripe_all_products()
+        all_products = list_stripe_all_products()
+        
+        # Retrieve all available plans
+        products = list_plans(all_products)
 
         return render(request, 'subscriptions/plans.html', {
             'subscription': subscription,
@@ -63,6 +66,23 @@ def plans(request):
             'products': products,
         })
 
+@login_required
+def products(request):
+    try:
+        # Recupera tutti i prodotti da Stripe
+        products = list_stripe_all_products()
+
+        # Filtra i prodotti 'one-time'
+        one_time_products = list_products(products)
+
+        return render(request, 'subscriptions/products.html', {
+            'one_time_products': one_time_products,  # Passa i prodotti one-time
+        })
+    except Exception as e:
+        print(f"Errore recuperando i prodotti: {str(e)}")
+        return render(request, 'subscriptions/products.html', {
+            'one_time_products': [],
+        })
 
 @csrf_exempt
 def stripe_config(request):
@@ -140,6 +160,7 @@ def create_checkout_session(request):
             
             selected_product = get_product_by_price_id(products, price_id)
             mode = 'subscription' if selected_product.get('type') == 'recurring' else 'payment'
+            # 
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
@@ -163,32 +184,39 @@ def create_checkout_session(request):
 @login_required
 def purchased_products(request):
     try:
-        #stripe_customer = StripeCustomer.objects.get(user=request.user)
-        #subscriptions = stripe_customer.subscriptions.all()  # Recupera tutti gli abbonamenti dell'utente
+        # Recupera il cliente Stripe per l'utente
+        stripe_customer = StripeCustomer.objects.get(user=request.user)
 
-        """purchased_products = []
+        # Recupera tutte le sottoscrizioni dell'utente
+        subscriptions = StripeSubscription.objects.filter(stripe_customer=stripe_customer)
+
+        # Recupera tutti i prodotti da Stripe
+        products = list_stripe_all_products()
+
+        # Filtra solo i prodotti one-time acquistati (escludendo i piani ricorrenti)
+        one_time_products = list_products(products)
+
+        # Per ogni sottoscrizione, aggiungiamo il prodotto associato se non è ricorrente
+        purchased_one_time_products = []
         for subscription in subscriptions:
-            purchased_products.append({
-                'product_name': subscription.product_name,
-                'product_id': subscription.product_id,
-                'status': subscription.status,
-                'subscription_date': subscription.subscription_date,
-            })
+            product = next((prod for prod in one_time_products if prod['product_id'] == subscription.product_id), None)
+            if product:
+                purchased_one_time_products.append(product)
 
-        return render(request, 'subscriptions/pages.html', {
-            'purchased_products': purchased_products,
-        })"""
-
-        # Recupera tutte le sottoscrizioni per questo cliente
-        subscriptions = StripeSubscription.objects.filter(stripe_customer__user=request.user)
-
-        # Passa i dati al template
-        return render(request, 'subscriptions/pages.html', {
-            'subscriptions': subscriptions,  # Passa le sottoscrizioni al template
+        return render(request, 'subscriptions/purchased_products.html', {
+            'subscriptions': subscriptions,  # Passa tutte le sottoscrizioni
+            'purchased_one_time_products': purchased_one_time_products,  # Passa solo i prodotti one-time acquistati
         })
     except StripeCustomer.DoesNotExist:
-        return render(request, 'subscriptions/pages.html', {
+        return render(request, 'subscriptions/purchased_products.html', {
             'subscriptions': [],
+            'purchased_one_time_products': [],
+        })
+    except Exception as e:
+        print(f"Errore recuperando i prodotti acquistati: {str(e)}")
+        return render(request, 'subscriptions/purchased_products.html', {
+            'subscriptions': [],
+            'purchased_one_time_products': [],
         })
 
 
@@ -232,7 +260,7 @@ def stripe_webhook(request):
 
         # Ottieni il customer dalla sessione
         stripe_customer_id = checkout_session.get('customer')
-        stripe_subscription_id = checkout_session.get('subscription')  # Questo può essere null se il checkout non è per una sottoscrizione
+        stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
 
         #stripe_customer_id = session.get('stripe_customer_id')
         #stripe_subscription_id = session.get('stripe_subscription_id')
@@ -250,34 +278,51 @@ def stripe_webhook(request):
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
             # Verifica se il customer esiste o lo crea
-            stripe_customer = StripeCustomer(
+            stripe_customer, created = StripeCustomer(
                 user=user,
                 stripeCustomerId=stripe_customer_id,
                 stripeSubscriptionId=stripe_subscription_id,
             )
             stripe_customer.save()
 
-            if stripe_customer:
+            if created:
                 print(f"StripeCustomer for user {user.username} created.")
             else:
                 print(f"StripeCustomer for user {user.username} already exists.")
 
-            # Recupere la subscription
-            stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
-            
-            # Log della subscription
-            print(f"Subscription details: {subscription}")
-            
-            # Salva la subscription (modifica come necessario)
-            subscription = StripeSubscription(
-                stripe_customer=stripe_customer,
-                stripe_subscription_id=stripe_subscription_id,
-                product_name=stripe_subscription.plan.product.name,
-                product_id=stripe_subscription.plan.product.id,
-                status=stripe_subscription.status,
-            )
-            print(f"Subscription saved for {user.username}.")
-            subscription.save()
+            # Handle subscription and one-time payments
+            if stripe_subscription_id != '':
+                # Subscription created, save the subscription details
+                stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+                subscription = StripeSubscription(
+                    stripe_customer=stripe_customer,
+                    stripe_subscription_id=stripe_subscription_id,
+                    product_name=stripe_subscription.plan.product.name,
+                    product_id=stripe_subscription.plan.product.id,
+                    status=stripe_subscription.status,
+                )
+                subscription.save()
+                print(f"Subscription saved for {user.username}.")
+            else:
+                # Handle one-time payment (if no subscription ID is available)
+                line_item = checkout_session.get('line_items')['data'][0]  # Get the first line item
+                one_time_product_name = line_item.get('description')
+                one_time_product_id = line_item.get('price').get('product')
+                price_amount = line_item.get('amount_total') / 100.0  # Convert cents to dollars/euros
+                currency = line_item.get('currency').upper()
+
+                # Save the one-time purchase
+                one_time_purchase = OneTimePurchase(
+                    stripe_customer=stripe_customer,
+                    product_name=one_time_product_name,
+                    product_id=one_time_product_id,
+                    price_amount=price_amount,
+                    currency=currency,
+                    status='completed',
+                )
+                one_time_purchase.save()
+                print(f"One-time purchase saved for {user.username}.")
+
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")

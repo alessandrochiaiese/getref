@@ -1,9 +1,11 @@
 from django.contrib import admin
-from subscriptions.models import StripeCustomer, StripeSubscription
+from subscriptions.models import OneTimePurchase, StripeCustomer, StripeSubscription
 
 
 #admin.site.register(StripeCustomer)
 #admin.site.register(Subscription)
+
+admin.site.register(OneTimePurchase)
 
 # Registra il modello StripeCustomer
 @admin.register(StripeCustomer)
