@@ -159,16 +159,20 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'No price ID found.'}, status=400)
             
             selected_product = get_product_by_price_id(products, price_id)
-            print('is selected the product: ', selected_product)
-            mode = 'subscription' if selected_product and selected_product.get('type') == 'recurring' else 'payment'
-            # 
+            print('Product selected: ', selected_product)
+            
+            if selected_product and selected_product.get('type') == 'recurring' and selected_product.get('type') != 'one_time':
+                mode = 'subscription'
+            elif selected_product and selected_product.get('type') == 'one_time' and selected_product.get('type') != 'recurring':
+                mode = 'payment'
+
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
                 success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN}/cancel/",
                 payment_method_types=['card'],
-                mode= 'payment', # 'subscription' if price is recurring type else 'payment'
+                mode= mode, # 'subscription' if price is recurring type else 'payment'
                 line_items=[{
                     'price': price_id,
                     'quantity': 1,
