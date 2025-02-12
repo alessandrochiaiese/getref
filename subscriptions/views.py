@@ -129,13 +129,33 @@ def list_products(products):
             product_list.append(product)
     return product_list
 
-def list_plans(products):
+"""def list_plans(products):
     product_list = []
     for product in products:
         if product.get('type') != 'one_time': # 'recurring
             product_list.append(product)
     return product_list
+"""
+def list_plans(products):
+    product_list = []
+    for product in products:
+        # Recupera i prezzi associati al prodotto
+        prices = stripe.Price.list(product=product['product_id'])
 
+        for price in prices.auto_paging_iter():
+            if price.billing_scheme == 'tiered' or price.recurring:  # Verifica se è ricorrente
+                product_list.append({
+                    'product_name': product['product_name'],
+                    'product_id': product['product_id'],
+                    'price_id': price.id,
+                    'price_amount': str(round(price.unit_amount / 100, 2)),
+                    'currency': price.currency,
+                    'billing_scheme': price.billing_scheme,
+                    'type': price.type,
+                    'interval': price.recurring.interval if price.recurring else None  # Intervallo ricorrente
+                })
+                break  # Se abbiamo trovato un piano ricorrente, non è necessario continuare con gli altri prezzi dello stesso prodotto
+    return product_list
 
 def get_product_by_price_id(products, price_id):
     return next((product for product in products if product['price_id'] == price_id), None)
