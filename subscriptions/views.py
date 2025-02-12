@@ -284,6 +284,7 @@ def stripe_webhook(request):
         checkout_session = stripe.checkout.Session.retrieve(session_id)
 
         # Ottieni il customer dalla sessione
+        mode = checkout_session.get('mode')
         stripe_customer_id = checkout_session.get('customer')
         stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
 
@@ -303,7 +304,7 @@ def stripe_webhook(request):
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
             # Verifica se il customer esiste o lo crea
-            stripe_customer, created = StripeCustomer(
+            stripe_customer, created = StripeCustomer.objects.get_or_create(
                 user=user,
                 stripeCustomerId=stripe_customer_id,
                 stripeSubscriptionId=stripe_subscription_id,
@@ -316,7 +317,7 @@ def stripe_webhook(request):
                 print(f"StripeCustomer for user {user.username} already exists.")
 
             # Handle subscription and one-time payments
-            if stripe_subscription_id != '':
+            if mode == 'subscription':
                 # Subscription created, save the subscription details
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
                 subscription = StripeSubscription(
@@ -328,7 +329,7 @@ def stripe_webhook(request):
                 )
                 subscription.save()
                 print(f"Subscription saved for {user.username}.")
-            else:
+            elif mode == 'payment':
                 # Handle one-time payment (if no subscription ID is available)
                 line_item = checkout_session.get('line_items')['data'][0]  # Get the first line item
                 one_time_product_name = line_item.get('description')
