@@ -132,7 +132,7 @@ def list_products(products):
 def list_plans(products):
     product_list = []
     for product in products:
-        if product.get('type') == 'recurring':
+        if product.get('type') == 'recurring' or product.get('type') != 'one_time':
             product_list.append(product)
     return product_list
 
@@ -320,7 +320,7 @@ def stripe_webhook(request):
             if mode == 'subscription':
                 # Subscription created, save the subscription details
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
-                subscription = StripeSubscription(
+                subscription = StripeSubscription.objects.get_or_create(
                     stripe_customer=stripe_customer,
                     stripe_subscription_id=stripe_subscription_id,
                     product_name=stripe_subscription.plan.product.name,
@@ -338,7 +338,7 @@ def stripe_webhook(request):
                 currency = line_item.get('currency').upper()
 
                 # Save the one-time purchase
-                one_time_purchase = OneTimePurchase(
+                one_time_purchase = OneTimePurchase.objects.get_or_create(
                     stripe_customer=stripe_customer,
                     product_name=one_time_product_name,
                     product_id=one_time_product_id,
