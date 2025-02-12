@@ -197,13 +197,31 @@ def purchased_products(request):
         print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
 
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
-        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
-        print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
+        #checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
+        #print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
+
+        # Recupera tutti i pagamenti completati per i prodotti one-time
+        payment_intents = stripe.PaymentIntent.list(customer=stripe_customer.stripeCustomerId, status='succeeded')
+        print(f"Payment Intents: {payment_intents}")  # Debug
 
         # Lista per i prodotti one-time acquistati
         purchased_one_time_products = []
+        for payment_intent in payment_intents['data']:
+            charges = payment_intent['charges']['data']
+            for charge in charges:
+                # Stripe memorizza il prodotto all'interno dei Metadata del PaymentIntent
+                if 'product_id' in charge['metadata']:
+                    product_id = charge['metadata']['product_id']
+                    product = stripe.Product.retrieve(product_id)
+                    purchased_one_time_products.append({
+                        'name': product.name,
+                        'id': product.id,
+                        'description': product.description,
+                        'amount': charge['amount'] / 100,  # Converti da cent a euro
+                        'currency': charge['currency'].upper(),
+                    })
 
-        # Verifica ogni sessione di checkout per i prodotti acquistati
+        """# Verifica ogni sessione di checkout per i prodotti acquistati
         for session in checkout_sessions['data']:
             line_items = stripe.checkout.Session.list_line_items(session['id'])
             print(f"Line items for session {session.id}: {line_items}")  # Debug: visualizzare i line items della sessione
@@ -219,7 +237,7 @@ def purchased_products(request):
                         'amount': item['amount_total'] / 100,  # Converti da cent a euro
                         'currency': item['currency'].upper(),
                         'quantity': item['quantity']
-                    })
+                    })"""
 
         # Ora recuperiamo i piani di abbonamento (recurring)
         purchased_subscriptions = []
