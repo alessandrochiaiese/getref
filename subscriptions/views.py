@@ -301,20 +301,20 @@ def stripe_webhook(request):
 
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
 
-            # Verifica se il customer esiste o lo crea
-            stripe_customer, created = StripeCustomer.objects.get_or_create(
-                user=user,
-                stripeCustomerId=stripe_customer_id,
-                stripeSubscriptionId=stripe_subscription_id,
-            )
-
-            if created:
-                print(f"StripeCustomer for user {user.username} created.")
-            else:
-                print(f"StripeCustomer for user {user.username} already exists.")
-
             # Handle subscription and one-time payments
             if mode == 'subscription':
+                # Verifica se il customer esiste o lo crea
+                stripe_customer, created = StripeCustomer.objects.get_or_create(
+                    user=user,
+                    stripeCustomerId=stripe_customer_id,
+                    stripeSubscriptionId=stripe_subscription_id,
+                )
+
+                if created:
+                    print(f"StripeCustomer for user {user.username} created.")
+                else:
+                    print(f"StripeCustomer for user {user.username} already exists.")
+
                 # Verifica che i valori non siano nulli
                 if not stripe_customer_id: # or not stripe_subscription_id:
                     print(f"Error: Missing customer ID. session: {session}")
@@ -334,6 +334,18 @@ def stripe_webhook(request):
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
+                # Verifica se il customer esiste o lo crea
+                stripe_customer, created = StripeCustomer.objects.get_or_create(
+                    user=user,
+                    stripeCustomerId='',
+                    stripeSubscriptionId='',
+                )
+
+                if created:
+                    print(f"StripeCustomer for user {user.username} created.")
+                else:
+                    print(f"StripeCustomer for user {user.username} already exists.")
+
                 # Handle one-time payment (if no subscription ID is available)
                 line_items = stripe.checkout.Session.list_line_items(session_id)
                 line_item = line_items.data[0] if line_items.data else None
