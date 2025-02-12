@@ -132,7 +132,7 @@ def list_products(products):
 """def list_plans(products):
     product_list = []
     for product in products:
-        if product.get('type') != 'one_time': # 'recurring
+        if product.get('type') == 'recurring': # 'recurring
             product_list.append(product)
     return product_list
 """
@@ -143,7 +143,7 @@ def list_plans(products):
         prices = stripe.Price.list(product=product['product_id'])
 
         for price in prices.auto_paging_iter():
-            if price.billing_scheme == 'tiered' or price.recurring:  # Verifica se è ricorrente
+            if price.billing_scheme == 'tiered' or price.recurring or product.get('type') == 'recurring':  # Verifica se è ricorrente
                 product_list.append({
                     'product_name': product['product_name'],
                     'product_id': product['product_id'],
