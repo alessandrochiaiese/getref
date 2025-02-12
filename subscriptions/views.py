@@ -160,7 +160,7 @@ def create_checkout_session(request):
             
             selected_product = get_product_by_price_id(products, price_id)
             print('is selected the product: ', selected_product)
-            mode = 'subscription' if selected_product.get('type') == 'recurring' else 'payment'
+            mode = 'subscription' if selected_product and selected_product.get('type') == 'recurring' else 'payment'
             # 
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
@@ -309,7 +309,6 @@ def stripe_webhook(request):
                 stripeCustomerId=stripe_customer_id,
                 stripeSubscriptionId=stripe_subscription_id,
             )
-            stripe_customer.save()
 
             if created:
                 print(f"StripeCustomer for user {user.username} created.")
@@ -320,14 +319,15 @@ def stripe_webhook(request):
             if mode == 'subscription':
                 # Subscription created, save the subscription details
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+                product = stripe.Product.retrieve(stripe_subscription.plan.product) #BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
+
                 subscription = StripeSubscription.objects.get_or_create(
                     stripe_customer=stripe_customer,
                     stripe_subscription_id=stripe_subscription_id,
-                    product_name=stripe_subscription.plan.product.name,
-                    product_id=stripe_subscription.plan.product.id,
+                    product_name=product.name,#BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
+                    product_id=stripe_subscription.plan.product,
                     status=stripe_subscription.status,
                 )
-                subscription.save()
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
                 # Handle one-time payment (if no subscription ID is available)
@@ -346,7 +346,6 @@ def stripe_webhook(request):
                     currency=currency,
                     status='completed',
                 )
-                one_time_purchase.save()
                 print(f"One-time purchase saved for {user.username}.")
 
 
