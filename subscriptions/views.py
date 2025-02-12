@@ -202,12 +202,13 @@ def purchased_products(request):
         for one_time_purchase in one_time_purchases:
             product_id = one_time_purchase.product_id
             product = stripe.Product.retrieve(product_id)
+            price = stripe.Price.retrieve(product=product_id)
             purchased_one_time_products.append({
                 'name': product.name,
                 'id': product.id,
                 'description': product.description,
-                'amount': product['quantity'] / 100,  # Converti da cent a euro
-                'currency': str(product['currency']).upper(),
+                'amount': product['unit_amount'] / 100,  # Converti da cent a euro
+                'currency': str(price['currency']).upper(),
             })
 
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
