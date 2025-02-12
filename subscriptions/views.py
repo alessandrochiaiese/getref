@@ -186,6 +186,30 @@ def create_checkout_session(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
+def get_prices_for_product(product_id):
+    try:
+        # Recupera i prezzi associati al prodotto
+        prices = stripe.Price.list(product=product_id)
+        price_list = []
+
+        for price in prices.auto_paging_iter():
+            price_list.append({
+                'price_id': price.id,
+                'amount': price.unit_amount / 100,  # Converti da centesimi a unità di valuta
+                'currency': price.currency.upper(),
+                'billing_scheme': price.billing_scheme,
+                'type': price.type
+            })
+        
+        return price_list
+
+    except stripe.error.StripeError as e:
+        print(f"Errore Stripe: {str(e)}")
+        return {'error': f"Stripe Error: {str(e)}"}
+    except Exception as e:
+        print(f"Errore generico: {str(e)}")
+        return {'error': str(e)}
+
 @login_required
 def purchased_products(request):
     try:
@@ -202,7 +226,7 @@ def purchased_products(request):
         for one_time_purchase in one_time_purchases:
             product_id = one_time_purchase.product_id
             product = stripe.Product.retrieve(product_id)
-            price = stripe.Price.search(query=f"metadata['product']:{product_id}")
+            price = get_prices_for_product(product_id)
             purchased_one_time_products.append({
                 'name': product.name,
                 'id': product.id,
