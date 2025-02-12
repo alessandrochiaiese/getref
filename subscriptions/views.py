@@ -202,7 +202,7 @@ def purchased_products(request):
         for one_time_purchase in one_time_purchases:
             product_id = one_time_purchase.product_id
             product = stripe.Product.retrieve(product_id)
-            price = stripe.Price.search(query=f"product:{product_id}")
+            price = stripe.Price.search(query=f"metadata['product']:{product_id}")
             purchased_one_time_products.append({
                 'name': product.name,
                 'id': product.id,
