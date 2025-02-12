@@ -125,14 +125,14 @@ def list_stripe_all_products():
 def list_products(products):
     product_list = []
     for product in products:
-        if product.get('type') == 'one_time' and product.get('type') != 'recurring':
+        if product.get('type') == 'one_time':
             product_list.append(product)
     return product_list
 
 def list_plans(products):
     product_list = []
     for product in products:
-        if product.get('type') == 'recurring' and product.get('type') != 'one_time':
+        if product.get('type') != 'one_time': # 'recurring
             product_list.append(product)
     return product_list
 
