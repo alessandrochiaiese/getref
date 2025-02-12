@@ -11,12 +11,13 @@ from drf_yasg import openapi
 from ..services.referral_settings_service import ReferralSettingsService
 from ...models.referral_settings import ReferralSettings
 from ..serializers import ReferralSettingsSerializer
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class ReferralSettingsAPIView(APIView):
-    permission_classes = [AllowAny]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

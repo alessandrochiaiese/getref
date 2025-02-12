@@ -11,12 +11,13 @@ from drf_yasg import openapi
 from affiliate.api.services.affiliate_commission_service import AffiliateCommissionService
 from affiliate.models.affiliate_commission import AffiliateCommission
 from affiliate.api.serializers import AffiliateCommissionSerializer
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class AffiliateCommissionAPIView(APIView):
-    permission_classes = [IsAuthenticated]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

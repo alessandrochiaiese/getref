@@ -11,12 +11,13 @@ from drf_yasg import openapi
 from affiliate.api.services.affiliate_payout_service import AffiliatePayoutService
 from affiliate.models.affiliate_payout import AffiliatePayout
 from affiliate.api.serializers import AffiliatePayoutSerializer
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class AffiliatePayoutAPIView(APIView):
-    permission_classes = [IsAuthenticated]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

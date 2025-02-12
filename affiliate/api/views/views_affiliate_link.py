@@ -11,12 +11,13 @@ from drf_yasg import openapi
 from affiliate.api.services.affiliate_link_service import AffiliateLinkService
 from affiliate.models.affiliate_link import AffiliateLink
 from affiliate.api.serializers import AffiliateLinkSerializer
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class AffiliateLinkAPIView(APIView):
-    permission_classes = [IsAuthenticated]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

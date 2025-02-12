@@ -16,12 +16,13 @@ from dashboard.api.services.profile_service import ProfileService
 from dashboard.models.profile import Profile
 from dashboard.api.serializers import ProfileSerializer
 from referral.models import *
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class ProfileAPIView(APIView):
-    permission_classes = [AllowAny]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

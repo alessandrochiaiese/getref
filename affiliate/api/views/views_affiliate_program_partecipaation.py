@@ -11,6 +11,7 @@ from drf_yasg import openapi
 from affiliate.api.services.affiliate_program_partecipation_service import AffiliateProgramPartecipationService
 from affiliate.models.affiliate_program_partecipation import AffiliateProgramPartecipation
 from affiliate.api.serializers import AffiliateProgramPartecipationSerializer
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 import logging

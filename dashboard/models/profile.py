@@ -23,6 +23,8 @@ class Profile(models.Model):
     CAP = models.CharField(max_length=64, null=True, blank=True, verbose_name=_("CAP"))
     phone_number = models.CharField(max_length=13, blank=True, null=True, unique=True, verbose_name=_("Phone Number"))
 
+    # To use platform and allow javascript to use API
+    is_platform = models.BooleanField(default=True)
 
     # Differenet kind of profile (Business, Buyer, Base)
     is_business = models.BooleanField(default=False, verbose_name=_("Is Business"))

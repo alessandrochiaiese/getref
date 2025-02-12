@@ -1,34 +1,27 @@
 # referral_system/views.py
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status, permissions
+import logging
 from referral.models import ReferralReward, Referral, ReferralReward
 from referral.api.serializers import ReferralRewardSerializer, ReferralSerializer, ReferralRewardSerializer
 from referral.api.services.referral_service import ReferralService
-
-class ReferralRewardView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-# referral_system/views.py
-
-import logging
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from ...models import ReferralReward
 from ..serializers import ReferralRewardSerializer
 from ..services.referral_service import ReferralService
+from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger
 logger = logging.getLogger(__name__)
 
 class ReferralRewardAPIView(APIView):
-    permission_classes = [AllowAny]  # [AllowAny]  or [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 
