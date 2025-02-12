@@ -193,7 +193,7 @@ def purchased_products(request):
         print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
 
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
-        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, payment_status='paid')
+        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
         print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
 
         # Lista per i prodotti one-time acquistati
