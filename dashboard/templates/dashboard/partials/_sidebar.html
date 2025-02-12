@@ -17,9 +17,9 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'ui_features_buttons' %}">{% trans "Buttons" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'ui_features_dropdowns' %}">{% trans "Dropdowns" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'ui_features_typography' %}">{% trans "Typography" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ui_features_buttons' %}">{% trans "Buttons" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ui_features_dropdowns' %}">{% trans "Dropdowns" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ui_features_typography' %}">{% trans "Typography" %}</a></li>
         </ul>
       </div>
     </li>
@@ -44,7 +44,7 @@
       </a>
       <div class="collapse" id="charts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'charts' %}">{% trans "ChartJs" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'charts' %}">{% trans "ChartJs" %}</a></li>
         </ul>
       </div>
     </li>
@@ -56,7 +56,7 @@
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'basic_table' %}">{% trans "Basic table" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'basic_table' %}">{% trans "Basic table" %}</a></li>
         </ul>
       </div>
     </li>
@@ -68,7 +68,7 @@
       </a>
       <div class="collapse" id="icons">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'icons_mdi' %}">{% trans "Mdi icons" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'icons_mdi' %}">{% trans "Mdi icons" %}</a></li>
         </ul>
       </div>
     </li>
@@ -80,8 +80,8 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'core_login' %}">{% trans " Login " %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'core_register' %}">{% trans " Register " %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core_login' %}">{% trans " Login " %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core_register' %}">{% trans " Register " %}</a></li>
         </ul>
       </div>
     </li>
@@ -93,8 +93,8 @@
       </a>
       <div class="collapse" id="error">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url '404' %}">{% trans " 404 " %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url '500' %}">{% trans " 500 " %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url '404' %}">{% trans " 404 " %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url '500' %}">{% trans " 500 " %}</a></li>
         </ul>
       </div>
     </li>
@@ -113,8 +113,8 @@
       </a>
       <div class="collapse" id="enterprise">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'create_enterprise' %}">{% trans "Create Enterprise" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'enterprise_list' %}">{% trans "List Enterprise" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'create_enterprise' %}">{% trans "Create Enterprise" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'enterprise_list' %}">{% trans "List Enterprise" %}</a></li>
         </ul>
       </div>
     </li>
@@ -126,18 +126,25 @@
       </a>
       <div class="collapse" id="referred-accounts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'my_network' %}">{% trans "My Network" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'master_accounts' %}">{% trans "Master Accounts" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'investor_accounts' %}">{% trans "Investor Accounts" %}</a></li>
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'incomplete_registrations' %}">{% trans "Incomplete Registrations" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'my_network' %}">{% trans "My Network" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'master_accounts' %}">{% trans "Master Accounts" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'investor_accounts' %}">{% trans "Investor Accounts" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'incomplete_registrations' %}">{% trans "Incomplete Registrations" %}</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'product_list' %}">
+      <a class="nav-link" data-toggle="collapse" href="#products" aria-expanded="false" aria-controls="products">
         <i class="bi bi-shop menu-icon"></i>
-        <span class="menu-title">{% trans "Prodotti" %}</span>
+        <span class="menu-title">{% trans "Referred Accounts" %}</span>
+        <i class="menu-arrow"></i>
       </a>
+      <div class="collapse" id="products">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">{% trans "Prodotti" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'purchased_products' %}">{% trans "I miei prodotti" %}</a></li>
+        </ul>
+      </div>
     </li>
     <!--<li class="nav-item">
       <a class="nav-link" href="{#% url 'my_network' %#}">
@@ -153,7 +160,7 @@
       </a>
       <div class="collapse" id="finances">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">{% trans " " %}<a class="nav-link" href="{% url 'withdrawals' %}">{% trans "Withdrawals" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'withdrawals' %}">{% trans "Withdrawals" %}</a></li>
         </ul>
       </div>
     </li>
@@ -165,7 +172,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'plans' %}">
-        <i class="bi bi-person menu-icon"></i>
+        <i class="bi bi-kanban menu-icon"></i>
         <span class="menu-title">{% trans "Plans" %}</span>
       </a>
     </li>

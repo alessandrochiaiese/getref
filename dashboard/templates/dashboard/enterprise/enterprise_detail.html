@@ -14,7 +14,7 @@
             <p><strong>{% trans "Numero richieste di lavoro per settimana:" %}</strong> {{ profile.number_job_request_desidered_per_week }}</p>
             <p><strong>{% trans "Contatto:" %}</strong> {{ profile.contact_number }}</p>
             <p><strong>{% trans "Email:" %}</strong> {{ profile.email }}</p>
-            <p><strong>{% trans "Link Google Maps:" %}</strong>{% trans " " %}<a href="{{ profile.link_google_maps }}" target="_blank">{{ profile.link_google_maps }}</a></p>
+            <p><strong>{% trans "Link Google Maps:" %}</strong><a href="{{ profile.link_google_maps }}" target="_blank">{{ profile.link_google_maps }}</a></p>
             <p><strong>{% trans "Settori:" %}</strong> {{ profile.sectors.all|join:", " }}</p>
             <p><strong>{% trans "Regione:" %}</strong> {{ profile.region.name }}</p>
             <p><strong>{% trans "Comunicazione dell'ufficio:" %}</strong> {{ profile.have_office_shop_to_receive_customers|yesno:"Sì,No" }}</p>
