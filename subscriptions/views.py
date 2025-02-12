@@ -347,12 +347,6 @@ def stripe_webhook(request):
 
                 print(f"Using StripeCustomer for user {user.username}.")
 
-
-                if created:
-                    print(f"StripeCustomer for user {user.username} created.")
-                else:
-                    print(f"StripeCustomer for user {user.username} already exists.")
-
                 # Handle one-time payment (if no subscription ID is available)
                 line_items = stripe.checkout.Session.list_line_items(session_id)
                 line_item = line_items.data[0] if line_items.data else None
