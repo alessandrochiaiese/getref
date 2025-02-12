@@ -334,12 +334,19 @@ def stripe_webhook(request):
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
-                # Verifica se il customer esiste o lo crea
-                stripe_customer, created = StripeCustomer.objects.get_or_create(
-                    user=user,
-                    stripeCustomerId='',
-                    stripeSubscriptionId='',
-                )
+                # Cerca se esiste già un StripeCustomer per l'utente
+                stripe_customer = StripeCustomer.objects.filter(user=user).first()
+
+                # Se non esiste, crealo
+                if not stripe_customer:
+                    stripe_customer = StripeCustomer.objects.create(
+                        user=user,
+                        stripeCustomerId='',
+                        stripeSubscriptionId='',
+                    )
+
+                print(f"Using StripeCustomer for user {user.username}.")
+
 
                 if created:
                     print(f"StripeCustomer for user {user.username} created.")
