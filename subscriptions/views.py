@@ -232,7 +232,7 @@ def purchased_products(request):
                 'id': product.id,
                 'description': product.description,
                 'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                'currency': str(price['currency']).upper(),
+                'currency': 'EUR' #str(price['currency']).upper(),
             })
 
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
