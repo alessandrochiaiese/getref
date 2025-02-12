@@ -193,7 +193,7 @@ def purchased_products(request):
         print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
 
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
-        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
+        checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, payment_status='paid')
         print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
 
         # Lista per i prodotti one-time acquistati
@@ -201,14 +201,21 @@ def purchased_products(request):
 
         # Verifica ogni sessione di checkout per i prodotti acquistati
         for session in checkout_sessions['data']:
-            line_items = stripe.checkout.Session.retrieve(session['id']).line_items
+            line_items = stripe.checkout.Session.list_line_items(session['id'])
             print(f"Line items for session {session.id}: {line_items}")  # Debug: visualizzare i line items della sessione
             for item in line_items['data']:
                 # Verifica se il prodotto è one-time (non ha un prezzo ricorrente)
                 if 'recurring' not in item['price']:
-                    print(f"One-time product found: {item['product']}")  # Debug: visualizzare il prodotto one-time
-                    product = stripe.Product.retrieve(item['product'])
-                    purchased_one_time_products.append(product)
+                    print(f"One-time product found: {item['price']['product']}")  # Debug: visualizzare il prodotto one-time
+                    product = stripe.Product.retrieve(item['price']['product'])
+                    purchased_one_time_products.append({
+                        'name': product.name,
+                        'id': product.id,
+                        'description': product.description,
+                        'amount': item['amount_total'] / 100,  # Converti da cent a euro
+                        'currency': item['currency'].upper(),
+                        'quantity': item['quantity']
+                    })
 
         # Ora recuperiamo i piani di abbonamento (recurring)
         purchased_subscriptions = []
