@@ -231,7 +231,7 @@ def purchased_products(request):
                 'name': product.name,
                 'id': product.id,
                 'description': product.description,
-                'amount': product['unit_amount'] / 100,  # Converti da cent a euro
+                'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
                 'currency': str(price['currency']).upper(),
             })
 
