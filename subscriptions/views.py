@@ -295,12 +295,6 @@ def stripe_webhook(request):
         #stripe_customer_id = session.get('stripe_customer_id')
         #stripe_subscription_id = session.get('stripe_subscription_id')
 
-
-        # Verifica che i valori non siano nulli
-        if not stripe_customer_id: # or not stripe_subscription_id:
-            print(f"Error: Missing customer ID or subscription ID. session: {session}")
-            return HttpResponse(status=400)
-
         try:
             # Log per il debug
             print(f"Received session for user ID {client_reference_id}, customer ID {stripe_customer_id}, subscription ID {stripe_subscription_id}")
@@ -321,6 +315,12 @@ def stripe_webhook(request):
 
             # Handle subscription and one-time payments
             if mode == 'subscription':
+                # Verifica che i valori non siano nulli
+                if not stripe_customer_id: # or not stripe_subscription_id:
+                    print(f"Error: Missing customer ID. session: {session}")
+                    #print(f"Error: Missing customer ID or subscription ID. session: {session}")
+                    return HttpResponse(status=400)
+
                 # Subscription created, save the subscription details
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
                 product = stripe.Product.retrieve(stripe_subscription.plan.product) #BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
@@ -335,7 +335,14 @@ def stripe_webhook(request):
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
                 # Handle one-time payment (if no subscription ID is available)
-                line_item = checkout_session.get('line_items')['data'][0]  # Get the first line item
+                line_items = stripe.checkout.Session.list_line_items(session_id)
+                line_item = line_items.data[0] if line_items.data else None
+                
+                """if not line_item:
+                    print(f"Error: No line items found for session {session_id}")
+                    return HttpResponse(status=400)
+                """
+                #line_item = checkout_session.get('line_items')['data'][0]  # Get the first line item
                 one_time_product_name = line_item.get('description')
                 one_time_product_id = line_item.get('price').get('product')
                 price_amount = line_item.get('amount_total') / 100.0  # Convert cents to dollars/euros
