@@ -201,7 +201,7 @@ def purchased_products(request):
         #print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
 
         # Recupera tutti i pagamenti completati per i prodotti one-time
-        payment_intents = stripe.PaymentIntent.list(customer=stripe_customer.stripeCustomerId, status='succeeded')
+        payment_intents = stripe.PaymentIntent.list(customer=stripe_customer.stripeCustomerId) #, status='succeeded')
         print(f"Payment Intents: {payment_intents}")  # Debug
 
         # Lista per i prodotti one-time acquistati
