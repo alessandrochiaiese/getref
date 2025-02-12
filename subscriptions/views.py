@@ -293,7 +293,7 @@ def stripe_webhook(request):
 
 
         # Verifica che i valori non siano nulli
-        if not stripe_customer_id or not stripe_subscription_id:
+        if not stripe_customer_id: # or not stripe_subscription_id:
             print(f"Error: Missing customer ID or subscription ID. session: {session}")
             return HttpResponse(status=400)
 
