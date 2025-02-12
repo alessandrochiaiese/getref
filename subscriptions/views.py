@@ -195,7 +195,7 @@ def get_prices_for_product(product_id):
         for price in prices.auto_paging_iter():
             price_list.append({
                 'price_id': price.id,
-                'amount': price.unit_amount / 100,  # Converti da centesimi a unità di valuta
+                #'amount': price.unit_amount / 100,  # Converti da centesimi a unità di valuta
                 'currency': price.currency.upper(),
                 'billing_scheme': price.billing_scheme,
                 'type': price.type
