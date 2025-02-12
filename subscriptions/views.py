@@ -196,11 +196,25 @@ def purchased_products(request):
         subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId, status='active')
         print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
 
+        one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
+
+        purchased_one_time_products = []
+        for one_time_purchase in one_time_purchases:
+            product_id = one_time_purchase.product_id
+            product = stripe.Product.retrieve(product_id)
+            purchased_one_time_products.append({
+                'name': product.name,
+                'id': product.id,
+                'description': product.description,
+                'amount': product['amount'] / 100,  # Converti da cent a euro
+                'currency': product['currency'].upper(),
+            })
+
         # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
         #checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
         #print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
 
-        # Recupera tutti i pagamenti completati per i prodotti one-time
+        """# Recupera tutti i pagamenti completati per i prodotti one-time
         payment_intents = stripe.PaymentIntent.list(customer=stripe_customer.stripeCustomerId) #, status='succeeded')
         print(f"Payment Intents: {payment_intents}")  # Debug
 
@@ -221,7 +235,7 @@ def purchased_products(request):
                         'currency': charge['currency'].upper(),
                     })
 
-        """# Verifica ogni sessione di checkout per i prodotti acquistati
+        # Verifica ogni sessione di checkout per i prodotti acquistati
         for session in checkout_sessions['data']:
             line_items = stripe.checkout.Session.list_line_items(session['id'])
             print(f"Line items for session {session.id}: {line_items}")  # Debug: visualizzare i line items della sessione
