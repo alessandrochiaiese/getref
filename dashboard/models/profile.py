@@ -24,7 +24,7 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=13, blank=True, null=True, unique=True, verbose_name=_("Phone Number"))
 
     # To use platform and allow javascript to use API
-    is_platform = models.BooleanField(default=True)
+    is_platform = models.BooleanField(default=True, verbose_name=_("Is Platform"))
 
     # Differenet kind of profile (Business, Buyer, Base)
     is_business = models.BooleanField(default=False, verbose_name=_("Is Business"))
