@@ -168,7 +168,7 @@ def create_checkout_session(request):
                 success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN}/cancel/",
                 payment_method_types=['card'],
-                mode= mode, # 'subscription' if price is recurring type else 'payment'
+                mode= 'payment', # 'subscription' if price is recurring type else 'payment'
                 line_items=[{
                     'price': price_id,
                     'quantity': 1,
