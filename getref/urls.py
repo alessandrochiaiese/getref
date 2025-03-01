@@ -52,7 +52,7 @@ urlpatterns = [
     #path('api/v0/', include('core.api.urls'), name='api_core_v0'),
     path('api/v0/affiliate/', include('affiliate.api.urls'), name='api_affiliate_v0'),
     path('api/v0/referral/', include('referral.api.urls'), name='api_referral'),
-    path('api/v0/', include('subscriptions.api.urls'), name='api_subscriptions'),
+    path('', include('subscriptions.api.urls'), name='api_subscriptions'),
 
     ## social django
     url(r'^oauth/', include('social_django.urls', namespace='social')),
