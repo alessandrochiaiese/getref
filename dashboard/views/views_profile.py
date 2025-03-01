@@ -192,7 +192,7 @@ class EnterpriseUpdateView(UpdateView):
     model = ProfileBusiness
     form_class = EnterpriseForm
     template_name = 'dashboard/enterprise/create_enterprise.html'
-    success_url = reverse_lazy('core_profile')
+    success_url = reverse_lazy('enterprise_list')
 
     def get_object(self, queryset=None):
         # Puoi gestire l'oggetto in base alla logica che desideri, per esempio
