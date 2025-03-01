@@ -30,6 +30,8 @@ class EnterpriseRedirectView(View):
         # Verifica che il codice referral esista
         try:
             referral = ProfileBusiness.objects.get(code=referral_code, status='active')
+            # Imposta un flag nel request per sapere se è EnterpriseRedirectView
+            request.session['is_enterprise_redirect'] = True
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
             return redirect(reverse('core_register_with_referral', args=[referral_code]))
         except ProfileBusiness.DoesNotExist:
@@ -113,10 +115,20 @@ class RegisterView(View):
             if referral_code_used is not None:
                 try:
                     if ProfileBusiness.objects.filter(code=referral_code_used).exists():
-                        profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
-                        profile_business.user_registered = user
-                        profile_business.save()
+                        # Verifica se proviene da EnterpriseRedirectView
+                        if request.session.get('is_enterprise_redirect', False):
+                            # Esegui la parte del codice per ProfileBusiness solo se EnterpriseRedirectView
+                            profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
+                            profile_business.user_registered = user
+                            profile_business.save()
+                            print(f"ProfileBusiness updated for {user.username}")
+                        else:
+                            print("ReferralRedirectView: ProfileBusiness update skipped.")
+                    # Altre logiche di referral code...
+                except ProfileBusiness.DoesNotExist:
+                    messages.warning(request, 'Il codice referral non è valido.')
 
+                try: 
                     # Recupera il codice referral del referrer
                     referrer_code = ReferralCode.objects.filter(code=referral_code_used, status="active").first()
                     if referrer_code:
@@ -163,6 +175,9 @@ class RegisterView(View):
             else:
                 # Messaggio di successo standard se nessun referral è stato usato
                 messages.success(request, 'Registrazione completata! Benvenuto.')
+
+            # Rimuovi il flag dalla sessione enterprise
+            request.session.pop('is_enterprise_redirect', None)
 
 
             # Creazione del codice referral per il nuovo utente
