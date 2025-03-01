@@ -19,8 +19,9 @@
                     <h5 class="card-title">{{ item.product.name }}</h5>
                     <p class="card-text">{% trans "Description" %}: {{ item.product.description|default:"No description available." }}</p>
                     <p class="card-text">{% trans "Price" %}: {{ item.product.price | default:"Unknown price" }} {{ item.product.currency|default:"USD"|upper }}</p>
-                    <p>Link Promozionale: <a href={{ promotion.get_promotion_url }} target="_blank">{{ promotion.get_promotion_url }}</a></p>
-                    <button class="btn btn-primary promote-btn" onclick="copyLink('{{ promotion.get_promotion_url }}')">{% trans "Copy Link" %}</button>
+                    <p>Link Promozionale: <a href={{ item.promotion.get_promotion_url }} target="_blank">{{ item.promotion.get_promotion_url }}</a></p>
+                    <button class="btn btn-primary promote-btn" onclick="copyLink('{{ item.promotion.get_promotion_url }}')">{% trans "Copy Link" %}</button>
+ 
                 </div>
             </div>
         </div>
