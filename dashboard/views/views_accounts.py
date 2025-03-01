@@ -114,7 +114,7 @@ class RegisterView(View):
                 try:
                     if ProfileBusiness.objects.filter(code=referral_code_used).exists():
                         profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
-                        profile_business.user_registered = self.request.user
+                        profile_business.user_registered = user
                         profile_business.save()
 
                     # Recupera il codice referral del referrer
