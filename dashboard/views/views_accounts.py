@@ -32,7 +32,7 @@ class EnterpriseRedirectView(View):
             request.session['is_enterprise_redirect'] = True
             request.session['is_referral_redirect'] = False
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
-            return redirect(reverse('core_register_with_referral', args=[referral_code]))
+            return redirect(reverse('core_register', args=[referral_code]))
         except ProfileBusiness.DoesNotExist:
             messages.warning(request, 'Codice referral azienda non valido o inattivo.')
             # Se il codice referral non è valido, reindirizza ad una pagina di errore o alla home
@@ -49,7 +49,7 @@ class ReferralRedirectView(View):
             request.session['is_enterprise_redirect'] = False
             request.session['is_referral_redirect'] = True
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
-            return redirect(reverse('core_register_with_referral', args=[referral_code]))
+            return redirect(reverse('core_register', args=[referral_code]))
         except ReferralCode.DoesNotExist:
             messages.warning(request, 'Codice referral utente non valido o inattivo.')
             # Se il codice referral non è valido, reindirizza ad una pagina di errore o alla home
