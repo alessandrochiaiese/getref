@@ -32,6 +32,7 @@ class EnterpriseRedirectView(View):
             referral = ProfileBusiness.objects.get(code=referral_code, status='active')
             # Imposta un flag nel request per sapere se è EnterpriseRedirectView
             request.session['is_enterprise_redirect'] = True
+            request.session['is_referral_redirect'] = False
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
             return redirect(reverse('core_register_with_referral', args=[referral_code]))
         except ProfileBusiness.DoesNotExist:
@@ -48,6 +49,7 @@ class ReferralRedirectView(View):
         try:
             referral = ReferralCode.objects.get(code=referral_code, status='active')
             # Imposta un flag nel request per sapere se è ReferralRedirectView
+            request.session['is_enterprise_redirect'] = False
             request.session['is_referral_redirect'] = True
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
             return redirect(reverse('core_register_with_referral', args=[referral_code]))
@@ -117,7 +119,7 @@ class RegisterView(View):
             if referral_code_used is not None:
                 is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
                 is_referral_redirect = request.session.get('is_referral_redirect', False)
-                if is_enterprise_redirect:
+                if is_enterprise_redirect and not is_referral_redirect:
                     try:
                         if ProfileBusiness.objects.filter(code=referral_code_used).exists():
                             # Verifica se proviene da EnterpriseRedirectView
@@ -132,7 +134,7 @@ class RegisterView(View):
 
                     # Rimuovi il flag dalla sessione enterprise
                     request.session.pop('is_enterprise_redirect', None)
-                elif is_referral_redirect:
+                elif is_referral_redirect and not is_enterprise_redirect:
                     print("ReferralRedirectView: ProfileBusiness update skipped.") 
                     try:  
                         # Recupera il codice referral del referrer
