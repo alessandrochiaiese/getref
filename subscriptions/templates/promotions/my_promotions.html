@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <p>Prodotto: {{ promotion.stripe_product_id }}</p>
                     <!-- Puoi sostituire con il nome del prodotto, se disponibile -->
-                    <p>Link Promozionale: <a class="btn btn-primary promote-btn" href="{{ promotion.get_promotion_url }}" target="_blank">{{
+                    <p>Link Promozionale: <a href="{{ promotion.get_promotion_url }}" target="_blank">{{
                             promotion.get_promotion_url }}</a></p>
                     <button class="btn btn-primary promote-btn" onclick="copyLink('{{ promotion.get_promotion_url }}')">Copia Link</button>
                 </div>
