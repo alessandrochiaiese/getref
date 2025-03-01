@@ -27,7 +27,7 @@ class EnterpriseRedirectView(View):
 
         # Verifica che il codice referral esista
         try:
-            referral = ProfileBusiness.objects.get(code=referral_code, status='active')
+            referral = ProfileBusiness.objects.get(code=referral_code)
             # Imposta un flag nel request per sapere se è EnterpriseRedirectView
             request.session['is_enterprise_redirect'] = True
             request.session['is_referral_redirect'] = False
@@ -108,6 +108,7 @@ class RegisterView(View):
                     try:
                         profile_business = ProfileBusiness.objects.get(code=referral_code_used)
                         profile_business.user_registered = user
+                        profile_business.status = 'active'
                         profile_business.save()
                         print(f"ProfileBusiness aggiornato per {user.username}")
                     except ProfileBusiness.DoesNotExist:
