@@ -8,14 +8,17 @@ import stripe
 def my_promotions(request):
     # Recupera tutte le promozioni per l'utente autenticato
     promotions = Promotion.objects.filter(user=request.user)
-
+    products = {}
+    for promotion in promotions:
+        # Recupera i prezzi associati al prodotto
+        products[promotion['stripe_product_id']] = stripe.Product.list(product=promotion['stripe_product_id'])
     # Passa le promozioni al template
-    return render(request, 'promotions/my_promotions.html', {'promotions': promotions})
+    return render(request, 'promotions/my_promotions.html', {'promotions': promotions, 'products': products})
 
 def promote(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
-
+    product = stripe.Product.list(product=promotion['stripe_product_id'])
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -23,7 +26,7 @@ def promote(request, promotion_link):
             'price_data': {
                 'currency': 'usd',
                 'product_data': {
-                    'name': 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
+                    'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
                 },
                 'unit_amount': 2000,  # Prezzo in centesimi (es. $20)
             },
