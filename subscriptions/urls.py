@@ -8,7 +8,7 @@ urlpatterns = [
 
     # promotions
     path('my_promotions/', views_promotion.my_promotions, name='my_promotions'),
-    #path('promote/', views_promotion.promote, name='stripe_promote'),
+    path('promote/', views_promotion.promote, name='stripe_promote'),
     path('promotion_sales/', views_promotion.promotion_sales, name='promotion_sales'),
     
     # products
