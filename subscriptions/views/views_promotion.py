@@ -1,5 +1,5 @@
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from subscriptions.models.promotion import Promotion
 from subscriptions.models.promotion_sale import PromotionSale
 
@@ -16,6 +16,34 @@ def my_promotions(request):
     return render(request, 'promotions/my_promotions.html', {'promotions': promotions})
 
 def promote(request, promotion_link):
+    # Ottieni la promozione tramite il link
+    promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
+    
+    # Recupera il prodotto Stripe utilizzando l'ID del prodotto
+    product = stripe.Product.retrieve(promotion.stripe_product_id)
+    
+    # Crea una sessione di checkout con Stripe
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'usd',
+                'product_data': {
+                    'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
+                },
+                'unit_amount': 2000,  # Prezzo in centesimi (es. $20)
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url=request.build_absolute_uri('/success/'),
+        cancel_url=request.build_absolute_uri('/cancel/'),
+    )
+
+    # Reindirizza direttamente alla sessione di checkout di Stripe
+    return redirect(checkout_session.url)
+
+def promote_bak(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
     product = stripe.Product.list(product=promotion['stripe_product_id'])
