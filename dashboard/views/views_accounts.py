@@ -137,6 +137,8 @@ class RegisterView(View):
                         referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
                         # Recupera utente che ha invitato un utente a registrarsi
                         referrer = referral_code.user
+                        referral_code.referred_user_count += 1
+                        referral_code.save()
                         messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
                     except ReferralCode.DoesNotExist:
                         messages.warning(request, 'Codice referral utente non valido.')
@@ -144,8 +146,6 @@ class RegisterView(View):
                 # Creazione o aggiornamento del record di referral
                 referral, created = Referral.objects.get_or_create(referrer=referrer)
                 referral.referred.add(user)
-                referral_code.referred_user_count += 1
-                referral_code.save()
 
                 # Rimuovi il flag dalla sessione dopo l'uso
                 request.session.pop('is_enterprise_redirect', None)
