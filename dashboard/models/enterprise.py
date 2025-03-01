@@ -3,7 +3,7 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-from core.models.referral_code import ReferralCode
+from referral.models.referral_code import ReferralCode
 
 class Sector(models.Model):
     SECTOR_CHOICES = [
