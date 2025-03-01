@@ -106,15 +106,15 @@
     </li>
     {% endif %}
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#enterprise" aria-expanded="false" aria-controls="enterprise">
+      <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false" aria-controls="customer">
         <i class="bi bi-building menu-icon"></i>
-        <span class="menu-title">{% trans "Enterprise" %}</span>
+        <span class="menu-title">{% trans "Customers" %}</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="enterprise">
+      <div class="collapse" id="customer">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{% url 'create_enterprise' %}">{% trans "Create Enterprise" %}</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'enterprise_list' %}">{% trans "List Enterprise" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'create_enterprise' %}">{% trans "Create Customer" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'enterprise_list' %}">{% trans "List Customer" %}</a></li>
         </ul>
       </div>
     </li>
@@ -143,6 +143,7 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">{% trans "Prodotti" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'purchased_products' %}">{% trans "I miei prodotti" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'my_promotions' %}">{% trans "My promotions" %}</a></li>
         </ul>
       </div>
     </li>
