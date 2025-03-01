@@ -12,7 +12,7 @@ from subscriptions.api.views.views_purchase_token import PurchaseTokensAPIView
 urlpatterns = [
     #path('', include(router.urls)),
     #path('protected/', ProtectedAPI.as_view(), name="protected-api"),
-    path('create-promotion/', create_promotion, name="create_promotion"),
+    path('create-promotion/', create_promotion, name='create_promotion'),
 
     path('purchase-subscription/', PurchaseSubscriptionAPIView.as_view(), name='purchase-subscription'),
     path('purchase-tokens/', PurchaseTokensAPIView.as_view(), name='purchase-tokens'),
