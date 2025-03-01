@@ -60,13 +60,13 @@
                         </tr>
                     </thead>
                     <tbody id="user-table-tbody ">
-                        {% for referred_user in my_network %}
+                        {% for enterprise in my_enterprises %}
                         <tr>
-                            <th>{{ referred_user.phone }}</th>
-                            <th>{{ referred_user.email }}</th>
-                            <th>{{ referred_user.company_name }}</th>
-                            <th>{{ referred_user.user_registered.username }}</th>
-                            <th>{{ referred_user.user_registered.date_joined|date:"d/m/Y" }}</th>
+                            <th>{{ enterprise.phone }}</th>
+                            <th>{{ enterprise.email }}</th>
+                            <th>{{ enterprise.company_name }}</th>
+                            <th>{{ enterprise.user_registered.username }}</th>
+                            <th>{{ enterprise.user_registered.date_joined|date:"d/m/Y" }}</th>
                         </tr>
                         {% endfor %}
                     </tbody>
