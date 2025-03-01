@@ -8,12 +8,12 @@ import stripe
 def my_promotions(request):
     # Recupera tutte le promozioni per l'utente autenticato
     promotions = Promotion.objects.filter(user=request.user)
-    products = {}
-    for promotion in promotions:
-        # Recupera i prezzi associati al prodotto
-        products[promotion['stripe_product_id']] = stripe.Product.list(product=promotion['stripe_product_id'])
+    #products = {}
+    #for promotion in promotions:
+    #    # Recupera i prezzi associati al prodotto
+    #    products[promotion['stripe_product_id']] = stripe.Product.list(product=promotion['stripe_product_id'])
     # Passa le promozioni al template
-    return render(request, 'promotions/my_promotions.html', {'promotions': promotions, 'products': products})
+    return render(request, 'promotions/my_promotions.html', {'promotions': promotions})
 
 def promote(request, promotion_link):
     # Ottieni la promozione tramite il link
