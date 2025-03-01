@@ -18,6 +18,10 @@
             <p><strong>{% trans "Settori:" %}</strong> {{ profile.sectors.all|join:", " }}</p>
             <p><strong>{% trans "Regione:" %}</strong> {{ profile.region.name }}</p>
             <p><strong>{% trans "Comunicazione dell'ufficio:" %}</strong> {{ profile.have_office_shop_to_receive_customers|yesno:"Sì,No" }}</p>
+            
+            <p><strong>{% trans "Link usato per la registrazione:" %}</strong> {{ profile.unique_url }}</p>
+            <p><strong>{% trans "Codice usato per la registrazione:" %}</strong> {{ profile.code }}</p>
+            <p><strong>{% trans "Stato:" %}</strong> {{ profile.status }}</p>
         </div>
         <div class="col-md-6">
             <p><strong>{% trans "Certificato della Camera di Commercio:" %}</strong></p>
