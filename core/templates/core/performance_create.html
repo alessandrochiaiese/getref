@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New Performance{% endblock %}
+
+{% block content %}
+    <h2>Add New Performance</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add Performance</button>
+    </form>
+    <br>
+    <a href="{% url 'performance_list' %}">Back to Performance List</a>
+    
+{% endblock %}

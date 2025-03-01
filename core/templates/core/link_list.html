@@ -1,0 +1,130 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Link List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Link List</h1>
+    <a href="{% url 'core:link_create' %}" class="btn btn-primary">Add New Link</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Participant Id</th>
+<th>Program Id</th>
+<th>Url</th>
+<th>Click Count</th>
+<th>Conversion Count</th>
+<th>Date Created</th>
+<th>Last Used</th>
+<th>Status</th>
+<th>Landing Page</th>
+<th>Custom Tracking Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="LinkTableBody">
+        {% for item in link_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.url }}</td>
+<td>{{ item.click_count }}</td>
+<td>{{ item.conversion_count }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.last_used }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.landing_page }}</td>
+<td>{{ item.custom_tracking_id }}</td>
+                <td>
+                    <a href="{% url 'core:link_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:link_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:link_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_link.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allLinks = []; // Store all referral data
+
+    async function fetchLinks() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/link/`);
+            allLinks = await response.json();
+            populateLinksTable(allLinks);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateLinksTable(links) {
+        const tableBody = document.getElementById('LinksTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        links.forEach(link => {
+            const row = `<tr>
+                    <td>${link.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.url }}</td>
+<td>{{ item.click_count }}</td>
+<td>{{ item.conversion_count }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.last_used }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.landing_page }}</td>
+<td>{{ item.custom_tracking_id }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${link.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteLinks(${link.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${link.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterLinks() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allLinks.filter(link => 
+            String(			link.id).toLowerCase().includes(query) ||
+String(			link.participant_id).toLowerCase().includes(query) ||
+String(			link.program_id).toLowerCase().includes(query) ||
+String(			link.url).toLowerCase().includes(query) ||
+String(			link.click_count).toLowerCase().includes(query) ||
+String(			link.conversion_count).toLowerCase().includes(query) ||
+String(			link.date_created).toLowerCase().includes(query) ||
+String(			link.last_used).toLowerCase().includes(query) ||
+String(			link.status).toLowerCase().includes(query) ||
+String(			link.landing_page).toLowerCase().includes(query) ||
+String(			link.custom_tracking_id).toLowerCase().includes(query)
+        );
+        populateLinksTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveLinksChanges, deleteLinks, saveNewLinks, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchLinks;
+</script>
+{% endblock %}

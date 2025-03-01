@@ -37,7 +37,7 @@ class AffiliateProgramService():
                 currency = data.get('currency'),
                 min_payout_threshold = data.get('min_payout_threshold'),
                 max_payout_limit = data.get('max_payout_limit'),
-                date_created = data.get('date_created'),
+                date_created = datetime.datetime.now(), #data.get('date_created'),
                 is_active = data.get('is_active'),
                 duration = data.get('duration'),
                 allowed_countries = data.get('allowed_countries'),

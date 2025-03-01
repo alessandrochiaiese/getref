@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Audit{% endblock %}
+
+{% block content %}
+    <h2>Edit Audit</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Audit</button>
+    </form>
+    <br>
+    <a href="{% url 'audit_list' %}">Back to Audit List</a>
+{% endblock %}

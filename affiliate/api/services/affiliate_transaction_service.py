@@ -32,7 +32,7 @@ class AffiliateTransactionService():
         try:
             affiliate_transaction = AffiliateTransaction( 
                 transaction_amount = data.get('transaction_amount'),
-                transaction_date = data.get('transaction_date'),
+                transaction_date = datetime.datetime.now(), #data.get('transaction_date'),
                 order_id = data.get('oreder_id'),
                 product_id = data.get('product_id'),
                 status = data.get('status'),

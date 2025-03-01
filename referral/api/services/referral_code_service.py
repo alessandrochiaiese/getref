@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
 
 from typing import List
@@ -36,31 +37,6 @@ class ReferralCodeService():
             logger.warning(f"ReferralCode not found: {pk}")
             raise ValueError("ReferralCode not found")
      
-    """def create_referral_code(self, data) -> ReferralCode:
-        try:
-            referral_code = ReferralCode(
-                user = data.get('user'),
-                code = data.get('code'),
-                usage_count = data.get('usage_count'),
-                date_created = data.get('date_created'),
-                status = data.get('status'),
-                expiry_date = data.get('expiry_date'),
-                referred_user_count = data.get('referred_user_count'),
-                unique_url = data.get('unique_url'),
-                campaign_source = data.get('campaign_source'),
-                campaign_medium = data.get('campaign_medium'))
-            referral_code.save()
-
-            referral_programs = ReferralProgram.objects.filter(id__in=data['referral_programs'])
-            referral_code.programs.set(referral_programs)
-
-            logger.info(f"ReferralCode created: {referral_code}")
-            return referral_code
-        except Exception as e:
-            logger.error(f"Error creating referral_code: {e}")
-            raise e"""
-
-
     def create_referral_code(self, data) -> ReferralCode:
         try:
             # Creazione dell'oggetto ReferralCode
@@ -68,7 +44,7 @@ class ReferralCodeService():
                 user = data.get('user'),
                 code = data.get('code'),
                 usage_count = data.get('usage_count'),
-                date_created = data.get('date_created'),
+                date_created = datetime.datetime.now(), #data.get('date_created'),
                 status = data.get('status'),
                 expiry_date = data.get('expiry_date'),
                 referred_user_count = data.get('referred_user_count'),

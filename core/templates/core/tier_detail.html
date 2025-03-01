@@ -1,0 +1,67 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Tier Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Tier Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ tier_item.id }}</p>
+<p><strong>Program Id:</strong> {{ tier_item.program_id }}</p>
+<p><strong>Tier Name:</strong> {{ tier_item.tier_name }}</p>
+<p><strong>Min Sales:</strong> {{ tier_item.min_sales }}</p>
+<p><strong>Commission Rate:</strong> {{ tier_item.commission_rate }}</p>
+<p><strong>Benefits:</strong> {{ tier_item.benefits }}</p>
+<p><strong>Access Level:</strong> {{ tier_item.access_level }}</p>
+<p><strong>Next Tier Threshold:</strong> {{ tier_item.next_tier_threshold }}</p>
+<p><strong>Expiration Date:</strong> {{ tier_item.expiration_date }}</p>
+    <a href="{% url 'core:tier_update' tier_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:tier_delete' tier_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:tier_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_tier.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/tiers/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'TierDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

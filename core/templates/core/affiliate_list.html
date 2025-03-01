@@ -1,0 +1,138 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Affiliate List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Affiliate List</h1>
+    <a href="{% url 'core:affiliate_create' %}" class="btn btn-primary">Add New Affiliate</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>User Id</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Date Joined</th>
+<th>Status</th>
+<th>Total Earnings</th>
+<th>Country</th>
+<th>Profile Picture</th>
+<th>Account Balance</th>
+<th>Last Login</th>
+<th>Referral Source</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="AffiliateTableBody">
+        {% for item in affiliate_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.user_id }}</td>
+<td>{{ item.name }}</td>
+<td>{{ item.email }}</td>
+<td>{{ item.phone }}</td>
+<td>{{ item.date_joined }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.country }}</td>
+<td>{{ item.profile_picture }}</td>
+<td>{{ item.account_balance }}</td>
+<td>{{ item.last_login }}</td>
+<td>{{ item.referral_source }}</td>
+                <td>
+                    <a href="{% url 'core:affiliate_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:affiliate_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:affiliate_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_affiliate.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allAffiliates = []; // Store all referral data
+
+    async function fetchAffiliates() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/affiliate/`);
+            allAffiliates = await response.json();
+            populateAffiliatesTable(allAffiliates);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateAffiliatesTable(affiliates) {
+        const tableBody = document.getElementById('AffiliatesTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        affiliates.forEach(affiliate => {
+            const row = `<tr>
+                    <td>${affiliate.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.user_id }}</td>
+<td>{{ item.name }}</td>
+<td>{{ item.email }}</td>
+<td>{{ item.phone }}</td>
+<td>{{ item.date_joined }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.country }}</td>
+<td>{{ item.profile_picture }}</td>
+<td>{{ item.account_balance }}</td>
+<td>{{ item.last_login }}</td>
+<td>{{ item.referral_source }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${affiliate.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteAffiliates(${affiliate.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${affiliate.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterAffiliates() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allAffiliates.filter(affiliate => 
+            String(			affiliate.id).toLowerCase().includes(query) ||
+String(			affiliate.user_id).toLowerCase().includes(query) ||
+String(			affiliate.name).toLowerCase().includes(query) ||
+String(			affiliate.email).toLowerCase().includes(query) ||
+String(			affiliate.phone).toLowerCase().includes(query) ||
+String(			affiliate.date_joined).toLowerCase().includes(query) ||
+String(			affiliate.status).toLowerCase().includes(query) ||
+String(			affiliate.total_earnings).toLowerCase().includes(query) ||
+String(			affiliate.country).toLowerCase().includes(query) ||
+String(			affiliate.profile_picture).toLowerCase().includes(query) ||
+String(			affiliate.account_balance).toLowerCase().includes(query) ||
+String(			affiliate.last_login).toLowerCase().includes(query) ||
+String(			affiliate.referral_source).toLowerCase().includes(query)
+        );
+        populateAffiliatesTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveAffiliatesChanges, deleteAffiliates, saveNewAffiliates, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchAffiliates;
+</script>
+{% endblock %}

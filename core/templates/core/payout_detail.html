@@ -1,0 +1,69 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Payout Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Payout Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ payout_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ payout_item.participant_id }}</p>
+<p><strong>Amount:</strong> {{ payout_item.amount }}</p>
+<p><strong>Currency:</strong> {{ payout_item.currency }}</p>
+<p><strong>Payout Date:</strong> {{ payout_item.payout_date }}</p>
+<p><strong>Payout Method:</strong> {{ payout_item.payout_method }}</p>
+<p><strong>Status:</strong> {{ payout_item.status }}</p>
+<p><strong>Transaction Id:</strong> {{ payout_item.transaction_id }}</p>
+<p><strong>Processing Fee:</strong> {{ payout_item.processing_fee }}</p>
+<p><strong>Net Amount:</strong> {{ payout_item.net_amount }}</p>
+<p><strong>Provider:</strong> {{ payout_item.provider }}</p>
+    <a href="{% url 'core:payout_update' payout_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:payout_delete' payout_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:payout_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_payout.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/payouts/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'PayoutDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

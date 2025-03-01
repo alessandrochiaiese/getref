@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit SupportTicket{% endblock %}
+
+{% block content %}
+    <h2>Edit SupportTicket</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit SupportTicket</button>
+    </form>
+    <br>
+    <a href="{% url 'support_ticket_list' %}">Back to SupportTicket List</a>
+{% endblock %}

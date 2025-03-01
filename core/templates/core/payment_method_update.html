@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit PaymentMethod{% endblock %}
+
+{% block content %}
+    <h2>Edit PaymentMethod</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit PaymentMethod</button>
+    </form>
+    <br>
+    <a href="{% url 'payment_method_list' %}">Back to PaymentMethod List</a>
+{% endblock %}

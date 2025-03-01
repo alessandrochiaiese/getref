@@ -1,0 +1,138 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="createlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createperiod" class="form-label">Period</label>
+            <input type="text" class="form-control" data-field="period" id="createperiod" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createclick_count" class="form-label">Click Count</label>
+            <input type="text" class="form-control" data-field="click_count" id="createclick_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createconversion_count" class="form-label">Conversion Count</label>
+            <input type="text" class="form-control" data-field="conversion_count" id="createconversion_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtotal_rewards" class="form-label">Total Rewards</label>
+            <input type="text" class="form-control" data-field="total_rewards" id="createtotal_rewards" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createaverage_conversion_value" class="form-label">Average Conversion Value</label>
+            <input type="text" class="form-control" data-field="average_conversion_value" id="createaverage_conversion_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createhighest_referral_earning" class="form-label">Highest Referral Earning</label>
+            <input type="text" class="form-control" data-field="highest_referral_earning" id="createhighest_referral_earning" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="editlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editperiod" class="form-label">Period</label>
+            <input type="text" class="form-control" data-field="period" id="editperiod" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editclick_count" class="form-label">Click Count</label>
+            <input type="text" class="form-control" data-field="click_count" id="editclick_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editconversion_count" class="form-label">Conversion Count</label>
+            <input type="text" class="form-control" data-field="conversion_count" id="editconversion_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittotal_rewards" class="form-label">Total Rewards</label>
+            <input type="text" class="form-control" data-field="total_rewards" id="edittotal_rewards" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editaverage_conversion_value" class="form-label">Average Conversion Value</label>
+            <input type="text" class="form-control" data-field="average_conversion_value" id="editaverage_conversion_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edithighest_referral_earning" class="form-label">Highest Referral Earning</label>
+            <input type="text" class="form-control" data-field="highest_referral_earning" id="edithighest_referral_earning" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

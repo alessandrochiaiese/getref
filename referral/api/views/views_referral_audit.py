@@ -22,6 +22,7 @@ class ReferralAuditAPIView(APIView):
     authentication_classes = [OAuth2Authentication]
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.referral_audit_service = ReferralAuditService()
 
     @swagger_auto_schema(
@@ -63,7 +64,9 @@ class ReferralAuditAPIView(APIView):
     def post(self, request):
         try:
             data = request.data
-            data['ip_address'] = request.hostname
+            data['ip_address'] = request.META.get('REMOTE_ADDR') #request.hostname
+            data['device_info'] = request.META.get('HTTP_USER_AGENT') 
+            data['location'] = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
             serializer = ReferralAuditSerializer(data=data)
             if serializer.is_valid():
                 referral_audit = self.referral_audit_service.create_referral_audit(serializer.validated_data)

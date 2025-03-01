@@ -35,7 +35,7 @@ class AffiliateCommissionService():
             affiliate_commission = AffiliateCommission( 
                 amount = data.get('amonut'),
                 currency = data.get('currency'),
-                date_awarded = data.get('date_awarded'),
+                date_awarded = datetime.datetime.now(), #data.get('date_awarded'),
                 status = data.get('status'),
                 approved_by = data.get('approved_by'), 
                 commission_type = data.get('commission_type'),

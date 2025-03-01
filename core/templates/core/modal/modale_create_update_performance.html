@@ -1,0 +1,174 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createperiod" class="form-label">Period</label>
+            <input type="text" class="form-control" data-field="period" id="createperiod" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtotal_clicks" class="form-label">Total Clicks</label>
+            <input type="text" class="form-control" data-field="total_clicks" id="createtotal_clicks" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtotal_conversions" class="form-label">Total Conversions</label>
+            <input type="text" class="form-control" data-field="total_conversions" id="createtotal_conversions" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createconversion_rate" class="form-label">Conversion Rate</label>
+            <input type="text" class="form-control" data-field="conversion_rate" id="createconversion_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtotal_earnings" class="form-label">Total Earnings</label>
+            <input type="text" class="form-control" data-field="total_earnings" id="createtotal_earnings" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createaverage_order_value" class="form-label">Average Order Value</label>
+            <input type="text" class="form-control" data-field="average_order_value" id="createaverage_order_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createrefund_rate" class="form-label">Refund Rate</label>
+            <input type="text" class="form-control" data-field="refund_rate" id="createrefund_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcustomer_lifetime_value" class="form-label">Customer Lifetime Value</label>
+            <input type="text" class="form-control" data-field="customer_lifetime_value" id="createcustomer_lifetime_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtop_product" class="form-label">Top Product</label>
+            <input type="text" class="form-control" data-field="top_product" id="createtop_product" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editperiod" class="form-label">Period</label>
+            <input type="text" class="form-control" data-field="period" id="editperiod" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittotal_clicks" class="form-label">Total Clicks</label>
+            <input type="text" class="form-control" data-field="total_clicks" id="edittotal_clicks" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittotal_conversions" class="form-label">Total Conversions</label>
+            <input type="text" class="form-control" data-field="total_conversions" id="edittotal_conversions" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editconversion_rate" class="form-label">Conversion Rate</label>
+            <input type="text" class="form-control" data-field="conversion_rate" id="editconversion_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittotal_earnings" class="form-label">Total Earnings</label>
+            <input type="text" class="form-control" data-field="total_earnings" id="edittotal_earnings" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editaverage_order_value" class="form-label">Average Order Value</label>
+            <input type="text" class="form-control" data-field="average_order_value" id="editaverage_order_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editrefund_rate" class="form-label">Refund Rate</label>
+            <input type="text" class="form-control" data-field="refund_rate" id="editrefund_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcustomer_lifetime_value" class="form-label">Customer Lifetime Value</label>
+            <input type="text" class="form-control" data-field="customer_lifetime_value" id="editcustomer_lifetime_value" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittop_product" class="form-label">Top Product</label>
+            <input type="text" class="form-control" data-field="top_product" id="edittop_product" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

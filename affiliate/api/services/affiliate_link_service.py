@@ -35,7 +35,7 @@ class AffiliateLinkService():
             affiliate_link = AffiliateLink( 
                 url = data.get('url'),
                 click_count = data.get('click_count'),
-                conversion_count = data.get('date_created'),
+                conversion_count = datetime.datetime.now(), #data.get('date_created'),
                 date_created = data.get('program'),
                 last_used = data.get('last_used'),
                 link_status = data.get('link_status'),

@@ -36,7 +36,7 @@ class AffiliateSupportTicketService():
                 subject = data.get('subject'),
                 description = data.get('description'),
                 status = data.get('status'),
-                date_created = data.get('date_created'),
+                date_created = datetime.datetime.now(), #data.get('date_created'),
                 date_closed = data.get('date_closed'),
                 priority = data.get('priority'),
                 assigned_agent = data.get('assigned_agent'))

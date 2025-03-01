@@ -1,6 +1,7 @@
 # referral_system/views.py
 
 import logging
+from referral.api.services.referral_notification_service import ReferralNotificationService
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import JSONRenderer
@@ -23,7 +24,7 @@ class ReferralNotificationAPIView(APIView):
     authentication_classes = [OAuth2Authentication]
 
     def __init__(self, *args, **kwargs):
-        self.referral_notification_service = ReferralNotification()
+        self.referral_notification_service = ReferralNotificationService()
 
     @swagger_auto_schema(
         operation_summary="List all referral_notification",

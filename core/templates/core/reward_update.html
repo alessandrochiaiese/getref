@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Reward{% endblock %}
+
+{% block content %}
+    <h2>Edit Reward</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Reward</button>
+    </form>
+    <br>
+    <a href="{% url 'reward_list' %}">Back to Reward List</a>
+{% endblock %}

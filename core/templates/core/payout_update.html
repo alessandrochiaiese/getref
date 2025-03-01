@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Payout{% endblock %}
+
+{% block content %}
+    <h2>Edit Payout</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Payout</button>
+    </form>
+    <br>
+    <a href="{% url 'payout_list' %}">Back to Payout List</a>
+{% endblock %}

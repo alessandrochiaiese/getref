@@ -1,0 +1,44 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Promotion Sales" %}{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Le tue Promozioni</h1>
+
+    {% if promotions %}
+        <ul>
+            {% for promotion in promotions %}
+                <li>
+                    <p>Prodotto: {{ promotion.stripe_product_id }}</p>  <!-- Puoi sostituire con il nome del prodotto, se disponibile -->
+                    <p>Link Promozionale: <a href="{{ promotion.get_promotion_url }}" target="_blank">{{ promotion.get_promotion_url }}</a></p>
+                    <button onclick="copyLink('{{ promotion.get_promotion_url }}')">Copia Link</button>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Non hai ancora promozioni attive.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Funzione per copiare il link negli appunti
+    function copyLink(link) {
+        const textarea = document.createElement('textarea');
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Link copiato negli appunti!');
+    }
+</script>
+{% endblock %}

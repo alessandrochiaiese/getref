@@ -1,0 +1,36 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Promotion Sales" %}{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h4>Your active subscription:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Prodotto</th>
+                <th>Acquirente</th>
+                <th>Quantità</th>
+                <th>Data Acquisto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.promotion.stripe_product_id }}</td> <!-- Mostra l'ID del prodotto Stripe -->
+                <td>{{ sale.user.username }}</td>
+                <td>{{ sale.amount }}</td>
+                <td>{{ sale.purchased_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+
+{% endblock %}

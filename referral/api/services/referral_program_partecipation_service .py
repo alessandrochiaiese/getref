@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
 
 from typing import List
@@ -38,7 +39,7 @@ class ReferralProgramPartecipationPartecipationService():
     def create_referral_program_partecipation(self, data) -> ReferralProgramPartecipation:
         try:
             referral_program_partecipation = ReferralProgramPartecipation( 
-                date_joined = data.get('date_joined'),
+                date_joined = datetime.datetime.now(), #data.get('date_joined'),
                 reward_earned = data.get('reward_earned'),
                 status = data.get('status'))
             referral_program_partecipation.save()

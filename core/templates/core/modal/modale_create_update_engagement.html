@@ -1,0 +1,126 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="createlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createemail_opened" class="form-label">Email Opened</label>
+            <input type="text" class="form-control" data-field="email_opened" id="createemail_opened" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createemail_clicked" class="form-label">Email Clicked</label>
+            <input type="text" class="form-control" data-field="email_clicked" id="createemail_clicked" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createsocial_share_count" class="form-label">Social Share Count</label>
+            <input type="text" class="form-control" data-field="social_share_count" id="createsocial_share_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlast_interaction_date" class="form-label">Last Interaction Date</label>
+            <input type="text" class="form-control" data-field="last_interaction_date" id="createlast_interaction_date" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="editlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editemail_opened" class="form-label">Email Opened</label>
+            <input type="text" class="form-control" data-field="email_opened" id="editemail_opened" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editemail_clicked" class="form-label">Email Clicked</label>
+            <input type="text" class="form-control" data-field="email_clicked" id="editemail_clicked" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editsocial_share_count" class="form-label">Social Share Count</label>
+            <input type="text" class="form-control" data-field="social_share_count" id="editsocial_share_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlast_interaction_date" class="form-label">Last Interaction Date</label>
+            <input type="text" class="form-control" data-field="last_interaction_date" id="editlast_interaction_date" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

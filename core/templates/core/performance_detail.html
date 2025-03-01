@@ -1,0 +1,69 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Performance Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Performance Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ performance_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ performance_item.participant_id }}</p>
+<p><strong>Period:</strong> {{ performance_item.period }}</p>
+<p><strong>Total Clicks:</strong> {{ performance_item.total_clicks }}</p>
+<p><strong>Total Conversions:</strong> {{ performance_item.total_conversions }}</p>
+<p><strong>Conversion Rate:</strong> {{ performance_item.conversion_rate }}</p>
+<p><strong>Total Earnings:</strong> {{ performance_item.total_earnings }}</p>
+<p><strong>Average Order Value:</strong> {{ performance_item.average_order_value }}</p>
+<p><strong>Refund Rate:</strong> {{ performance_item.refund_rate }}</p>
+<p><strong>Customer Lifetime Value:</strong> {{ performance_item.customer_lifetime_value }}</p>
+<p><strong>Top Product:</strong> {{ performance_item.top_product }}</p>
+    <a href="{% url 'core:performance_update' performance_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:performance_delete' performance_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:performance_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_performance.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/performances/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'PerformanceDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

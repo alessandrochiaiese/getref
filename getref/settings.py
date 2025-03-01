@@ -71,8 +71,8 @@ CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 APP_NAME = config('APP_NAME')
 
-OAUTH2_PROVIDER_APPLICATION_MODEL = "oauth2_provider.Application"
-#OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.CustomApplication"
+#OAUTH2_PROVIDER_APPLICATION_MODEL = "oauth2_provider.Application"
+OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.CustomApplication"
 
 
 
@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     "accounts",                                 # Django users
     # Local
     'dashboard', 
+    #'core',
     'referral', 
     'affiliate',
     'subscriptions',

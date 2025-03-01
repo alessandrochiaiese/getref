@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
 
 from typing import List 
@@ -40,7 +41,7 @@ class ReferralBonusService():
                 bonus_type = data.get('bonus_type'),
                 bonus_value = data.get('bonus_value'), 
                 min_referrals_required = data.get('min_referrals_required'),
-                bonus_date = data.get('bonus_date'),
+                bonus_date = datetime.datetime.now(), #data.get('bonus_date'),
                 expiry_date = data.get('expiry_date'),
                 max_usage = data.get('max_usage'),
                 eligibility_criteria = data.get('eligibility_criteria')

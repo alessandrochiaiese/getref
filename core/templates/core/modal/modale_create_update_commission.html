@@ -1,0 +1,174 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="createprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createamount" class="form-label">Amount</label>
+            <input type="text" class="form-control" data-field="amount" id="createamount" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcurrency" class="form-label">Currency</label>
+            <input type="text" class="form-control" data-field="currency" id="createcurrency" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdate_awarded" class="form-label">Date Awarded</label>
+            <input type="text" class="form-control" data-field="date_awarded" id="createdate_awarded" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="createstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createapproved_by" class="form-label">Approved By</label>
+            <input type="text" class="form-control" data-field="approved_by" id="createapproved_by" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtype" class="form-label">Type</label>
+            <input type="text" class="form-control" data-field="type" id="createtype" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdescription" class="form-label">Description</label>
+            <input type="text" class="form-control" data-field="description" id="createdescription" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtier" class="form-label">Tier</label>
+            <input type="text" class="form-control" data-field="tier" id="createtier" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="editprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editamount" class="form-label">Amount</label>
+            <input type="text" class="form-control" data-field="amount" id="editamount" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcurrency" class="form-label">Currency</label>
+            <input type="text" class="form-control" data-field="currency" id="editcurrency" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdate_awarded" class="form-label">Date Awarded</label>
+            <input type="text" class="form-control" data-field="date_awarded" id="editdate_awarded" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="editstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editapproved_by" class="form-label">Approved By</label>
+            <input type="text" class="form-control" data-field="approved_by" id="editapproved_by" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittype" class="form-label">Type</label>
+            <input type="text" class="form-control" data-field="type" id="edittype" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdescription" class="form-label">Description</label>
+            <input type="text" class="form-control" data-field="description" id="editdescription" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittier" class="form-label">Tier</label>
+            <input type="text" class="form-control" data-field="tier" id="edittier" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

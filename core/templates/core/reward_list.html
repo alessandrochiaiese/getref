@@ -1,0 +1,130 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Reward List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Reward List</h1>
+    <a href="{% url 'core:reward_create' %}" class="btn btn-primary">Add New Reward</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Participant Id</th>
+<th>Program Id</th>
+<th>Reward Type</th>
+<th>Reward Value</th>
+<th>Currency</th>
+<th>Date Awarded</th>
+<th>Status</th>
+<th>Expiry Date</th>
+<th>Description</th>
+<th>Source</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="RewardTableBody">
+        {% for item in reward_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.reward_type }}</td>
+<td>{{ item.reward_value }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.date_awarded }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.expiry_date }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.source }}</td>
+                <td>
+                    <a href="{% url 'core:reward_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:reward_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:reward_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_reward.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allRewards = []; // Store all referral data
+
+    async function fetchRewards() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/reward/`);
+            allRewards = await response.json();
+            populateRewardsTable(allRewards);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateRewardsTable(rewards) {
+        const tableBody = document.getElementById('RewardsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        rewards.forEach(reward => {
+            const row = `<tr>
+                    <td>${reward.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.reward_type }}</td>
+<td>{{ item.reward_value }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.date_awarded }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.expiry_date }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.source }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${reward.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteRewards(${reward.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${reward.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterRewards() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allRewards.filter(reward => 
+            String(			reward.id).toLowerCase().includes(query) ||
+String(			reward.participant_id).toLowerCase().includes(query) ||
+String(			reward.program_id).toLowerCase().includes(query) ||
+String(			reward.reward_type).toLowerCase().includes(query) ||
+String(			reward.reward_value).toLowerCase().includes(query) ||
+String(			reward.currency).toLowerCase().includes(query) ||
+String(			reward.date_awarded).toLowerCase().includes(query) ||
+String(			reward.status).toLowerCase().includes(query) ||
+String(			reward.expiry_date).toLowerCase().includes(query) ||
+String(			reward.description).toLowerCase().includes(query) ||
+String(			reward.source).toLowerCase().includes(query)
+        );
+        populateRewardsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveRewardsChanges, deleteRewards, saveNewRewards, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchRewards;
+</script>
+{% endblock %}

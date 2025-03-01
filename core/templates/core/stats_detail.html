@@ -1,0 +1,66 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Stats Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Stats Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ stats_item.id }}</p>
+<p><strong>Link Id:</strong> {{ stats_item.link_id }}</p>
+<p><strong>Period:</strong> {{ stats_item.period }}</p>
+<p><strong>Click Count:</strong> {{ stats_item.click_count }}</p>
+<p><strong>Conversion Count:</strong> {{ stats_item.conversion_count }}</p>
+<p><strong>Total Rewards:</strong> {{ stats_item.total_rewards }}</p>
+<p><strong>Average Conversion Value:</strong> {{ stats_item.average_conversion_value }}</p>
+<p><strong>Highest Referral Earning:</strong> {{ stats_item.highest_referral_earning }}</p>
+    <a href="{% url 'core:stats_update' stats_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:stats_delete' stats_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:stats_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_stats.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/stats/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'StatsDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

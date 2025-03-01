@@ -1,0 +1,70 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Transaction Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Transaction Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ transaction_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ transaction_item.participant_id }}</p>
+<p><strong>Link Id:</strong> {{ transaction_item.link_id }}</p>
+<p><strong>Transaction Amount:</strong> {{ transaction_item.transaction_amount }}</p>
+<p><strong>Transaction Date:</strong> {{ transaction_item.transaction_date }}</p>
+<p><strong>Order Id:</strong> {{ transaction_item.order_id }}</p>
+<p><strong>Product Id:</strong> {{ transaction_item.product_id }}</p>
+<p><strong>Status:</strong> {{ transaction_item.status }}</p>
+<p><strong>Payment Date:</strong> {{ transaction_item.payment_date }}</p>
+<p><strong>Commission Rate:</strong> {{ transaction_item.commission_rate }}</p>
+<p><strong>Discount Applied:</strong> {{ transaction_item.discount_applied }}</p>
+<p><strong>Coupon Code:</strong> {{ transaction_item.coupon_code }}</p>
+    <a href="{% url 'core:transaction_update' transaction_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:transaction_delete' transaction_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:transaction_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_transaction.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/transactions/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'TransactionDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

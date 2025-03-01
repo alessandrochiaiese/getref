@@ -33,7 +33,7 @@ class AffiliateAuditService():
         try:
             affiliate_audit = AffiliateAudit( 
                 action_taken = data.get('action_taken'),
-                action_date = data.get('action_date'),
+                action_date = datetime.datetime.now(), #data.get('action_date'),
                 ip_address = data.get('ip_address'),
                 device_info = data.get('device_info'),
                 location = data.get('location'))

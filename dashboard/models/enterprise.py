@@ -83,6 +83,11 @@ class ProfileBusiness(models.Model):
     holder = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Holder"))
     company_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Name"))
     email = models.EmailField(max_length=255, blank=True, null=True, verbose_name=_("Email"))
+    
+    user_registered = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User Registered"), related_name='profile_registered')
+    status = models.CharField(default="inactive", max_length=50, verbose_name=_("Status"))
+    code = models.CharField(default="HREMFSD", max_length=50, unique=True, verbose_name=_("Code"))
+    unique_url = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Invitation URL"))
 
     def __str__(self):
         return self.company_name or "Profile Business"

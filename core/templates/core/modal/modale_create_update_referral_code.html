@@ -1,0 +1,186 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="createprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcode" class="form-label">Code</label>
+            <input type="text" class="form-control" data-field="code" id="createcode" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createusage_count" class="form-label">Usage Count</label>
+            <input type="text" class="form-control" data-field="usage_count" id="createusage_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdate_created" class="form-label">Date Created</label>
+            <input type="text" class="form-control" data-field="date_created" id="createdate_created" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="createstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createexpiry_date" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" data-field="expiry_date" id="createexpiry_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createreferred_user_count" class="form-label">Referred User Count</label>
+            <input type="text" class="form-control" data-field="referred_user_count" id="createreferred_user_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createunique_url" class="form-label">Unique Url</label>
+            <input type="text" class="form-control" data-field="unique_url" id="createunique_url" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcampaign_source" class="form-label">Campaign Source</label>
+            <input type="text" class="form-control" data-field="campaign_source" id="createcampaign_source" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcampaign_medium" class="form-label">Campaign Medium</label>
+            <input type="text" class="form-control" data-field="campaign_medium" id="createcampaign_medium" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="editprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcode" class="form-label">Code</label>
+            <input type="text" class="form-control" data-field="code" id="editcode" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editusage_count" class="form-label">Usage Count</label>
+            <input type="text" class="form-control" data-field="usage_count" id="editusage_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdate_created" class="form-label">Date Created</label>
+            <input type="text" class="form-control" data-field="date_created" id="editdate_created" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="editstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editexpiry_date" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" data-field="expiry_date" id="editexpiry_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editreferred_user_count" class="form-label">Referred User Count</label>
+            <input type="text" class="form-control" data-field="referred_user_count" id="editreferred_user_count" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editunique_url" class="form-label">Unique Url</label>
+            <input type="text" class="form-control" data-field="unique_url" id="editunique_url" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcampaign_source" class="form-label">Campaign Source</label>
+            <input type="text" class="form-control" data-field="campaign_source" id="editcampaign_source" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcampaign_medium" class="form-label">Campaign Medium</label>
+            <input type="text" class="form-control" data-field="campaign_medium" id="editcampaign_medium" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

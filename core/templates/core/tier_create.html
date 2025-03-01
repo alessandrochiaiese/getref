@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New Tier{% endblock %}
+
+{% block content %}
+    <h2>Add New Tier</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add Tier</button>
+    </form>
+    <br>
+    <a href="{% url 'tier_list' %}">Back to Tier List</a>
+    
+{% endblock %}

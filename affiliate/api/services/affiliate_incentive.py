@@ -36,7 +36,7 @@ class AffiliateIncentiveService():
                 affiliate = data.get('affiliate'),
                 program = data.get('program'),
                 incentive_type = data.get('incentive_type'),
-                date = data.get('date'),
+                date = datetime.datetime.now(), #data.get('date'),
                 amount = data.get('amount'),
                 currency = data.get('currency'),
                 status = data.get('status'),

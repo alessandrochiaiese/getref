@@ -34,7 +34,7 @@ class AffiliatePayoutService():
             affiliate_payout = AffiliatePayout( 
                 amount = data.get('amount'),
                 currency = data.get('currency'),
-                payout_date = data.get('payout_date'),
+                payout_date = datetime.datetime.now(), #data.get('payout_date'),
                 payout_method = data.get('payout_method'),
                 payout_status = data.get('payout_status'),
                 transaction_id = data.get('transaction_id'),

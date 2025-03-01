@@ -1,0 +1,146 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Program List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Program List</h1>
+    <a href="{% url 'core:program_create' %}" class="btn btn-primary">Add New Program</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Name</th>
+<th>Description</th>
+<th>Program Type</th>
+<th>Reward Type</th>
+<th>Reward Value</th>
+<th>Currency</th>
+<th>Commission Rate</th>
+<th>Min Payout Threshold</th>
+<th>Max Payout Limit</th>
+<th>Date Created</th>
+<th>Is Active</th>
+<th>Duration</th>
+<th>Allowed Regions</th>
+<th>Target Industry</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="ProgramTableBody">
+        {% for item in program_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.name }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.program_type }}</td>
+<td>{{ item.reward_type }}</td>
+<td>{{ item.reward_value }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.commission_rate }}</td>
+<td>{{ item.min_payout_threshold }}</td>
+<td>{{ item.max_payout_limit }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.is_active }}</td>
+<td>{{ item.duration }}</td>
+<td>{{ item.allowed_regions }}</td>
+<td>{{ item.target_industry }}</td>
+                <td>
+                    <a href="{% url 'core:program_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:program_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:program_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_program.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allPrograms = []; // Store all referral data
+
+    async function fetchPrograms() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/program/`);
+            allPrograms = await response.json();
+            populateProgramsTable(allPrograms);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateProgramsTable(programs) {
+        const tableBody = document.getElementById('ProgramsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        programs.forEach(program => {
+            const row = `<tr>
+                    <td>${program.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.name }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.program_type }}</td>
+<td>{{ item.reward_type }}</td>
+<td>{{ item.reward_value }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.commission_rate }}</td>
+<td>{{ item.min_payout_threshold }}</td>
+<td>{{ item.max_payout_limit }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.is_active }}</td>
+<td>{{ item.duration }}</td>
+<td>{{ item.allowed_regions }}</td>
+<td>{{ item.target_industry }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${program.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deletePrograms(${program.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${program.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterPrograms() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allPrograms.filter(program => 
+            String(			program.id).toLowerCase().includes(query) ||
+String(			program.name).toLowerCase().includes(query) ||
+String(			program.description).toLowerCase().includes(query) ||
+String(			program.program_type).toLowerCase().includes(query) ||
+String(			program.reward_type).toLowerCase().includes(query) ||
+String(			program.reward_value).toLowerCase().includes(query) ||
+String(			program.currency).toLowerCase().includes(query) ||
+String(			program.commission_rate).toLowerCase().includes(query) ||
+String(			program.min_payout_threshold).toLowerCase().includes(query) ||
+String(			program.max_payout_limit).toLowerCase().includes(query) ||
+String(			program.date_created).toLowerCase().includes(query) ||
+String(			program.is_active).toLowerCase().includes(query) ||
+String(			program.duration).toLowerCase().includes(query) ||
+String(			program.allowed_regions).toLowerCase().includes(query) ||
+String(			program.target_industry).toLowerCase().includes(query)
+        );
+        populateProgramsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveProgramsChanges, deletePrograms, saveNewPrograms, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchPrograms;
+</script>
+{% endblock %}

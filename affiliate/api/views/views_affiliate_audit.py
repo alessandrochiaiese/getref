@@ -62,7 +62,11 @@ class AffiliateAuditAPIView(APIView):
     )
     def post(self, request):
         try:
-            serializer = AffiliateAuditSerializer(data=request.data)
+            data = request.data
+            data['ip_address'] = request.META.get('REMOTE_ADDR') #request.hostname
+            data['device_info'] = request.META.get('HTTP_USER_AGENT') 
+            data['location'] = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
+            serializer = AffiliateAuditSerializer(data=data)
             if serializer.is_valid():
                 affiliate_audit = self.affiliate_audit_service.create_affiliate_audit(serializer.validated_data)
                 return Response(AffiliateAuditSerializer(affiliate_audit).data, status=status.HTTP_201_CREATED)

@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New ReferralLevel{% endblock %}
+
+{% block content %}
+    <h2>Add New ReferralLevel</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add ReferralLevel</button>
+    </form>
+    <br>
+    <a href="{% url 'referral_level_list' %}">Back to ReferralLevel List</a>
+    
+{% endblock %}

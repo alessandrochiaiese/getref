@@ -1,0 +1,63 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}PaymentMethod Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>PaymentMethod Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ paymentmethod_item.id }}</p>
+<p><strong>Amount:</strong> {{ paymentmethod_item.amount }}</p>
+<p><strong>Description:</strong> {{ paymentmethod_item.description }}</p>
+<p><strong>Paid:</strong> {{ paymentmethod_item.paid }}</p>
+<p><strong>User Id:</strong> {{ paymentmethod_item.user_id }}</p>
+    <a href="{% url 'core:paymentmethod_update' paymentmethod_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:paymentmethod_delete' paymentmethod_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:paymentmethod_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_payment_method.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/payment-methods/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'PaymentMethodDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

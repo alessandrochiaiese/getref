@@ -1,0 +1,67 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Bonus Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Bonus Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ bonus_item.id }}</p>
+<p><strong>Program Id:</strong> {{ bonus_item.program_id }}</p>
+<p><strong>Type:</strong> {{ bonus_item.type }}</p>
+<p><strong>Value:</strong> {{ bonus_item.value }}</p>
+<p><strong>Min Referrals Required:</strong> {{ bonus_item.min_referrals_required }}</p>
+<p><strong>Bonus Date:</strong> {{ bonus_item.bonus_date }}</p>
+<p><strong>Expiry Date:</strong> {{ bonus_item.expiry_date }}</p>
+<p><strong>Max Usage:</strong> {{ bonus_item.max_usage }}</p>
+<p><strong>Eligibility Criteria:</strong> {{ bonus_item.eligibility_criteria }}</p>
+    <a href="{% url 'core:bonus_update' bonus_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:bonus_delete' bonus_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:bonus_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_bonus.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/bonus/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'BonusDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

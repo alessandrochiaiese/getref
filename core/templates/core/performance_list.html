@@ -1,0 +1,130 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Performance List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Performance List</h1>
+    <a href="{% url 'core:performance_create' %}" class="btn btn-primary">Add New Performance</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Participant Id</th>
+<th>Period</th>
+<th>Total Clicks</th>
+<th>Total Conversions</th>
+<th>Conversion Rate</th>
+<th>Total Earnings</th>
+<th>Average Order Value</th>
+<th>Refund Rate</th>
+<th>Customer Lifetime Value</th>
+<th>Top Product</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="PerformanceTableBody">
+        {% for item in performance_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.period }}</td>
+<td>{{ item.total_clicks }}</td>
+<td>{{ item.total_conversions }}</td>
+<td>{{ item.conversion_rate }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.average_order_value }}</td>
+<td>{{ item.refund_rate }}</td>
+<td>{{ item.customer_lifetime_value }}</td>
+<td>{{ item.top_product }}</td>
+                <td>
+                    <a href="{% url 'core:performance_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:performance_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:performance_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_performance.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allPerformances = []; // Store all referral data
+
+    async function fetchPerformances() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/performance/`);
+            allPerformances = await response.json();
+            populatePerformancesTable(allPerformances);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populatePerformancesTable(performances) {
+        const tableBody = document.getElementById('PerformancesTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        performances.forEach(performance => {
+            const row = `<tr>
+                    <td>${performance.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.period }}</td>
+<td>{{ item.total_clicks }}</td>
+<td>{{ item.total_conversions }}</td>
+<td>{{ item.conversion_rate }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.average_order_value }}</td>
+<td>{{ item.refund_rate }}</td>
+<td>{{ item.customer_lifetime_value }}</td>
+<td>{{ item.top_product }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${performance.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deletePerformances(${performance.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${performance.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterPerformances() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allPerformances.filter(performance => 
+            String(			performance.id).toLowerCase().includes(query) ||
+String(			performance.participant_id).toLowerCase().includes(query) ||
+String(			performance.period).toLowerCase().includes(query) ||
+String(			performance.total_clicks).toLowerCase().includes(query) ||
+String(			performance.total_conversions).toLowerCase().includes(query) ||
+String(			performance.conversion_rate).toLowerCase().includes(query) ||
+String(			performance.total_earnings).toLowerCase().includes(query) ||
+String(			performance.average_order_value).toLowerCase().includes(query) ||
+String(			performance.refund_rate).toLowerCase().includes(query) ||
+String(			performance.customer_lifetime_value).toLowerCase().includes(query) ||
+String(			performance.top_product).toLowerCase().includes(query)
+        );
+        populatePerformancesTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, savePerformancesChanges, deletePerformances, saveNewPerformances, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchPerformances;
+</script>
+{% endblock %}

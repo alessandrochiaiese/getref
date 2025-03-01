@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New Conversion{% endblock %}
+
+{% block content %}
+    <h2>Add New Conversion</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add Conversion</button>
+    </form>
+    <br>
+    <a href="{% url 'conversion_list' %}">Back to Conversion List</a>
+    
+{% endblock %}

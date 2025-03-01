@@ -1,0 +1,150 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="createprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtype" class="form-label">Type</label>
+            <input type="text" class="form-control" data-field="type" id="createtype" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createvalue" class="form-label">Value</label>
+            <input type="text" class="form-control" data-field="value" id="createvalue" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createmin_referrals_required" class="form-label">Min Referrals Required</label>
+            <input type="text" class="form-control" data-field="min_referrals_required" id="createmin_referrals_required" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createbonus_date" class="form-label">Bonus Date</label>
+            <input type="text" class="form-control" data-field="bonus_date" id="createbonus_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createexpiry_date" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" data-field="expiry_date" id="createexpiry_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createmax_usage" class="form-label">Max Usage</label>
+            <input type="text" class="form-control" data-field="max_usage" id="createmax_usage" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createeligibility_criteria" class="form-label">Eligibility Criteria</label>
+            <input type="text" class="form-control" data-field="eligibility_criteria" id="createeligibility_criteria" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="editprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittype" class="form-label">Type</label>
+            <input type="text" class="form-control" data-field="type" id="edittype" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editvalue" class="form-label">Value</label>
+            <input type="text" class="form-control" data-field="value" id="editvalue" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editmin_referrals_required" class="form-label">Min Referrals Required</label>
+            <input type="text" class="form-control" data-field="min_referrals_required" id="editmin_referrals_required" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editbonus_date" class="form-label">Bonus Date</label>
+            <input type="text" class="form-control" data-field="bonus_date" id="editbonus_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editexpiry_date" class="form-label">Expiry Date</label>
+            <input type="text" class="form-control" data-field="expiry_date" id="editexpiry_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editmax_usage" class="form-label">Max Usage</label>
+            <input type="text" class="form-control" data-field="max_usage" id="editmax_usage" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editeligibility_criteria" class="form-label">Eligibility Criteria</label>
+            <input type="text" class="form-control" data-field="eligibility_criteria" id="editeligibility_criteria" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

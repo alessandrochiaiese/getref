@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
  
 from django.contrib.auth import get_user_model
@@ -40,7 +41,7 @@ class ReferralConversionService():
         try:
             referral_conversion = ReferralConversion(
                 referral_user = data.get('referral_user'),
-                conversion_date = data.get('conversion_date'),
+                conversion_date = datetime.datetime.now(), #data.get('conversion_date'),
                 conversion_value = data.get('conversion_value'),
                 conversion = data.get('conversion'),
                 status = data.get('status'),

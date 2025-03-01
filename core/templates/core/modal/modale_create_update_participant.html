@@ -1,0 +1,150 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createuser_id" class="form-label">User Id</label>
+            <input type="text" class="form-control" data-field="user_id" id="createuser_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="createprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="createstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtotal_earnings" class="form-label">Total Earnings</label>
+            <input type="text" class="form-control" data-field="total_earnings" id="createtotal_earnings" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createaccount_balance" class="form-label">Account Balance</label>
+            <input type="text" class="form-control" data-field="account_balance" id="createaccount_balance" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdate_joined" class="form-label">Date Joined</label>
+            <input type="text" class="form-control" data-field="date_joined" id="createdate_joined" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlast_login" class="form-label">Last Login</label>
+            <input type="text" class="form-control" data-field="last_login" id="createlast_login" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createreferral_source" class="form-label">Referral Source</label>
+            <input type="text" class="form-control" data-field="referral_source" id="createreferral_source" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edituser_id" class="form-label">User Id</label>
+            <input type="text" class="form-control" data-field="user_id" id="edituser_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="editprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="editstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittotal_earnings" class="form-label">Total Earnings</label>
+            <input type="text" class="form-control" data-field="total_earnings" id="edittotal_earnings" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editaccount_balance" class="form-label">Account Balance</label>
+            <input type="text" class="form-control" data-field="account_balance" id="editaccount_balance" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdate_joined" class="form-label">Date Joined</label>
+            <input type="text" class="form-control" data-field="date_joined" id="editdate_joined" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlast_login" class="form-label">Last Login</label>
+            <input type="text" class="form-control" data-field="last_login" id="editlast_login" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editreferral_source" class="form-label">Referral Source</label>
+            <input type="text" class="form-control" data-field="referral_source" id="editreferral_source" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

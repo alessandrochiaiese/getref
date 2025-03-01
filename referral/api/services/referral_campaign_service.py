@@ -46,7 +46,7 @@ class ReferralCampaignService():
                 end_date = data.get('end_date'),
                 goal = data.get('goal'),
                 budget = data.get('budget'),
-                spending_to_date = 0, #data.get('spending_to_date'),
+                spending_to_date = data.get('spending_to_date'),
                 target_audience = data.get('target_audience', None))
             referral_campaign.save()
 

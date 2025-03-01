@@ -39,6 +39,7 @@ fetch(`${window.location.origin}/config/`)
         }
       });
     });
+    
   })
   .catch((error) => {
     console.error("Error fetching Stripe public key:", error);

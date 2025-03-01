@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Affiliate{% endblock %}
+
+{% block content %}
+    <h2>Edit Affiliate</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Affiliate</button>
+    </form>
+    <br>
+    <a href="{% url 'affiliate_list' %}">Back to Affiliate List</a>
+{% endblock %}

@@ -1,0 +1,126 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createaction_taken" class="form-label">Action Taken</label>
+            <input type="text" class="form-control" data-field="action_taken" id="createaction_taken" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createaction_date" class="form-label">Action Date</label>
+            <input type="text" class="form-control" data-field="action_date" id="createaction_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createip_address" class="form-label">Ip Address</label>
+            <input type="text" class="form-control" data-field="ip_address" id="createip_address" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdevice_info" class="form-label">Device Info</label>
+            <input type="text" class="form-control" data-field="device_info" id="createdevice_info" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlocation" class="form-label">Location</label>
+            <input type="text" class="form-control" data-field="location" id="createlocation" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editaction_taken" class="form-label">Action Taken</label>
+            <input type="text" class="form-control" data-field="action_taken" id="editaction_taken" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editaction_date" class="form-label">Action Date</label>
+            <input type="text" class="form-control" data-field="action_date" id="editaction_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editip_address" class="form-label">Ip Address</label>
+            <input type="text" class="form-control" data-field="ip_address" id="editip_address" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdevice_info" class="form-label">Device Info</label>
+            <input type="text" class="form-control" data-field="device_info" id="editdevice_info" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlocation" class="form-label">Location</label>
+            <input type="text" class="form-control" data-field="location" id="editlocation" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

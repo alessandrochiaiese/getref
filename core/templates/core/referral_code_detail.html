@@ -1,0 +1,70 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}ReferralCode Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>ReferralCode Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ referralcode_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ referralcode_item.participant_id }}</p>
+<p><strong>Program Id:</strong> {{ referralcode_item.program_id }}</p>
+<p><strong>Code:</strong> {{ referralcode_item.code }}</p>
+<p><strong>Usage Count:</strong> {{ referralcode_item.usage_count }}</p>
+<p><strong>Date Created:</strong> {{ referralcode_item.date_created }}</p>
+<p><strong>Status:</strong> {{ referralcode_item.status }}</p>
+<p><strong>Expiry Date:</strong> {{ referralcode_item.expiry_date }}</p>
+<p><strong>Referred User Count:</strong> {{ referralcode_item.referred_user_count }}</p>
+<p><strong>Unique Url:</strong> {{ referralcode_item.unique_url }}</p>
+<p><strong>Campaign Source:</strong> {{ referralcode_item.campaign_source }}</p>
+<p><strong>Campaign Medium:</strong> {{ referralcode_item.campaign_medium }}</p>
+    <a href="{% url 'core:referralcode_update' referralcode_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:referralcode_delete' referralcode_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:referralcode_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_referral_code.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/referral-codes/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'ReferralCodeDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

@@ -1,0 +1,150 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="createprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createname" class="form-label">Name</label>
+            <input type="text" class="form-control" data-field="name" id="createname" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstart_date" class="form-label">Start Date</label>
+            <input type="text" class="form-control" data-field="start_date" id="createstart_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createend_date" class="form-label">End Date</label>
+            <input type="text" class="form-control" data-field="end_date" id="createend_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="creategoal" class="form-label">Goal</label>
+            <input type="text" class="form-control" data-field="goal" id="creategoal" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createbudget" class="form-label">Budget</label>
+            <input type="text" class="form-control" data-field="budget" id="createbudget" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createspending_to_date" class="form-label">Spending To Date</label>
+            <input type="text" class="form-control" data-field="spending_to_date" id="createspending_to_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtarget_audience" class="form-label">Target Audience</label>
+            <input type="text" class="form-control" data-field="target_audience" id="createtarget_audience" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editprogram_id" class="form-label">Program Id</label>
+            <input type="text" class="form-control" data-field="program_id" id="editprogram_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editname" class="form-label">Name</label>
+            <input type="text" class="form-control" data-field="name" id="editname" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstart_date" class="form-label">Start Date</label>
+            <input type="text" class="form-control" data-field="start_date" id="editstart_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editend_date" class="form-label">End Date</label>
+            <input type="text" class="form-control" data-field="end_date" id="editend_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editgoal" class="form-label">Goal</label>
+            <input type="text" class="form-control" data-field="goal" id="editgoal" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editbudget" class="form-label">Budget</label>
+            <input type="text" class="form-control" data-field="budget" id="editbudget" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editspending_to_date" class="form-label">Spending To Date</label>
+            <input type="text" class="form-control" data-field="spending_to_date" id="editspending_to_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittarget_audience" class="form-label">Target Audience</label>
+            <input type="text" class="form-control" data-field="target_audience" id="edittarget_audience" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

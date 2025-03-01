@@ -1,3 +1,4 @@
+import datetime
 from typing import List
 from django.shortcuts import get_object_or_404
 from affiliate.models.affiliate import Affiliate
@@ -38,7 +39,7 @@ class AffiliateProgramPartecipationService():
             affiliate_program_partecipation = AffiliateProgramPartecipation(
                 affiliate = data.get('affiliate'),
                 program = data.get('program'),
-                date_joined = data.get('date_joined'),
+                date_joined = datetime.datetime.now(), #data.get('date_joined'),
                 commission_earned = data.get('commission_earned'),
                 status = data.get('status'))
             affiliate_program_partecipation.save()

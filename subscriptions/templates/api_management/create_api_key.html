@@ -1,0 +1,13 @@
+{% extends "dashboard/layout.html" %}
+{% block content %}
+<h2>Crea una nuova API Key</h2>
+<form method="POST">
+    {% csrf_token %}
+    <input class="form-control" type="text" name="name" placeholder="Nome API Key" required>
+    <select class="form-control" name="plan" required>
+        <option value="free">Free</option>
+        <option value="pro">Pro</option>
+    </select>
+    <button class="btn btn-primary" type="submit">Crea API Key</button>
+</form>
+{% endblock %}

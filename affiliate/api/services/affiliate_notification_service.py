@@ -32,7 +32,7 @@ class AffiliateNotificationService():
         try:
             affiliate_notification = AffiliateNotification(
                 message = data.get('message'),
-                date_sent = data.get('date_sent'),
+                date_sent = datetime.datetime.now(), #data.get('date_sent'),
                 is_read = data.get('is_read'),
                 priority = data.get('priority'),
                 notification_type = data.get('notification_type'))

@@ -102,6 +102,57 @@ DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/
 [ ] Stripe, Create i prodotti o servizi (piani di affiliazione sys e piani di referral sys)
 
 
+25.02.2025
+
+
+
+*_affiliate.py
+*_audit.py
+*_bonus.py
+*_campaign.py
+*_commission.py
+*_conversion.py
+*_country.py          DELETE
+*_custom_order.py     DELETE
+*_engagement.py
+*_link.py
+*_notification.py
+*_order_item.py       DELETE
+*_order.py            DELETE
+*_participant.py
+*_payment_method.py
+*_payout.py
+*_performance.py
+*_price.py            DELETE
+*_product_tag.py      DELETE
+*_product.py          DELETE
+*_profile.py          DELETE
+*_program.py
+*_referral_code.py
+*_referral_level.py
+*_region.py           DELETE
+*_reward.py
+*_settings.py
+*_stats.py
+*_support_ticket.py
+*_tier.py
+*_transaction.py
+*_user.py             DELETE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 USEFUL LINK:

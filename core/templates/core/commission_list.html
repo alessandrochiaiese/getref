@@ -1,0 +1,130 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Commission List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Commission List</h1>
+    <a href="{% url 'core:commission_create' %}" class="btn btn-primary">Add New Commission</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Participant Id</th>
+<th>Program Id</th>
+<th>Amount</th>
+<th>Currency</th>
+<th>Date Awarded</th>
+<th>Status</th>
+<th>Approved By</th>
+<th>Type</th>
+<th>Description</th>
+<th>Tier</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="CommissionTableBody">
+        {% for item in commission_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.amount }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.date_awarded }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.approved_by }}</td>
+<td>{{ item.type }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.tier }}</td>
+                <td>
+                    <a href="{% url 'core:commission_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:commission_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:commission_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_commission.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allCommissions = []; // Store all referral data
+
+    async function fetchCommissions() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/commission/`);
+            allCommissions = await response.json();
+            populateCommissionsTable(allCommissions);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateCommissionsTable(commissions) {
+        const tableBody = document.getElementById('CommissionsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        commissions.forEach(commission => {
+            const row = `<tr>
+                    <td>${commission.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.amount }}</td>
+<td>{{ item.currency }}</td>
+<td>{{ item.date_awarded }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.approved_by }}</td>
+<td>{{ item.type }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.tier }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${commission.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteCommissions(${commission.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${commission.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterCommissions() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allCommissions.filter(commission => 
+            String(			commission.id).toLowerCase().includes(query) ||
+String(			commission.participant_id).toLowerCase().includes(query) ||
+String(			commission.program_id).toLowerCase().includes(query) ||
+String(			commission.amount).toLowerCase().includes(query) ||
+String(			commission.currency).toLowerCase().includes(query) ||
+String(			commission.date_awarded).toLowerCase().includes(query) ||
+String(			commission.status).toLowerCase().includes(query) ||
+String(			commission.approved_by).toLowerCase().includes(query) ||
+String(			commission.type).toLowerCase().includes(query) ||
+String(			commission.description).toLowerCase().includes(query) ||
+String(			commission.tier).toLowerCase().includes(query)
+        );
+        populateCommissionsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveCommissionsChanges, deleteCommissions, saveNewCommissions, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchCommissions;
+</script>
+{% endblock %}

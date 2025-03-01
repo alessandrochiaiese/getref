@@ -8,7 +8,7 @@ from dashboard.utils import *
     
 from django.contrib.auth import views as auth_views 
 from dashboard.forms import * 
-from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
+from dashboard.views.views_accounts import ( EnterpriseRedirectView, LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
 from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, ParticipateCampaignView, WithdrawalView, privacyPolice, termService, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
@@ -86,6 +86,7 @@ urlpatterns = [
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
     # enterprise
+    path('enterprise/', EnterpriseRedirectView.as_view(), name='enterprise_redirect'),
     path('create-enterprise/', EnterpriseCreateView.as_view(), name='create_enterprise'),  # Aggiungi azienda
     path('update-enterprise/<int:pk>/', EnterpriseUpdateView.as_view(), name='update_enterprise'),  # Modifica azienda
     path('enterprise-list/', EnterpriseListView.as_view(), name='enterprise_list'),  # Elenco di tutte le aziende

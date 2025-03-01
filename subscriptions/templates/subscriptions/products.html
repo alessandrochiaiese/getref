@@ -14,7 +14,7 @@
     {% if one_time_products %}
     <div class="row">
         {% for product in one_time_products %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 m-5">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.product_name }}</h5>
@@ -23,6 +23,9 @@
                     <!-- Subscribe button (will redirect to checkout) -->
                     <a href="#" class="btn btn-primary buy-btn" data-price-id="{{ product.price_id }}">
                         {% trans "Buy" %}
+                    </a>
+                    <a href="#" class="btn btn-primary promote-btn" data-stripe-product-id="{{ product.price_id }}">
+                        {% trans "Promote" %}
                     </a>
                 </div>
             </div>
@@ -45,5 +48,6 @@
 <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>-->
-<script src="{% static 'subscriptions/products.js' %}"></script>
+    <script src="{% static 'subscriptions/products.js' %}"></script>
+    <script src="{% static 'subscriptions/promotions.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,136 @@
+from django.urls import path
+from .views import *
+
+urlpatterns = [
+    path('referral-levels/<int:pk>/', delete_referral_level, name='delete_referral_level'),
+    path('referral-levels/', create_referral_level, name='create_referral_level'),
+    path('referral-levels/', referral_level_list, name='referral_level_list'),
+    path('referral-levels/<int:pk>/', update_referral_level, name='update_referral_level'),
+    path('referral-levels/<int:pk>/', referral_level_detail, name='referral_level_detail'),
+    
+    path('stats/<int:pk>/', delete_stats, name='delete_stats'),
+    path('stats/', create_stats, name='create_stats'),
+    path('stats/', stats_list, name='stats_list'),
+    path('stats/<int:pk>/', stats_detail, name='stats_detail'),
+    path('stats/<int:pk>/', update_stats, name='update_stats'),
+    
+    path('conversions/<int:pk>/', delete_conversion, name='delete_conversion'),
+    path('conversions/', create_conversion, name='create_conversion'),
+    path('conversions/', conversion_list, name='conversion_list'),
+    path('conversions/<int:pk>/', update_conversion, name='update_conversion'),
+    path('conversions/<int:pk>/', conversion_detail, name='conversion_detail'),
+    
+    path('bonus/<int:pk>/', delete_bonus, name='delete_bonus'),
+    path('bonus/', create_bonus, name='create_bonus'),
+    path('bonus/', bonus_list, name='bonus_list'),
+    path('bonus/<int:pk>/', update_bonus, name='update_bonus'),
+    path('bonus/<int:pk>/', bonus_detail, name='bonus_detail'),
+    
+    path('referral-codes/<int:pk>/', delete_referral_code, name='delete_referral_code'),
+    path('referral-codes/', create_referral_code, name='create_referral_code'),
+    path('referral-codes/', referral_code_list, name='referral_code_list'),
+    path('referral-codes/<int:pk>/', update_referral_code, name='update_referral_code'),
+    path('referral-codes/<int:pk>/', referral_code_detail, name='referral_code_detail'),
+    
+    path('support-tickets/<int:pk>/', delete_support_ticket, name='delete_support_ticket'),
+    path('support-tickets/', create_support_ticket, name='create_support_ticket'),
+    path('support-tickets/', support_ticket_list, name='support_ticket_list'),
+    path('support-tickets/<int:pk>/', update_support_ticket, name='update_support_ticket'),
+    path('support-tickets/<int:pk>/', support_ticket_detail, name='support_ticket_detail'),
+    
+    path('tiers/<int:pk>/', delete_tier, name='delete_tier'),
+    path('tiers/', create_tier, name='create_tier'),
+    path('tiers/', tier_list, name='tier_list'),
+    path('tiers/<int:pk>/', update_tier, name='update_tier'),
+    path('tiers/<int:pk>/', tier_detail, name='tier_detail'),
+    
+    path('commissions/<int:pk>/', delete_commission, name='delete_commission'),
+    path('commissions/', create_commission, name='create_commission'),
+    path('commissions/', commission_list, name='commission_list'),
+    path('commissions/<int:pk>/', update_commission, name='update_commission'),
+    path('commissions/<int:pk>/', commission_detail, name='commission_detail'),
+    
+    path('affiliates/<int:pk>/', delete_affiliate, name='delete_affiliate'),
+    path('affiliates/', create_affiliate, name='create_affiliate'),
+    path('affiliates/', affiliate_list, name='affiliate_list'),
+    path('affiliates/<int:pk>/', update_affiliate, name='update_affiliate'),
+    path('affiliates/<int:pk>/', affiliate_detail, name='affiliate_detail'),
+    
+    path('settings/<int:pk>/', delete_settings, name='delete_settings'),
+    path('settings/', create_settings, name='create_settings'),
+    path('settings/', settings_list, name='settings_list'),
+    path('settings/<int:pk>/', update_settings, name='update_settings'),
+    path('settings/<int:pk>/', settings_detail, name='settings_detail'),
+    
+    path('engagements/<int:pk>/', delete_engagement, name='delete_engagement'),
+    path('engagements/', create_engagement, name='create_engagement'),
+    path('engagements/', engagement_list, name='engagement_list'),
+    path('engagements/<int:pk>/', update_engagement, name='update_engagement'),
+    path('engagements/<int:pk>/', engagement_detail, name='engagement_detail'),
+    
+    path('campaigns/<int:pk>/', delete_campaign, name='delete_campaign'),
+    path('campaigns/', create_campaign, name='create_campaign'),
+    path('campaigns/', campaign_list, name='campaign_list'),
+    path('campaigns/<int:pk>/', update_campaign, name='update_campaign'),
+    path('campaigns/<int:pk>/', campaign_detail, name='campaign_detail'),
+    
+    path('payment-methods/<int:pk>/', delete_payment_method, name='delete_payment_method'),
+    path('payment-methods/', create_payment_method, name='create_payment_method'),
+    path('payment-methods/', payment_method_list, name='payment_method_list'),
+    path('payment-methods/<int:pk>/', update_payment_method, name='update_payment_method'),
+    path('payment-methods/<int:pk>/', payment_method_detail, name='payment_method_detail'),
+    
+    path('audits/<int:pk>/', delete_audit, name='delete_audit'),
+    path('audits/', create_audit, name='create_audit'),
+    path('audits/', audit_list, name='audit_list'),
+    path('audits/<int:pk>/', update_audit, name='update_audit'),
+    path('audits/<int:pk>/', audit_detail, name='audit_detail'),
+    
+    path('notifications/<int:pk>/', delete_notification, name='delete_notification'),
+    path('notifications/', create_notification, name='create_notification'),
+    path('notifications/', notification_list, name='notification_list'),
+    path('notifications/<int:pk>/', update_notification, name='update_notification'),
+    path('notifications/<int:pk>/', notification_detail, name='notification_detail'),
+    
+    path('performances/<int:pk>/', delete_performance, name='delete_performance'),
+    path('performances/', create_performance, name='create_performance'),
+    path('performances/', performance_list, name='performance_list'),
+    path('performances/<int:pk>/', update_performance, name='update_performance'),
+    path('performances/<int:pk>/', performance_detail, name='performance_detail'),
+    
+    path('payouts/<int:pk>/', delete_payout, name='delete_payout'),
+    path('payouts/', create_payout, name='create_payout'),
+    path('payouts/', payout_list, name='payout_list'),
+    path('payouts/<int:pk>/', update_payout, name='update_payout'),
+    path('payouts/<int:pk>/', payout_detail, name='payout_detail'),
+    
+    path('rewards/<int:pk>/', delete_reward, name='delete_reward'),
+    path('rewards/', create_reward, name='create_reward'),
+    path('rewards/', reward_list, name='reward_list'),
+    path('rewards/<int:pk>/', update_reward, name='update_reward'),
+    path('rewards/<int:pk>/', reward_detail, name='reward_detail'),
+    
+    path('transactions/<int:pk>/', delete_transaction, name='delete_transaction'),
+    path('transactions/', create_transaction, name='create_transaction'),
+    path('transactions/', transaction_list, name='transaction_list'),
+    path('transactions/<int:pk>/', update_transaction, name='update_transaction'),
+    path('transactions/<int:pk>/', transaction_detail, name='transaction_detail'),
+    
+    path('links/<int:pk>/', delete_link, name='delete_link'),
+    path('links/', create_link, name='create_link'),
+    path('links/', link_list, name='link_list'),
+    path('links/<int:pk>/', update_link, name='update_link'),
+    path('links/<int:pk>/', link_detail, name='link_detail'),
+    
+    path('participants/<int:pk>/', delete_participant, name='delete_participant'),
+    path('participants/', create_participant, name='create_participant'),
+    path('participants/', participant_list, name='participant_list'),
+    path('participants/<int:pk>/', update_participant, name='update_participant'),
+    path('participants/<int:pk>/', participant_detail, name='participant_detail'),
+    
+    path('programs/<int:pk>/', delete_program, name='delete_program'),
+    path('programs/', create_program, name='create_program'),
+    path('programs/', program_list, name='program_list'),
+    path('programs/<int:pk>/', update_program, name='update_program'),
+    path('programs/<int:pk>/', program_detail, name='program_detail'),
+]

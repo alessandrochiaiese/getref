@@ -1,0 +1,67 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Campaign Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Campaign Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ campaign_item.id }}</p>
+<p><strong>Program Id:</strong> {{ campaign_item.program_id }}</p>
+<p><strong>Name:</strong> {{ campaign_item.name }}</p>
+<p><strong>Start Date:</strong> {{ campaign_item.start_date }}</p>
+<p><strong>End Date:</strong> {{ campaign_item.end_date }}</p>
+<p><strong>Goal:</strong> {{ campaign_item.goal }}</p>
+<p><strong>Budget:</strong> {{ campaign_item.budget }}</p>
+<p><strong>Spending To Date:</strong> {{ campaign_item.spending_to_date }}</p>
+<p><strong>Target Audience:</strong> {{ campaign_item.target_audience }}</p>
+    <a href="{% url 'core:campaign_update' campaign_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:campaign_delete' campaign_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:campaign_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_campaign.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/campaigns/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'CampaignDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

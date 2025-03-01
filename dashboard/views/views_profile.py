@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.crypto import get_random_string 
 from django.utils.decorators import method_decorator 
 from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.edit import UpdateView 
 from dashboard.utils import get_tree_referred, tree_to_list
 from dashboard.models import *
+from getref.settings import DOMAIN
 from referral.models import *
 from dashboard.forms import * 
 
@@ -174,7 +176,10 @@ class EnterpriseCreateView(CreateView):
 
     def form_valid(self, form):
         # Se vuoi eseguire operazioni extra quando il form è valido
+        code = get_random_string(length=8).upper()
         form.instance.user = self.request.user
+        form.instance.unique_url = f"{DOMAIN}/enterprise/?code={code}"
+        form.instance.code = code
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

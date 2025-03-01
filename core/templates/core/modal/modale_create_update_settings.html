@@ -1,0 +1,150 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createpreferred_currency" class="form-label">Preferred Currency</label>
+            <input type="text" class="form-control" data-field="preferred_currency" id="createpreferred_currency" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createpreferred_payment_method" class="form-label">Preferred Payment Method</label>
+            <input type="text" class="form-control" data-field="preferred_payment_method" id="createpreferred_payment_method" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createpayout_schedule" class="form-label">Payout Schedule</label>
+            <input type="text" class="form-control" data-field="payout_schedule" id="createpayout_schedule" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createnotification_preference" class="form-label">Notification Preference</label>
+            <input type="text" class="form-control" data-field="notification_preference" id="createnotification_preference" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdashboard_layout" class="form-label">Dashboard Layout</label>
+            <input type="text" class="form-control" data-field="dashboard_layout" id="createdashboard_layout" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createauto_share_setting" class="form-label">Auto Share Setting</label>
+            <input type="text" class="form-control" data-field="auto_share_setting" id="createauto_share_setting" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createsocial_share_message" class="form-label">Social Share Message</label>
+            <input type="text" class="form-control" data-field="social_share_message" id="createsocial_share_message" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editpreferred_currency" class="form-label">Preferred Currency</label>
+            <input type="text" class="form-control" data-field="preferred_currency" id="editpreferred_currency" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editpreferred_payment_method" class="form-label">Preferred Payment Method</label>
+            <input type="text" class="form-control" data-field="preferred_payment_method" id="editpreferred_payment_method" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editpayout_schedule" class="form-label">Payout Schedule</label>
+            <input type="text" class="form-control" data-field="payout_schedule" id="editpayout_schedule" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editnotification_preference" class="form-label">Notification Preference</label>
+            <input type="text" class="form-control" data-field="notification_preference" id="editnotification_preference" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdashboard_layout" class="form-label">Dashboard Layout</label>
+            <input type="text" class="form-control" data-field="dashboard_layout" id="editdashboard_layout" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editauto_share_setting" class="form-label">Auto Share Setting</label>
+            <input type="text" class="form-control" data-field="auto_share_setting" id="editauto_share_setting" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editsocial_share_message" class="form-label">Social Share Message</label>
+            <input type="text" class="form-control" data-field="social_share_message" id="editsocial_share_message" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

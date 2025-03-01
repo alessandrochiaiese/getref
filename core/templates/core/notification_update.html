@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Notification{% endblock %}
+
+{% block content %}
+    <h2>Edit Notification</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Notification</button>
+    </form>
+    <br>
+    <a href="{% url 'notification_list' %}">Back to Notification List</a>
+{% endblock %}

@@ -1,0 +1,73 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Program Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Program Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ program_item.id }}</p>
+<p><strong>Name:</strong> {{ program_item.name }}</p>
+<p><strong>Description:</strong> {{ program_item.description }}</p>
+<p><strong>Program Type:</strong> {{ program_item.program_type }}</p>
+<p><strong>Reward Type:</strong> {{ program_item.reward_type }}</p>
+<p><strong>Reward Value:</strong> {{ program_item.reward_value }}</p>
+<p><strong>Currency:</strong> {{ program_item.currency }}</p>
+<p><strong>Commission Rate:</strong> {{ program_item.commission_rate }}</p>
+<p><strong>Min Payout Threshold:</strong> {{ program_item.min_payout_threshold }}</p>
+<p><strong>Max Payout Limit:</strong> {{ program_item.max_payout_limit }}</p>
+<p><strong>Date Created:</strong> {{ program_item.date_created }}</p>
+<p><strong>Is Active:</strong> {{ program_item.is_active }}</p>
+<p><strong>Duration:</strong> {{ program_item.duration }}</p>
+<p><strong>Allowed Regions:</strong> {{ program_item.allowed_regions }}</p>
+<p><strong>Target Industry:</strong> {{ program_item.target_industry }}</p>
+    <a href="{% url 'core:program_update' program_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:program_delete' program_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:program_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_program.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/programs/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'ProgramDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

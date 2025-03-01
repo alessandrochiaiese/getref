@@ -1,0 +1,68 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}SupportTicket Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>SupportTicket Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ supportticket_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ supportticket_item.participant_id }}</p>
+<p><strong>Ticket Number:</strong> {{ supportticket_item.ticket_number }}</p>
+<p><strong>Subject:</strong> {{ supportticket_item.subject }}</p>
+<p><strong>Description:</strong> {{ supportticket_item.description }}</p>
+<p><strong>Status:</strong> {{ supportticket_item.status }}</p>
+<p><strong>Date Created:</strong> {{ supportticket_item.date_created }}</p>
+<p><strong>Date Closed:</strong> {{ supportticket_item.date_closed }}</p>
+<p><strong>Priority:</strong> {{ supportticket_item.priority }}</p>
+<p><strong>Assigned Agent:</strong> {{ supportticket_item.assigned_agent }}</p>
+    <a href="{% url 'core:supportticket_update' supportticket_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:supportticket_delete' supportticket_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:supportticket_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_support_ticket.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/support-tickets/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'SupportTicketDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

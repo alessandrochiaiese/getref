@@ -1,0 +1,126 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}SupportTicket List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>SupportTicket List</h1>
+    <a href="{% url 'core:supportticket_create' %}" class="btn btn-primary">Add New SupportTicket</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Participant Id</th>
+<th>Ticket Number</th>
+<th>Subject</th>
+<th>Description</th>
+<th>Status</th>
+<th>Date Created</th>
+<th>Date Closed</th>
+<th>Priority</th>
+<th>Assigned Agent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="SupportTicketTableBody">
+        {% for item in supportticket_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.ticket_number }}</td>
+<td>{{ item.subject }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.date_closed }}</td>
+<td>{{ item.priority }}</td>
+<td>{{ item.assigned_agent }}</td>
+                <td>
+                    <a href="{% url 'core:supportticket_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:supportticket_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:supportticket_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_support_ticket.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allSupportTickets = []; // Store all referral data
+
+    async function fetchSupportTickets() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/support_ticket/`);
+            allSupportTickets = await response.json();
+            populateSupportTicketsTable(allSupportTickets);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateSupportTicketsTable(support_tickets) {
+        const tableBody = document.getElementById('SupportTicketsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        support_tickets.forEach(support_ticket => {
+            const row = `<tr>
+                    <td>${support_ticket.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.participant_id }}</td>
+<td>{{ item.ticket_number }}</td>
+<td>{{ item.subject }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.date_created }}</td>
+<td>{{ item.date_closed }}</td>
+<td>{{ item.priority }}</td>
+<td>{{ item.assigned_agent }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${support_ticket.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteSupportTickets(${support_ticket.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${support_ticket.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterSupportTickets() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allSupportTickets.filter(support_ticket => 
+            String(			support_ticket.id).toLowerCase().includes(query) ||
+String(			support_ticket.participant_id).toLowerCase().includes(query) ||
+String(			support_ticket.ticket_number).toLowerCase().includes(query) ||
+String(			support_ticket.subject).toLowerCase().includes(query) ||
+String(			support_ticket.description).toLowerCase().includes(query) ||
+String(			support_ticket.status).toLowerCase().includes(query) ||
+String(			support_ticket.date_created).toLowerCase().includes(query) ||
+String(			support_ticket.date_closed).toLowerCase().includes(query) ||
+String(			support_ticket.priority).toLowerCase().includes(query) ||
+String(			support_ticket.assigned_agent).toLowerCase().includes(query)
+        );
+        populateSupportTicketsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveSupportTicketsChanges, deleteSupportTickets, saveNewSupportTickets, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchSupportTickets;
+</script>
+{% endblock %}

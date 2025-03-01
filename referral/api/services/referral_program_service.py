@@ -1,6 +1,6 @@
 # referral_system/services.py
  
-from datetime import datetime
+import datetime
 import logging
 
 from typing import List
@@ -44,8 +44,8 @@ class ReferralProgramService():
                 currency = data.get('currency'),
                 min_referral_count = data.get('min_referral_count'),
                 max_referrals_per_user = data.get('max_referrals_per_user'),
-                date_created = datetime.now(),#data.get('date_created'),
-                is_active = True, #data.get('is_active'),
+                date_created = datetime.datetime.now(),#data.get('date_created'),
+                is_active = data.get('is_active'),
                 program_duration = data.get('program_duration'), 
                 target_industry = data.get('target_industry'))
             referral_program.save()

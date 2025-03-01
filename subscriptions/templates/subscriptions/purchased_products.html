@@ -15,7 +15,7 @@
   {% if subscriptions %}
   <div class="row">
     {% for subscription in subscriptions %}
-    <div class="col-md-4">
+    <div class="col-md-4 m-5">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{% trans "Subscription Plan" %}: {{ subscription.product.name }}</h5>
@@ -36,7 +36,7 @@
   {% if purchased_one_time_products %}
   <div class="row">
     {% for product in purchased_one_time_products %}
-    <div class="col-md-4">
+    <div class="col-md-4 m-5">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>

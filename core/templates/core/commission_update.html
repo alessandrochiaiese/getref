@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Commission{% endblock %}
+
+{% block content %}
+    <h2>Edit Commission</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Commission</button>
+    </form>
+    <br>
+    <a href="{% url 'commission_list' %}">Back to Commission List</a>
+{% endblock %}

@@ -24,7 +24,7 @@ from oauth2_provider import urls as oauth2_urls
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from subscriptions.views import create_checkout_session, stripe_config, stripe_webhook
+from subscriptions.views.views_subscription import create_checkout_session, stripe_config, stripe_webhook
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -49,8 +49,10 @@ urlpatterns = [
     
     # API 
     path('api/v0/', include('dashboard.api.urls'), name='api_profile'),
+    #path('api/v0/', include('core.api.urls'), name='api_core_v0'),
     path('api/v0/affiliate/', include('affiliate.api.urls'), name='api_affiliate_v0'),
     path('api/v0/referral/', include('referral.api.urls'), name='api_referral'),
+    path('api/v0/', include('subscriptions.api.urls'), name='api_subscriptions'),
 
     ## social django
     url(r'^oauth/', include('social_django.urls', namespace='social')),
@@ -61,7 +63,6 @@ urlpatterns = [
     # health
     path('health/', include('health_check.urls')),
     
-
     # subscriptions
     path('config/', stripe_config),
     path('create-checkout-session/', create_checkout_session),
@@ -76,8 +77,8 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     # apps   
     path('', include('dashboard.urls')),
-    path('', include('affiliate.urls')), 
-    path('', include('referral.urls')),
+    #path('', include('affiliate.urls')), 
+    #path('', include('referral.urls')),
     path('', include('payments.urls')),
     path('', include('subscriptions.urls')),
 )

@@ -1,0 +1,186 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="createlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtransaction_amount" class="form-label">Transaction Amount</label>
+            <input type="text" class="form-control" data-field="transaction_amount" id="createtransaction_amount" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createtransaction_date" class="form-label">Transaction Date</label>
+            <input type="text" class="form-control" data-field="transaction_date" id="createtransaction_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createorder_id" class="form-label">Order Id</label>
+            <input type="text" class="form-control" data-field="order_id" id="createorder_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createproduct_id" class="form-label">Product Id</label>
+            <input type="text" class="form-control" data-field="product_id" id="createproduct_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="createstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createpayment_date" class="form-label">Payment Date</label>
+            <input type="text" class="form-control" data-field="payment_date" id="createpayment_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcommission_rate" class="form-label">Commission Rate</label>
+            <input type="text" class="form-control" data-field="commission_rate" id="createcommission_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="creatediscount_applied" class="form-label">Discount Applied</label>
+            <input type="text" class="form-control" data-field="discount_applied" id="creatediscount_applied" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createcoupon_code" class="form-label">Coupon Code</label>
+            <input type="text" class="form-control" data-field="coupon_code" id="createcoupon_code" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editlink_id" class="form-label">Link Id</label>
+            <input type="text" class="form-control" data-field="link_id" id="editlink_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittransaction_amount" class="form-label">Transaction Amount</label>
+            <input type="text" class="form-control" data-field="transaction_amount" id="edittransaction_amount" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="edittransaction_date" class="form-label">Transaction Date</label>
+            <input type="text" class="form-control" data-field="transaction_date" id="edittransaction_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editorder_id" class="form-label">Order Id</label>
+            <input type="text" class="form-control" data-field="order_id" id="editorder_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editproduct_id" class="form-label">Product Id</label>
+            <input type="text" class="form-control" data-field="product_id" id="editproduct_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="editstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editpayment_date" class="form-label">Payment Date</label>
+            <input type="text" class="form-control" data-field="payment_date" id="editpayment_date" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcommission_rate" class="form-label">Commission Rate</label>
+            <input type="text" class="form-control" data-field="commission_rate" id="editcommission_rate" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdiscount_applied" class="form-label">Discount Applied</label>
+            <input type="text" class="form-control" data-field="discount_applied" id="editdiscount_applied" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editcoupon_code" class="form-label">Coupon Code</label>
+            <input type="text" class="form-control" data-field="coupon_code" id="editcoupon_code" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

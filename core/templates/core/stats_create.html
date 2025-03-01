@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New Stats{% endblock %}
+
+{% block content %}
+    <h2>Add New Stats</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add Stats</button>
+    </form>
+    <br>
+    <a href="{% url 'stats_list' %}">Back to Stats List</a>
+    
+{% endblock %}

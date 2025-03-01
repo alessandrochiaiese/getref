@@ -1,0 +1,118 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Stats List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Stats List</h1>
+    <a href="{% url 'core:stats_create' %}" class="btn btn-primary">Add New Stats</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Link Id</th>
+<th>Period</th>
+<th>Click Count</th>
+<th>Conversion Count</th>
+<th>Total Rewards</th>
+<th>Average Conversion Value</th>
+<th>Highest Referral Earning</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="StatsTableBody">
+        {% for item in stats_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.link_id }}</td>
+<td>{{ item.period }}</td>
+<td>{{ item.click_count }}</td>
+<td>{{ item.conversion_count }}</td>
+<td>{{ item.total_rewards }}</td>
+<td>{{ item.average_conversion_value }}</td>
+<td>{{ item.highest_referral_earning }}</td>
+                <td>
+                    <a href="{% url 'core:stats_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:stats_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:stats_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_stats.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allStats = []; // Store all referral data
+
+    async function fetchStats() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/stats/`);
+            allStats = await response.json();
+            populateStatsTable(allStats);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateStatsTable(stats) {
+        const tableBody = document.getElementById('StatsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        stats.forEach(stats => {
+            const row = `<tr>
+                    <td>${stats.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.link_id }}</td>
+<td>{{ item.period }}</td>
+<td>{{ item.click_count }}</td>
+<td>{{ item.conversion_count }}</td>
+<td>{{ item.total_rewards }}</td>
+<td>{{ item.average_conversion_value }}</td>
+<td>{{ item.highest_referral_earning }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${stats.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteStats(${stats.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${stats.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterStats() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allStats.filter(stats => 
+            String(			stats.id).toLowerCase().includes(query) ||
+String(			stats.link_id).toLowerCase().includes(query) ||
+String(			stats.period).toLowerCase().includes(query) ||
+String(			stats.click_count).toLowerCase().includes(query) ||
+String(			stats.conversion_count).toLowerCase().includes(query) ||
+String(			stats.total_rewards).toLowerCase().includes(query) ||
+String(			stats.average_conversion_value).toLowerCase().includes(query) ||
+String(			stats.highest_referral_earning).toLowerCase().includes(query)
+        );
+        populateStatsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveStatsChanges, deleteStats, saveNewStats, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchStats;
+</script>
+{% endblock %}

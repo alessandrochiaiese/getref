@@ -34,7 +34,8 @@ class AffiliateRewardService():
             affiliate_reward = AffiliateReward( 
                 affiliate = data.get('affiliate'),
                 amount = data.get('amount'),
-                created_at = data.get('created_at'))
+                created_at = datetime.datetime.now() #data.get('created_at')
+            )
             affiliate_reward.save() 
              
             logger.info(f"AffiliateReward created: {affiliate_reward}")

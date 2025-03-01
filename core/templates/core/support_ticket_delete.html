@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Delete SupportTicket{% endblock %}
+
+{% block content %}
+    <h2>Delete SupportTicket</h2>
+    <p>Are you sure you want to delete this SupportTicket?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+        <a href="{% url 'support_ticket_list' %}">Cancel</a>
+    </form>
+{% endblock %}

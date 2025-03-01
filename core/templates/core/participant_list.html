@@ -1,0 +1,122 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Participant List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Participant List</h1>
+    <a href="{% url 'core:participant_create' %}" class="btn btn-primary">Add New Participant</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>User Id</th>
+<th>Program Id</th>
+<th>Status</th>
+<th>Total Earnings</th>
+<th>Account Balance</th>
+<th>Date Joined</th>
+<th>Last Login</th>
+<th>Referral Source</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="ParticipantTableBody">
+        {% for item in participant_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.user_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.account_balance }}</td>
+<td>{{ item.date_joined }}</td>
+<td>{{ item.last_login }}</td>
+<td>{{ item.referral_source }}</td>
+                <td>
+                    <a href="{% url 'core:participant_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:participant_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:participant_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_participant.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allParticipants = []; // Store all referral data
+
+    async function fetchParticipants() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/participant/`);
+            allParticipants = await response.json();
+            populateParticipantsTable(allParticipants);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateParticipantsTable(participants) {
+        const tableBody = document.getElementById('ParticipantsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        participants.forEach(participant => {
+            const row = `<tr>
+                    <td>${participant.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.user_id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.status }}</td>
+<td>{{ item.total_earnings }}</td>
+<td>{{ item.account_balance }}</td>
+<td>{{ item.date_joined }}</td>
+<td>{{ item.last_login }}</td>
+<td>{{ item.referral_source }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${participant.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteParticipants(${participant.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${participant.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterParticipants() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allParticipants.filter(participant => 
+            String(			participant.id).toLowerCase().includes(query) ||
+String(			participant.user_id).toLowerCase().includes(query) ||
+String(			participant.program_id).toLowerCase().includes(query) ||
+String(			participant.status).toLowerCase().includes(query) ||
+String(			participant.total_earnings).toLowerCase().includes(query) ||
+String(			participant.account_balance).toLowerCase().includes(query) ||
+String(			participant.date_joined).toLowerCase().includes(query) ||
+String(			participant.last_login).toLowerCase().includes(query) ||
+String(			participant.referral_source).toLowerCase().includes(query)
+        );
+        populateParticipantsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveParticipantsChanges, deleteParticipants, saveNewParticipants, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchParticipants;
+</script>
+{% endblock %}

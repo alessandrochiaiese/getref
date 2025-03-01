@@ -1,0 +1,122 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}Tier List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Tier List</h1>
+    <a href="{% url 'core:tier_create' %}" class="btn btn-primary">Add New Tier</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Program Id</th>
+<th>Tier Name</th>
+<th>Min Sales</th>
+<th>Commission Rate</th>
+<th>Benefits</th>
+<th>Access Level</th>
+<th>Next Tier Threshold</th>
+<th>Expiration Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="TierTableBody">
+        {% for item in tier_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.tier_name }}</td>
+<td>{{ item.min_sales }}</td>
+<td>{{ item.commission_rate }}</td>
+<td>{{ item.benefits }}</td>
+<td>{{ item.access_level }}</td>
+<td>{{ item.next_tier_threshold }}</td>
+<td>{{ item.expiration_date }}</td>
+                <td>
+                    <a href="{% url 'core:tier_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:tier_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:tier_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_tier.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allTiers = []; // Store all referral data
+
+    async function fetchTiers() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/tier/`);
+            allTiers = await response.json();
+            populateTiersTable(allTiers);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateTiersTable(tiers) {
+        const tableBody = document.getElementById('TiersTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        tiers.forEach(tier => {
+            const row = `<tr>
+                    <td>${tier.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.program_id }}</td>
+<td>{{ item.tier_name }}</td>
+<td>{{ item.min_sales }}</td>
+<td>{{ item.commission_rate }}</td>
+<td>{{ item.benefits }}</td>
+<td>{{ item.access_level }}</td>
+<td>{{ item.next_tier_threshold }}</td>
+<td>{{ item.expiration_date }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${tier.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteTiers(${tier.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${tier.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterTiers() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allTiers.filter(tier => 
+            String(			tier.id).toLowerCase().includes(query) ||
+String(			tier.program_id).toLowerCase().includes(query) ||
+String(			tier.tier_name).toLowerCase().includes(query) ||
+String(			tier.min_sales).toLowerCase().includes(query) ||
+String(			tier.commission_rate).toLowerCase().includes(query) ||
+String(			tier.benefits).toLowerCase().includes(query) ||
+String(			tier.access_level).toLowerCase().includes(query) ||
+String(			tier.next_tier_threshold).toLowerCase().includes(query) ||
+String(			tier.expiration_date).toLowerCase().includes(query)
+        );
+        populateTiersTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveTiersChanges, deleteTiers, saveNewTiers, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchTiers;
+</script>
+{% endblock %}

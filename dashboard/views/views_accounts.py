@@ -21,6 +21,21 @@ logger = logging.getLogger(__name__)
 #####################
 # Register & Login  #
 #####################
+class EnterpriseRedirectView(View):
+    def get(self, request, *args, **kwargs):
+        referral_code = kwargs.get('code')
+        #referral_code = kwargs.get('referral_code') #path('referral/<str:referral_code>/')
+        #referral_code = request.GET.get('referral_code') #path('referral/')
+
+        # Verifica che il codice referral esista
+        try:
+            referral = ProfileBusiness.objects.get(code=referral_code, status='active')
+            # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
+            return redirect(reverse('core_register_with_referral', args=[referral_code]))
+        except ProfileBusiness.DoesNotExist:
+            # Se il codice referral non è valido, reindirizza ad una pagina di errore o alla home
+            return redirect('/')
+
 class ReferralRedirectView(View):
     def get(self, request, *args, **kwargs):
         referral_code = kwargs.get('code')
@@ -97,6 +112,11 @@ class RegisterView(View):
             # Se il nuovo utente ha usato un codice referral
             if referral_code_used is not None:
                 try:
+                    if ProfileBusiness.objects.filter(code=referral_code_used).exists():
+                        profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
+                        profile_business.user_registered = self.request.user
+                        profile_business.save()
+
                     # Recupera il codice referral del referrer
                     referrer_code = ReferralCode.objects.filter(code=referral_code_used, status="active").first()
                     if referrer_code:

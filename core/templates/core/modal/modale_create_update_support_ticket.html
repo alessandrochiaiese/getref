@@ -1,0 +1,162 @@
+    <!-- Modal per creazione/aggiunta di nuova istanza -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create New Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <!-- Campi di input per la creazione -->
+                        
+        <div class="mb-3">
+            <label for="createid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="createid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="createparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createticket_number" class="form-label">Ticket Number</label>
+            <input type="text" class="form-control" data-field="ticket_number" id="createticket_number" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createsubject" class="form-label">Subject</label>
+            <input type="text" class="form-control" data-field="subject" id="createsubject" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdescription" class="form-label">Description</label>
+            <input type="text" class="form-control" data-field="description" id="createdescription" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="createstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdate_created" class="form-label">Date Created</label>
+            <input type="text" class="form-control" data-field="date_created" id="createdate_created" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createdate_closed" class="form-label">Date Closed</label>
+            <input type="text" class="form-control" data-field="date_closed" id="createdate_closed" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createpriority" class="form-label">Priority</label>
+            <input type="text" class="form-control" data-field="priority" id="createpriority" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="createassigned_agent" class="form-label">Assigned Agent</label>
+            <input type="text" class="form-control" data-field="assigned_agent" id="createassigned_agent" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="createSubmitBtn" onclick="saveNewExample()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per modifica istanza -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <!-- Campi di input per la modifica -->
+                        
+        <div class="mb-3">
+            <label for="editid" class="form-label">Id</label>
+            <input type="text" class="form-control" data-field="id" id="editid" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editparticipant_id" class="form-label">Participant Id</label>
+            <input type="text" class="form-control" data-field="participant_id" id="editparticipant_id" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editticket_number" class="form-label">Ticket Number</label>
+            <input type="text" class="form-control" data-field="ticket_number" id="editticket_number" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editsubject" class="form-label">Subject</label>
+            <input type="text" class="form-control" data-field="subject" id="editsubject" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdescription" class="form-label">Description</label>
+            <input type="text" class="form-control" data-field="description" id="editdescription" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editstatus" class="form-label">Status</label>
+            <input type="text" class="form-control" data-field="status" id="editstatus" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdate_created" class="form-label">Date Created</label>
+            <input type="text" class="form-control" data-field="date_created" id="editdate_created" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editdate_closed" class="form-label">Date Closed</label>
+            <input type="text" class="form-control" data-field="date_closed" id="editdate_closed" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editpriority" class="form-label">Priority</label>
+            <input type="text" class="form-control" data-field="priority" id="editpriority" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="editassigned_agent" class="form-label">Assigned Agent</label>
+            <input type="text" class="form-control" data-field="assigned_agent" id="editassigned_agent" required>
+        </div>
+        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editSubmitBtn" onclick="saveExampleChanges()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

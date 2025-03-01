@@ -1,0 +1,102 @@
+
+{% extends "core/base.html" %}
+
+{% block title %}ReferralLevel List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>ReferralLevel List</h1>
+    <a href="{% url 'core:referrallevel_create' %}" class="btn btn-primary">Add New ReferralLevel</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Id</th>
+<th>Referrer</th>
+<th>Referred</th>
+<th>Level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="ReferralLevelTableBody">
+        {% for item in referrallevel_items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.id }}</td>
+<td>{{ item.referrer }}</td>
+<td>{{ item.referred }}</td>
+<td>{{ item.level }}</td>
+                <td>
+                    <a href="{% url 'core:referrallevel_detail' item.id %}" class="btn btn-info">View</a>
+                    <a href="{% url 'core:referrallevel_update' item.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'core:referrallevel_delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_referral_level.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let allReferralLevels = []; // Store all referral data
+
+    async function fetchReferralLevels() {
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/v0/referral_level/`);
+            allReferralLevels = await response.json();
+            populateReferralLevelsTable(allReferralLevels);
+        } catch (error) {
+            console.error('Error fetching referral audits:', error);
+        }
+    }
+
+    function populateReferralLevelsTable(referral_levels) {
+        const tableBody = document.getElementById('ReferralLevelsTableBody');
+        tableBody.innerHTML = ''; // Clear table before populating
+        referral_levels.forEach(referral_level => {
+            const row = `<tr>
+                    <td>${referral_level.id}</td>
+                    <td>{{ item.id }}</td>
+<td>{{ item.referrer }}</td>
+<td>{{ item.referred }}</td>
+<td>{{ item.level }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareEditModal(${referral_level.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm float-end me-2" onclick="deleteReferralLevels(${referral_level.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-info btn-sm float-end" onclick="navigateToDetail(${referral_level.id})">
+                            <i class="bi bi-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    function filterReferralLevels() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allReferralLevels.filter(referral_level => 
+            String(			referral_level.id).toLowerCase().includes(query) ||
+String(			referral_level.referrer).toLowerCase().includes(query) ||
+String(			referral_level.referred).toLowerCase().includes(query) ||
+String(			referral_level.level).toLowerCase().includes(query)
+        );
+        populateReferralLevelsTable(filtered);
+    }
+
+    // Define additional helper functions: populateModalFields, prepareEditModal, saveReferralLevelsChanges, deleteReferralLevels, saveNewReferralLevels, etc.
+    // Use the structure and logic provided in the original script.
+
+    window.onload = fetchReferralLevels;
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add New ReferralCode{% endblock %}
+
+{% block content %}
+    <h2>Add New ReferralCode</h2>
+    <form method="post">
+        {% csrf_token %}
+        { form.as_p }
+        <button type="submit">Add ReferralCode</button>
+    </form>
+    <br>
+    <a href="{% url 'referral_code_list' %}">Back to ReferralCode List</a>
+    
+{% endblock %}

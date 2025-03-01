@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Campaign{% endblock %}
+
+{% block content %}
+    <h2>Edit Campaign</h2> 
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Edit Campaign</button>
+    </form>
+    <br>
+    <a href="{% url 'campaign_list' %}">Back to Campaign List</a>
+{% endblock %}

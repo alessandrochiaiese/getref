@@ -1,0 +1,69 @@
+\ 
+{% extends "core/base.html" %}
+
+{% block title %}Link Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Link Detail</h1>
+    <hr>
+    <p><strong>Id:</strong> {{ link_item.id }}</p>
+<p><strong>Participant Id:</strong> {{ link_item.participant_id }}</p>
+<p><strong>Program Id:</strong> {{ link_item.program_id }}</p>
+<p><strong>Url:</strong> {{ link_item.url }}</p>
+<p><strong>Click Count:</strong> {{ link_item.click_count }}</p>
+<p><strong>Conversion Count:</strong> {{ link_item.conversion_count }}</p>
+<p><strong>Date Created:</strong> {{ link_item.date_created }}</p>
+<p><strong>Last Used:</strong> {{ link_item.last_used }}</p>
+<p><strong>Status:</strong> {{ link_item.status }}</p>
+<p><strong>Landing Page:</strong> {{ link_item.landing_page }}</p>
+<p><strong>Custom Tracking Id:</strong> {{ link_item.custom_tracking_id }}</p>
+    <a href="{% url 'core:link_update' link_item.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'core:link_delete' link_item.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'core:link_list' %}" class="btn btn-secondary">Back to list</a>
+</div>
+
+<!-- Include modals for create/update if needed -->
+{% include 'core/modals/modal_create_update_link.html' %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Funzione per estrarre l'ID dall'URL
+    function getModelIdFromUrl() {
+        const pathSegments = window.location.pathname.split('/'); // Dividi il percorso dell'URL
+        return pathSegments[pathSegments.length - 2]; // L'ID dovrebbe essere il penultimo segmento
+    }
+
+    async function fetchModelDetail(apiEndpoint, detailContainerId) {
+        const id = getModelIdFromUrl(); // Ottieni l'ID dinamicamente
+        try {
+            const response = await fetch(`${window.location.protocol}://${window.location.host}${apiEndpoint}${id}/`);
+            const modelData = await response.json();
+            
+            const detailList = document.getElementById(detailContainerId);
+            if (!detailList) {
+                console.error(`Element with ID "${detailContainerId}" not found.`);
+                return;
+            }
+
+            const details = Object.entries(modelData)
+                .map(([key, value]) => `<li class="list-group-item"><strong>${key.replace('_', ' ').replace(/^\w/, c => c.toUpperCase())}:</strong> ${value}</li>`)
+                .join('');
+            
+            detailList.innerHTML = details;
+        } catch (error) {
+            console.error(`Error fetching detail for ${apiEndpoint}:`, error);
+        }
+    }
+
+    // Specifica l'endpoint API e l'ID del container per il modello corrente
+    const apiEndpoint = '/api/v0/links/'; // Aggiorna dinamicamente per altri modelli
+    const detailContainerId = 'LinkDetail';
+
+    // Esegui il fetch al caricamento della pagina
+    fetchModelDetail(apiEndpoint, detailContainerId);
+</script>
+{% endblock %}

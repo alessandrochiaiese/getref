@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
 
 from typing import List 
@@ -38,7 +39,7 @@ class ReferralAuditService():
         try:
             referral_audit = ReferralAudit( 
                 action_taken = data.get('action_taken'),
-                action_date = data.get('action_date'),
+                action_date = datetime.datetime.now(), #data.get('action_date'),
                 user = data.get('user'),
                 ip_address = data.get('ip_address'),
                 device_info = data.get('device_info'),

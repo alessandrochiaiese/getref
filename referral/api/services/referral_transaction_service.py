@@ -1,5 +1,6 @@
 # referral_system/services.py
 
+import datetime
 import logging
 
 from typing import List
@@ -38,7 +39,7 @@ class ReferralTransactionService():
             referral_transaction = ReferralTransaction(
                 program = data.get('program'),
                 referred_users = data.get('referred_users'),
-                transaction_date = data.get('transaction_date'),
+                transaction_date = datetime.datetime.now(), #data.get('transaction_date'),
                 order_id = data.get('order_id'),
                 transaction_amount = data.get('transaction_amount'),
                 currency = data.get('currency'),
