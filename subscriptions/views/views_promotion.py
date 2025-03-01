@@ -5,15 +5,26 @@ from subscriptions.models.promotion_sale import PromotionSale
 
 import stripe
 
+
 def my_promotions(request):
     # Recupera tutte le promozioni per l'utente autenticato
     promotions = Promotion.objects.filter(user=request.user)
-    #products = {}
-    #for promotion in promotions:
-    #    # Recupera i prezzi associati al prodotto
-    #    products[promotion['stripe_product_id']] = stripe.Product.list(product=promotion['stripe_product_id'])
-    # Passa le promozioni al template
-    return render(request, 'promotions/my_promotions.html', {'promotions': promotions})
+    
+    # Recupera i dettagli dei prodotti Stripe per ogni promozione
+    products = []
+    for promotion in promotions:
+        try:
+            product = stripe.Product.retrieve(promotion.stripe_product_id)
+            products.append({
+                'promotion': promotion,
+                'product': product
+            })
+        except stripe.error.StripeError as e:
+            # Gestisci gli errori di Stripe, come la mancata connessione o errore nell'ID del prodotto
+            print(f"Errore nel recupero del prodotto Stripe per la promozione {promotion.id}: {e}")
+
+    # Passa le promozioni e i dettagli dei prodotti al template
+    return render(request, 'promotions/my_promotions.html', {'products': products})
 
 def promote(request, promotion_link):
     # Ottieni la promozione tramite il link

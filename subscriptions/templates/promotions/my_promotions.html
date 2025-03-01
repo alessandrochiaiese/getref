@@ -10,16 +10,17 @@
 <div class="container mt-5">
     <h1>Le tue Promozioni</h1>
 
-    {% if promotions %}
+    {% if products %}
     <div class="row">
-        {% for promotion in promotions %}
+        {% for item in products %}
         <div class="col-md-4 m-5">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p>Prodotto: {{ promotion.stripe_product_id }}</p>
-                    <!-- Puoi sostituire con il nome del prodotto, se disponibile -->
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text">{% trans "Description" %}: {{ item.product.description|default:"No description available." }}</p>
+                    <p class="card-text">{% trans "Price" %}: {{ item.product.price | default:"Unknown price" }} {{ item.product.currency|default:"USD"|upper }}</p>
                     <p>Link Promozionale: <a href={{ promotion.get_promotion_url }} target="_blank">{{ promotion.get_promotion_url }}</a></p>
-                    <button class="btn btn-primary promote-btn" onclick="copyLink('{{ promotion.get_promotion_url }}')">Copia Link</button>
+                    <button class="btn btn-primary promote-btn" onclick="copyLink('{{ promotion.get_promotion_url }}')">{% trans "Copy Link" %}</button>
                 </div>
             </div>
         </div>

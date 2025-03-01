@@ -172,7 +172,7 @@ class EnterpriseCreateView(CreateView):
     model = ProfileBusiness
     form_class = EnterpriseForm
     template_name = 'dashboard/enterprise/create_enterprise.html'
-    success_url = reverse_lazy('core_profile')  # Redirige alla pagina del profilo dell'utente o a un'altra pagina di successo
+    success_url = reverse_lazy('enterprise_list')  # Redirige alla pagina del profilo dell'utente o a un'altra pagina di successo
 
     def form_valid(self, form):
         # Se vuoi eseguire operazioni extra quando il form è valido
