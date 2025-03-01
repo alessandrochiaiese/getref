@@ -1,8 +1,10 @@
 
+from urllib.parse import urlencode
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import login, logout
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import TemplateView 
 from django.shortcuts import render, redirect
@@ -32,7 +34,14 @@ class EnterpriseRedirectView(View):
             request.session['is_enterprise_redirect'] = True
             request.session['is_referral_redirect'] = False
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
-            return redirect(reverse('core_register', args=[referral_code]))
+            #return redirect(reverse('core_register', args=[referral_code]))
+
+            # Costruisci l'URL con il parametro di query
+            url = reverse('core_register')  # Ottieni la base dell'URL
+            query_string = urlencode({'code': referral_code})  # Aggiungi il parametro alla query
+            full_url = f'{url}?{query_string}'  # Combina l'URL con la query
+
+            return HttpResponseRedirect(full_url)  # Fai il redirect alla nuova URL
         except ProfileBusiness.DoesNotExist:
             messages.warning(request, 'Codice referral azienda non valido o inattivo.')
             # Se il codice referral non è valido, reindirizza ad una pagina di errore o alla home
@@ -49,7 +58,14 @@ class ReferralRedirectView(View):
             request.session['is_enterprise_redirect'] = False
             request.session['is_referral_redirect'] = True
             # Redirect alla vista di registrazione, passando il codice referral come parte dell'URL
-            return redirect(reverse('core_register', args=[referral_code]))
+            #return redirect(reverse('core_register', args=[referral_code]))
+
+            # Costruisci l'URL con il parametro di query
+            url = reverse('core_register')  # Ottieni la base dell'URL
+            query_string = urlencode({'code': referral_code})  # Aggiungi il parametro alla query
+            full_url = f'{url}?{query_string}'  # Combina l'URL con la query
+
+            return HttpResponseRedirect(full_url)  # Fai il redirect alla nuova URL
         except ReferralCode.DoesNotExist:
             messages.warning(request, 'Codice referral utente non valido o inattivo.')
             # Se il codice referral non è valido, reindirizza ad una pagina di errore o alla home
