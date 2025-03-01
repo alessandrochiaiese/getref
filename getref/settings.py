@@ -72,7 +72,7 @@ CLIENT_SECRET = config('CLIENT_SECRET')
 APP_NAME = config('APP_NAME')
 
 #OAUTH2_PROVIDER_APPLICATION_MODEL = "oauth2_provider.Application"
-OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.CustomApplication"
+OAUTH2_PROVIDER_APPLICATION_MODEL = "subscriptions.models.custom_application.CustomApplication"
 
 
 
