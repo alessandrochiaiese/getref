@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 #####################
 class EnterpriseRedirectView(View):
     def get(self, request, *args, **kwargs):
-        referral_code = kwargs.get('code')
+        referral_code = self.request.GET.get('code')
 
         # Verifica che il codice referral esista
         try:
@@ -40,7 +40,7 @@ class EnterpriseRedirectView(View):
         
 class ReferralRedirectView(View):
     def get(self, request, *args, **kwargs):
-        referral_code = kwargs.get('code')
+        referral_code = self.request.GET.get('code')
 
         # Verifica che il codice referral esista
         try:
