@@ -12,7 +12,13 @@ from referral.models import *
 from dashboard.forms import * 
 from dashboard.utils import calculate_user_level, get_tree_referred, tree_to_list
 
+logger = logging.getLogger(__name__)
+
 User = get_user_model()
+
+@method_decorator(login_required, name='dispatch')
+class SettingsView(TemplateView):
+    template_name = 'dashboard/settings.html'
 
 @method_decorator(login_required, name='dispatch')
 class HomeView(TemplateView):
@@ -105,6 +111,7 @@ class HomeView(TemplateView):
         
         return context
     
+
 @method_decorator(login_required, name='dispatch')
 class MasterAccountsView(TemplateView):
     model = get_user_model()  # Usa il modello User di default
@@ -274,7 +281,6 @@ class InvestorAccountsView(TemplateView):
         return context
     
 
-logger = logging.getLogger(__name__)
 @method_decorator(login_required, name='dispatch')
 class IncompleteRegistrationsView(TemplateView):
     template_name = 'dashboard/referred_accounts/incomplete_registrations.html'
@@ -441,6 +447,8 @@ class MyNetworkView(TemplateView):
         print(investor_accounts)
         context['my_network'] = investor_accounts+referreds
         
+        my_enterprises = ProfileBusiness.objects.filter(user=user)
+        context['my_enterprises'] = my_enterprises
         return context
     
 @method_decorator(login_required, name='dispatch')

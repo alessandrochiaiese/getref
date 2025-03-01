@@ -143,8 +143,60 @@ DETAIL:  Failing row contains (25, /api/v0/referral/, 2025-01-29, null, Mozilla/
 
 
 
+01.03.2025
+o Utente   o Business
+
+register/
+register/business/
+
+[] in Register Page aggiungere i tab per 2 entità: utente e azienda
+[] considera di creare due Register Page: utente e azienda
+[] in Profile Page si potrebbe aggiungere i tab: se è utente niente tab perche ci saranno solo dati , invece
+[] in Profile il caricamento dell'immagine da errore
+[] Enterprise list potrebbe essere visualizzata sotto forma di tabella
+[] Verificare che il link promozionale del prodotto permettti di tracciare la vendita del prodotto con eventuali bonus e commissioni
+
+[X] a non far funzionare il referral invitation è in dashboard/urls.py:
+
+    path('referral-code/', ReferralRedirectView.as_view(), name='referral_redirect'),
+    perchè referral-code/ è stato sostituito con en/register/?code=
+
+    (SI E PER QUESTO MOTIVO QUI)
+[X] controlla perche utente non riesce a registrarsi sotto l utente che invita
+[X] controlla i due tipi di referral coding (utente e azienda)
+[X] quando si incolla url invito azienda compare il messagio Codice referral non è valido. (vedi in views_accounts.py a rigo 99:                 messages.warning(request, 'Il codice referral non è valido.'))
+[X] Nella mia rete bisogna vedere gli utenti referenziati, gli amministratori aziende clienti registrati, aziende
+quindi magare fare la mia rete e la mia rete di aziende 
+[X] in my_promotions bisogna definire Price: Unkown price
+[X] definire la pagina settings per:
+- impostare la lingua
+- 
 
 
+[] inserire Privacy Policy e Terms of Service (quando disponibile o  con IUBENDA)
+[] 
+[] 
+[] 
+
+
+
+
+
+
+[] il link di referral utente e azienda dovrebbero essere piu brevi (in urls.py gli endpoint andrebbero rivisti e in views_profile.py l'endpoint per invitare l azienda e in view_accounts.py per invitare l'utente, (per il primo forse si potrebbe usare per internderci /e/ e invece per l'utente si potrebbe usare /)) 
+
+
+
+[] Fare ultime modifiche alle API core (affiliate, referral), riguardo i valori di self.request in views per recuperare IP e dispositivo (che mancano probabilmente non ricordo)
+[] cancella app affiliate e referral e quindi modifica gli import nella logica e eventualmente il nome dell'instanza che non inizieranno più con Affiliate_ o Referral_
+[] collega il pagamento di un plans con le API (core)
+
+
+N.B.: 
+- quando invito azienda a registrarsi funziona (OK)
+- quando invito utente a registrarsi non funziona (TODO)
+- ReferralLevel non viene mai utilizzato nella logica (BHO NON SO SE è PIU UTILE)
+- 
 
 
 

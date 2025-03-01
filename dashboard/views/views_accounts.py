@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy 
 from django.utils.crypto import get_random_string 
 from dashboard.models import *   
-from getref import settings
+from getref.settings import DOMAIN, EMAIL_HOST_USER
 from referral.models import *   
 from dashboard.forms import * 
 import logging
@@ -89,14 +89,14 @@ class RegisterView(View):
         referral_code_used = self.request.GET.get('code')
         form = self.form_class(initial=self.initial)
 
-        if referral_code_used:
-            try:
-                referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
-                print(form.fields)
-                # Imposta il referral_code nel form (se necessario)
-                # form.fields['referral_code'].initial = referral_code.code
-            except ReferralCode.DoesNotExist:
-                messages.warning(request, 'Il codice referral non è valido.')
+        #if referral_code_used:
+        #    try:
+        #        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
+        #        print(form.fields)
+        #        # Imposta il referral_code nel form (se necessario)
+        #        # form.fields['referral_code'].initial = referral_code.code
+        #    except ReferralCode.DoesNotExist:
+        #        messages.warning(request, 'Il codice referral non è valido.')
 
         response = render(request, self.template_name, {'form': form})
 
@@ -126,6 +126,8 @@ class RegisterView(View):
                         profile_business.user_registered = user
                         profile_business.status = 'active'
                         profile_business.save()
+                        # Recupera utente che ha invitato un'azienda a registrarsi
+                        referrer=profile_business.user
                         print(f"ProfileBusiness aggiornato per {user.username}")
                     except ProfileBusiness.DoesNotExist:
                         messages.warning(request, 'Codice referral azienda non valido.')
@@ -133,17 +135,17 @@ class RegisterView(View):
                     # Trattamento codice referral utente
                     try:
                         referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
+                        # Recupera utente che ha invitato un utente a registrarsi
                         referrer = referral_code.user
-
-                        # Creazione o aggiornamento del record di referral
-                        referral, created = Referral.objects.get_or_create(referrer=referrer)
-                        referral.referred.add(user)
-                        referral_code.referred_user_count += 1
-                        referral_code.save()
-
                         messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
                     except ReferralCode.DoesNotExist:
                         messages.warning(request, 'Codice referral utente non valido.')
+
+                # Creazione o aggiornamento del record di referral
+                referral, created = Referral.objects.get_or_create(referrer=referrer)
+                referral.referred.add(user)
+                referral_code.referred_user_count += 1
+                referral_code.save()
 
                 # Rimuovi il flag dalla sessione dopo l'uso
                 request.session.pop('is_enterprise_redirect', None)
@@ -165,7 +167,7 @@ class RegisterView(View):
                 status="active",
                 referred_user_count=0,
                 expiry_date=self.request.POST.get('expiry_date'),
-                unique_url=self.request.build_absolute_uri(f'?code={code}'),
+                unique_url=f'{DOMAIN}/c/?code={code}' #self.request.build_absolute_uri(f'?code={code}'),
             )
 
             # Redirect al login
@@ -215,8 +217,8 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
         try:
             form.save(
                 request=self.request,
-                from_email=settings.EMAIL_HOST_USER,
-                    extra_email_context={'domain': settings.DOMAIN}
+                from_email=EMAIL_HOST_USER,
+                    extra_email_context={'domain': DOMAIN}
             )
             logger.info("Email di reset inviata con successo")
         except Exception as e:

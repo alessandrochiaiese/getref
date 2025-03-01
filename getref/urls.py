@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import include, path, re_path as url
 from django.conf.urls.i18n import i18n_patterns
+from dashboard.views.views_accounts import EnterpriseRedirectView, ReferralRedirectView
 from getref import settings
 from rest_framework import generics, permissions, serializers
 from oauth2_provider import urls as oauth2_urls
@@ -46,6 +47,10 @@ urlpatterns = [
 
     # language
     path('i18n/', include('django.conf.urls.i18n')),
+    
+    # Redirect
+    path('c/', ReferralRedirectView.as_view(), name='referral_redirect'),
+    path('e/', EnterpriseRedirectView.as_view(), name='enterprise_redirect'),
     
     # API 
     path('api/v0/', include('dashboard.api.urls'), name='api_profile'),

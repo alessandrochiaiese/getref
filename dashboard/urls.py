@@ -8,9 +8,9 @@ from dashboard.utils import *
     
 from django.contrib.auth import views as auth_views 
 from dashboard.forms import * 
-from dashboard.views.views_accounts import ( EnterpriseRedirectView, LandingPageView, LoginView, CustomLoginView, ReferralRedirectView, ResetPasswordView, ChangePasswordView, RegisterView)
+from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
-from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, ParticipateCampaignView, WithdrawalView, privacyPolice, termService, )
+from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, ParticipateCampaignView, SettingsView, WithdrawalView, privacyPolice, termService, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
@@ -41,7 +41,10 @@ urlpatterns = [
     # privacy policy & terms of service
     path('privacy-policy/', privacyPolice, name='privacy_policy'),
     path('terms-of-service/', termService, name='terms_service'),
-
+    
+    # Impostazioni
+    path('settings/', SettingsView.as_view(), name='settings'),
+    
     # get users referred with level
     #path('get-level-users/', UserReferredLevelView.as_view(), name='get_user_table'), #get_user_table, name='get_user_table'),
 
@@ -51,7 +54,6 @@ urlpatterns = [
     
     # Registrazione
     path('register/', RegisterView.as_view(), name='core_register'),    
-    path('referral-code/', ReferralRedirectView.as_view(), name='referral_redirect'),
     # Registrazione di prima
     # #path('register/', RegisterView.as_view(), name='core_register'),    
     #path('referral-code/<str:referral_code>/', ReferralRedirectView.as_view(), name='referral_redirect'),
@@ -86,7 +88,6 @@ urlpatterns = [
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
     # enterprise
-    path('enterprise/', EnterpriseRedirectView.as_view(), name='enterprise_redirect'),
     path('create-enterprise/', EnterpriseCreateView.as_view(), name='create_enterprise'),  # Aggiungi azienda
     path('update-enterprise/<int:pk>/', EnterpriseUpdateView.as_view(), name='update_enterprise'),  # Modifica azienda
     path('enterprise-list/', EnterpriseListView.as_view(), name='enterprise_list'),  # Elenco di tutte le aziende

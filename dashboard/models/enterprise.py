@@ -3,6 +3,8 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+from core.models.referral_code import ReferralCode
+
 class Sector(models.Model):
     SECTOR_CHOICES = [
         ('lawn_care', 'Lawn Care'),
@@ -84,6 +86,7 @@ class ProfileBusiness(models.Model):
     company_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Name"))
     email = models.EmailField(max_length=255, blank=True, null=True, verbose_name=_("Email"))
     
+    #referrl_code = models.OneToOneField(ReferralCode, null=True, on_delete=models.CASCADE, verbose_name=_("Referral Code"), related_name='referral_code')
     user_registered = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User Registered"), related_name='profile_registered')
     status = models.CharField(default="inactive", max_length=50, verbose_name=_("Status"))
     code = models.CharField(default="HREMFSD", max_length=50, unique=True, verbose_name=_("Code"))

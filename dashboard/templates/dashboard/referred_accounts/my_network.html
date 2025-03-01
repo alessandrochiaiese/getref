@@ -42,6 +42,39 @@
         </div>
     </div>
 </div>
+
+<!-- Business referenziati -->
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="section-title">{% trans "My Referred Business" %}</h4>
+                <table class="table table-striped" id="user-table">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Phone" %}</th>
+                            <th>{% trans "Email" %}</th>
+                            <th>{% trans "Company Name" %}</th>
+                            <th>{% trans "Username Registered" %}</th>
+                            <th>{% trans "Date Joined" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-tbody ">
+                        {% for referred_user in my_network %}
+                        <tr>
+                            <th>{{ referred_user.phone }}</th>
+                            <th>{{ referred_user.email }}</th>
+                            <th>{{ referred_user.company_name }}</th>
+                            <th>{{ referred_user.user_registered.username }}</th>
+                            <th>{{ referred_user.user_registered.date_joined|date:"d/m/Y" }}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

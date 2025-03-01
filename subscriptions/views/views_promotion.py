@@ -4,6 +4,7 @@ from subscriptions.models.promotion import Promotion
 from subscriptions.models.promotion_sale import PromotionSale
 
 import stripe
+from subscriptions.views.views_subscription import get_prices_for_product
 
 
 def my_promotions(request):

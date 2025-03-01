@@ -178,7 +178,7 @@ class EnterpriseCreateView(CreateView):
         # Se vuoi eseguire operazioni extra quando il form è valido
         code = get_random_string(length=8).upper()
         form.instance.user = self.request.user
-        form.instance.unique_url = f"{DOMAIN}/enterprise/?code={code}"
+        form.instance.unique_url = f"{DOMAIN}/e/?code={code}"
         form.instance.code = code
         return super().form_valid(form)
 

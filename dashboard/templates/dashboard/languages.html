@@ -1,0 +1,22 @@
+{% get_current_language as LANGUAGE_CODE %}
+<div class="form-row">
+    <div class="col-md-12">
+        <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">{% trans "Current language" %}:
+            <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">
+                {{LANGUAGE_CODE }}</small>
+        </p>
+    </div>
+    <div class="col-md-12">
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group border-top-0 mb-3 pl-3 pt-0 pr-3 border-bottom-0 pb-0">
+                <label class="small" for="languages">{% trans "Languages" %}</label>
+                <select class="form-control" name="language" id="languages">
+                    <option value="en">{% trans "English" %}</option>
+                    <option value="it">{% trans "Italiano" %}</option>
+                </select>
+                <button class="btn btn-primary col-md-12 mt-3" type="submit">{% trans "Change Language" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
