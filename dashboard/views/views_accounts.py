@@ -113,61 +113,65 @@ class RegisterView(View):
 
             # Se il nuovo utente ha usato un codice referral
             if referral_code_used is not None:
-                try:
-                    if ProfileBusiness.objects.filter(code=referral_code_used).exists():
-                        # Verifica se proviene da EnterpriseRedirectView
-                        if request.session.get('is_enterprise_redirect', False):
-                            # Esegui la parte del codice per ProfileBusiness solo se EnterpriseRedirectView
-                            profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
-                            profile_business.user_registered = user
-                            profile_business.save()
-                            print(f"ProfileBusiness updated for {user.username}")
-                        else:
-                            print("ReferralRedirectView: ProfileBusiness update skipped.")
-                    # Altre logiche di referral code...
-                except ProfileBusiness.DoesNotExist:
-                    messages.warning(request, 'Il codice referral non è valido.')
+                is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
+                if is_enterprise_redirect:
+                    try:
+                        if ProfileBusiness.objects.filter(code=referral_code_used).exists():
+                            # Verifica se proviene da EnterpriseRedirectView
+                                # Esegui la parte del codice per ProfileBusiness solo se EnterpriseRedirectView
+                                profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
+                                profile_business.user_registered = user
+                                profile_business.save()
+                                print(f"ProfileBusiness updated for {user.username}")
+                        # Altre logiche di referral code...
+                    except ProfileBusiness.DoesNotExist:
+                        messages.warning(request, 'Il codice referral non è valido.')
+
+                else:
+                    print("ReferralRedirectView: ProfileBusiness update skipped.")
+
 
                 try: 
-                    # Recupera il codice referral del referrer
-                    referrer_code = ReferralCode.objects.filter(code=referral_code_used, status="active").first()
-                    if referrer_code:
+                    if not is_enterprise_redirect:
+                        # Recupera il codice referral del referrer
+                        referrer_code = ReferralCode.objects.filter(code=referral_code_used, status="active").first()
+                        if referrer_code:
+                            print(f"Referral code found: {referrer_code.code}")
+                        else:
+                            print(f"No active referral code found for {referral_code_used}")
+
                         print(f"Referral code found: {referrer_code.code}")
-                    else:
-                        print(f"No active referral code found for {referral_code_used}")
+                        referrer = referrer_code.user  # Assuming you have the referrer from the referral code.
+                        
+                        referral = None
+                        if Referral.objects.filter(referrer=referrer).exists():
+                            # If a referral record for this user already exists, you can handle it as needed.
+                            # You could raise an error or return early, depending on your business logic.
+                            print(f"Referral already exists for {referrer.username}")
+                            referral = Referral.objects.filter(referrer=referrer).first()
+                            referral.referred.add(user)
+                        else:
+                            # If no referral exists for this user, proceed to create a new referral.
+                            referral = Referral.objects.create(
+                                program=None,  # referrer_code.program,
+                                referrer=referrer,
+                                #referred=user,
+                                reward_given=False
+                            )
+                            referral.referred.add(user)
+                            # Add the referred users to the referral record
+                            #if user not in referral.referred.all(): referral.referred.add(user)  # Solo se l'utente non è già referenziato # Add the referred user (assuming `user` is the referred user)
+                            #print(f"Referral created for {referrer.username}")
+                        
+                        print("Referral created successfully")
+                        # Aggiorna il conteggio degli utenti invitati
+                        referrer_code.referred_user_count += 1
+                        referrer_code.save()
 
-                    print(f"Referral code found: {referrer_code.code}")
-                    referrer = referrer_code.user  # Assuming you have the referrer from the referral code.
-                    
-                    referral = None
-                    if Referral.objects.filter(referrer=referrer).exists():
-                        # If a referral record for this user already exists, you can handle it as needed.
-                        # You could raise an error or return early, depending on your business logic.
-                        print(f"Referral already exists for {referrer.username}")
-                        referral = Referral.objects.filter(referrer=referrer).first()
-                        referral.referred.add(user)
-                    else:
-                        # If no referral exists for this user, proceed to create a new referral.
-                        referral = Referral.objects.create(
-                            program=None,  # referrer_code.program,
-                            referrer=referrer,
-                            #referred=user,
-                            reward_given=False
+                        messages.success(
+                            request,
+                            f"Registrazione completata! Sei stato invitato da {referrer_code.user.username}."
                         )
-                        referral.referred.add(user)
-                        # Add the referred users to the referral record
-                        #if user not in referral.referred.all(): referral.referred.add(user)  # Solo se l'utente non è già referenziato # Add the referred user (assuming `user` is the referred user)
-                        #print(f"Referral created for {referrer.username}")
-                    
-                    print("Referral created successfully")
-                    # Aggiorna il conteggio degli utenti invitati
-                    referrer_code.referred_user_count += 1
-                    referrer_code.save()
-
-                    messages.success(
-                        request,
-                        f"Registrazione completata! Sei stato invitato da {referrer_code.user.username}."
-                    )
 
                 except ReferralCode.DoesNotExist:
                     # Se il codice non è valido, mostra un messaggio di avvertimento
