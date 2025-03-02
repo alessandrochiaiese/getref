@@ -62,17 +62,22 @@ class ReferralProgramService():
             referral_code.programs.add(referral_program)
 
             # Creazione Stats iniziali
-            ReferralStats.objects.create(
-                referral_code=referral_code,
+            referraul_stats = ReferralStats.objects.create( 
                 period="daily",  # Esempio: può essere settimanale o mensile
                 click_count=0,
                 conversion_count=0,
-                total_rewards=0
+                total_rewards=0,
+                average_conversion_value=0,
+                highest_referral_earning=0
             )
+            referraul_stats.referral_codes.add(referral_code)
 
             # Creazione o aggiornamento ReferralUser
             referral_user, created = ReferralUser.objects.get_or_create(user=user)
             referral_user.total_referrals += 1
+            referral_user.total_rewards_earned = 0
+            referral_user.total_spent_by_referred_users = 0
+            referral_user.average_order_value = 0
             referral_user.save()
 
             logger.info(f"ReferralProgram created: {referral_program}")
