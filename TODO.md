@@ -153,8 +153,10 @@ register/business/
 [] considera di creare due Register Page: utente e azienda
 [] in Profile Page si potrebbe aggiungere i tab: se è utente niente tab perche ci saranno solo dati , invece
 [] in Profile il caricamento dell'immagine da errore
-[] Enterprise list potrebbe essere visualizzata sotto forma di tabella
+[X] Enterprise list potrebbe essere visualizzata sotto forma di tabella ( MY NETWORK)
 [] Verificare che il link promozionale del prodotto permettti di tracciare la vendita del prodotto con eventuali bonus e commissioni
+Bonus i primi 5 invitati che fanno ognuno un acquisto
+Commissione 15% CPA
 [\] Modify APIView Authentication
 [X] Campaign and Program in home
 [X] a non far funzionare il referral invitation è in dashboard/urls.py:
