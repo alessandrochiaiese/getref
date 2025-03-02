@@ -562,6 +562,11 @@
             });
         });
 
+        // Function to get CSRF token from the document's cookies
+        function getCSRFToken() {
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            return csrfToken;
+        }
         // Gestione creazione programma
         document.getElementById('createProgramForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -588,6 +593,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
                     },
                     body: JSON.stringify(programData),
                 });
@@ -634,7 +640,10 @@
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
+                    },
                     body: JSON.stringify({ name, start_date: startDate, end_date: endDate, program_id: programId })
                 });
                 const result = await response.json();
