@@ -6,6 +6,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from affiliate.api.services.affiliate_support_ticket_service import AffiliateSupportTicketService
@@ -19,7 +20,12 @@ logger = logging.getLogger(__name__)
 class AffiliateSupportTicketAPIView(APIView):
     permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
-    authentication_classes = [OAuth2Authentication]
+    authentication_classes = [
+        SessionAuthentication,  # Funziona per web app con sessione
+        BasicAuthentication,    # Funziona per login base con username/password
+        OAuth2Authentication,   # Funziona per autenticazione tramite OAuth2
+        TokenAuthentication     # Funziona per Bearer token (es. JWT)
+    ]
 
     def __init__(self, *args, **kwargs):
         self.affiliate_support_ticket_service = AffiliateSupportTicketService()

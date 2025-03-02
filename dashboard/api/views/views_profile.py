@@ -22,7 +22,7 @@ from dashboard.api.permissions import HasActiveSubscription
 logger = logging.getLogger(__name__)
 
 class ProfileAPIView(APIView):
-    permission_classes = [IsAuthenticated, HasActiveSubscription]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
+    permission_classes = [AllowAny]  # [AllowAny]  or [IsAuthenticated]  or [HasActiveSubscription]
     renderer_classes = [JSONRenderer]
     authentication_classes = [OAuth2Authentication]
 

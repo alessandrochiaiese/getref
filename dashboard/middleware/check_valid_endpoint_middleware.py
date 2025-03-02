@@ -19,7 +19,10 @@ class CheckValidEndpointMiddleware:
             if request.user.is_authenticated and request.user.is_staff:
                 # Mostra la lista degli URL disponibili in formato JSON (solo admin)
                 available_urls = self.get_all_urls()
-                return redirect(to='core_home')
+                # Renderizza la lista delle URL come pagina HTML
+                return render(request, 'dashboard/admin/available_urls.html', {'available_urls': available_urls})
+
+                #return redirect(to='core_home')
                 #return JsonResponse({'available_urls': available_urls}, status=200)
 
             # Se l'utente non è admin, mostra 404
