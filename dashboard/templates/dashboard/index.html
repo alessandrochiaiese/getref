@@ -431,17 +431,17 @@
                 if (!response.ok) {
                     const errorData = await response.json();  // Ottieni i dettagli dell'errore dal server
                     console.error('Errore durante la creazione del programma:', errorData);
-                    alert('Errore durante la creazione del programma.');
+                    //alert('Errore durante la creazione del programma.');
                 } else {
                     const result = await response.json();
                     console.log('Programma creato con successo:', result);
-                    alert('Programma creato con successo!');
+                    //alert('Programma creato con successo!');
                     $('#createProgramModal').modal('hide');
                 }
 
             } catch (error) {
                 console.error('Errore nella creazione del programma:', error);
-                alert('Errore durante la creazione del programma.');
+                //alert('Errore durante la creazione del programma.');
             }
         });
 
