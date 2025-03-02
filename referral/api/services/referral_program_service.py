@@ -5,8 +5,10 @@ import logging
 
 from typing import List
 from dashboard.models.region import Region
+from getref.settings import DOMAIN
 from referral.models import *
 from django.contrib.auth import get_user_model
+from django.utils.crypto import get_random_string 
 
 User = get_user_model()
 
@@ -50,18 +52,13 @@ class ReferralProgramService():
                 target_industry = data.get('target_industry'))
             referral_program.save()
                 
-            # Creazione ReferralCode per l'utente creatore
-            if ReferralCode.objects.exists(user=user):
-                referral_code = ReferralCode.objects.filter(user=user).first()
-            else:
-                referral_code = ReferralCode.objects.create(
-                    user=user,
-                    code=f"{user.username}-{referral_program.name}",
-                    usage_count=0,
-                    date_created=datetime.datetime.now(),
-                    status="active",
-                    referred_user_count=0
-                )
+            # Creazione ReferralCode per l'utente creatore 
+            referral_code, created = ReferralCode.objects.get_or_create(user=user)
+            if created:
+                code = get_random_string(length=8).upper()
+                referral_code.status="active"
+                referral_code.expiry_date=datetime.datetime.today() - datetime.timedelta(days=30)
+                referral_code.unique_url=f'{DOMAIN}/c/?code={code}'
             referral_code.programs.add(referral_program)
 
             # Creazione Stats iniziali
