@@ -5,7 +5,7 @@ import logging
 from typing import List
 from django.contrib.auth import get_user_model
 
-from core.models.referral_code import ReferralCode
+from referral.models.referral_code import ReferralCode
 from referral.models.referral_campaign import ReferralCampaign
 from referral.models.referral_program import ReferralProgram
 from referral.models.referral_stats import ReferralStats
