@@ -271,17 +271,17 @@
                             <option value="EUR">{% trans "EUR" %}</option>
                             <option value="GBP">{% trans "GBP" %}</option>
                         </select>
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="program-allowed-regions">{% trans "Regioni permesse" %}</label>
                         <select class="form-control" id="program-allowed-regions" multiple required>
                             <!-- Option values for regions will be populated dynamically -->
                         </select>
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="program-target-industry">{% trans "Settore Target" %}</label>
                         <input type="text" class="form-control" id="program-target-industry" required>
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="program-min-referrals">{% trans "Numero Minimo di Referral" %}</label>
                         <input type="number" class="form-control" id="program-min-referrals" required>
@@ -314,15 +314,15 @@
                     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
                     <div class="form-group">
-                        <label for="campaign-name">{% trans "Nome Campagna" %}</label>
+                        <label for="campaign-name">{% trans "Campaign Name" %}</label>
                         <input type="text" class="form-control" id="campaign-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="campaign-start-date">{% trans "Data Inizio" %}</label>
+                        <label for="campaign-start-date">{% trans "Start Date" %}</label>
                         <input type="date" class="form-control" id="campaign-start-date" required>
                     </div>
                     <div class="form-group">
-                        <label for="campaign-end-date">{% trans "Data Fine" %}</label>
+                        <label for="campaign-end-date">{% trans "End Date" %}</label>
                         <input type="date" class="form-control" id="campaign-end-date" required>
                     </div>
                     <div class="form-group">
@@ -330,14 +330,18 @@
                         <input type="number" class="form-control" id="campaign-budget" required>
                     </div>
                     <div class="form-group">
-                        <label for="campaign-goal">{% trans "Obiettivo" %}</label>
+                        <label for="campaign-goal">{% trans "Goal" %}</label>
                         <textarea class="form-control" id="campaign-goal" rows="2" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="campaign-program">{% trans "Seleziona Programma di Affiliazione" %}</label>
-                        <select class="form-control" id="campaign-program" required>
-                            <!-- I programmi di affiliazione saranno caricati dinamicamente -->
+                        <label for="campaign-programs">{% trans "Select Affiliate Programs" %}</label>
+                        <select class="form-control" id="campaign-programs" multiple required>
+                            <!-- The programs will be dynamically populated -->
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="campaign-spending-to-date">{% trans "Spending To Date" %}</label>
+                        <input type="number" class="form-control" id="campaign-spending-to-date" value="0" required>
                     </div>
                     <button type="submit" class="btn btn-success">{% trans "Lancia Campagna" %}</button>
                 </form>
@@ -353,7 +357,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        
+
         // Function to get CSRF token from the document's cookies
         function getCSRFToken() {
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -379,7 +383,7 @@
 
         // Load regions when the page is ready
         loadRegions();
-        
+
         // Gestione creazione programma
         document.getElementById('createProgramForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -407,7 +411,7 @@
                 allowed_regions: allowedRegions,
                 target_industry: targetIndustry,
             };
-            
+
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`, {
                     method: 'POST',
@@ -436,27 +440,51 @@
         });
 
 
-        // Gestione creazione campagna
+
+        // Load available programs dynamically into the select dropdown
+        async function loadAffiliatePrograms() {
+            try {
+                const response = await fetch('/api/v0/affiliate-programs/'); // Assuming you have an endpoint to get programs
+                const programs = await response.json();
+                const select = document.getElementById('campaign-programs');
+                programs.forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program.id;
+                    option.textContent = program.name;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading affiliate programs:', error);
+            }
+        }
+
+        // Load programs when the page is ready
+        loadAffiliatePrograms();
+
+        // Handle campaign creation
         document.getElementById('createCampaignForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // Ottieni i valori dal modulo
+            // Get values from the form
             const name = document.getElementById('campaign-name').value;
             const startDate = document.getElementById('campaign-start-date').value;
             const endDate = document.getElementById('campaign-end-date').value;
-            const programId = document.getElementById('campaign-program').value;
             const budget = document.getElementById('campaign-budget').value;
             const goal = document.getElementById('campaign-goal').value;
+            const spendingToDate = document.getElementById('campaign-spending-to-date').value;
+            const programIds = Array.from(document.getElementById('campaign-programs').selectedOptions).map(option => option.value); // Get selected program IDs
 
-            // Crea l'oggetto campaignData
+            // Create campaign data object
             const campaignData = {
-                name: name,
+                campaign_name: name,
                 start_date: startDate,
                 end_date: endDate,
-                program_id: programId,
-                budget: budget,
                 goal: goal,
+                budget: budget,
+                spending_to_date: spendingToDate,
+                programs: programIds,  // Pass the selected program IDs
             };
+            
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
                     method: 'POST',
