@@ -242,7 +242,8 @@
             </div>
             <div class="modal-body">
                 <form id="createProgramForm">
-                    {% csrf_token %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
                     <div class="form-group">
                         <label for="program-name">{% trans "Nome Programma" %}</label>
                         <input type="text" class="form-control" id="program-name" required>
@@ -292,7 +293,8 @@
             </div>
             <div class="modal-body">
                 <form id="createCampaignForm">
-                    {% csrf_token %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
                     <div class="form-group">
                         <label for="campaign-name">{% trans "Nome Campagna" %}</label>
                         <input type="text" class="form-control" id="campaign-name" required>
