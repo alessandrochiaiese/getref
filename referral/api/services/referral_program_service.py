@@ -56,7 +56,7 @@ class ReferralProgramService():
                 program=referral_program,
                 code=f"{user.username}-{referral_program.name}",
                 usage_count=0,
-                date_created=datetime.now(),
+                date_created=datetime.datetime.now(),
                 status="active",
                 referred_user_count=0
             )
