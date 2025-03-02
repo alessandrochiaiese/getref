@@ -69,7 +69,6 @@ class ReferralCampaignAPIView(APIView):
     def post(self, request):
         try:
             data=request.data
-            data['url'] = request.host
             serializer = ReferralCampaignSerializer(data=data)
             if serializer.is_valid():
                 referral_campaign = self.referral_campaign_service.create_referral_campaign(serializer.validated_data)
