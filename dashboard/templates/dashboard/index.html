@@ -752,7 +752,7 @@
         try {
             const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`);
             const data = await response.json();
-
+            console.log('load programs: ', data);
             if (data) {
                 const programSelect = document.getElementById('campaign-program');
                 programSelect.innerHTML = ''; // Pulisci il dropdown
@@ -772,11 +772,11 @@
                     programSelect.appendChild(option);
                 });
             } else {
-                alert('Nessun programma trovato.');
+                //alert('Nessun programma trovato.');
             }
         } catch (error) {
             console.error('Errore nel caricamento dei programmi:', error);
-            alert('Errore nel caricamento dei programmi.');
+            //alert('Errore nel caricamento dei programmi.');
         }
     }
 
