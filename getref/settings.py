@@ -395,14 +395,14 @@ OAUTH2_PROVIDER = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        #'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # per OAuth2
-        # 'rest_framework.authentication.TokenAuthentication',  # per Token Bearer
+        'rest_framework.authentication.BasicAuthentication',            # per username e password
+        'rest_framework.authentication.SessionAuthentication',          # per le sessioni
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # per OAuth2
+        #'oauth2_provider.ext.rest_framework.OAuth2Authentication',     # per OAuth2
+        'rest_framework.authentication.TokenAuthentication',            # per Token Bearer
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',                   # Richiede autenticazione per tutte le API
     )
 }
 
