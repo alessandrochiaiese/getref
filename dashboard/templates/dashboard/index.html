@@ -368,151 +368,6 @@
             return csrfToken;
         }
 
-        // Load regions dynamically into the allowed regions select
-        async function loadRegions() {
-            try {
-                const response = await fetch('/api/v0/regions/'); // Assuming you have an endpoint for fetching regions
-                const regions = await response.json();
-                const select = document.getElementById('program-allowed-regions');
-                regions.forEach(region => {
-                    const option = document.createElement('option');
-                    option.value = region.id;
-                    option.textContent = region.name;
-                    select.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error loading regions:', error);
-            }
-        }
-
-        // Load regions when the page is ready
-        loadRegions();
-
-        // Gestione creazione programma
-        document.getElementById('createProgramForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            // Ottieni i valori dal modulo
-            const name = document.getElementById('program-name').value;
-            const description = document.getElementById('program-description').value;
-            const rewardType = document.getElementById('program-reward').value;
-            const rewardValue = document.getElementById('program-reward-value').value;
-            const minReferrals = document.getElementById('program-min-referrals').value;
-            const maxReferrals = document.getElementById('program-max-referrals').value;
-            const duration = document.getElementById('program-duration').value;
-            const currency = document.getElementById('program-currency').value;  // New field
-            const allowedRegions = Array.from(document.getElementById('program-allowed-regions').selectedOptions).map(option => option.value); // Get selected regions
-            const targetIndustry = document.getElementById('program-target-industry').value;  // New field
-
-            // Crea l'oggetto programData
-            const programData = {
-                name: name,
-                description: description,
-                reward_type: rewardType,
-                reward_value: rewardValue,
-                currency: currency,
-                min_referral_count: minReferrals,
-                max_referrals_per_user: maxReferrals,
-                program_duration: duration,
-                allowed_regions: allowedRegions,
-                target_industry: targetIndustry,
-            };
-
-            try {
-                const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
-                    },
-                    body: JSON.stringify(programData),
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();  // Ottieni i dettagli dell'errore dal server
-                    console.error('Errore durante la creazione del programma:', errorData);
-                    //alert('Errore durante la creazione del programma.');
-                } else {
-                    const result = await response.json();
-                    console.log('Programma creato con successo:', result);
-                    //alert('Programma creato con successo!');
-                    $('#createProgramModal').modal('hide');
-                }
-
-            } catch (error) {
-                console.error('Errore nella creazione del programma:', error);
-                //alert('Errore durante la creazione del programma.');
-            }
-        });
-
-
-
-        // Load available programs dynamically into the select dropdown
-        async function loadAffiliatePrograms() {
-            try {
-                const response = await fetch('/api/v0/affiliate/programs/'); // Assuming you have an endpoint to get programs
-                const programs = await response.json();
-                const select = document.getElementById('campaign-programs');
-                programs.forEach(program => {
-                    const option = document.createElement('option');
-                    option.value = program.id;
-                    option.textContent = program.name;
-                    select.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error loading affiliate programs:', error);
-            }
-        }
-
-        // Load programs when the page is ready
-        loadAffiliatePrograms();
-
-        // Handle campaign creation
-        document.getElementById('createCampaignForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            // Get values from the form
-            const name = document.getElementById('campaign-name').value;
-            const startDate = document.getElementById('campaign-start-date').value;
-            const endDate = document.getElementById('campaign-end-date').value;
-            const budget = document.getElementById('campaign-budget').value;
-            const goal = document.getElementById('campaign-goal').value;
-            const spendingToDate = document.getElementById('campaign-spending-to-date').value;
-            const programIds = Array.from(document.getElementById('campaign-programs').selectedOptions).map(option => option.value); // Get selected program IDs
-
-            // Create campaign data object
-            const campaignData = {
-                campaign_name: name,
-                start_date: startDate,
-                end_date: endDate,
-                goal: goal,
-                budget: budget,
-                spending_to_date: spendingToDate,
-                programs: programIds,  // Pass the selected program IDs
-            };
-
-            try {
-                const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
-                    },
-                    body: JSON.stringify({ name, start_date: startDate, end_date: endDate, program_id: programId })
-                });
-                const result = await response.json();
-                if (result.success) {
-                    alert('Campagna creata con successo!');
-                    $('#createCampaignModal').modal('hide');
-                    loadReferralData(); // Ricarica i dati per visualizzare la nuova campagna
-                } else {
-                    alert('Errore nella creazione della campagna.');
-                }
-            } catch (error) {
-                console.error('Errore nella creazione della campagna:', error);
-                alert('Errore durante la creazione della campagna.');
-            }
-        });
 
         // Carica i dati tramite fetch 
         async function loadReferralStats() {
@@ -588,8 +443,7 @@
             }
         }
 
-        // Carica i dati del profilo
-        loadReferralStats();
+        // Carica i dati 
         async function loadReferralData() {
             try {
                 console.log('Inizio caricamento dati referral...');
@@ -671,27 +525,162 @@
                 console.error('Errore nel caricamento dei dati di referral:', error.message);
             }
         }
+  
+        // Funzione per caricare i programmi di affiliazione (programmi)
+        async function loadPrograms() {
+            try {
+                const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`);
+                const data = await response.json();
+                console.log('load programs: ', data);
+                if (data) {
+                    const programSelect = document.getElementById('campaign-programs');
+                    programSelect.innerHTML = ''; // Pulisci il dropdown
 
-        // Carica i dati al caricamento della pagina
-        loadReferralData();
+                    // Aggiungi una voce di selezione vuota
+                    const defaultOption = document.createElement('option');
+                    defaultOption.textContent = '{% trans "Seleziona Programma" %}';
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    programSelect.appendChild(defaultOption);
 
-
-
-
-        /* 
-        // Funzione per caricare i dati tramite chiamate API
-        function loadReferralData() {
-            let referral_code = document.getElementById('referral-code');
-            let referral_code_url = document.getElementById('referral-code-url');
-            console.debug(referral_code);
-            $.get('/profile/data/', function (data) {
-                // Visualizza il codice referral direttamente dal JSON ricevuto
-                console.debug(data.referral_code);
-                referral_code.value = data.referral_code;
-                referral_code_url.setAttribute('href', `${window.location.protocol}//${window.location.host}/referral-code/${data.referral_code}/`);
-            });
+                    // Aggiungi i programmi dinamicamente
+                    data.forEach(program => {
+                        const option = document.createElement('option');
+                        option.value = program.id; // Assicurati che 'id' esista nella risposta
+                        option.textContent = program.name; // Assicurati che 'name' esista nella risposta
+                        programSelect.appendChild(option);
+                    });
+                } else {
+                    //alert('Nessun programma trovato.');
+                }
+            } catch (error) {
+                console.error('Errore nel caricamento dei programmi:', error);
+                //alert('Errore nel caricamento dei programmi.');
+            }
         }
-        */
+     
+        // Load regions dynamically into the allowed regions select
+        async function loadRegions() {
+            try {
+                const response = await fetch('/api/v0/regions/'); // Assuming you have an endpoint for fetching regions
+                const regions = await response.json();
+                const select = document.getElementById('program-allowed-regions');
+                regions.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region.id;
+                    option.textContent = region.name;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading regions:', error);
+            }
+        }
+
+
+        // Gestione creazione programma
+        document.getElementById('createProgramForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Ottieni i valori dal modulo
+            const name = document.getElementById('program-name').value;
+            const description = document.getElementById('program-description').value;
+            const rewardType = document.getElementById('program-reward').value;
+            const rewardValue = document.getElementById('program-reward-value').value;
+            const minReferrals = document.getElementById('program-min-referrals').value;
+            const maxReferrals = document.getElementById('program-max-referrals').value;
+            const duration = document.getElementById('program-duration').value;
+            const currency = document.getElementById('program-currency').value;  // New field
+            const allowedRegions = Array.from(document.getElementById('program-allowed-regions').selectedOptions).map(option => option.value); // Get selected regions
+            const targetIndustry = document.getElementById('program-target-industry').value;  // New field
+
+            // Crea l'oggetto programData
+            const programData = {
+                name: name,
+                description: description,
+                reward_type: rewardType,
+                reward_value: rewardValue,
+                currency: currency,
+                min_referral_count: minReferrals,
+                max_referrals_per_user: maxReferrals,
+                program_duration: duration,
+                allowed_regions: allowedRegions,
+                target_industry: targetIndustry,
+            };
+
+            try {
+                const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
+                    },
+                    body: JSON.stringify(programData),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();  // Ottieni i dettagli dell'errore dal server
+                    console.error('Errore durante la creazione del programma:', errorData);
+                    //alert('Errore durante la creazione del programma.');
+                } else {
+                    const result = await response.json();
+                    console.log('Programma creato con successo:', result);
+                    //alert('Programma creato con successo!');
+                    $('#createProgramModal').modal('hide');
+                }
+
+            } catch (error) {
+                console.error('Errore nella creazione del programma:', error);
+                //alert('Errore durante la creazione del programma.');
+            }
+        });
+ 
+        // Handle campaign creation
+        document.getElementById('createCampaignForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Get values from the form
+            const name = document.getElementById('campaign-name').value;
+            const startDate = document.getElementById('campaign-start-date').value;
+            const endDate = document.getElementById('campaign-end-date').value;
+            const budget = document.getElementById('campaign-budget').value;
+            const goal = document.getElementById('campaign-goal').value;
+            const spendingToDate = document.getElementById('campaign-spending-to-date').value;
+            const programIds = Array.from(document.getElementById('campaign-programs').selectedOptions).map(option => option.value); // Get selected program IDs
+
+            // Create campaign data object
+            const campaignData = {
+                campaign_name: name,
+                start_date: startDate,
+                end_date: endDate,
+                goal: goal,
+                budget: budget,
+                spending_to_date: spendingToDate,
+                programs: programIds,  // Pass the selected program IDs
+            };
+
+            try {
+                const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
+                    },
+                    body: JSON.stringify({ name, start_date: startDate, end_date: endDate, program_id: programId })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Campagna creata con successo!');
+                    $('#createCampaignModal').modal('hide');
+                    loadReferralData(); // Ricarica i dati per visualizzare la nuova campagna
+                } else {
+                    alert('Errore nella creazione della campagna.');
+                }
+            } catch (error) {
+                console.error('Errore nella creazione della campagna:', error);
+                alert('Errore durante la creazione della campagna.');
+            }
+        });
+
 
         // Funzione per copiare il referral code
         $('#copy-code').click(function () {
@@ -743,46 +732,18 @@
             });
         });
 
-    });
 
 
-
-    // Funzione per caricare i programmi di affiliazione (programmi)
-    async function loadPrograms() {
-        try {
-            const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`);
-            const data = await response.json();
-            console.log('load programs: ', data);
-            if (data) {
-                const programSelect = document.getElementById('campaign-programs');
-                programSelect.innerHTML = ''; // Pulisci il dropdown
-
-                // Aggiungi una voce di selezione vuota
-                const defaultOption = document.createElement('option');
-                defaultOption.textContent = '{% trans "Seleziona Programma" %}';
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                programSelect.appendChild(defaultOption);
-
-                // Aggiungi i programmi dinamicamente
-                data.forEach(program => {
-                    const option = document.createElement('option');
-                    option.value = program.id; // Assicurati che 'id' esista nella risposta
-                    option.textContent = program.name; // Assicurati che 'name' esista nella risposta
-                    programSelect.appendChild(option);
-                });
-            } else {
-                //alert('Nessun programma trovato.');
-            }
-        } catch (error) {
-            console.error('Errore nel caricamento dei programmi:', error);
-            //alert('Errore nel caricamento dei programmi.');
-        }
-    }
-
-    // Carica i programmi quando la pagina è pronta
-    document.addEventListener('DOMContentLoaded', function () {
+    
+        // Load regions when the page is ready
+        loadRegions();
+        // Carica i dati del profilo
+        loadReferralStats();
+        // Carica i dati al caricamento della pagina
+        loadReferralData();
+        // Carica i programmi
         loadPrograms();
+
     });
 </script>
 {% endblock %}
