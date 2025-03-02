@@ -9,9 +9,9 @@ class ReferralUser(models.Model):
     total_referrals = models.IntegerField(default=0, verbose_name=_("Total Referrals"))
     active_referrals = models.IntegerField(default=0, verbose_name=_("Active Referrals"))
     inactive_referrals = models.IntegerField(default=0, verbose_name=_("Inactive Referrals"))
-    total_rewards_earned = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Total Rewards Earned"))
-    total_spent_by_referred_users = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Total Spent By Referred Users"))
-    average_order_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Average Order Value"))
+    total_rewards_earned = models.DecimalField(default=0.00, max_digits=10, decimal_places=2, verbose_name=_("Total Rewards Earned"))
+    total_spent_by_referred_users = models.DecimalField(default=0.00, max_digits=10, decimal_places=2, verbose_name=_("Total Spent By Referred Users"))
+    average_order_value = models.DecimalField(default=0.00, max_digits=10, decimal_places=2, verbose_name=_("Average Order Value"))
     loyalty_points_earned = models.IntegerField(default=0, verbose_name=_("Loyalty Points Earned"))
 
     class Meta: 

@@ -1,5 +1,6 @@
 
 from urllib.parse import urlencode
+from django.conf import settings
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
