@@ -45,7 +45,7 @@ class ReferralProgramService():
                 min_referral_count = data.get('min_referral_count'),
                 max_referrals_per_user = data.get('max_referrals_per_user'),
                 date_created = datetime.datetime.now(),#data.get('date_created'),
-                is_active = data.get('is_active') or False,
+                is_active = True,
                 program_duration = data.get('program_duration'), 
                 target_industry = data.get('target_industry'))
             referral_program.save()
