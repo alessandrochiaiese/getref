@@ -51,14 +51,17 @@ class ReferralProgramService():
             referral_program.save()
                 
             # Creazione ReferralCode per l'utente creatore
-            referral_code = ReferralCode.objects.create(
-                user=user,
-                code=f"{user.username}-{referral_program.name}",
-                usage_count=0,
-                date_created=datetime.datetime.now(),
-                status="active",
-                referred_user_count=0
-            )
+            if ReferralCode.objects.exists(user=user):
+                referral_code = ReferralCode.objects.filter(user=user).first()
+            else:
+                referral_code = ReferralCode.objects.create(
+                    user=user,
+                    code=f"{user.username}-{referral_program.name}",
+                    usage_count=0,
+                    date_created=datetime.datetime.now(),
+                    status="active",
+                    referred_user_count=0
+                )
             referral_code.programs.add(referral_program)
 
             # Creazione Stats iniziali
