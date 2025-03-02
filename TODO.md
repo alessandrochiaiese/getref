@@ -155,7 +155,8 @@ register/business/
 [] in Profile il caricamento dell'immagine da errore
 [] Enterprise list potrebbe essere visualizzata sotto forma di tabella
 [] Verificare che il link promozionale del prodotto permettti di tracciare la vendita del prodotto con eventuali bonus e commissioni
-
+[\] Modify APIView Authentication
+[X] Campaign and Program in home
 [X] a non far funzionare il referral invitation è in dashboard/urls.py:
 
     path('referral-code/', ReferralRedirectView.as_view(), name='referral_redirect'),

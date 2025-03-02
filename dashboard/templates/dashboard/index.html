@@ -563,8 +563,24 @@
         // Gestione creazione programma
         document.getElementById('createProgramForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            const name = document.getElementById('program-name').value;
 
+            // Ottieni i valori dal modulo
+            const name = document.getElementById('program-name').value;
+            const description = document.getElementById('program-description').value;
+            const rewardType = document.getElementById('program-reward').value;
+            const rewardValue = document.getElementById('program-reward-value').value;
+            const minReferrals = document.getElementById('program-min-referrals').value;
+            const duration = document.getElementById('program-duration').value;
+
+            // Crea l'oggetto programData
+            const programData = {
+                name: name,
+                description: description,
+                reward_type: rewardType,
+                reward_value: rewardValue,
+                min_referrals: minReferrals,
+                duration: duration,
+            };
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`, {
                     method: 'POST',
@@ -592,11 +608,24 @@
         // Gestione creazione campagna
         document.getElementById('createCampaignForm').addEventListener('submit', async function (e) {
             e.preventDefault();
+            
+            // Ottieni i valori dal modulo
             const name = document.getElementById('campaign-name').value;
             const startDate = document.getElementById('campaign-start-date').value;
             const endDate = document.getElementById('campaign-end-date').value;
             const programId = document.getElementById('campaign-program').value;
+            const budget = document.getElementById('campaign-budget').value;
+            const goal = document.getElementById('campaign-goal').value;
 
+            // Crea l'oggetto campaignData
+            const campaignData = {
+                name: name,
+                start_date: startDate,
+                end_date: endDate,
+                program_id: programId,
+                budget: budget,
+                goal: goal,
+            };
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
                     method: 'POST',
