@@ -691,6 +691,7 @@
                 goal: goal,
                 budget: budget,
                 spending_to_date: spendingToDate,
+                target_audience: "",
                 programs: programIds,  // Pass the selected program IDs
             };
 
@@ -701,7 +702,7 @@
                         'Content-Type': 'application/json',
                         'X-CSRFToken': getCSRFToken(), // Add the CSRF token in the header
                     },
-                    body: JSON.stringify({ name, start_date: startDate, end_date: endDate, program_id: programId })
+                    body: JSON.stringify(campaignData)
                 });
                 const result = await response.json();
                 if (result.success) {
