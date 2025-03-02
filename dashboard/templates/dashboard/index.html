@@ -242,6 +242,7 @@
             </div>
             <div class="modal-body">
                 <form id="createProgramForm">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="program-name">{% trans "Nome Programma" %}</label>
                         <input type="text" class="form-control" id="program-name" required>
@@ -291,6 +292,7 @@
             </div>
             <div class="modal-body">
                 <form id="createCampaignForm">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="campaign-name">{% trans "Nome Campagna" %}</label>
                         <input type="text" class="form-control" id="campaign-name" required>
@@ -593,9 +595,12 @@
                 if (!response.ok) {
                     const errorData = await response.json();  // Ottieni i dettagli dell'errore dal server
                     console.error('Errore durante la creazione del programma:', errorData);
+                    alert('Errore durante la creazione del programma.');
                 } else {
                     const result = await response.json();
                     console.log('Programma creato con successo:', result);
+                    alert('Programma creato con successo!');
+                    $('#createProgramModal').modal('hide');
                 }
 
             } catch (error) {
@@ -608,7 +613,7 @@
         // Gestione creazione campagna
         document.getElementById('createCampaignForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             // Ottieni i valori dal modulo
             const name = document.getElementById('campaign-name').value;
             const startDate = document.getElementById('campaign-start-date').value;
@@ -645,6 +650,47 @@
                 alert('Errore durante la creazione della campagna.');
             }
         });
+
+    });
+
+
+
+    // Funzione per caricare i programmi di affiliazione (programmi)
+    async function loadPrograms() {
+        try {
+            const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`);
+            const data = await response.json();
+
+            if (data && data.programs) {
+                const programSelect = document.getElementById('campaign-program');
+                programSelect.innerHTML = ''; // Pulisci il dropdown
+
+                // Aggiungi una voce di selezione vuota
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = '{% trans "Seleziona Programma" %}';
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                programSelect.appendChild(defaultOption);
+
+                // Aggiungi i programmi dinamicamente
+                data.programs.forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program.id; // Assicurati che 'id' esista nella risposta
+                    option.textContent = program.name; // Assicurati che 'name' esista nella risposta
+                    programSelect.appendChild(option);
+                });
+            } else {
+                alert('Nessun programma trovato.');
+            }
+        } catch (error) {
+            console.error('Errore nel caricamento dei programmi:', error);
+            alert('Errore nel caricamento dei programmi.');
+        }
+    }
+
+    // Carica i programmi quando la pagina è pronta
+    document.addEventListener('DOMContentLoaded', function () {
+        loadPrograms();
     });
 </script>
 {% endblock %}
