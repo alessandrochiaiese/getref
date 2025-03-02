@@ -40,7 +40,7 @@ class ReferralCampaignService():
     def create_referral_campaign(self, data) -> ReferralCampaign:
         try:
             # Associa il programma esistente
-            program = ReferralProgram.objects.get(id=data['program_id'])
+            #program = ReferralProgram.objects.get(id=data['program_id'])
 
             referral_campaign = ReferralCampaign( 
                 campaign_name = data.get('campaign_name'),
