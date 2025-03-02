@@ -444,7 +444,7 @@
         // Load available programs dynamically into the select dropdown
         async function loadAffiliatePrograms() {
             try {
-                const response = await fetch('/api/v0/affiliate-programs/'); // Assuming you have an endpoint to get programs
+                const response = await fetch('/api/v0/affiliate/programs/'); // Assuming you have an endpoint to get programs
                 const programs = await response.json();
                 const select = document.getElementById('campaign-programs');
                 programs.forEach(program => {
@@ -484,7 +484,7 @@
                 spending_to_date: spendingToDate,
                 programs: programIds,  // Pass the selected program IDs
             };
-            
+
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
                     method: 'POST',
