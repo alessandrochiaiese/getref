@@ -75,9 +75,9 @@ class ReferralProgramService():
             # Creazione o aggiornamento ReferralUser
             referral_user, created = ReferralUser.objects.get_or_create(user=user)
             referral_user.total_referrals += 1
-            referral_user.total_rewards_earned = 0
-            referral_user.total_spent_by_referred_users = 0
-            referral_user.average_order_value = 0
+            referral_user.total_rewards_earned = 0.00
+            referral_user.total_spent_by_referred_users = 0.00
+            referral_user.average_order_value = 0.00
             referral_user.save()
 
             logger.info(f"ReferralProgram created: {referral_program}")
