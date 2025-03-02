@@ -753,7 +753,7 @@
             const response = await fetch(`${window.location.origin}/api/v0/referral/programs/`);
             const data = await response.json();
 
-            if (data && data.programs) {
+            if (data) {
                 const programSelect = document.getElementById('campaign-program');
                 programSelect.innerHTML = ''; // Pulisci il dropdown
 
@@ -765,7 +765,7 @@
                 programSelect.appendChild(defaultOption);
 
                 // Aggiungi i programmi dinamicamente
-                data.programs.forEach(program => {
+                data.forEach(program => {
                     const option = document.createElement('option');
                     option.value = program.id; // Assicurati che 'id' esista nella risposta
                     option.textContent = program.name; // Assicurati che 'name' esista nella risposta
