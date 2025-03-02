@@ -72,7 +72,7 @@ class ReferralProgramAPIView(APIView):
         try:
             serializer = ReferralProgramSerializer(data=request.data)
             if serializer.is_valid():
-                referral_program = self.referral_program_service.create_referral_program(serializer.validated_data)
+                referral_program = self.referral_program_service.create_referral_program(serializer.validated_data, request.user)
                 return Response(ReferralProgramSerializer(referral_program).data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
