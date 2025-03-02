@@ -13,7 +13,7 @@ from ..serializers import NotificationSerializer
 logger = logging.getLogger(__name__)
 
 class NotificationAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]
     renderer_classes = [JSONRenderer]
 
     def __init__(self, *args, **kwargs):

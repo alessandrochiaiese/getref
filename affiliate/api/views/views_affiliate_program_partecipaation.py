@@ -6,6 +6,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
 from oauth2_provider.contrib.rest_framework import OAuth2Authentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from affiliate.api.services.affiliate_program_partecipation_service import AffiliateProgramPartecipationService
@@ -18,9 +19,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 class AffiliateProgramPartecipationAPIView(APIView):
-    permission_classes = [AllowAny]  # You can change this to [IsAuthenticated] if needed
+    permission_classes = [IsAuthenticated, HasActiveSubscription]  # You can change this to [IsAuthenticated] if needed
     renderer_classes = [JSONRenderer]
-    authentication_classes = [OAuth2Authentication]
+    authentication_classes = [
+        SessionAuthentication,  # Funziona per web app con sessione
+        BasicAuthentication,    # Funziona per login base con username/password
+        OAuth2Authentication,   # Funziona per autenticazione tramite OAuth2
+        TokenAuthentication     # Funziona per Bearer token (es. JWT)
+    ]
 
     def __init__(self, *args, **kwargs):
         self.affiliate_program_partecipation_service = AffiliateProgramPartecipationService()

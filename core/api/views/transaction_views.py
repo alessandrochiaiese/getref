@@ -13,7 +13,7 @@ from ..serializers import TransactionSerializer
 logger = logging.getLogger(__name__)
 
 class TransactionAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, HasActiveSubscription]
     renderer_classes = [JSONRenderer]
 
     def __init__(self, *args, **kwargs):
