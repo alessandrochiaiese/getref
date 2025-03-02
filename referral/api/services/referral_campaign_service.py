@@ -55,7 +55,7 @@ class ReferralCampaignService():
             referral_programs = ReferralProgram.objects.filter(id__in=data['programs'])
             referral_campaign.programs.set(referral_programs)
             
-            referral_codes = ReferralCode.objects.filter(referral_code__programs__contains=referral_campaign.programs)
+            """referral_codes = ReferralCode.objects.filter(referral_code__programs__contains=referral_campaign.programs)
             
             # 1. Troviamo o creiamo ReferralStats associato al ReferralProgram
             program_statses, created = ReferralStats.objects.filter(referral_codes__contains=referral_codes)
@@ -63,7 +63,7 @@ class ReferralCampaignService():
             # 2. Incrementiamo il contatore delle campagne
             for program_stats in program_statses:
                 program_stats.total_campaigns += 1
-                program_stats.save() 
+                program_stats.save() """
                 
             logger.info(f"ReferralCampaign created: {referral_campaign}")
             return referral_campaign
