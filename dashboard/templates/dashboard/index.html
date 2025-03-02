@@ -362,6 +362,42 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
+        // Funzione per copiare il referral code
+        $('#copy-code').click(function () {
+            var copyText = $('#referral-code')[0];
+            copyText.select();
+
+            // Cambia l'icona del bottone in "clipboard-check"
+            var copyCode = $('#copy-code');
+            copyCode.html('<i class="bi bi-clipboard-check"></i>');  // Cambia l'icona
+
+            // Esegui il comando per copiare il testo
+            document.execCommand('copy');
+
+            // Dopo 2 secondi (2000 ms), ripristina l'icona originale
+            setTimeout(function () {
+                copyCode.html('<i class="bi bi-clipboard"></i>');  // Ripristina il testo o l'icona originale
+            }, 2000);  // Tempo di attesa in millisecondi (2 secondi)
+        });
+
+        // Funzione per copiare il link referral
+        $('#copy-url').click(function () {
+            var copyText = $('#referral-unique-url')[0];
+            copyText.select();
+
+            // Cambia l'icona del bottone in "link-45deg"
+            var copyCode = $('#copy-url');
+            copyCode.html('<i class="bi bi-link-45deg"></i>');  // Cambia l'icona
+
+            // Esegui il comando per copiare il testo
+            document.execCommand('copy');
+
+            // Dopo 2 secondi (2000 ms), ripristina l'icona originale
+            setTimeout(function () {
+                copyCode.html('<i class="bi bi-link"></i>');  // Ripristina il testo o l'icona originale
+            }, 2000);  // Tempo di attesa in millisecondi (2 secondi)
+        });
+
         // Function to get CSRF token from the document's cookies
         function getCSRFToken() {
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -681,42 +717,6 @@
             }
         });
 
-
-        // Funzione per copiare il referral code
-        $('#copy-code').click(function () {
-            var copyText = $('#referral-code')[0];
-            copyText.select();
-
-            // Cambia l'icona del bottone in "clipboard-check"
-            var copyCode = $('#copy-code');
-            copyCode.html('<i class="bi bi-clipboard-check"></i>');  // Cambia l'icona
-
-            // Esegui il comando per copiare il testo
-            document.execCommand('copy');
-
-            // Dopo 2 secondi (2000 ms), ripristina l'icona originale
-            setTimeout(function () {
-                copyCode.html('<i class="bi bi-clipboard"></i>');  // Ripristina il testo o l'icona originale
-            }, 2000);  // Tempo di attesa in millisecondi (2 secondi)
-        });
-
-        // Funzione per copiare il link referral
-        $('#copy-url').click(function () {
-            var copyText = $('#referral-unique-url')[0];
-            copyText.select();
-
-            // Cambia l'icona del bottone in "link-45deg"
-            var copyCode = $('#copy-url');
-            copyCode.html('<i class="bi bi-link-45deg"></i>');  // Cambia l'icona
-
-            // Esegui il comando per copiare il testo
-            document.execCommand('copy');
-
-            // Dopo 2 secondi (2000 ms), ripristina l'icona originale
-            setTimeout(function () {
-                copyCode.html('<i class="bi bi-link"></i>');  // Ripristina il testo o l'icona originale
-            }, 2000);  // Tempo di attesa in millisecondi (2 secondi)
-        });
 
         // Partecipare a una campagna
         $(document).on('click', '.participate-btn', function () {

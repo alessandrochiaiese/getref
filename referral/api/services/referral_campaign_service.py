@@ -5,8 +5,10 @@ import logging
 from typing import List
 from django.contrib.auth import get_user_model
 
+from core.models.referral_code import ReferralCode
 from referral.models.referral_campaign import ReferralCampaign
 from referral.models.referral_program import ReferralProgram
+from referral.models.referral_stats import ReferralStats
 
 User = get_user_model()
 
@@ -50,13 +52,19 @@ class ReferralCampaignService():
                 target_audience = data.get('target_audience', None))
             referral_campaign.save()
 
-            referral_programs = ReferralProgram.objects.filter(id__in=data['referral_programs'])
+            referral_programs = ReferralProgram.objects.filter(id__in=data['programs'])
             referral_campaign.programs.set(referral_programs)
+            
+            referral_codes = ReferralCode.objects.filter(referral_code__programs__contains=referral_campaign.programs)
+            
+            # 1. Troviamo o creiamo ReferralStats associato al ReferralProgram
+            program_statses, created = ReferralStats.objects.filter(referral_codes__contains=referral_codes)
 
-            # Aggiorna le statistiche del programma
-            program.stats.total_campaigns += 1
-            program.stats.save()
-
+            # 2. Incrementiamo il contatore delle campagne
+            for program_stats in program_statses:
+                program_stats.total_campaigns += 1
+                program_stats.save() 
+                
             logger.info(f"ReferralCampaign created: {referral_campaign}")
             return referral_campaign
         except Exception as e:
