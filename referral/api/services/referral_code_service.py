@@ -43,6 +43,7 @@ class ReferralCodeService():
             referral_code = ReferralCode(
                 user = data.get('user'),
                 code = data.get('code'),
+                program=data.get('program'),
                 usage_count = data.get('usage_count'),
                 date_created = datetime.datetime.now(), #data.get('date_created'),
                 status = data.get('status'),
@@ -54,18 +55,14 @@ class ReferralCodeService():
             )
 
             # Generazione dell'URL di referral unico
-            current_site = data.get('url') #Site.objects.get_current()
-            referral_url = f"{data.host}{reverse('referral', kwargs={'referral_code': referral_code.code})}"
+            #current_site = data.get('url') #Site.objects.get_current()
+            #referral_url = f"{data.host}{reverse('referral', kwargs={'referral_code': referral_code.code})}"
 
             # Impostazione del URL di referral
-            referral_code.unique_url = referral_url
+            #referral_code.unique_url = referral_url
             
             # Salvataggio del ReferralCode
             referral_code.save()
-
-            # Associare i programmi di affiliazione
-            referral_programs = ReferralProgram.objects.filter(id__in=data['referral_programs'])
-            referral_code.programs.set(referral_programs)
 
             logger.info(f"ReferralCode created: {referral_code}")
             return referral_code

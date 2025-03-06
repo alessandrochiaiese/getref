@@ -50,10 +50,7 @@ class Sector(models.Model):
         verbose_name = "Sector"
         verbose_name_plural = "Sectors" 
 
-class ProfileBusiness(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User"), related_name='profile_businesses')
-    number_job_request_desidered_per_week = models.IntegerField(default=0, verbose_name=_("Number Job Request Desidered Per Week"))
-    have_office_shop_to_receive_customers = models.BooleanField(default=False, verbose_name=_("Have Office Shop To Receive Customers"))
+class Business(models.Model):
     link_google_maps = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Link Google Maps"))
     contact_number = models.CharField(max_length=20, blank=True, null=True, verbose_name=_("Conctac Number"))
     chamber_commerce_certificate = models.ImageField(
@@ -86,8 +83,15 @@ class ProfileBusiness(models.Model):
     company_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Name"))
     email = models.EmailField(max_length=255, blank=True, null=True, verbose_name=_("Email"))
     
+class ProfileBusiness(Business):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User"), related_name='profile_businesses')
+    number_job_request_desidered_per_week = models.IntegerField(default=0, verbose_name=_("Number Job Request Desidered Per Week"))
+    have_office_shop_to_receive_customers = models.BooleanField(default=False, verbose_name=_("Have Office Shop To Receive Customers"))
+    
+    # Business Attributes
+
     #referrl_code = models.OneToOneField(ReferralCode, null=True, on_delete=models.CASCADE, verbose_name=_("Referral Code"), related_name='referral_code')
-    user_registered = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User Registered"), related_name='profile_registered')
+    user_ower = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User Registered"), related_name='profile_registered')
     status = models.CharField(default="inactive", max_length=50, verbose_name=_("Status"))
     code = models.CharField(default="HREMFSD", max_length=50, unique=True, verbose_name=_("Code"))
     unique_url = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Invitation URL"))

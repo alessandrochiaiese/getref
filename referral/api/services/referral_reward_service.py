@@ -35,6 +35,7 @@ class ReferralRewardService():
     def create_referral_reward(self, data) -> ReferralReward:
         try:
             referral_reward = ReferralReward(
+                referral_code = data.get('referral_code'),
                 user = data.get('user'),
                 reward_type = data.get('reward_type'),
                 reward_value = data.get('reward_value'),

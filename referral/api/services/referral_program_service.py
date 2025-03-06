@@ -51,18 +51,31 @@ class ReferralProgramService():
                 program_duration = data.get('program_duration'), 
                 target_industry = data.get('target_industry'))
             referral_program.save()
-                
+            
+            # Creazione ReferralBonus
+            referral_bonus = ReferralBonus.objects.create(
+                referral_program=referral_program,
+                bonus_type="Cash",
+                bonus_value=200.00,
+                min_referrals_required=5,
+                bonus_date=datetime.datetime.now(),
+                expiry_date=datetime.datetime.now() + datetime.timedelta(years=1),
+                max_usage=1,
+                eligibility_criteria="Completa almeno 5 referral"
+            )
             # Creazione ReferralCode per l'utente creatore 
             referral_code, created = ReferralCode.objects.get_or_create(user=user)
             if created:
+                program = referral_program
                 code = get_random_string(length=8).upper()
                 referral_code.status="active"
-                referral_code.expiry_date=datetime.datetime.today() - datetime.timedelta(days=30)
+                referral_code.expiry_date=datetime.datetime.today() + datetime.timedelta(days=30)
                 referral_code.unique_url=f'{DOMAIN}/c/?code={code}'
-            referral_code.programs.add(referral_program)
+            
 
             # Creazione Stats iniziali
             referraul_stats = ReferralStats.objects.create( 
+                referral_code = referral_code,
                 period="daily",  # Esempio: può essere settimanale o mensile
                 click_count=0,
                 conversion_count=0,
@@ -70,7 +83,6 @@ class ReferralProgramService():
                 average_conversion_value=0,
                 highest_referral_earning=0
             )
-            referraul_stats.referral_codes.add(referral_code)
 
             # Creazione o aggiornamento ReferralUser
             referral_user, created = ReferralUser.objects.get_or_create(user=user)

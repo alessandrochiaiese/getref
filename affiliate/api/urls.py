@@ -7,7 +7,7 @@ from affiliate.api.views.views_affiliate_notification import AffiliateNotificati
 from affiliate.api.views.views_affiliate_payout import AffiliatePayoutAPIView
 from affiliate.api.views.views_affiliate_performance import AffiliatePerformanceAPIView
 from affiliate.api.views.views_affiliate_program import AffiliateProgramAPIView
-from affiliate.api.views.views_affiliate_program_partecipaation import AffiliateProgramPartecipationAPIView
+from affiliate.api.views.views_affiliate_program_partecipation import AffiliateProgramPartecipationAPIView
 from affiliate.api.views.views_affiliate_settings import AffiliateSettingsAPIView
 from affiliate.api.views.views_affiliate_reward import AffiliateRewardAPIView
 from affiliate.api.views.views_affiliate_support_ticket import AffiliateSupportTicketAPIView

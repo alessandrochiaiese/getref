@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
-from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, ParticipateCampaignView, SettingsView, WithdrawalView, privacyPolice, termService, )
+from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, NotificationsView, ParticipateCampaignView, SettingsView, WithdrawalView, privacyPolice, termService, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
@@ -42,6 +42,8 @@ urlpatterns = [
     path('privacy-policy/', privacyPolice, name='privacy_policy'),
     path('terms-of-service/', termService, name='terms_service'),
     
+    # Notifiche
+    path('notifications/', NotificationsView.as_view(), name='notifications'),
     # Impostazioni
     path('settings/', SettingsView.as_view(), name='settings'),
     

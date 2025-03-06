@@ -81,10 +81,10 @@
         <div class="text-center">
           <div class="brand-logo">
             <img src="{% static 'dashboard/images/logo.png' %}" alt="logo">
-            <h3 class="mt-3">{% trans "- Costi pubblicitari" %}</h3> 
-            <h3 class="mt-3">{% trans "+ Recensioni positive" %}</h3> 
-            <h3 class="mt-3">{% trans "+ Autorevolezza =" %}</h3>  
-            <h3 class="mt-3">{% trans "+ FATTURATO" %}</h3>  
+            <h3 class="mt-3">{% trans "- Costi pubblicitari" %}</h3>
+            <h3 class="mt-3">{% trans "+ Recensioni positive" %}</h3>
+            <h3 class="mt-3">{% trans "+ Autorevolezza =" %}</h3>
+            <h3 class="mt-3">{% trans "+ FATTURATO" %}</h3>
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@
           </div>
           {% endif %}
 
-          <form method="POST" class="pt-3">
+          <form method="POST" class="pt-3" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- Nome -->
             <div class="form-row">
@@ -159,6 +159,102 @@
               </div>
             </div>
 
+            <!-- Tipo di account (selezione tra utente e business) -->
+            <div class="form-group">
+              <label class="small mb-1">{% trans "Account Type" %}</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="account_type" id="user_type" value="user" checked>
+                <label class="form-check-label" for="user_type">
+                  {% trans "Normal User" %}
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="account_type" id="business_type" value="business">
+                <label class="form-check-label" for="business_type">
+                  {% trans "Business User" %}
+                </label>
+              </div>
+            </div>
+
+            <!-- Form Business (visibile solo se "Business User" è selezionato) -->
+            <div id="business-form-container" style="display: none;">
+              {% if business_form %}
+
+              <!-- Campo Google Maps Link -->
+              <div class="form-group">
+                <label for="id_link_google_maps">{% trans "Google Maps Link" %}</label>
+                {{ business_form.link_google_maps }}
+              </div>
+
+              <!-- Campo Contact Number -->
+              <div class="form-group">
+                <label for="id_contact_number">{% trans "Contact Number" %}</label>
+                {{ business_form.contact_number }}
+              </div>
+
+              <!-- Campo Chamber Commerce Certificate -->
+              <div class="form-group">
+                <label for="id_chamber_commerce_certificate">{% trans "Chamber of Commerce Certificate" %}</label>
+                {{ business_form.chamber_commerce_certificate }}
+              </div>
+
+              <!-- Campo Insurance Policy Certificate -->
+              <div class="form-group">
+                <label for="id_insurance_policy_certificate">{% trans "Insurance Policy Certificate" %}</label>
+                {{ business_form.insurance_policy_certificate }}
+              </div>
+
+              <!-- Campo Region -->
+              <div class="form-group">
+                <!--<p>{% trans "N.B.: Scrivi la regione (Abruzzo, Basilicata, Calabria, Campania, Emilia-Romagna, Friuli-Venezia Giulia, Lazio, Liguria, Lombardia, Marche, Molise, Piemonte, Puglia, Sardegna, Sicilia, Toscana, Trentino-Alto Adige/Südtirol, Umbria, Valle d'Aosta/Vallée d'Aoste, Veneto)" %}</p>-->
+                <label for="id_region">{% trans "Region" %}</label>
+                {#{ business_form.region }#}
+                <select name="region" id="id_region" class="form-control">
+                  {% for region in business_form.region.field.queryset %}
+                  <option value="{{ region.id }}" {% if business_form.region.value == region.id|stringformat:"s" %}selected{% endif %}>
+                    {{ region.name }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+
+
+
+              <!-- Campo Sectors (Checkboxes) -->
+              <div class="form-group">
+                <label for="id_sectors">{% trans "Sectors" %}</label>
+                <div class="row" style="margin-left: 25px;">
+                  {% for sector in business_form.sectors.field.queryset %}
+                  <div class="form-check col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <input class="form-check-input" type="checkbox" name="sectors" value="{{ sector.id }}" {% if sector.id in business_form.sectors.value %}checked{% endif %}>
+                    <label class="form-check-label">{{ sector.name }}</label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+
+              <!-- Campo Holder -->
+              <div class="form-group">
+                <label for="id_holder">{% trans "Holder" %}</label>
+                {{ business_form.holder }}
+              </div>
+
+              <!-- Campo Company Name -->
+              <div class="form-group">
+                <label for="id_company_name">{% trans "Company Name" %}</label>
+                {{ business_form.company_name }}
+              </div>
+
+              <!-- Campo Email -->
+              <div class="form-group">
+                <label for="id_email">{% trans "Email" %}</label>
+                {{ business_form.email }}
+              </div>
+              {% endif %}
+            </div>
+
+            
             <!-- Termini e condizioni -->
             <div class="mb-4">
               <div class="form-check">
@@ -186,8 +282,30 @@
     </div>
   </div>
 </div>
-{% endblock %}
 
+<!-- JavaScript per mostrare/nascondere il form business -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Riferimenti agli input radio
+    const userTypeRadio = document.getElementById('user_type');
+    const businessTypeRadio = document.getElementById('business_type');
+    const businessFormContainer = document.getElementById('business-form-container');
 
-{% block scripts %}
+    // Funzione per aggiornare la visibilità del form business
+    function toggleBusinessForm() {
+      if (businessTypeRadio.checked) {
+        businessFormContainer.style.display = 'block'; // Mostra il form business
+      } else {
+        businessFormContainer.style.display = 'none'; // Nascondi il form business
+      }
+    }
+
+    // Imposta la visibilità all'inizio in base alla selezione
+    toggleBusinessForm();
+
+    // Aggiungi eventi per il cambiamento delle selezioni
+    userTypeRadio.addEventListener('change', toggleBusinessForm);
+    businessTypeRadio.addEventListener('change', toggleBusinessForm);
+  });
+</script>
 {% endblock %}

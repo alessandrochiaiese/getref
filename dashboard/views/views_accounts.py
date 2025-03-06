@@ -1,4 +1,5 @@
 
+import datetime
 from urllib.parse import urlencode
 from django.conf import settings
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
@@ -12,7 +13,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy 
 from django.utils.crypto import get_random_string 
 from dashboard.models import *   
-from getref.settings import DOMAIN, EMAIL_HOST_USER
+from getref.settings import DOMAIN #, EMAIL_HOST_USER
 from referral.models import *   
 from dashboard.forms import * 
 import logging
@@ -74,6 +75,7 @@ class ReferralRedirectView(View):
 
 class RegisterView(View):
     form_class = RegisterForm
+    business_form_class = BusinessForm
     initial = {'key': 'value'}
     template_name = 'core/register.html'
     success_url = '/login/'  # Dopo il successo della registrazione, reindirizza alla pagina di login
@@ -89,6 +91,7 @@ class RegisterView(View):
         # Verifica se c'è un referral code nei parametri GET
         referral_code_used = self.request.GET.get('code')
         form = self.form_class(initial=self.initial)
+        business_form = self.business_form_class(initial=self.initial)
 
         #if referral_code_used:
         #    try:
@@ -99,7 +102,10 @@ class RegisterView(View):
         #    except ReferralCode.DoesNotExist:
         #        messages.warning(request, 'Il codice referral non è valido.')
 
-        response = render(request, self.template_name, {'form': form})
+        response = render(request, self.template_name, {
+            'form': form,
+            'business_form': business_form,
+        })
 
         if referral_code_used:
             response.set_cookie('code', referral_code_used, max_age=60*60*24*30) # 30 giorni
@@ -109,10 +115,23 @@ class RegisterView(View):
     def post(self, request, *args, **kwargs):   
         referral_code_used = self.request.POST.get('code') or request.COOKIES.get('code')
         form = self.form_class(self.request.POST)
+        account_type = request.POST.get('account_type')  # Ottieni il tipo di account selezionato
+        business_form = None
         
-        if form.is_valid():
+        if account_type == 'business':
+            business_form = self.business_form_class(request.POST, request.FILES)
+
+        if form.is_valid() and (not business_form or business_form.is_valid()):
             user = form.save()
             referrer_code = None
+
+            if account_type == 'business' and business_form:
+                business = business_form.save(commit=False)
+                business.save()
+                
+                profile = Profile.objects.get(user=user)
+                profile.business = business
+                profile.save()
 
             # Gestione codice referral per aziende
             is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
@@ -124,7 +143,7 @@ class RegisterView(View):
                     # Trattamento codice referral aziendale
                     try:
                         profile_business = ProfileBusiness.objects.get(code=referral_code_used)
-                        profile_business.user_registered = user
+                        profile_business.user_ower = user
                         profile_business.status = 'active'
                         profile_business.save()
                         # Recupera utente che ha invitato un'azienda a registrarsi
@@ -161,6 +180,18 @@ class RegisterView(View):
 
             # Creazione del codice referral per il nuovo utente
             code = get_random_string(length=8).upper()
+            referral_program, created= ReferralProgram.objects.get_or_create(
+                name="Programma Referral Premium",
+                description="Programma per utenti premium",
+                reward_type="Cash",
+                reward_value=100.00,
+                currency="EUR",
+                min_referral_count=5,
+                max_referrals_per_user=10,
+                program_duration=365*10,  # Durata di 30 giorni
+                allowed_regions=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                target_industry="Getref"
+            )
             referral_code = ReferralCode.objects.create(
                 user=user,
                 code=code,
@@ -170,14 +201,34 @@ class RegisterView(View):
                 expiry_date=self.request.POST.get('expiry_date'),
                 unique_url=f'{DOMAIN}/c/?code={code}' #self.request.build_absolute_uri(f'?code={code}'),
             )
-
+            referral_conversion = ReferralConversion.objects.create(
+                referral_code=referral_code,
+                referred_user=user,
+                conversion_date=datetime.datetime.now(),
+                conversion_value=0.00,
+                status="Completed",
+                reward_issued=False,
+                conversion_source="website",
+                referral_type="Standard"
+            )
+            referral_engagement = ReferralEngagement.objects.create(
+                referral_code=referral_code,
+                user=user,
+                email_opened=True,
+                email_clicked=True,
+                social_share_count=3,
+                last_interaction_date=datetime.datetime.now(),
+            )
             # Redirect al login
             response = redirect('core_login')
             response.delete_cookie('code')  # Rimuovi il cookie
             return response
 
-        return render(request, self.template_name, {'form': form})
-
+        return render(request, self.template_name, {
+            'form': form,
+            'business_form': business_form if account_type == 'business' else None,
+        })
+    
 # Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
     form_class = LoginForm
@@ -218,7 +269,7 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
         try:
             form.save(
                 request=self.request,
-                from_email=EMAIL_HOST_USER,
+                from_email="EMAIL_HOST_USER",
                     extra_email_context={'domain': DOMAIN}
             )
             logger.info("Email di reset inviata con successo")

@@ -125,7 +125,7 @@ class RegisterView(View):
                             # Verifica se proviene da EnterpriseRedirectView
                                 # Esegui la parte del codice per ProfileBusiness solo se EnterpriseRedirectView
                                 profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()    
-                                profile_business.user_registered = user
+                                profile_business.user_ower = user
                                 profile_business.save()
                                 print(f"ProfileBusiness updated for {user.username}")
                         # Altre logiche di referral code...

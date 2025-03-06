@@ -15,7 +15,6 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from ...models import ReferralReward
 from ..serializers import ReferralRewardSerializer
-from ..services.referral_service import ReferralService
 from dashboard.api.permissions import HasActiveSubscription
 
 # Set up a logger

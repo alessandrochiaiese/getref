@@ -10,3 +10,6 @@ class ReferralLevel(models.Model):
     referred = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Referred"), related_name="referred_by")  
     level = models.PositiveIntegerField(default=1, verbose_name=_("Level"))
 
+
+    def __str__(self):
+        return f"Referral Level {self.referrer} {self.referred}"

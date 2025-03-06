@@ -28,4 +28,4 @@ ReferralTransaction(referral_codes [ReferralCode], referred_user [User], transac
 ReferralUser(user [User], total_referrals, active_referrals, inactive_referrals, total_rewards_earned, total_spent_by_referred_users, average_order_value, loyalty_points_earned)
 
 Referral(program, referrer, referred, reward_given)
- 
+

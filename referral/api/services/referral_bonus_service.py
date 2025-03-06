@@ -38,6 +38,7 @@ class ReferralBonusService():
     def create_referral_bonus(self, data) -> ReferralBonus:
         try:
             referral_bonus = ReferralBonus(
+                program = data.get('program'),
                 bonus_type = data.get('bonus_type'),
                 bonus_value = data.get('bonus_value'), 
                 min_referrals_required = data.get('min_referrals_required'),
@@ -47,9 +48,6 @@ class ReferralBonusService():
                 eligibility_criteria = data.get('eligibility_criteria')
             )
             referral_bonus.save()
-
-            referral_programs = ReferralProgram.objects.filter(id__in=data['referral_programs'])
-            referral_bonus.programs.set(referral_programs)
 
             logger.info(f"ReferralBonus created: {referral_bonus}")
             return referral_bonus

@@ -338,8 +338,8 @@
                         <textarea class="form-control" id="campaign-goal" rows="2" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="campaign-programs">{% trans "Select Affiliate Programs" %}</label>
-                        <select class="form-control" id="campaign-programs" multiple required>
+                        <label for="campaign-program">{% trans "Select Affiliate Programs" %}</label>
+                        <select class="form-control" id="campaign-program" required>
                             <!-- The programs will be dynamically populated -->
                         </select>
                     </div>
@@ -569,7 +569,7 @@
                 const data = await response.json();
                 console.log('load programs: ', data);
                 if (data) {
-                    const programSelect = document.getElementById('campaign-programs');
+                    const programSelect = document.getElementById('campaign-program');
                     programSelect.innerHTML = ''; // Pulisci il dropdown
 
                     // Aggiungi una voce di selezione vuota
@@ -681,7 +681,7 @@
             const budget = document.getElementById('campaign-budget').value;
             const goal = document.getElementById('campaign-goal').value;
             const spendingToDate = document.getElementById('campaign-spending-to-date').value;
-            const programIds = Array.from(document.getElementById('campaign-programs').selectedOptions).map(option => option.value); // Get selected program IDs
+            const programId = Array.from(document.getElementById('campaign-program').selectedOptions).map(option => option.value); // Get selected program IDs
 
             // Create campaign data object
             const campaignData = {
@@ -692,7 +692,7 @@
                 budget: budget,
                 spending_to_date: spendingToDate,
                 target_audience: "",
-                programs: programIds,  // Pass the selected program IDs
+                programs: programId,  // Pass the selected program IDs
             };
 
             try {

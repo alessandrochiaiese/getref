@@ -1,8 +1,10 @@
 from django.db import models
+from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from PIL import Image
 
+from dashboard.models.enterprise import Business
 from referral.models.referral_transaction import ReferralTransaction
 import payments
 from payments.models.payment_method import PaymentMethod
@@ -31,12 +33,12 @@ class Profile(models.Model):
     is_buyer = models.BooleanField(default=False, verbose_name=_("Is Buyer"))
     
     # business
-    name_business = models.CharField(max_length=64, blank=True, null=True, verbose_name=_("Name Business")) # nome azienda
+    #company_name = models.CharField(max_length=64, blank=True, null=True, verbose_name=_("Name Business")) # nome azienda
     is_owner = models.BooleanField(default=False, verbose_name=_("Is Owner"))
-    user_ower = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("User Owner"), related_name="owner_business")
+    #user_ower = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("User Owner"), related_name="owner_business")
     iva = models.CharField(max_length=32, default="0000", verbose_name=_("IVA"))
-    office_number = models.CharField(max_length=13, blank=True, null=True, unique=True, verbose_name=_("Office Number")) 
-    
+    #contact_number = models.CharField(max_length=13, blank=True, null=True, unique=True, verbose_name=_("Office Number")) 
+    business = models.OneToOneField(Business, default=None, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("Business")) 
     
     # buyer
     #transactions = models.ManyToManyField(ReferralTransaction, related_name='txns')

@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class ReferralUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("user"), related_name='referra_user_user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("user"), related_name='referra_user_user')
     total_referrals = models.IntegerField(default=0, verbose_name=_("Total Referrals"))
     active_referrals = models.IntegerField(default=0, verbose_name=_("Active Referrals"))
     inactive_referrals = models.IntegerField(default=0, verbose_name=_("Inactive Referrals"))
@@ -13,6 +13,9 @@ class ReferralUser(models.Model):
     total_spent_by_referred_users = models.DecimalField(default=0.00, max_digits=10, decimal_places=2, verbose_name=_("Total Spent By Referred Users"))
     average_order_value = models.DecimalField(default=0.00, max_digits=10, decimal_places=2, verbose_name=_("Average Order Value"))
     loyalty_points_earned = models.IntegerField(default=0, verbose_name=_("Loyalty Points Earned"))
+
+    def __str__(self):
+        return f"Referral User {self.user.name}"
 
     class Meta: 
         verbose_name = "Referral User"

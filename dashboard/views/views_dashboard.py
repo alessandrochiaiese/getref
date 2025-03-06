@@ -18,6 +18,7 @@ User = get_user_model()
 
 @method_decorator(login_required, name='dispatch')
 class SettingsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
     template_name = 'dashboard/settings.html'
 
 @method_decorator(login_required, name='dispatch')
@@ -108,6 +109,23 @@ class HomeView(TemplateView):
         print(tree_referred)
         print(list_referred)
         context['referred_leveled_users'] = list_referred
+        context['notifications'] = ReferralNotification.objects.get(user=user) or []
+        
+        return context
+    
+
+@method_decorator(login_required, name='dispatch')
+class NotificationsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
+    template_name = 'dashboard/notifications.html'
+    def get_object(self, queryset=None):
+        # Ritorna l'oggetto corrispondente all'utente autenticato
+        return self.request.user
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['notifications'] = ReferralNotification.objects.get(user=self.request.user) or []
         
         return context
     

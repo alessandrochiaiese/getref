@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
+from dashboard.models.enterprise import Business
+
 from .models import * 
 
 
@@ -88,7 +90,7 @@ class UpdateUserForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control file-upload-info'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-    #name_business = forms.CharField(widget=forms.TextInput(attrs={'required': False}))
+    #company_name = forms.CharField(widget=forms.TextInput(attrs={'required': False}))
 
     class Meta:
         model = Profile
@@ -117,13 +119,45 @@ class UpdateBusinessProfileForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
 
     # business
-    name_business = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'})) 
+    company_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'})) 
     iva = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
      
 
     class Meta:
         model = Profile
-        fields = ['avatar', 'bio', 'name_business', 'iva']
+        fields = ['avatar', 'bio', 'company_name', 'iva']
+
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = [
+            'link_google_maps',
+            'contact_number',
+            'chamber_commerce_certificate',
+            'insurance_policy_certificate',
+            'region',
+            'sectors',
+            'holder',
+            'company_name',
+            'email',
+        ]
+        widgets = {
+            'link_google_maps': forms.URLInput(attrs={'class': 'form-control'}),
+            'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'chamber_commerce_certificate': forms.ClearableFileInput(attrs={'required': False, 'class': 'form-control'}),
+            'insurance_policy_certificate': forms.ClearableFileInput(attrs={'required': False, 'class': 'form-control'}),
+            'region': forms.Select(attrs={'class': 'form-control'}),
+            'sectors': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+            'holder': forms.TextInput(attrs={'class': 'form-control'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['region'].queryset = Region.objects.all()
+        self.fields['sectors'].queryset = Sector.objects.all()
 
 
 class EnterpriseForm(forms.ModelForm):

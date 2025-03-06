@@ -38,6 +38,7 @@ class ReferralStatsService():
     def create_referral_stat(self, data) -> ReferralStats:
         try:
             referral_stat = ReferralStats(
+                referral_code = data.get('referral_code'),
                 user = data.get('user'),
                 period = data.get('period'),
                 click_count = data.get('click_count'),
@@ -47,8 +48,6 @@ class ReferralStatsService():
                 highest_referral_earning = data.get('highest_referral_earning')
             )
             referral_stat.save()
-            referral_codes = ReferralCode.objects.filter(id__in=data['referral_codes'])
-            referral_stat.referral_codes.set(referral_codes)
 
             logger.info(f"ReferralStats created: {referral_stat}")
             return referral_stat

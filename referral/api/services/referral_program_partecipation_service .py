@@ -39,15 +39,12 @@ class ReferralProgramPartecipationPartecipationService():
     def create_referral_program_partecipation(self, data) -> ReferralProgramPartecipation:
         try:
             referral_program_partecipation = ReferralProgramPartecipation( 
+                referral_code = data.get('referral_code'),
+                program = data.get('program'),
                 date_joined = datetime.datetime.now(), #data.get('date_joined'),
                 reward_earned = data.get('reward_earned'),
                 status = data.get('status'))
-            referral_program_partecipation.save()
-            programs = ReferralProgram.objects.filter(id__in=data['programs'])
-            referral_program_partecipation.programs.set(programs)
-
-            referral_codes = ReferralCode.objects.filter(id__in=data['referral_codes'])
-            referral_program_partecipation.referral_codes.set(referral_codes)
+            referral_program_partecipation.save() 
 
             logger.info(f"ReferralProgramPartecipation created: {referral_program_partecipation}")
             return referral_program_partecipation

@@ -43,6 +43,7 @@ class ReferralCampaignService():
             #program = ReferralProgram.objects.get(id=data['program_id'])
 
             referral_campaign = ReferralCampaign( 
+                program = data.get('program'),
                 campaign_name = data.get('campaign_name'),
                 start_date = data.get('start_date'),
                 end_date = data.get('end_date'),
@@ -52,9 +53,6 @@ class ReferralCampaignService():
                 target_audience = data.get('target_audience', None))
             referral_campaign.save()
 
-            referral_programs = ReferralProgram.objects.filter(id__in=data.get('programs'))
-            referral_campaign.programs.set(referral_programs)
-            
             """referral_codes = ReferralCode.objects.filter(referral_code__programs__contains=referral_campaign.programs)
             
             # 1. Troviamo o creiamo ReferralStats associato al ReferralProgram

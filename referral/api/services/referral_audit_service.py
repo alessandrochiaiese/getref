@@ -38,6 +38,7 @@ class ReferralAuditService():
     def create_referral_audit(self, data) -> ReferralAudit:
         try:
             referral_audit = ReferralAudit( 
+                referral_code = data.get('referral_code'),
                 action_taken = data.get('action_taken'),
                 action_date = datetime.datetime.now(), #data.get('action_date'),
                 user = data.get('user'),
@@ -47,9 +48,6 @@ class ReferralAuditService():
             )
             referral_audit.save()
             
-            referral_codes = ReferralCode.objects.filter(id__in=data['referral_codes'])
-            referral_audit.referral_codes.set(referral_codes)
-
             logger.info(f"ReferralAudit created: {referral_audit}")
             return referral_audit
         except Exception as e:

@@ -37,12 +37,13 @@ class ReferralTransactionService():
     def create_referral_transaction(self, data) -> ReferralTransaction:
         try:
             referral_transaction = ReferralTransaction(
-                program = data.get('program'),
-                referred_users = data.get('referred_users'),
+                referral_code = data.get('referral_code'),
+                referred_user = data.get('referred_user'),
                 transaction_date = datetime.datetime.now(), #data.get('transaction_date'),
-                order_id = data.get('order_id'),
+                order = data.get('order'),
                 transaction_amount = data.get('transaction_amount'),
                 currency = data.get('currency'),
+                status = data.get('status'),
                 conversion_value = data.get('conversion_value'),
                 discount_value = data.get('discount_value'),
                 coupon_code_used = data.get('coupon_code_used'),

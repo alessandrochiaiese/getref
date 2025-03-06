@@ -20,6 +20,7 @@ from dashboard.forms import *
 class ProfileView(UpdateView):
     model = get_user_model()  # Usa il modello User di default
     form_class = UpdateUserForm
+    business_class = BusinessForm
     template_name = 'core/profile.html'
     success_url = reverse_lazy('core_profile')
 
@@ -35,7 +36,7 @@ class ProfileView(UpdateView):
 
         # Get the user's profile
         profile = Profile.objects.filter(user=user).first()
-
+        
         # Get the referral code for the user
         referral_code = ReferralCode.objects.filter(user=user).first()
 
@@ -69,6 +70,8 @@ class ProfileView(UpdateView):
 
         # Add the profile form to the context
         context['profile_base_form'] = UpdateBaseProfileForm(instance=profile)
+        # Add the profile form to the context
+        context['business_form'] = BusinessForm(instance=profile.business)
 
         # Add the referral code to the context
         context['referral_code'] = referral_code.code if referral_code else None
@@ -115,6 +118,8 @@ class ProfileView(UpdateView):
         print(list_referred)
         context['referred_leveled_users'] = list_referred
         
+        if profile.business:
+            context['business'] = profile.business
         return context
     
     def form_valid(self, form):
@@ -138,6 +143,14 @@ class ProfileView(UpdateView):
             print("Profile Base Form Errors:", profile_base_form.errors)
             messages.error(self.request, 'There was an error updating your profile.')
             return self.form_invalid(form)
+
+        if profile.business:
+            business_form = BusinessForm(self.request.POST, self.request.FILES, instance=profile.business)
+            if not business_form.is_valid():
+                print("Profile Form Errors:", profile_form.errors)
+                messages.error(self.request, 'There was an error updating your business profile.')
+                return self.form_invalid(form)
+            business_form.save()  # Salva i dati del profilo business
 
         # Salvataggio dei form
         profile_form.save()  # Salva i dati del profilo

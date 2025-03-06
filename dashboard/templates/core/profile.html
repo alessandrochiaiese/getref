@@ -87,7 +87,8 @@
             <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="profile-header-img img-fluid rounded-circle"
                 sizes="150x150">
             <h2>{{ user.first_name|default:"Guest" }} {{ user.last_name|default:"" }}</h2>
-            <p class="text-muted">{% trans "Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi referral." %}</p>
+            <p class="text-muted">{% trans "Benvenuto nel tuo profilo. Gestisci il tuo account e visualizza i tuoi
+                referral." %}</p>
             <p>{% trans "Ti sei registrato con il codice referral" %}:
             <p>{% if referrer_code %}
                 {{ referrer_name }}
@@ -147,7 +148,81 @@
                         {{ profile_base_form.as_p }}
 
                         <!-- Profile Business form -->
-                        {#{ profile_business_form.as_p }#}
+                        {% if business_form %}
+
+                        <!-- Campo Google Maps Link -->
+                        <div class="form-group">
+                            <label for="id_link_google_maps">{% trans "Google Maps Link" %}</label>
+                            {{ business_form.link_google_maps }}
+                        </div>
+
+                        <!-- Campo Contact Number -->
+                        <div class="form-group">
+                            <label for="id_contact_number">{% trans "Contact Number" %}</label>
+                            {{ business_form.contact_number }}
+                        </div>
+
+                        <!-- Campo Chamber Commerce Certificate -->
+                        <div class="form-group">
+                            <label for="id_chamber_commerce_certificate">{% trans "Chamber of Commerce Certificate" %}</label>
+                            {{ business_form.chamber_commerce_certificate }}
+                        </div>
+
+                        <!-- Campo Insurance Policy Certificate -->
+                        <div class="form-group">
+                            <label for="id_insurance_policy_certificate">{% trans "Insurance Policy Certificate" %}</label>
+                            {{ business_form.insurance_policy_certificate }}
+                        </div>
+
+                        <!-- Campo Region -->
+                        <div class="form-group">
+                            <!--<p>{% trans "N.B.: Scrivi la regione (Abruzzo, Basilicata, Calabria, Campania, Emilia-Romagna, Friuli-Venezia Giulia, Lazio, Liguria, Lombardia, Marche, Molise, Piemonte, Puglia, Sardegna, Sicilia, Toscana, Trentino-Alto Adige/Südtirol, Umbria, Valle d'Aosta/Vallée d'Aoste, Veneto)" %}</p>-->
+                            <label for="id_region">{% trans "Region" %}</label>
+                            {#{ business_form.region }#}
+                            <select name="region" id="id_region" class="form-control">
+                                {% for region in business_form.region.field.queryset %}
+                                <option value="{{ region.id }}" {% if business_form.region.value == region.id|stringformat:"s" %}selected{% endif %}>
+                                    {{ region.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+
+                        <!-- Campo Sectors (Checkboxes) -->
+                        <div class="form-group">
+                            <label for="id_sectors">{% trans "Sectors" %}</label>
+                            <div class="row" style="margin-left: 25px;">
+                                {% for sector in business_form.sectors.field.queryset %}
+                                <div class="form-check col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                                    <input class="form-check-input" type="checkbox" name="sectors"
+                                        value="{{ sector.id }}" {% if sector.id in business_form.sectors.value %}checked{% endif %}>
+                                    <label class="form-check-label">{{ sector.name }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+
+                        <!-- Campo Holder -->
+                        <div class="form-group">
+                            <label for="id_holder">{% trans "Holder" %}</label>
+                            {{ business_form.holder }}
+                        </div>
+
+                        <!-- Campo Company Name -->
+                        <div class="form-group">
+                            <label for="id_company_name">{% trans "Company Name" %}</label>
+                            {{ business_form.company_name }}
+                        </div>
+
+                        <!-- Campo Email -->
+                        <div class="form-group">
+                            <label for="id_email">{% trans "Email" %}</label>
+                            {{ business_form.email }}
+                        </div>
+                        {% endif %} 
 
                         <!-- Pulsanti -->
                         <div class="d-flex justify-content-center">

@@ -1,5 +1,11 @@
 
+import datetime
 from django.shortcuts import get_object_or_404, redirect, render
+from referral.models.referral import Referral
+from referral.models.referral_bonus import ReferralBonus
+from referral.models.referral_code import ReferralCode
+from referral.models.referral_notification import ReferralNotification
+from referral.models.referral_reward import ReferralReward
 from subscriptions.models.promotion import Promotion
 from subscriptions.models.promotion_sale import PromotionSale
 
@@ -33,7 +39,15 @@ def promote(request, promotion_link):
     
     # Recupera il prodotto Stripe utilizzando l'ID del prodotto
     product = stripe.Product.retrieve(promotion.stripe_product_id)
+    price = get_prices_for_product(product.id)
     
+    customer = request.user
+
+    # Seller get Commission
+    seller = promotion.user
+    unit_commission = price.amount * 0.15
+    unit_amount = price.amount - unit_commission
+    # check if customer have bonus
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -51,6 +65,38 @@ def promote(request, promotion_link):
         success_url=request.build_absolute_uri('/success/'),
         cancel_url=request.build_absolute_uri('/cancel/'),
     )
+    # Seller get Bonus if more than 5 customer have made first bought
+    referral = Referral.objects.filter(referred=customer).first()
+    promotion_sales = PromotionSale.objects.filter(user=referral.referrer)
+    numer_of_customer_seller = 0
+    if len(promotion_sales) >= 5:
+        for promotion_sale in promotion_sales:
+            customer_promotion_sales = PromotionSale.objects.filter(user=promotion_sale.user)
+            if len(customer_promotion_sales) >= 1:
+                numer_of_customer_seller += 1
+
+    if numer_of_customer_seller >= 5:
+        referral_code = ReferralCode.objects.filter(user=customer).first()
+        referral_reward = ReferralReward.objects.create(
+            referral_code=referral_code,
+            referred_user=customer,
+            reward_type="Cash",
+            reward_value=50.00,
+            date_awarded=datetime.datetime.now(),
+            status="Awarded",
+            expiry_date=datetime.datetime.today() + datetime.timedelta(days=30),
+            reward_description="Premio per aver completato la registrazione",
+            reward_source="ReferralProgram"
+        )
+        referral_notification = ReferralNotification.objects.create(
+            user=customer,
+            message="Hai ricevuto un nuovo referral bonus!",
+            date_sent=datetime.datetime.now(),
+            is_read=False,
+            notification_type="Bonus",
+            priority="High",
+            action_required=True
+        )
 
     # Reindirizza direttamente alla sessione di checkout di Stripe
     return redirect(checkout_session.url)

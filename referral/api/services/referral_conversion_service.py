@@ -40,19 +40,16 @@ class ReferralConversionService():
     def create_referral_conversion(self, data) -> ReferralConversion:
         try:
             referral_conversion = ReferralConversion(
+                referral_code = data.get('referral_code'),
                 referral_user = data.get('referral_user'),
                 conversion_date = datetime.datetime.now(), #data.get('conversion_date'),
                 conversion_value = data.get('conversion_value'),
-                conversion = data.get('conversion'),
                 status = data.get('status'),
                 reward_issued = data.get('reward_issued'),
                 conversion_source = data.get('conversion_source'),
                 referral_type = data.get('referral_type'))
             referral_conversion.save() 
             
-            referral_codes = ReferralCode.objects.filter(id__in=data['referral_codes'])
-            referral_conversion.referral_codes.set(referral_codes)
-
             logger.info(f"ReferralConversion created: {referral_conversion}")
             return referral_conversion
         except Exception as e:
