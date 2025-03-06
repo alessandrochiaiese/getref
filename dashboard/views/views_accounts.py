@@ -175,12 +175,10 @@ class RegisterView(View):
             else:
                 # Messaggio di successo standard se nessun referral è stato usato
                 messages.success(request, 'Registrazione completata! Benvenuto.')
-
-
-
+            
             # Creazione del codice referral per il nuovo utente
             code = get_random_string(length=8).upper()
-            referral_program, created= ReferralProgram.objects.get_or_create(
+            referral_program, created = ReferralProgram.objects.get_or_create(
                 name="Programma Referral Premium",
                 description="Programma per utenti premium",
                 reward_type="Cash",
@@ -188,13 +186,14 @@ class RegisterView(View):
                 currency="EUR",
                 min_referral_count=5,
                 max_referrals_per_user=10,
-                date_created = datetime.datetime.now(),
+                date_created=datetime.datetime.now(),
                 is_active=True,
-                program_duration=365*10,  # Durata di 30 giorni
+                program_duration=365*10,  # Durata di 10 anni
                 target_industry="Getref"
             )
+
             # Assuming you have a list of region IDs
-            region_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            region_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
             regions = Region.objects.filter(id__in=region_ids)
 
             # Now assign the regions to the allowed_regions field
