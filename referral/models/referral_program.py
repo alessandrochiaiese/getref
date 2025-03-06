@@ -21,7 +21,7 @@ class ReferralProgram(models.Model):
     currency = models.CharField(max_length=10, verbose_name=_("Currency"))
     min_referral_count = models.IntegerField(default=0, verbose_name=_("Min Referral Count"))
     max_referrals_per_user = models.IntegerField(default=100, verbose_name=_("Max Referrals Per User"))
-    date_created = models.DateField(verbose_name=_("Date Created"))
+    date_created = models.DateField(auto_now_add=True, verbose_name=_("Date Created"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     program_duration = models.IntegerField(verbose_name=_("Program Duration"))
     allowed_regions = models.ManyToManyField(Region, verbose_name=_("Allowed Regions"), related_name='engagement_program_regions')
