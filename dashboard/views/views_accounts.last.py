@@ -93,6 +93,15 @@ class RegisterView(View):
         form = self.form_class(initial=self.initial)
         business_form = self.business_form_class(initial=self.initial)
 
+        #if referral_code_used:
+        #    try:
+        #        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
+        #        print(form.fields)
+        #        # Imposta il referral_code nel form (se necessario)
+        #        # form.fields['referral_code'].initial = referral_code.code
+        #    except ReferralCode.DoesNotExist:
+        #        messages.warning(request, 'Il codice referral non è valido.')
+
         response = render(request, self.template_name, {
             'form': form,
             'business_form': business_form,
@@ -105,24 +114,34 @@ class RegisterView(View):
     
     def post(self, request, *args, **kwargs):   
         referral_code_used = self.request.POST.get('code') or request.COOKIES.get('code')
+        form = self.form_class(self.request.POST)
         account_type = request.POST.get('account_type')  # Ottieni il tipo di account selezionato
-
-        # Gestione codice referral per aziende
-        is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
-        is_referral_redirect = request.session.get('is_referral_redirect', False)
-        
         business_form = None
         
         if account_type == 'business':
             business_form = self.business_form_class(request.POST, request.FILES)
-            if business_form.is_valid():
-                business = business_form.save() #save(commit=False)
+        elif account_type == 'user':
+            user = form.save()
+            
+        if form.is_valid() and (not business_form or business_form.is_valid()):
+            user = form.save()
+            referrer_code = None
+
+            if account_type == 'business' and business_form:
+                business = business_form.save(commit=False)
+                business.save()
                 
                 profile = Profile.objects.get(user=user)
                 profile.business = business
                 profile.save()
 
-                if referral_code_used and is_enterprise_redirect and not is_referral_redirect:
+            # Gestione codice referral per aziende
+            is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
+            is_referral_redirect = request.session.get('is_referral_redirect', False)
+
+            # Se il nuovo utente ha usato un codice referral
+            if referral_code_used:
+                if is_enterprise_redirect and not is_referral_redirect:
                     # Trattamento codice referral aziendale
                     try:
                         profile_business = ProfileBusiness.objects.get(code=referral_code_used)
@@ -131,118 +150,94 @@ class RegisterView(View):
                         profile_business.save()
                         # Recupera utente che ha invitato un'azienda a registrarsi
                         referrer=profile_business.user
-
-                        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
-                        # Recupera utente che ha invitato un utente a registrarsi
-                        referrer = referral_code.user
-                        referral_code.referred_user_count += 1
-                        referral_code.save()
-                        
-                        # Creazione o aggiornamento del record di referral
-                        referral = Referral.objects.create(referrer=referrer, referred=user)
-                        
-                        messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
+                        print(f"ProfileBusiness aggiornato per {user.username}")
                     except ProfileBusiness.DoesNotExist:
                         messages.warning(request, 'Codice referral azienda non valido.')
-
-            else:
-                return render(request, self.template_name, {
-                    'form': form,
-                    'business_form': business_form if account_type == 'business' else None,
-                })
-            
-        elif account_type == 'user':
-            form = self.form_class(self.request.POST)
-            if form.is_valid():
-                user = form.save()
-
-                if referral_code_used and not is_enterprise_redirect and is_referral_redirect:
+                elif is_referral_redirect and not is_enterprise_redirect:
                     # Trattamento codice referral utente
                     try:
                         referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
                         # Recupera utente che ha invitato un utente a registrarsi
+                        referrer = referral_code.user
                         referral_code.referred_user_count += 1
                         referral_code.save()
-                        # Recupera utente che ha invitato un'azienda a registrarsi
-                        referrer = referral_code.user
-                        
-                        # Creazione o aggiornamento del record di referral
-                        referral = Referral.objects.create(referrer=referrer, referred=user)
-                        
                         messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
                     except ReferralCode.DoesNotExist:
                         messages.warning(request, 'Codice referral utente non valido.')
 
+                # Creazione o aggiornamento del record di referral
+                referral, created = Referral.objects.get_or_create(referrer=referrer)
+                referral.referred.add(user)
+
+                # Rimuovi il flag dalla sessione dopo l'uso
+                request.session.pop('is_enterprise_redirect', None)
+                request.session.pop('is_referral_redirect', None)
+
+
             else:
-                return render(request, self.template_name, {
-                    'form': form
-                })
+                # Messaggio di successo standard se nessun referral è stato usato
+                messages.success(request, 'Registrazione completata! Benvenuto.')
 
-        # Se il nuovo utente ha usato un codice referral
-        if referral_code_used or is_enterprise_redirect or is_referral_redirect: 
-            # Rimuovi il flag dalla sessione dopo l'uso
-            request.session.pop('is_enterprise_redirect', None)
-            request.session.pop('is_referral_redirect', None)
-    
-        # Messaggio di successo standard se nessun referral è stato usato
-        messages.success(request, 'Registrazione completata! Benvenuto.')
+            # Creazione del codice referral per il nuovo utente
+            code = get_random_string(length=8).upper()
+            referral_program, created = ReferralProgram.objects.get_or_create(
+                name="Programma Referral Premium",
+                description="Programma per utenti premium",
+                reward_type="Cash",
+                reward_value=100.00,
+                currency="EUR",
+                min_referral_count=5,
+                max_referrals_per_user=10,
+                date_created=datetime.datetime.now(),
+                is_active=True,
+                program_duration=365*10,  # Durata di 10 anni
+                target_industry="Getref"
+            )
 
-        # Creazione del codice referral per il nuovo utente
-        code = get_random_string(length=8).upper()
-        referral_program, created = ReferralProgram.objects.get_or_create(
-            name="Programma Referral Premium",
-            description="Programma per utenti premium",
-            reward_type="Cash",
-            reward_value=100.00,
-            currency="EUR",
-            min_referral_count=5,
-            max_referrals_per_user=10,
-            date_created=datetime.datetime.now(),
-            is_active=True,
-            program_duration=365*10,  # Durata di 10 anni
-            target_industry="Getref"
-        )
+            # Assuming you have a list of region IDs
+            region_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+            regions = Region.objects.filter(id__in=region_ids)
 
-        # Assuming you have a list of region IDs
-        region_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-        regions = Region.objects.filter(id__in=region_ids)
+            # Now assign the regions to the allowed_regions field
+            referral_program.allowed_regions.set(regions)
 
-        # Now assign the regions to the allowed_regions field
-        referral_program.allowed_regions.set(regions)
+            referral_code = ReferralCode.objects.create(
+                program=referral_program,
+                user=user,
+                code=code,
+                usage_count=0,
+                status="active",
+                referred_user_count=0,
+                expiry_date=self.request.POST.get('expiry_date'),
+                unique_url=f'{DOMAIN}/c/?code={code}' #self.request.build_absolute_uri(f'?code={code}'),
+            )
+            referral_conversion = ReferralConversion.objects.create(
+                referral_code=referral_code,
+                referred_user=user,
+                conversion_date=datetime.datetime.now(),
+                conversion_value=0.00,
+                status="Completed",
+                reward_issued=False,
+                conversion_source="website",
+                referral_type="Standard"
+            )
+            referral_engagement = ReferralEngagement.objects.create(
+                referral_code=referral_code,
+                user=user,
+                email_opened=True,
+                email_clicked=True,
+                social_share_count=3,
+                last_interaction_date=datetime.datetime.now(),
+            )
+            # Redirect al login
+            response = redirect('core_login')
+            response.delete_cookie('code')  # Rimuovi il cookie
+            return response
 
-        referral_code = ReferralCode.objects.create(
-            program=referral_program,
-            user=user,
-            code=code,
-            usage_count=0,
-            status="active",
-            referred_user_count=0,
-            expiry_date=self.request.POST.get('expiry_date'),
-            unique_url=f'{DOMAIN}/c/?code={code}' #self.request.build_absolute_uri(f'?code={code}'),
-        )
-        referral_conversion = ReferralConversion.objects.create(
-            referral_code=referral_code,
-            referred_user=user,
-            conversion_date=datetime.datetime.now(),
-            conversion_value=0.00,
-            status="Completed",
-            reward_issued=False,
-            conversion_source="website",
-            referral_type="Standard"
-        )
-        referral_engagement = ReferralEngagement.objects.create(
-            referral_code=referral_code,
-            user=user,
-            email_opened=True,
-            email_clicked=True,
-            social_share_count=3,
-            last_interaction_date=datetime.datetime.now(),
-        )
-        # Redirect al login
-        response = redirect('core_login')
-        response.delete_cookie('code')  # Rimuovi il cookie
-        return response
-
+        return render(request, self.template_name, {
+            'form': form,
+            'business_form': business_form if account_type == 'business' else None,
+        })
     
 # Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
