@@ -189,9 +189,15 @@ class RegisterView(View):
                 min_referral_count=5,
                 max_referrals_per_user=10,
                 program_duration=365*10,  # Durata di 30 giorni
-                allowed_regions=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
                 target_industry="Getref"
             )
+            # Assuming you have a list of region IDs
+            region_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            regions = Region.objects.filter(id__in=region_ids)
+
+            # Now assign the regions to the allowed_regions field
+            referral_program.allowed_regions.set(regions)
+
             referral_code = ReferralCode.objects.create(
                 user=user,
                 code=code,
