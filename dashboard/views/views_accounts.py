@@ -200,7 +200,7 @@ class RegisterView(View):
             referral_program.allowed_regions.set(regions)
 
             referral_code = ReferralCode.objects.create(
-                program=referral_program.id,
+                program=referral_program,
                 user=user,
                 code=code,
                 usage_count=0,
