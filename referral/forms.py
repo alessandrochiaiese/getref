@@ -10,7 +10,7 @@ class ReferralAuditForm(forms.ModelForm):
 class ReferralBonusForm(forms.ModelForm):
     class Meta:
         model = ReferralBonus
-        fields = ['id', 'program', 'bonus_type', 'bonus_value', 'min_referrals_required', 'bonus_date', 'expiry_date', 'max_usage', 'eligibility_criteria'] # '__all__' #
+        fields = ['id', 'program', 'bonus_type', 'bonus_value', 'min_referrals_required', 'expiry_date', 'max_usage', 'eligibility_criteria'] # '__all__' #
 
 class ReferralCampaignForm(forms.ModelForm):
     class Meta:
@@ -25,7 +25,7 @@ class ReferralCodeForm(forms.ModelForm):
 class ReferralConversionForm(forms.ModelForm):
     class Meta:
         model = ReferralConversion
-        fields = ['id', 'referral_code', 'referred_user', 'conversion_date', 'conversion_value', 'status', 'reward_issued', 'conversion_source', 'referral_type'] # '__all__' #
+        fields = ['id', 'referral_code', 'referred_user', 'conversion_value', 'status', 'reward_issued', 'conversion_source', 'referral_type'] # '__all__' #
 
 class ReferralEngagementForm(forms.ModelForm):
     class Meta:
