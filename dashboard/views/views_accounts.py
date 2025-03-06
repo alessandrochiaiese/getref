@@ -175,7 +175,7 @@ class RegisterView(View):
             else:
                 # Messaggio di successo standard se nessun referral è stato usato
                 messages.success(request, 'Registrazione completata! Benvenuto.')
-            
+
             # Creazione del codice referral per il nuovo utente
             code = get_random_string(length=8).upper()
             referral_program, created = ReferralProgram.objects.get_or_create(
@@ -200,6 +200,7 @@ class RegisterView(View):
             referral_program.allowed_regions.set(regions)
 
             referral_code = ReferralCode.objects.create(
+                program=referral_program.id,
                 user=user,
                 code=code,
                 usage_count=0,

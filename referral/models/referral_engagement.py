@@ -14,7 +14,7 @@ class ReferralEngagement(models.Model):
     last_interaction_date = models.DateField(null=True, blank=True, verbose_name=_("Last Interaction Date"))
     
     def __str__(self):
-        return f"Engagement {self.referral_code} {self.user}"
+        return f"ReferralEngagement {self.referral_code} {self.user}"
     
     class Meta:
         ordering = ['-last_interaction_date']

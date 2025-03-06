@@ -12,7 +12,7 @@ class ReferralCampaign(models.Model):
     target_audience = models.TextField(blank=True, verbose_name=_("Target Audience"))
 
     def __str__(self):
-        return f"Campaign {self.campaign_name}"
+        return f"ReferralCampaign {self.campaign_name}"
 
     class Meta:
         ordering = ['-end_date']

@@ -12,14 +12,14 @@ class ReferralNotification(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("User"), related_name='engagement_notification_user')
     message = models.TextField(verbose_name=_("Message"))
-    date_sent = models.DateField(verbose_name=_("Date Sent"))
+    date_sent = models.DateField(auto_now_add=True, verbose_name=_("Date Sent"))
     is_read = models.BooleanField(default=False, verbose_name=_("Is Read"))
     notification_type = models.CharField(max_length=50, choices=NOTIFICATION_TYPE_CHOICES, verbose_name=_("Notification Type"))
     priority = models.CharField(max_length=50, verbose_name=_("Priority"))
     action_required = models.BooleanField(default=False, verbose_name=_("Action Required"))
 
     def __str__(self):
-        return f"Notification to {self.user.name}"
+        return f"ReferralNotification to {self.user.name}"
 
     class Meta:
         ordering = ['-date_sent']

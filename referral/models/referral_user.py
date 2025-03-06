@@ -15,7 +15,7 @@ class ReferralUser(models.Model):
     loyalty_points_earned = models.IntegerField(default=0, verbose_name=_("Loyalty Points Earned"))
 
     def __str__(self):
-        return f"Referral User {self.user.name}"
+        return f"ReferralUser {self.user.name}"
 
     class Meta: 
         verbose_name = "Referral User"

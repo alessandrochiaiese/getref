@@ -12,4 +12,4 @@ class ReferralLevel(models.Model):
 
 
     def __str__(self):
-        return f"Referral Level {self.referrer} {self.referred}"
+        return f"ReferralLevel {self.referrer} {self.referred}"
