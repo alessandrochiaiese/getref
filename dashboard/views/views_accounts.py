@@ -188,6 +188,8 @@ class RegisterView(View):
                 currency="EUR",
                 min_referral_count=5,
                 max_referrals_per_user=10,
+                date_created = datetime.datetime.now(),
+                is_active=True,
                 program_duration=365*10,  # Durata di 30 giorni
                 target_industry="Getref"
             )
