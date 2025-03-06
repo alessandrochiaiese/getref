@@ -109,7 +109,8 @@ class HomeView(TemplateView):
         print(tree_referred)
         print(list_referred)
         context['referred_leveled_users'] = list_referred
-        context['notifications'] = ReferralNotification.objects.get(user=user) or []
+        context['notifications'] = ReferralNotification.objects.filter(user=user) or []
+        
         
         return context
     
@@ -125,7 +126,7 @@ class NotificationsView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['notifications'] = ReferralNotification.objects.get(user=self.request.user) or []
+        context['notifications'] = ReferralNotification.objects.filter(user=self.request.user) or []
         
         return context
     

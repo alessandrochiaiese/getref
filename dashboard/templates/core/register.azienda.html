@@ -177,49 +177,7 @@
             </div>
 
             <!-- Form Business (visibile solo se "Business User" è selezionato) -->
-            <div id="business-form-container">
-               
-            </div>
-
-
-            <!-- Termini e condizioni -->
-            <div class="mb-4">
-              <div class="form-check">
-                <label class="form-check-label text-muted">
-                  <input type="checkbox" class="form-check-input" name="agree">
-                  I agree to all Terms & Conditions
-                </label>
-              </div>
-            </div>
-
-            <!-- Bottone per registrarsi -->
-            <div class="mt-3">
-              <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-                SIGN UP
-              </button>
-            </div>
-
-            <!-- Link per login -->
-            <div class="text-center mt-4 font-weight-light">
-              Already have an account? <a href="{% url 'core_login' %}" class="text-primary">{% trans "Login" %}</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- JavaScript per mostrare/nascondere il form business -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Riferimenti agli input radio
-    const userTypeRadio = document.getElementById('user_type');
-    const businessTypeRadio = document.getElementById('business_type');
-    const businessFormContainer = document.getElementById('business-form-container');
-
-    // Contenuto del form business come stringa HTML
-    const businessFormHTML = `
+            <div id="business-form-container" style="display: none;">
               {% if business_form %}
 
               <!-- Campo Google Maps Link -->
@@ -294,15 +252,51 @@
                 {{ business_form.email }}
               </div>
               {% endif %}
-    `;
+            </div>
+
+            
+            <!-- Termini e condizioni -->
+            <div class="mb-4">
+              <div class="form-check">
+                <label class="form-check-label text-muted">
+                  <input type="checkbox" class="form-check-input" name="agree">
+                  I agree to all Terms & Conditions
+                </label>
+              </div>
+            </div>
+
+            <!-- Bottone per registrarsi -->
+            <div class="mt-3">
+              <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                SIGN UP
+              </button>
+            </div>
+
+            <!-- Link per login -->
+            <div class="text-center mt-4 font-weight-light">
+              Already have an account? <a href="{% url 'core_login' %}" class="text-primary">{% trans "Login" %}</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript per mostrare/nascondere il form business -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Riferimenti agli input radio
+    const userTypeRadio = document.getElementById('user_type');
+    const businessTypeRadio = document.getElementById('business_type');
+    const businessFormContainer = document.getElementById('business-form-container');
+
     // Funzione per aggiornare la visibilità del form business
     function toggleBusinessForm() {
       if (businessTypeRadio.checked) {
-        businessFormContainer.innerHTML = businessFormHTML;
-        //businessFormContainer.style.display = 'block'; // Mostra il form business
+        businessFormContainer.style.display = 'block'; // Mostra il form business
       } else {
-        businessFormContainer.innerHTML = "";
-        //businessFormContainer.style.display = 'none'; // Nascondi il form business
+        businessFormContainer.style.display = 'none'; // Nascondi il form business
       }
     }
 

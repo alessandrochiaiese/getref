@@ -112,10 +112,40 @@ class RegisterView(View):
         is_referral_redirect = request.session.get('is_referral_redirect', False)
         
         business_form = None
+        form = None
+        user = None
         
-        if account_type == 'business':
+        if account_type == 'user':
+            form = self.form_class(self.request.POST)
+            if form.is_valid():
+                user = form.save()
+
+                if referral_code_used and not is_enterprise_redirect and is_referral_redirect:
+                    # Trattamento codice referral utente
+                    try:
+                        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
+                        # Recupera utente che ha invitato un utente a registrarsi
+                        referral_code.referred_user_count += 1
+                        referral_code.save()
+                        # Recupera utente che ha invitato un'azienda a registrarsi
+                        referrer = referral_code.user
+                        
+                        # Creazione o aggiornamento del record di referral
+                        referral = Referral.objects.create(referrer=referrer, referred=user)
+                        
+                        messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
+                    except ReferralCode.DoesNotExist:
+                        messages.warning(request, 'Codice referral utente non valido.')
+
+            else:
+                return render(request, self.template_name, {
+                    'form': form
+                })
+        elif account_type == 'business':
+            form = self.form_class(self.request.POST)
             business_form = self.business_form_class(request.POST, request.FILES)
-            if business_form.is_valid():
+            if form.is_valid() and business_form.is_valid():
+                user = form.save()
                 business = business_form.save() #save(commit=False)
                 
                 profile = Profile.objects.get(user=user)
@@ -151,32 +181,6 @@ class RegisterView(View):
                     'business_form': business_form if account_type == 'business' else None,
                 })
             
-        elif account_type == 'user':
-            form = self.form_class(self.request.POST)
-            if form.is_valid():
-                user = form.save()
-
-                if referral_code_used and not is_enterprise_redirect and is_referral_redirect:
-                    # Trattamento codice referral utente
-                    try:
-                        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
-                        # Recupera utente che ha invitato un utente a registrarsi
-                        referral_code.referred_user_count += 1
-                        referral_code.save()
-                        # Recupera utente che ha invitato un'azienda a registrarsi
-                        referrer = referral_code.user
-                        
-                        # Creazione o aggiornamento del record di referral
-                        referral = Referral.objects.create(referrer=referrer, referred=user)
-                        
-                        messages.success(request, f"Registrazione completata! Sei stato invitato da {referrer.username}.")
-                    except ReferralCode.DoesNotExist:
-                        messages.warning(request, 'Codice referral utente non valido.')
-
-            else:
-                return render(request, self.template_name, {
-                    'form': form
-                })
 
         # Se il nuovo utente ha usato un codice referral
         if referral_code_used or is_enterprise_redirect or is_referral_redirect: 

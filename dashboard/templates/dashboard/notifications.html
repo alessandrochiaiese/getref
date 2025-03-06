@@ -10,13 +10,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Attiva Notifiche</h1>
-    <!-- -->
     
-    <h1>Notifications</h1>
-    
+    <h1>Notifications</h1>   
+    {% if notifications %}
     {% for notification in notifications %}
     {% endfor %}
+    {% else %} 
+    <p>{% trans "Non ci sono notifiche!" %}</p>
+    {% endif %} 
 
 
 </div>
