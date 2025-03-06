@@ -78,29 +78,7 @@ class HomeView(TemplateView):
             context['referrer_code'] = None
  
         # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
+        context['referred_users'] = [x.referred for x in Referral.objects.filter(referrer=user)]
 
         referreds = []
         tree_referred = get_tree_referred(user, level=0)
@@ -238,29 +216,7 @@ class InvestorAccountsView(TemplateView):
 
         
         # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
+        context['referred_users'] = [x.referred for x in Referral.objects.filter(referrer=user)] or []
 
         referreds = []
         tree_referred = get_tree_referred(user, level=0)
@@ -315,8 +271,8 @@ class IncompleteRegistrationsView(TemplateView):
 
     def get_referred_users(self, user):
         # Otteniamo gli utenti inviati da un utente
-        referral = Referral.objects.filter(referrer=user.id).first()
-        return referral.referred.all() if referral else []
+        referreds = [x.referred for x in Referral.objects.filter(referrer=user)] or []
+        return referreds
 
     def get_incomplete_registrations(self, user):
         incomplete_registrations = []
@@ -424,29 +380,7 @@ class MyNetworkView(TemplateView):
 
         
         # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
+        context['referred_users'] = [x.referred for x in Referral.objects.filter(referrer=user)]
 
         referreds = []
         tree_referred = get_tree_referred(user, level=0)
@@ -481,18 +415,18 @@ class UserReferredLevelView(View):
 
         # Ottieni il primo referral dell'utente
         if user.is_authenticated:
-            referral = Referral.objects.filter(referrer=user).first()
+            referrals = [x.referred for x in Referral.objects.filter(referrer=user)]
         else: 
-            referral = None
+            referrals = None
 
-        if not referral:
+        if not referrals:
             return JsonResponse({'error': 'No referrals found for this user'}, status=400)
 
         try:
             user_data = []
 
             # Itera su tutti gli utenti che sono stati referenziati direttamente da te
-            for referred in referral.referred.all():
+            for referred in referrals:
                 # Calcola il livello di ogni utente ricorsivamente
                 level = calculate_user_level(user)
 

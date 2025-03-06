@@ -85,30 +85,8 @@ class ProfileView(UpdateView):
   
         context['referral_unique_url'] = referral_code.unique_url if referral_code else None
         
-        # Retrieve all referrals made by the logged-in user
-        referred_users = []
-
-        referral = None
-        try:
-            # Recupera tutti i Referral dell'utente autenticato
-            referral = Referral.objects.filter(referrer=user).first() 
-            print(referral)
-            
-        except Exception:
-            referrer = None
-        
-        if referral != None:
-            # Itera sui Referral e aggiungi gli utenti collegati alla lista
-            for referred in referral.referred.all():
-                referred_users.append(referred)  # Usa .all() per ottenere gli oggetti collegati
-
-            # Debug: Stampa gli utenti invitati
-            print("Final referred users list:", referred_users)
-            # Debug: Print the final list of referred users
-            print("Final Referred Users:", referred_users)
-
-            # Pass the referred users to the context
-            context['referred_users'] = referred_users
+        # Pass the referred users to the context
+        context['referred_users'] = [x.referred for x in Referral.objects.filter(referrer=user)] or []
 
         referreds = []
         tree_referred = get_tree_referred(user, level=0)
