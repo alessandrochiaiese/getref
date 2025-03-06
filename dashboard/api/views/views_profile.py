@@ -140,22 +140,22 @@ class UserProfileDataView(View):
         # Dati generali di referral
         referral_data = {
             # Totale delle commissioni: supponendo che siano in ReferralTransaction o ReferralReward
-            'total_commission': ReferralTransaction.objects.filter(referral_codes__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
+            'total_commission': ReferralTransaction.objects.filter(referral_code__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
             
             # Totale delle ricompense (bonus e premi)
             #'total_rewards': (ReferralBonus.objects.filter(user=user).aggregate(Sum('bonus_value'))['bonus_value__sum'] or 0) + 
             #                (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
             
-            'total_rewards': (ReferralReward.objects.filter(referred_user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
+            'total_rewards': (ReferralReward.objects.filter(user=user).aggregate(Sum('reward_value'))['reward_value__sum'] or 0),
             
             # Numero di referral attivi
             'active_referrals': Referral.objects.filter(referrer=user).count(),
             
             # Conversioni totali da ReferralConversion
-            'total_conversions': ReferralConversion.objects.filter(referral_codes__user=user).count(),
+            'total_conversions': ReferralConversion.objects.filter(referral_code__user=user).count(),
 
             # Totale delle transazioni da ReferralTransaction
-            'total_transactions': ReferralTransaction.objects.filter(referral_codes__user=user).aggregate(Sum('transaction_amount'))['transaction_amount__sum'] or 0,
+            'total_transactions': ReferralTransaction.objects.filter(referral_code__user=user).aggregate(Sum('transaction_amount'))['transaction_amount__sum'] or 0,
         }
 
 
@@ -166,13 +166,13 @@ class UserProfileDataView(View):
         #active_campaigns = ReferralCampaign.objects.filter(is_active=True).values('id', 'campaign_name', 'start_date', 'end_date', 'goal', 'budget', 'spending_to_date', 'target_audience')
 
         # Statistiche dei referral
-        referral_stats = list(ReferralStats.objects.filter(referral_codes__user=user).values('period', 'click_count', 'conversion_count', 'total_rewards', 'average_conversion_value', 'highest_referral_earning'))
+        referral_stats = list(ReferralStats.objects.filter(referral_code__user=user).values('period', 'click_count', 'conversion_count', 'total_rewards', 'average_conversion_value', 'highest_referral_earning'))
 
         # Transazioni dei referral
         #referral_transactions = list(ReferralTransaction.objects.filter(referral_codes__in__referral_codes=referral_codes).values('referred_user', 'transaction_date', 'order_id', 'transaction_amount', 'currency', 'status', 'conversion_value', 'discount_value', 'coupon_code_used', 'channel'))
 
         # Audit dei referral
-        recent_audits = list(ReferralAudit.objects.filter(user=user).values('referral_codes', 'action_taken', 'action_date', 'user', 'ip_address', 'device_info', 'location'))
+        recent_audits = list(ReferralAudit.objects.filter(referral_code__user=user).values('referral_code', 'action_taken', 'action_date', 'user', 'ip_address', 'device_info', 'location'))
 
         # Codice referral unico dell'utente
         referral_code = ReferralCode.objects.filter(user=user).first()

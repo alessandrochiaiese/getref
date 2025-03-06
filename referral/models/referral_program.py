@@ -13,6 +13,7 @@ class ReferralProgram(models.Model):
         ('Cash', 'Cash'),
         ('Discount', 'Discount'),
         ('Points', 'Points'),
+        ('Percentual', 'Percentual'),
     ]
     name = models.CharField(max_length=255, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"))

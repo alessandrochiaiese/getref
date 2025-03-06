@@ -54,12 +54,12 @@ class ReferralProgramService():
             
             # Creazione ReferralBonus
             referral_bonus = ReferralBonus.objects.create(
-                referral_program=referral_program,
+                program=referral_program,
                 bonus_type="Cash",
                 bonus_value=200.00,
                 min_referrals_required=5,
                 bonus_date=datetime.datetime.now(),
-                expiry_date=datetime.datetime.now() + datetime.timedelta(years=1),
+                expiry_date=datetime.datetime.now() + datetime.timedelta(days=365),
                 max_usage=1,
                 eligibility_criteria="Completa almeno 5 referral"
             )

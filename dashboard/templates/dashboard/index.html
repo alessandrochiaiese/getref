@@ -255,9 +255,10 @@
                     <div class="form-group">
                         <label for="program-reward">{% trans "Tipo di Ricompensa" %}</label>
                         <select class="form-control" id="program-reward" required>
-                            <option value="discount">{% trans "Sconto" %}</option>
-                            <option value="cashback">{% trans "Cashback" %}</option>
-                            <option value="points">{% trans "Punti" %}</option>
+                            <option value="Discount">{% trans "Sconto" %}</option>
+                            <option value="Cashback">{% trans "Cashback" %}</option>
+                            <option value="Points">{% trans "Punti" %}</option>
+                            <option value="Percentual">{% trans "Percentuale" %}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -681,7 +682,8 @@
             const budget = document.getElementById('campaign-budget').value;
             const goal = document.getElementById('campaign-goal').value;
             const spendingToDate = document.getElementById('campaign-spending-to-date').value;
-            const programId = Array.from(document.getElementById('campaign-program').selectedOptions).map(option => option.value); // Get selected program IDs
+            const programId = document.getElementById('campaign-program').value; // Get selected program IDs
+            //const programId = Array.from(document.getElementById('campaign-program').selectedOptions).map(option => option.value); // Get selected program IDs
 
             // Create campaign data object
             const campaignData = {
@@ -692,9 +694,10 @@
                 budget: budget,
                 spending_to_date: spendingToDate,
                 target_audience: "",
-                programs: programId,  // Pass the selected program IDs
+                program: programId,  // Pass the selected program IDs
             };
-
+            console.error('campaignData:', campaignData);
+            console.error('programId:', programId);
             try {
                 const response = await fetch(`${window.location.origin}/api/v0/referral/campaigns/`, {
                     method: 'POST',
