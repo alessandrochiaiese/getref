@@ -159,6 +159,9 @@
               </div>
             </div>
 
+            <input type="hidden" name="is_redirect_enterprise" value="{{ is_redirect_enterprise }}">
+            <input type="hidden" name="is_redirect_customer" value="{{ is_redirect_customer }}">
+            {% if not is_redirect_enterprise and not is_redirect_customer %}
             <!-- Tipo di account (selezione tra utente e business) -->
             <div class="form-group">
               <label class="small mb-1">{% trans "Account Type" %}</label><br>
@@ -175,10 +178,11 @@
                 </label>
               </div>
             </div>
+            {% endif %}
 
             <!-- Form Business (visibile solo se "Business User" è selezionato) -->
             <div id="business-form-container">
-               
+
             </div>
 
 
@@ -213,11 +217,14 @@
 <!-- JavaScript per mostrare/nascondere il form business -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Riferimenti agli input radio
-    const userTypeRadio = document.getElementById('user_type');
-    const businessTypeRadio = document.getElementById('business_type');
     const businessFormContainer = document.getElementById('business-form-container');
+    let is_redirect_enterprise = document.querySelector('[name=is_redirect_enterprise]').value;
+    let is_redirect_customer = document.querySelector('[name=is_redirect_customer]').value;
 
+    is_redirect_enterprise = is_redirect_enterprise.toLowerCase();
+    is_redirect_customer = is_redirect_customer.toLowerCase();
+    console.log("is_redirect_enterprise: ", is_redirect_enterprise);
+    console.log("is_redirect_customer: ", is_redirect_customer);
     // Contenuto del form business come stringa HTML
     const businessFormHTML = `
               {% if business_form %}
@@ -295,23 +302,33 @@
               </div>
               {% endif %}
     `;
-    // Funzione per aggiornare la visibilità del form business
-    function toggleBusinessForm() {
-      if (businessTypeRadio.checked) {
-        businessFormContainer.innerHTML = businessFormHTML;
-        //businessFormContainer.style.display = 'block'; // Mostra il form business
-      } else {
-        businessFormContainer.innerHTML = "";
-        //businessFormContainer.style.display = 'none'; // Nascondi il form business
+
+    if (is_redirect_enterprise == 'true' && is_redirect_customer == 'false') {
+      businessFormContainer.innerHTML = businessFormHTML;
+    }
+    else if (is_redirect_enterprise == 'false' && is_redirect_customer == 'false') {
+      // Riferimenti agli input radio
+      const userTypeRadio = document.getElementById('user_type');
+      const businessTypeRadio = document.getElementById('business_type');
+      // Funzione per aggiornare la visibilità del form business
+      function toggleBusinessForm() {
+        if (businessTypeRadio.checked) {
+          businessFormContainer.innerHTML = businessFormHTML;
+          //businessFormContainer.style.display = 'block'; // Mostra il form business
+        } else {
+          businessFormContainer.innerHTML = "";
+          //businessFormContainer.style.display = 'none'; // Nascondi il form business
+        }
       }
+      // Imposta la visibilità all'inizio in base alla selezione
+      toggleBusinessForm();
+
+      // Aggiungi eventi per il cambiamento delle selezioni
+      userTypeRadio.addEventListener('change', toggleBusinessForm);
+      businessTypeRadio.addEventListener('change', toggleBusinessForm);
     }
 
-    // Imposta la visibilità all'inizio in base alla selezione
-    toggleBusinessForm();
 
-    // Aggiungi eventi per il cambiamento delle selezioni
-    userTypeRadio.addEventListener('change', toggleBusinessForm);
-    businessTypeRadio.addEventListener('change', toggleBusinessForm);
   });
 </script>
 {% endblock %}

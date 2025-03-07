@@ -62,8 +62,8 @@ def promote(request, promotion_link):
             'quantity': 1,
         }],
         mode='payment',
-        success_url=request.build_absolute_uri('/success/'),
-        cancel_url=request.build_absolute_uri('/cancel/'),
+        success_url=request.build_absolute_uri('/success/'), #promote/success/
+        cancel_url=request.build_absolute_uri('/cancel/'),   #promote/cancel/
     )
     # Seller get Bonus if more than 5 customer have made first bought
     referral = Referral.objects.filter(referred=customer).first()

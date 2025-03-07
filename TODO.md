@@ -151,7 +151,7 @@ register/business/
 
 [] in Register Page aggiungere i tab per 2 entità: utente e azienda
 [] considera di creare due Register Page: utente e azienda
-[] in Profile Page si potrebbe aggiungere i tab: se è utente niente tab perche ci saranno solo dati , invece
+[\] in Profile Page si potrebbe aggiungere i tab: se è utente niente tab perche ci saranno solo dati , invece
 [] in Profile il caricamento dell'immagine da errore
 [X] Enterprise list potrebbe essere visualizzata sotto forma di tabella ( MY NETWORK)
 [] Verificare che il link promozionale del prodotto permettti di tracciare la vendita del prodotto con eventuali bonus e commissioni
@@ -186,13 +186,13 @@ quindi magare fare la mia rete e la mia rete di aziende
 
 
 
-[] il link di referral utente e azienda dovrebbero essere piu brevi (in urls.py gli endpoint andrebbero rivisti e in views_profile.py l'endpoint per invitare l azienda e in view_accounts.py per invitare l'utente, (per il primo forse si potrebbe usare per internderci /e/ e invece per l'utente si potrebbe usare /)) 
+[X] il link di referral utente e azienda dovrebbero essere piu brevi (in urls.py gli endpoint andrebbero rivisti e in views_profile.py l'endpoint per invitare l azienda e in view_accounts.py per invitare l'utente, (per il primo forse si potrebbe usare per internderci /e/ e invece per l'utente si potrebbe usare /)) 
 
 
 
-[] Fare ultime modifiche alle API core (affiliate, referral), riguardo i valori di self.request in views per recuperare IP e dispositivo (che mancano probabilmente non ricordo)
+[\] Fare ultime modifiche alle API core (affiliate, referral), riguardo i valori di self.request in views per recuperare IP e dispositivo (che mancano probabilmente non ricordo)
 [] cancella app affiliate e referral e quindi modifica gli import nella logica e eventualmente il nome dell'instanza che non inizieranno più con Affiliate_ o Referral_
-[] collega il pagamento di un plans con le API (core)
+[\] collega il pagamento di un plans con le API (core)
 
 
 N.B.: 
@@ -202,6 +202,26 @@ N.B.:
 - 
 
 
+07.03.2025
+
+[X] quando invito con il link:
+- /c/?code=FHGRTED e si prova a registrasi come azienda non va bene
+- /e/?code=FHGRTED e si prova a registrasi come utente non va bene
+
+[] quando si crea un azienda con /create-enterprise/ si popolano i campi di ProfileBusiness(Business) con link referenziale /e/?code=HGTFYDS ma quando uso questo link per registrarmi come azienda (apparte l'errore precedente della todolist) i campi azienda dovrebbero essere già popolati
+
+[\] quando da utente normale vado in /profile/ ci sono anche i campi aziendali 
+[] quando uso:
+- /promote/<promo-link> 
+- /create-checkout-session/
+- /webhook/
+molte delle logiche comuni dovrebbero ripetersi
+[]
+[]
+[]
+[]
+[]
+[]
 
 
 

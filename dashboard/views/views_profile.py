@@ -77,6 +77,7 @@ class ProfileView(UpdateView):
         context['referral_code'] = referral_code.code if referral_code else None
 
         # Add the referrer code to the context
+        #context['referrer'] = referrer
         context['referrer_code'] = referrer_code.code if referrer_code else None
         context['referrer_first_name'] = referrer.first_name if referrer else ""
         context['referrer_last_name'] = referrer.last_name if referrer else ""
@@ -96,8 +97,13 @@ class ProfileView(UpdateView):
         print(list_referred)
         context['referred_leveled_users'] = list_referred
         
-        if profile.business:
+        if profile.business or profile.is_business==True:
+            context['is_business'] = profile.is_business
             context['business'] = profile.business
+        else:
+            context['is_business'] = profile.is_business
+            context['business'] = None
+            
         return context
     
     def form_valid(self, form):

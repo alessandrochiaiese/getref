@@ -83,13 +83,14 @@ class Business(models.Model):
     company_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Company Name"))
     email = models.EmailField(max_length=255, blank=True, null=True, verbose_name=_("Email"))
     
-class ProfileBusiness(Business):
+class ProfileBusiness(Business): #models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User"), related_name='profile_businesses')
     number_job_request_desidered_per_week = models.IntegerField(default=0, verbose_name=_("Number Job Request Desidered Per Week"))
     have_office_shop_to_receive_customers = models.BooleanField(default=False, verbose_name=_("Have Office Shop To Receive Customers"))
     
     # Business Attributes
-
+    #business = models.OneToOneField(Business, default=None, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("Business")) 
+    
     #referrl_code = models.OneToOneField(ReferralCode, null=True, on_delete=models.CASCADE, verbose_name=_("Referral Code"), related_name='referral_code')
     user_ower = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name=_("User Registered"), related_name='profile_registered')
     status = models.CharField(default="inactive", max_length=50, verbose_name=_("Status"))
