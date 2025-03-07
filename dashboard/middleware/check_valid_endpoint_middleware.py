@@ -20,7 +20,7 @@ class CheckValidEndpointMiddleware:
                 # Mostra la lista degli URL disponibili in formato JSON (solo admin)
                 available_urls = self.get_all_urls()
                 # Renderizza la lista delle URL come pagina HTML
-                return render(request, 'dashboard/admin/available_urls.html', {'available_urls': available_urls})
+                return render(request, 'admin/available_urls.html', {'available_urls': available_urls})
 
                 #return redirect(to='core_home')
                 #return JsonResponse({'available_urls': available_urls}, status=200)
