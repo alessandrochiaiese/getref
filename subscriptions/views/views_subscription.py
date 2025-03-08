@@ -382,6 +382,9 @@ def stripe_webhook(request):
         stripe_customer_id = checkout_session.get('customer')
         stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
 
+        print("mode: ", mode)
+        print("stripe_customer_id: ", stripe_customer_id)
+        print("stripe_subscription_id: ", stripe_subscription_id)
         #stripe_customer_id = session.get('stripe_customer_id')
         #stripe_subscription_id = session.get('stripe_subscription_id')
 
