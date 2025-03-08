@@ -39,7 +39,7 @@ def plans(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        if stripe_customer and stripe_customer.get('stripeSubscriptionId'):
+        if stripe_customer and stripe_customer.stripeSubscriptionId != '':
             # load stipe secret key here
             subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
             product = stripe.Product.retrieve(subscription.plan.product)
