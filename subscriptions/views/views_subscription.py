@@ -419,6 +419,7 @@ def stripe_webhook(request):
             elif mode == 'payment':
                 payment_intent_id = checkout_session.get('payment_intent')
                 payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+                print("payment_intent: ", payment_intent)
                 stripe_customer_id = payment_intent.get('customer', '')
                 stripe_customer = StripeCustomer.objects.create(
                     user=user,
