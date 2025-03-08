@@ -105,8 +105,8 @@
       </a>
     </li>
     {% endif %}
-    
-    {% if not user.is_business %}
+
+    {% if not user.profile.is_business %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false" aria-controls="customer">
         <i class="bi bi-building menu-icon"></i>
@@ -156,7 +156,7 @@
         <span class="menu-title">{% trans "My Network" %}</span>
       </a>
     </li>-->
-    {% if not user.is_business %}
+    {% if not user.profile.is_business %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#finances" aria-expanded="false" aria-controls="finances">
         <i class="bi bi-bank menu-icon"></i>
@@ -176,7 +176,7 @@
         <span class="menu-title">{% trans "My Profile" %}</span>
       </a>
     </li>
-    {% if not user.is_business %}
+    {% if not user.profile.is_business %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'plans' %}">
         <i class="bi bi-kanban menu-icon"></i>
