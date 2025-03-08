@@ -37,7 +37,7 @@ def test(request):
 def get_products_paid(user):
     purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
-    stripe_customers = StripeCustomer.objects.filter(user=user).all()
+    stripe_customers = StripeCustomer.objects.filter(user=user, stripeCustomerId="", stripeSubscriptionId="").all()
 
     if stripe_customers:
         for stripe_customer in stripe_customers:
@@ -88,29 +88,14 @@ def plans(request):
         products = list_plans(all_products)
 
         # Recupera tutte le sottoscrizioni dell'utente
-        #subscriptions = get_subscription_plan_paid(request.user)
+        subscriptions = get_subscription_plan_paid(request.user) or []
                     
-        subscriptions = []
-        # Recupera il cliente Stripe per l'utente
-        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
-        
-        if stripe_customers:
-            for stripe_customer in stripe_customers:
-                # load stipe secret key here
-                subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-                product = stripe.Product.retrieve(subscription.plan.product)
-                subscriptions.append({
-                    'status': subscription.status,
-                    'name': product.name,
-                    'description': product.description,
 
-                })
- 
-            return render(request, 'subscriptions/plans.html', {
-                'subscriptions': subscriptions,
-                'products': products,  # Pass the list of products to the template
-            })
-    
+        return render(request, 'subscriptions/plans.html', {
+            'subscriptions': subscriptions,
+            'products': products,  # Pass the list of products to the template
+        })
+
 
     except stripe.error.StripeError as e:
         print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
@@ -295,25 +280,8 @@ def get_prices_for_product(product_id):
 @login_required
 def purchased_products(request):
     try:
-        purchased_one_time_products = []
-        # Recupera il cliente Stripe per l'utente
-        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
-
-        if stripe_customers:
-            for stripe_customer in stripe_customers:
-                one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
-
-                for one_time_purchase in one_time_purchases:
-                    product_id = one_time_purchase.product_id
-                    product = stripe.Product.retrieve(product_id)
-                    price = get_prices_for_product(product_id)
-                    purchased_one_time_products.append({
-                        'name': product.name,
-                        'id': product.id,
-                        'description': product.description,
-                        'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                        'currency': 'EUR' #str(price['currency']).upper(),
-                    })
+        purchased_one_time_products = get_products_paid or []
+        
         # Passa i dati al template
         return render(request, 'subscriptions/purchased_products.html', {
             'purchased_one_time_products': purchased_one_time_products,  # Prodotti one-time acquistati
@@ -417,14 +385,10 @@ def stripe_webhook(request):
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
-                payment_intent_id = checkout_session.get('payment_intent')
-                payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
-                print("payment_intent: ", payment_intent)
-                stripe_customer_id = payment_intent.get('customer', '')
-                stripe_customer = StripeCustomer.objects.create(
+                stripe_customer = StripeCustomer.objects.get_or_create(
                     user=user,
-                    stripeCustomerId=stripe_customer_id,
-                    stripeSubscriptionId=stripe_subscription_id,
+                    stripeCustomerId="",
+                    stripeSubscriptionId="",
                 )
 
                 print(f"Using StripeCustomer for user {user.username}.")
