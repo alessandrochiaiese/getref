@@ -14,7 +14,7 @@ class ReferralSettings(models.Model):
     social_share_message = models.TextField(blank=True, verbose_name=_("Social Share Message"))
 
     def __str__(self):
-        return f"ReferralSettings for {self.user.name}"
+        return f"ReferralSettings for {self.user.username}"
 
     class Meta: 
         verbose_name = "Referral Settings"

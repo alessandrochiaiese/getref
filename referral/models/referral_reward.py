@@ -26,7 +26,7 @@ class ReferralReward(models.Model):
     reward_source = models.CharField(max_length=100, blank=True, verbose_name=_("Reward Source"))
 
     def __str__(self):
-        return f"ReferralReward for {self.user.name}"
+        return f"ReferralReward for {self.user.username}"
 
     class Meta:
         ordering = ['-date_awarded']

@@ -10,14 +10,30 @@
 
 {% block content %}
 <div class="container mt-5">
-    
-    <h1>Notifications</h1>   
+
+    <h1>Notifications</h1>
     {% if notifications %}
+
     {% for notification in notifications %}
+    <div class="row">
+        <div class="col-md-8">
+            <p>{{notification.message}}</p>
+        </div>
+        <div class="col-md-2">
+            <i>{{notification.date_sent}}</i>
+        </div>
+        <div class="col-md-2">
+            {% if notification.is_read %}
+            <i class="bi bi-check-all"></i>
+            {% else %}
+            <i class="bi bi-check"></i>
+            {% endif %}
+        </div>
+    </div>
     {% endfor %}
-    {% else %} 
+    {% else %}
     <p>{% trans "Non ci sono notifiche!" %}</p>
-    {% endif %} 
+    {% endif %}
 
 
 </div>

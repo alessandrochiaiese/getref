@@ -102,7 +102,7 @@ class ReferralNotification(models.Model):
     action_required = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Notification to {self.user.name}"
+        return f"Notification to {self.user.username}"
 
 
 class ReferralReward(models.Model):
@@ -177,7 +177,7 @@ class ReferralUser(models.Model):
     loyalty_points_earned = models.IntegerField()
 
     def __str__(self):
-        return f"Referral User {self.user.name}"
+        return f"Referral User {self.user.username}"
 
 
 class Referral(models.Model):

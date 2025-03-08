@@ -19,7 +19,7 @@ class ReferralNotification(models.Model):
     action_required = models.BooleanField(default=False, verbose_name=_("Action Required"))
 
     def __str__(self):
-        return f"ReferralNotification to {self.user.name}"
+        return f"ReferralNotification to {self.user.username}"
 
     class Meta:
         ordering = ['-date_sent']
