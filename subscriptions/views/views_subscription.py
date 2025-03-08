@@ -59,6 +59,12 @@ def plans(request):
             'products': products,  # Pass the list of products to the template
         })
 
+    except stripe.error.StripeError as e:
+        print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
+        return {'error': f"Stripe Error: {str(e)}"}
+    except Exception as e:
+        print(f"Errore generico: {str(e)}")  # Log di errore generico
+        return {'error': str(e)}
     except StripeCustomer.DoesNotExist:
         # If the user doesn't have an active subscription
         products = list_stripe_all_products()
@@ -412,15 +418,15 @@ def stripe_webhook(request):
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
                 # Cerca se esiste già un StripeCustomer per l'utente
-                stripe_customer = StripeCustomer.objects.filter(user=user).first()
+                #stripe_customer = StripeCustomer.objects.filter(user=user).first()
 
                 # Se non esiste, crealo
-                if not stripe_customer:
-                    stripe_customer = StripeCustomer.objects.create(
-                        user=user,
-                        stripeCustomerId='',
-                        stripeSubscriptionId='',
-                    )
+                #if not stripe_customer:
+                #    stripe_customer = StripeCustomer.objects.create(
+                #        user=user,
+                #        stripeCustomerId='',
+                #        stripeSubscriptionId='',
+                #    )
 
                 print(f"Using StripeCustomer for user {user.username}.")
 
