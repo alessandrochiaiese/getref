@@ -385,10 +385,10 @@ def stripe_webhook(request):
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
-                payment_intent_id = checkout_session.get('payment_intent')  # Assicurati che ci sia un payment_intent
-                payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
-                print(f"payment_intent: {payment_intent}")
-                stripe_customer_id = payment_intent.get('customer', "")
+                #payment_intent_id = checkout_session.get('payment_intent')  # Assicurati che ci sia un payment_intent
+                #payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+                #print(f"payment_intent: {payment_intent}")
+                #stripe_customer_id = payment_intent.get('customer', "")
                 stripe_customer = StripeCustomer.objects.get_or_create(
                     user=user,
                     stripeCustomerId="",
