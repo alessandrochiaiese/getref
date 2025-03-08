@@ -37,7 +37,7 @@ def test(request):
 def get_products_paid(user):
     purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
-    stripe_customers = StripeCustomer.objects.filter(user=user, stripeCustomerId="", stripeSubscriptionId="").all()
+    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId="").all()
 
     if stripe_customers:
         for stripe_customer in stripe_customers:
@@ -243,7 +243,8 @@ def create_checkout_session(request):
                 line_items=[{
                     'price': price_id,
                     'quantity': 1,
-                }]
+                }],
+                customer_creation='always',  # "if_required" # Forza sempre la creazione del cliente
             )
 
             return JsonResponse({'sessionId': checkout_session.id})
@@ -363,7 +364,7 @@ def stripe_webhook(request):
                 stripe_customer = StripeCustomer.objects.create(
                     user=user,
                     stripeCustomerId=stripe_customer_id,
-                    stripeSubscriptionId=stripe_subscription_id,
+                    stripeSubscriptionId=stripe_subscription_id
                 )
 
                 # Verifica che i valori non siano nulli
@@ -381,7 +382,7 @@ def stripe_webhook(request):
                     stripe_subscription_id=stripe_subscription_id,
                     product_name=product.name,#BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
                     product_id=stripe_subscription.plan.product,
-                    status=stripe_subscription.status,
+                    status=stripe_subscription.status
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
@@ -391,8 +392,8 @@ def stripe_webhook(request):
                 #stripe_customer_id = payment_intent.get('customer', "")
                 stripe_customer = StripeCustomer.objects.get_or_create(
                     user=user,
-                    stripeCustomerId="",
-                    stripeSubscriptionId="",
+                    stripeCustomerId=stripe_subscription_id,
+                    stripeSubscriptionId=stripe_subscription_id
                 )
 
                 print(f"Using StripeCustomer for user {user.username}.")
@@ -418,7 +419,7 @@ def stripe_webhook(request):
                     product_id=one_time_product_id,
                     price_amount=price_amount,
                     currency=currency,
-                    status='completed',
+                    status='completed'
                 )
                 print(f"One-time purchase saved for {user.username}.")
 
