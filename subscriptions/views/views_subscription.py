@@ -45,7 +45,7 @@ def plans(request):
         products = list_plans(all_products)
 
         # Retrieve the subscription & product
-        stripe_customers = StripeCustomer.objects.filter(user=request.user)
+        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
         if stripe_customers:
             subscriptions = []
             for stripe_customer in stripe_customers:
