@@ -105,13 +105,7 @@ def plans(request):
                     'description': product.description,
 
                 })
-
-        if len(subscriptions)>=1:
-            # Feel free to fetch any additional data from 'subscription' or 'product'
-            # https://stripe.com/docs/api/subscriptions/object
-            # https://stripe.com/docs/api/products/object
-
-
+ 
             return render(request, 'subscriptions/plans.html', {
                 'subscriptions': subscriptions,
                 'products': products,  # Pass the list of products to the template
