@@ -38,9 +38,9 @@ def test(request):
 def plans(request):
     try:
         
-        if StripeCustomer.objects.exists(user=request.user):
-            # Retrieve the subscription & product
-            stripe_customer = StripeCustomer.objects.get(user=request.user)
+        # Retrieve the subscription & product
+        stripe_customer = StripeCustomer.objects.get(user=request.user)
+        if stripe_customer:
             # load stipe secret key here
             subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
             product = stripe.Product.retrieve(subscription.plan.product)
@@ -69,10 +69,18 @@ def plans(request):
 
     except stripe.error.StripeError as e:
         print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
-        return {'error': f"Stripe Error: {str(e)}"}
+        # If the user doesn't have an active subscription
+        products = list_stripe_all_products()
+        return render(request, 'subscriptions/plans.html', {
+            'products': products,
+        })
     except Exception as e:
         print(f"Errore generico: {str(e)}")  # Log di errore generico
-        return {'error': str(e)}
+        # If the user doesn't have an active subscription
+        products = list_stripe_all_products()
+        return render(request, 'subscriptions/plans.html', {
+            'products': products,
+        })
     except StripeCustomer.DoesNotExist:
         # If the user doesn't have an active subscription
         products = list_stripe_all_products()
