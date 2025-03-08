@@ -397,16 +397,11 @@ def stripe_webhook(request):
             # Handle subscription and one-time payments
             if mode == 'subscription':
                 # Verifica se il customer esiste o lo crea
-                stripe_customer, created = StripeCustomer.objects.get_or_create(
+                stripe_customer = StripeCustomer.objects.create(
                     user=user,
                     stripeCustomerId=stripe_customer_id,
                     stripeSubscriptionId=stripe_subscription_id,
                 )
-
-                if created:
-                    print(f"StripeCustomer for user {user.username} created.")
-                else:
-                    print(f"StripeCustomer for user {user.username} already exists.")
 
                 # Verifica che i valori non siano nulli
                 if not stripe_customer_id: # or not stripe_subscription_id:
@@ -418,7 +413,7 @@ def stripe_webhook(request):
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
                 product = stripe.Product.retrieve(stripe_subscription.plan.product) #BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
 
-                subscription = StripeSubscription.objects.get_or_create(
+                subscription = StripeSubscription.objects.create(
                     stripe_customer=stripe_customer,
                     stripe_subscription_id=stripe_subscription_id,
                     product_name=product.name,#BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
@@ -427,16 +422,11 @@ def stripe_webhook(request):
                 )
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
-                # Cerca se esiste già un StripeCustomer per l'utente
-                stripe_customer = StripeCustomer.objects.filter(user=user).first()
-
-                # Se non esiste, crealo
-                if not stripe_customer:
-                    stripe_customer = StripeCustomer.objects.create(
-                        user=user,
-                        stripeCustomerId=stripe_customer_id,
-                        stripeSubscriptionId='',
-                    )
+                stripe_customer = StripeCustomer.objects.create(
+                    user=user,
+                    stripeCustomerId=stripe_customer_id,
+                    stripeSubscriptionId='',
+                )
 
                 print(f"Using StripeCustomer for user {user.username}.")
 
@@ -455,7 +445,7 @@ def stripe_webhook(request):
                 currency = line_item.get('currency').upper()
 
                 # Save the one-time purchase
-                one_time_purchase = OneTimePurchase.objects.get_or_create(
+                one_time_purchase = OneTimePurchase.objects.create(
                     stripe_customer=stripe_customer,
                     product_name=one_time_product_name,
                     product_id=one_time_product_id,
