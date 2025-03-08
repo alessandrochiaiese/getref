@@ -41,7 +41,7 @@ def get_products_paid(user):
 
     if stripe_customers:
         for stripe_customer in stripe_customers:
-            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer, stripeSubscriptionId="").all()
+            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
 
             for one_time_purchase in one_time_purchases:
                 product_id = one_time_purchase.product_id
@@ -351,7 +351,7 @@ def stripe_webhook(request):
 
         # Ottieni il customer dalla sessione
         mode = checkout_session.get('mode')
-        stripe_customer_id = checkout_session.get('customer')
+        stripe_customer_id = checkout_session.get('customer', '')
         stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
 
         print("mode: ", mode)
@@ -397,7 +397,7 @@ def stripe_webhook(request):
                 stripe_customer = StripeCustomer.objects.create(
                     user=user,
                     stripeCustomerId=stripe_customer_id,
-                    stripeSubscriptionId="",
+                    stripeSubscriptionId=stripe_subscription_id,
                 )
 
                 print(f"Using StripeCustomer for user {user.username}.")
