@@ -374,7 +374,7 @@ def stripe_webhook(request):
 
         # Ottieni il customer dalla sessione
         mode = checkout_session.get('mode')
-        stripe_customer_id = checkout_session.get('customer')
+        stripe_customer_id = checkout_session.get('customer', '')
         stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
 
         print("mode: ", mode)
