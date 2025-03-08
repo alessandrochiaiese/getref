@@ -463,17 +463,17 @@ def stripe_webhook(request):
                 print(f"One-time purchase saved for {user.username}.")
 
             # Se il prodotto è stato promosso da un venditore
-            promotion_link = session.get('metadata', {}).get('promotion_link')
+            #promotion_link = session.get('metadata', {}).get('promotion_link')
 
-            if promotion_link:
-                promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
-                if promotion:
-                    # Crea una nuova vendita promozionale
-                    PromotionSale.objects.create(
-                        promotion=promotion,
-                        user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
-                        amount=session['amount_total'] / 100,  # Prezzo in dollari
-                    )
+            #if promotion_link:
+            #    promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
+            #    if promotion:
+            #        # Crea una nuova vendita promozionale
+            #        PromotionSale.objects.create(
+            #            promotion=promotion,
+            #            user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
+            #            amount=session['amount_total'] / 100,  # Prezzo in dollari
+            #        )
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")
