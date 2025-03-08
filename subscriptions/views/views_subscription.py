@@ -39,25 +39,32 @@ def plans(request):
     try:
         # Retrieve the subscription & product
         stripe_customer = StripeCustomer.objects.get(user=request.user)
-        # load stipe secret key here
-        subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-        product = stripe.Product.retrieve(subscription.plan.product)
+        if stripe_customer and stripe_customer.get('stripeSubscriptionId'):
+            # load stipe secret key here
+            subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+            product = stripe.Product.retrieve(subscription.plan.product)
 
-        # Feel free to fetch any additional data from 'subscription' or 'product'
-        # https://stripe.com/docs/api/subscriptions/object
-        # https://stripe.com/docs/api/products/object
+            # Feel free to fetch any additional data from 'subscription' or 'product'
+            # https://stripe.com/docs/api/subscriptions/object
+            # https://stripe.com/docs/api/products/object
 
-        # Retrieve all available products
-        all_products = list_stripe_all_products()
-        
-        # Retrieve all available plans
-        products = list_plans(all_products)
+            # Retrieve all available products
+            all_products = list_stripe_all_products()
+            
+            # Retrieve all available plans
+            products = list_plans(all_products)
 
-        return render(request, 'subscriptions/plans.html', {
-            'subscription': subscription,
-            'product': product,
-            'products': products,  # Pass the list of products to the template
-        })
+            return render(request, 'subscriptions/plans.html', {
+                'subscription': subscription,
+                'product': product,
+                'products': products,  # Pass the list of products to the template
+            })
+        else:
+            # If the user doesn't have an active subscription
+            products = list_stripe_all_products()
+            return render(request, 'subscriptions/plans.html', {
+                'products': products,
+            })
 
     except stripe.error.StripeError as e:
         print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
@@ -418,15 +425,15 @@ def stripe_webhook(request):
                 print(f"Subscription saved for {user.username}.")
             elif mode == 'payment':
                 # Cerca se esiste già un StripeCustomer per l'utente
-                #stripe_customer = StripeCustomer.objects.filter(user=user).first()
+                stripe_customer = StripeCustomer.objects.filter(user=user).first()
 
                 # Se non esiste, crealo
-                #if not stripe_customer:
-                #    stripe_customer = StripeCustomer.objects.create(
-                #        user=user,
-                #        stripeCustomerId='',
-                #        stripeSubscriptionId='',
-                #    )
+                if not stripe_customer:
+                    stripe_customer = StripeCustomer.objects.create(
+                        user=user,
+                        stripeCustomerId=stripe_customer_id,
+                        stripeSubscriptionId='',
+                    )
 
                 print(f"Using StripeCustomer for user {user.username}.")
 
