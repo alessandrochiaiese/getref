@@ -35,11 +35,11 @@ def test(request):
         return render(request, 'subscriptions/test.html')
 
 def get_products_paid(user):
+    purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
     stripe_customers = StripeCustomer.objects.filter(user=user).all()
 
     if stripe_customers:
-        purchased_one_time_products = []
         for stripe_customer in stripe_customers:
             one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
 
@@ -58,11 +58,11 @@ def get_products_paid(user):
     return []
 
 def get_subscription_plan_paid(user):
+    subscriptions = []
     # Recupera il cliente Stripe per l'utente
     stripe_customers = StripeCustomer.objects.filter(user=user).all()
     
     if stripe_customers:
-        subscriptions = []
         for stripe_customer in stripe_customers:
             # load stipe secret key here
             subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
@@ -88,8 +88,24 @@ def plans(request):
         products = list_plans(all_products)
 
         # Recupera tutte le sottoscrizioni dell'utente
-        subscriptions = get_subscription_plan_paid(request.user)
-                
+        #subscriptions = get_subscription_plan_paid(request.user)
+                    
+        subscriptions = []
+        # Recupera il cliente Stripe per l'utente
+        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
+        
+        if stripe_customers:
+            for stripe_customer in stripe_customers:
+                # load stipe secret key here
+                subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+                product = stripe.Product.retrieve(subscription.plan.product)
+                subscriptions.append({
+                    'status': subscription.status,
+                    'name': product.name,
+                    'description': product.description,
+
+                })
+
         if len(subscriptions)>=1:
             # Feel free to fetch any additional data from 'subscription' or 'product'
             # https://stripe.com/docs/api/subscriptions/object
@@ -285,14 +301,27 @@ def get_prices_for_product(product_id):
 @login_required
 def purchased_products(request):
     try:
-        # Recupera tutte le sottoscrizioni dell'utente
-        subscriptions = get_subscription_plan_paid(request.user)
-        # Recupera tutte i prodotti acquistati dell'utente
-        purchased_one_time_products = get_products_paid(request.user)
+        purchased_one_time_products = []
+        # Recupera il cliente Stripe per l'utente
+        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
 
+        if stripe_customers:
+            for stripe_customer in stripe_customers:
+                one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
+
+                for one_time_purchase in one_time_purchases:
+                    product_id = one_time_purchase.product_id
+                    product = stripe.Product.retrieve(product_id)
+                    price = get_prices_for_product(product_id)
+                    purchased_one_time_products.append({
+                        'name': product.name,
+                        'id': product.id,
+                        'description': product.description,
+                        'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
+                        'currency': 'EUR' #str(price['currency']).upper(),
+                    })
         # Passa i dati al template
         return render(request, 'subscriptions/purchased_products.html', {
-            'subscriptions': subscriptions,  # Piani ricorrenti
             'purchased_one_time_products': purchased_one_time_products,  # Prodotti one-time acquistati
         })
     
@@ -307,7 +336,6 @@ def purchased_products(request):
         pass
 
     return render(request, 'subscriptions/purchased_products.html', {
-        'subscriptions': [],
         'purchased_one_time_products': [],
     })
 

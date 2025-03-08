@@ -11,27 +11,7 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h4>{% trans "Your Active Subscriptions" %}</h4>
-  {% if subscriptions %}
-  <div class="row">
-    {% for subscription in subscriptions %}
-    <div class="col-md-4 m-5">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{% trans "Subscription Plan" %}: {{ subscription.name }}</h5>
-          <p class="card-text">{% trans "Status" %}: {{ subscription.status }}</p>
-          <p class="card-text">{% trans "Description" %}: {{ subscription.description }}</p>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% else %}
-  <p>{% trans "You do not have any active subscriptions." %}</p>
-  {% endif %}
-
-  <hr>
-
+  
   <h4>Purchased One-Time Products</h4>
   {% if purchased_one_time_products %}
   <div class="row">
