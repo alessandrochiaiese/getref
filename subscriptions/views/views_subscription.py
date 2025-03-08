@@ -35,11 +35,11 @@ def test(request):
         return render(request, 'subscriptions/test.html')
 
 def get_products_paid(user):
-    purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
     stripe_customers = StripeCustomer.objects.filter(user=user).all()
 
     if stripe_customers:
+        purchased_one_time_products = []
         for stripe_customer in stripe_customers:
             one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
 
@@ -54,15 +54,15 @@ def get_products_paid(user):
                     'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
                     'currency': 'EUR' #str(price['currency']).upper(),
                 })
-    return purchased_one_time_products
-
+        return purchased_one_time_products
+    return []
 
 def get_subscription_plan_paid(user):
-    subscriptions = []
     # Recupera il cliente Stripe per l'utente
     stripe_customers = StripeCustomer.objects.filter(user=user).all()
     
     if stripe_customers:
+        subscriptions = []
         for stripe_customer in stripe_customers:
             # load stipe secret key here
             subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
@@ -74,7 +74,8 @@ def get_subscription_plan_paid(user):
 
             })
 
-    return subscriptions      
+        return subscriptions    
+    return []  
 
 
 @login_required
