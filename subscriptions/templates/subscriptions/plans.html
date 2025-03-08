@@ -10,21 +10,25 @@
 
 {% block content %}
 <div class="container mt-5">
-  <!-- Active Subscription -->
-  {% if subscription.status == "active" %}
-  <h4>Your active subscription:</h4>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text">
-        {{ product.description }}
-      </p>
+  {% for subscription in subscriptions %}
+    <!-- Active Subscription -->
+    {% if subscription.status == "active" %}
+    <h4>Your active subscription:</h4>
+    <div class="col-md-4 m-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ subscription.name }}</h5>
+          <p class="card-text">
+            {{ subscription.description }}
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-  {% else %}
-  <h4>No active subscription. Choose a plan to subscribe to:</h4>
-  {% endif %}
-  
+    {% else %}
+    <h4>No active subscription. Choose a plan to subscribe to:</h4>
+    {% endif %}
+  {% endfor %}
+
   <hr>
 
   <!-- Display All Available Plans -->
