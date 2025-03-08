@@ -34,6 +34,48 @@ def test(request):
     except StripeCustomer.DoesNotExist:
         return render(request, 'subscriptions/test.html')
 
+def get_products_paid(user):
+    purchased_one_time_products = []
+    # Recupera il cliente Stripe per l'utente
+    stripe_customers = StripeCustomer.objects.filter(user=user).all()
+
+    if stripe_customers:
+        for stripe_customer in stripe_customers:
+            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer, stripeSubscriptionId="").all()
+
+            for one_time_purchase in one_time_purchases:
+                product_id = one_time_purchase.product_id
+                product = stripe.Product.retrieve(product_id)
+                price = get_prices_for_product(product_id)
+                purchased_one_time_products.append({
+                    'name': product.name,
+                    'id': product.id,
+                    'description': product.description,
+                    'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
+                    'currency': 'EUR' #str(price['currency']).upper(),
+                })
+    return purchased_one_time_products
+
+
+def get_subscription_plan_paid(user):
+    subscriptions = []
+    # Recupera il cliente Stripe per l'utente
+    stripe_customers = StripeCustomer.objects.filter(user=user).all()
+    
+    if stripe_customers:
+        for stripe_customer in stripe_customers:
+            # load stipe secret key here
+            subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+            product = stripe.Product.retrieve(subscription.plan.product)
+            subscriptions.append({
+                'status': subscription.status,
+                'name': product.name,
+                'description': product.description,
+
+            })
+
+    return subscriptions      
+
 
 @login_required
 def plans(request):
@@ -44,22 +86,10 @@ def plans(request):
         # Retrieve all available plans
         products = list_plans(all_products)
 
-        # Retrieve the subscription & product
-        stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
-        print("stripe_customers :", stripe_customers)
-        if stripe_customers:
-            subscriptions = []
-            for stripe_customer in stripe_customers:
-                # load stipe secret key here
-                subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-                product = stripe.Product.retrieve(subscription.plan.product)
-                subscriptions.append({
-                    'status': subscription.status,
-                    'name': product.name,
-                    'description': product.description,
-
-                })
+        # Recupera tutte le sottoscrizioni dell'utente
+        subscriptions = get_subscription_plan_paid(request.user)
                 
+        if len(subscriptions)>=1:
             # Feel free to fetch any additional data from 'subscription' or 'product'
             # https://stripe.com/docs/api/subscriptions/object
             # https://stripe.com/docs/api/products/object
@@ -254,97 +284,31 @@ def get_prices_for_product(product_id):
 @login_required
 def purchased_products(request):
     try:
-        # Recupera il cliente Stripe per l'utente
-        stripe_customer = StripeCustomer.objects.get(user=request.user)
-
         # Recupera tutte le sottoscrizioni dell'utente
-        subscriptions = stripe.Subscription.list(customer=stripe_customer.stripeCustomerId, status='active')
-        print(f"Subscriptions: {subscriptions}")  # Debug: visualizzare le sottoscrizioni
-
-        one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
-
-        purchased_one_time_products = []
-        for one_time_purchase in one_time_purchases:
-            product_id = one_time_purchase.product_id
-            product = stripe.Product.retrieve(product_id)
-            price = get_prices_for_product(product_id)
-            purchased_one_time_products.append({
-                'name': product.name,
-                'id': product.id,
-                'description': product.description,
-                'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                'currency': 'EUR' #str(price['currency']).upper(),
-            })
-
-        # Recupera tutte le sessioni di checkout completate (per i prodotti one-time)
-        #checkout_sessions = stripe.checkout.Session.list(customer=stripe_customer.stripeCustomerId, status='complete')
-        #print(f"Checkout Sessions: {checkout_sessions}")  # Debug: visualizzare le sessioni di checkout
-
-        """# Recupera tutti i pagamenti completati per i prodotti one-time
-        payment_intents = stripe.PaymentIntent.list(customer=stripe_customer.stripeCustomerId) #, status='succeeded')
-        print(f"Payment Intents: {payment_intents}")  # Debug
-
-        # Lista per i prodotti one-time acquistati
-        purchased_one_time_products = []
-        for payment_intent in payment_intents['data']:
-            charges = payment_intent['charges']['data']
-            for charge in charges:
-                # Stripe memorizza il prodotto all'interno dei Metadata del PaymentIntent
-                if 'product_id' in charge['metadata']:
-                    product_id = charge['metadata']['product_id']
-                    product = stripe.Product.retrieve(product_id)
-                    purchased_one_time_products.append({
-                        'name': product.name,
-                        'id': product.id,
-                        'description': product.description,
-                        'amount': charge['amount'] / 100,  # Converti da cent a euro
-                        'currency': charge['currency'].upper(),
-                    })
-
-        # Verifica ogni sessione di checkout per i prodotti acquistati
-        for session in checkout_sessions['data']:
-            line_items = stripe.checkout.Session.list_line_items(session['id'])
-            print(f"Line items for session {session.id}: {line_items}")  # Debug: visualizzare i line items della sessione
-            for item in line_items['data']:
-                # Verifica se il prodotto è one-time (non ha un prezzo ricorrente)
-                if 'recurring' not in item['price']:
-                    print(f"One-time product found: {item['price']['product']}")  # Debug: visualizzare il prodotto one-time
-                    product = stripe.Product.retrieve(item['price']['product'])
-                    purchased_one_time_products.append({
-                        'name': product.name,
-                        'id': product.id,
-                        'description': product.description,
-                        'amount': item['amount_total'] / 100,  # Converti da cent a euro
-                        'currency': item['currency'].upper(),
-                        'quantity': item['quantity']
-                    })"""
-
-        # Ora recuperiamo i piani di abbonamento (recurring)
-        purchased_subscriptions = []
-        for subscription in subscriptions['data']:
-            product = stripe.Product.retrieve(subscription['plan']['product'])
-            purchased_subscriptions.append({
-                'subscription': subscription,
-                'product': product,
-            })
+        subscriptions = get_subscription_plan_paid(request.user)
+        # Recupera tutte i prodotti acquistati dell'utente
+        purchased_one_time_products = get_products_paid(request.user)
 
         # Passa i dati al template
         return render(request, 'subscriptions/purchased_products.html', {
-            'subscriptions': purchased_subscriptions,  # Piani ricorrenti
+            'subscriptions': subscriptions,  # Piani ricorrenti
             'purchased_one_time_products': purchased_one_time_products,  # Prodotti one-time acquistati
         })
     
-    except StripeCustomer.DoesNotExist:
-        return render(request, 'subscriptions/purchased_products.html', {
-            'subscriptions': [],
-            'purchased_one_time_products': [],
-        })
+    except stripe.error.StripeError as e:
+        print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
+        pass
     except Exception as e:
-        print(f"Errore recuperando i prodotti acquistati: {str(e)}")
-        return render(request, 'subscriptions/purchased_products.html', {
-            'subscriptions': [],
-            'purchased_one_time_products': [],
-        })
+        print(f"Errore generico: {str(e)}")  # Log di errore generico
+        pass
+    except StripeCustomer.DoesNotExist:
+        # If the user doesn't have an active subscription
+        pass
+
+    return render(request, 'subscriptions/purchased_products.html', {
+        'subscriptions': [],
+        'purchased_one_time_products': [],
+    })
 
 
 @login_required
@@ -433,7 +397,7 @@ def stripe_webhook(request):
                 stripe_customer = StripeCustomer.objects.create(
                     user=user,
                     stripeCustomerId=stripe_customer_id,
-                    stripeSubscriptionId='',
+                    stripeSubscriptionId="",
                 )
 
                 print(f"Using StripeCustomer for user {user.username}.")
