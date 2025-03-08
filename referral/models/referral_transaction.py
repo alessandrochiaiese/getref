@@ -7,10 +7,11 @@ from payments.models.order import Order
 User = get_user_model()
 
 class ReferralTransaction(models.Model):
-    referral_code = models.ForeignKey('ReferralCode', on_delete=models.CASCADE, verbose_name=_("Referral Code"), related_name='referra_transaction_referral_code')
+    referral_code = models.ForeignKey('ReferralCode', null=True, on_delete=models.CASCADE, verbose_name=_("Referral Code"), related_name='referra_transaction_referral_code')
     referred_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("User"), related_name='referra_transaction_user')
     transaction_date = models.DateField(auto_now_add=True, verbose_name=_("Transaction Date"))
     order = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, verbose_name=_("Order"))
+    #order = models.CharField(null=True, verbose_name=_("Order"))
     transaction_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Amount"))
     currency = models.CharField(default='EUR', max_length=10, verbose_name=_("Currency"))
     status = models.CharField(max_length=50, verbose_name=_("Status"))

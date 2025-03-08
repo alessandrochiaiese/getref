@@ -1,5 +1,6 @@
 #DOMAIN='https://affiliate.getcall.it'
 from getref.settings import DOMAIN
+from referral.models.referral_transaction import ReferralTransaction
 import stripe
 from getref import settings
 from django.contrib.auth.decorators import login_required
@@ -36,57 +37,53 @@ def test(request):
 
 @login_required
 def plans(request):
-    try:
+    try:        
+        # Retrieve all available products
+        all_products = list_stripe_all_products()
         
-        # Retrieve the subscription & product
-        stripe_customer = StripeCustomer.objects.get(user=request.user)
-        if stripe_customer:
-            # load stipe secret key here
-            subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
-            product = stripe.Product.retrieve(subscription.plan.product)
+        # Retrieve all available plans
+        products = list_plans(all_products)
 
+        # Retrieve the subscription & product
+        stripe_customers = StripeCustomer.objects.filter(user=request.user)
+        if stripe_customers:
+            subscriptions = []
+            for stripe_customer in stripe_customers:
+                # load stipe secret key here
+                subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+                product = stripe.Product.retrieve(subscription.plan.product)
+                subscriptions.append({
+                    'status': subscription.status,
+                    'name': product.name,
+                    'description': product.description,
+
+                })
+                
             # Feel free to fetch any additional data from 'subscription' or 'product'
             # https://stripe.com/docs/api/subscriptions/object
             # https://stripe.com/docs/api/products/object
 
-            # Retrieve all available products
-            all_products = list_stripe_all_products()
-            
-            # Retrieve all available plans
-            products = list_plans(all_products)
 
             return render(request, 'subscriptions/plans.html', {
-                'subscription': subscription,
-                'product': product,
+                'subscriptions': subscriptions,
                 'products': products,  # Pass the list of products to the template
             })
-        else:
-            # If the user doesn't have an active subscription
-            products = list_stripe_all_products()
-            return render(request, 'subscriptions/plans.html', {
-                'products': products,
-            })
+    
 
     except stripe.error.StripeError as e:
         print(f"Errore Stripe: {str(e)}")  # Log di errore Stripe
-        # If the user doesn't have an active subscription
-        products = list_stripe_all_products()
-        return render(request, 'subscriptions/plans.html', {
-            'products': products,
-        })
+        pass
     except Exception as e:
         print(f"Errore generico: {str(e)}")  # Log di errore generico
-        # If the user doesn't have an active subscription
-        products = list_stripe_all_products()
-        return render(request, 'subscriptions/plans.html', {
-            'products': products,
-        })
+        pass
     except StripeCustomer.DoesNotExist:
         # If the user doesn't have an active subscription
-        products = list_stripe_all_products()
-        return render(request, 'subscriptions/plans.html', {
-            'products': products,
-        })
+        pass
+
+    return render(request, 'subscriptions/plans.html', {
+        'products': products,
+    })
+
 
 @login_required
 def products(request):
@@ -466,7 +463,7 @@ def stripe_webhook(request):
 
             # Se il prodotto è stato promosso da un venditore
             #promotion_link = session.get('metadata', {}).get('promotion_link')
-
+            #ReferralTransaction.objects.create()
             #if promotion_link:
             #    promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
             #    if promotion:
