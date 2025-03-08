@@ -46,6 +46,7 @@ def plans(request):
 
         # Retrieve the subscription & product
         stripe_customers = StripeCustomer.objects.filter(user=request.user).all()
+        print("stripe_customers :", stripe_customers)
         if stripe_customers:
             subscriptions = []
             for stripe_customer in stripe_customers:
@@ -155,6 +156,7 @@ def list_products(products):
             product_list.append(product)
     return product_list
 """
+
 def list_plans(products):
     product_list = []
     for product in products:
