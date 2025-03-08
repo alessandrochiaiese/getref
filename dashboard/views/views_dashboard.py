@@ -87,7 +87,6 @@ class HomeView(TemplateView):
         print(tree_referred)
         print(list_referred)
         context['referred_leveled_users'] = list_referred
-        context['notifications'] = ReferralNotification.objects.filter(user=user) or []
         
         
         return context
