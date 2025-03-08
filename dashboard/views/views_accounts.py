@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChan
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import TemplateView 
@@ -20,8 +21,6 @@ from dashboard.forms import *
 import logging
 
 logger = logging.getLogger(__name__)
-
-
 
 #####################
 # Register & Login  #
@@ -132,6 +131,9 @@ class RegisterView(View):
         is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
         is_referral_redirect = request.session.get('is_referral_redirect', False)
         
+        influencer_group, created = Group.objects.get_or_create(name='Influenzer')
+        enterprise_group, created = Group.objects.get_or_create(name='Enterprise')
+
         business_form = None
         form = None
         user = None
@@ -140,6 +142,8 @@ class RegisterView(View):
             form = self.form_class(self.request.POST)
             if form.is_valid():
                 user = form.save()
+                user.groups.add(influencer_group)
+                user.save()
 
                 if referral_code_used and not is_enterprise_redirect and is_referral_redirect:
                     # Trattamento codice referral utente
@@ -172,6 +176,9 @@ class RegisterView(View):
             business_form = self.business_form_class(request.POST, request.FILES)
             if form.is_valid() and business_form.is_valid():
                 user = form.save()
+                user.groups.add(enterprise_group)
+                user.save()
+
                 business = business_form.save() #save(commit=False)
                 
                 profile = Profile.objects.get(user=user)

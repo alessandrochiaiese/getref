@@ -6,7 +6,12 @@ from django.utils.translation import activate
 from dashboard.models import *
 from dashboard.forms import *
 from referral.models import * 
- 
+from django.core.mail import send_mail
+from django.conf import settings
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
  
@@ -20,6 +25,23 @@ def switch_to_italian(request):
 
 def switch_to_english(request):
     activate('en')
+#####################
+# Email         #
+#####################
+def send_email_from_server(email_object='Test Email', 
+                           email_body='Questo è un test di invio email.',
+                           emails=['tuoindirizzo@email.com']) -> None:
+    try:
+        send_mail(
+            email_object,
+            email_body,
+            settings.EMAIL_HOST_USER,
+            emails,
+            fail_silently=False,
+        )
+        logger.info("Email inviata con successo!")
+    except Exception as e:
+        logger.error(f"Errore durante l'invio della mail: {e}")
 
 #####################
 # Hierarchy         #
