@@ -125,12 +125,18 @@ class RegisterView(View):
     
     def post(self, request, *args, **kwargs):   
         referral_code_used = self.request.POST.get('code') or request.COOKIES.get('code')
-        account_type = request.POST.get('account_type')  # Ottieni il tipo di account selezionato
 
         # Gestione codice referral per aziende
         is_enterprise_redirect = request.session.get('is_enterprise_redirect', False)
         is_referral_redirect = request.session.get('is_referral_redirect', False)
         
+        if is_enterprise_redirect:
+            account_type = 'business'
+        elif is_referral_redirect:
+            account_type = 'user'
+        else:
+            account_type = request.POST.get('account_type')  # Ottieni il tipo di account selezionato
+
         influencer_group, created = Group.objects.get_or_create(name='Influenzer')
         enterprise_group, created = Group.objects.get_or_create(name='Enterprise')
 
@@ -162,11 +168,6 @@ class RegisterView(View):
                     except ReferralCode.DoesNotExist:
                         messages.warning(request, 'Codice referral utente non valido.')
 
-                else:
-                    return render(request, self.template_name, {
-                        'form': form,
-                        'business_form': business_form if account_type == 'business' else None,
-                    })
             else:
                 return render(request, self.template_name, {
                     'form': form
@@ -209,10 +210,6 @@ class RegisterView(View):
                     except ProfileBusiness.DoesNotExist:
                         messages.warning(request, 'Codice referral azienda non valido.')
 
-                else:
-                    return render(request, self.template_name, {
-                        'form': form
-                    })
             else:
                 return render(request, self.template_name, {
                     'form': form,
