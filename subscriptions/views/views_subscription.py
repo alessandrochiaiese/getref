@@ -239,7 +239,7 @@ def create_checkout_session(request):
             if promotion_link:
                 metadata={
                     'promotion_link': str(promotion_link) or ''
-                },
+                }
                 promotion = Promotion.objects.get(promotion_link=promotion_link)
                 selected_product = get_product_by_product_id(products, promotion.stripe_product_id)
             elif price_id:
