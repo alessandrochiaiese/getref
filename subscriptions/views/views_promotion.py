@@ -62,7 +62,7 @@ def promote(request, promotion_link):
                 'product_data': {
                     'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
                 },
-                'unit_amount': 2000,  # Prezzo in centesimi (es. $20)
+                'unit_amount': prices[0]['price_amount'] or prices['price_amount'], #2000,  # Prezzo in centesimi (es. $20)
             },
             'quantity': 1,
         }],
@@ -112,8 +112,6 @@ def promote_bak(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
     product = stripe.Product.list(product=promotion['stripe_product_id'])
-    prices = get_prices_for_product(product)
-
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -123,7 +121,7 @@ def promote_bak(request, promotion_link):
                 'product_data': {
                     'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
                 },
-                'unit_amount': prices[0]['price_amount'] or prices['price_amount'],  # Prezzo in centesimi (es. $20)
+                'unit_amount': 2000,  # Prezzo in centesimi (es. $20)
             },
             'quantity': 1,
         }],
