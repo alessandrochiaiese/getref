@@ -238,7 +238,7 @@ def create_checkout_session(request):
                     'promotion_link': promotion_link
                 },
                 promotion = Promotion.objects.get(promotion_link=promotion_link)
-                selected_product = stripe.Product.list(product=promotion['stripe_product_id'])
+                selected_product = stripe.Product.list(product=promotion.stripe_product_id)
                 prices = get_prices_for_product(selected_product)#stripe.Price.list(product=selected_product)
                 price_id = prices[0]['price_id'] or prices['price_id']
             elif price_id:

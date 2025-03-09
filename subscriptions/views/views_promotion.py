@@ -92,7 +92,7 @@ def promote_test(request, promotion_link):
 def promote_bak(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
-    product = stripe.Product.list(product=promotion['stripe_product_id'])
+    product = stripe.Product.list(product=promotion.stripe_product_id)
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
