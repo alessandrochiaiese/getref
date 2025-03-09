@@ -245,6 +245,7 @@ def create_checkout_session(request):
                     'quantity': 1,
                 }],
                 customer_creation='always',  # "if_required" # Forza sempre la creazione del cliente
+                customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
             )
 
             return JsonResponse({'sessionId': checkout_session.id})
