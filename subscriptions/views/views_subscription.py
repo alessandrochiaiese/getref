@@ -37,23 +37,23 @@ def test(request):
 def get_products_paid(user):
     purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
-    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId="" or None).all()
+    #stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId="" or None).all()
+    one_time_purchases = OneTimePurchase.objects.filter(stripe_customer__user=user).all()
 
-    if stripe_customers:
-        for stripe_customer in stripe_customers:
-            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
-
-            for one_time_purchase in one_time_purchases:
-                product_id = one_time_purchase.product_id
-                product = stripe.Product.retrieve(product_id)
-                price = get_prices_for_product(product_id)
-                purchased_one_time_products.append({
-                    'name': product.name,
-                    'id': product.id,
-                    'description': product.description,
-                    'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                    'currency': 'EUR' #str(price['currency']).upper(),
-                })
+    if one_time_purchases:
+        #for stripe_customer in stripe_customers:
+            
+        for one_time_purchase in one_time_purchases:
+            product_id = one_time_purchase.product_id
+            product = stripe.Product.retrieve(product_id)
+            price = get_prices_for_product(product_id)
+            purchased_one_time_products.append({
+                'name': product.name,
+                'id': product.id,
+                'description': product.description,
+                'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
+                'currency': 'EUR' #str(price['currency']).upper(),
+            })
         print("purchased_one_time_products: ", purchased_one_time_products)
         return purchased_one_time_products
     return []
