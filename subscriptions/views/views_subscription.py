@@ -36,26 +36,22 @@ def test(request):
 
 def get_products_paid(user):
     purchased_one_time_products = []
-    # Recupera il cliente Stripe per l'utente
-    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId="").all()
 
-    if stripe_customers:
-        for stripe_customer in stripe_customers:
-            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
+    one_time_purchases = OneTimePurchase.objects.filter(user=user).all()
+    if one_time_purchases:
+        for one_time_purchase in one_time_purchases:
+            product_id = one_time_purchase.product_id
+            product = stripe.Product.retrieve(product_id)
+            price = get_prices_for_product(product_id)
+            purchased_one_time_products.append({
+                'name': product.name,
+                'id': product.id,
+                'description': product.description,
+                'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
+                'currency': 'EUR' #str(price['currency']).upper(),
+            })
 
-            for one_time_purchase in one_time_purchases:
-                product_id = one_time_purchase.product_id
-                product = stripe.Product.retrieve(product_id)
-                price = get_prices_for_product(product_id)
-                purchased_one_time_products.append({
-                    'name': product.name,
-                    'id': product.id,
-                    'description': product.description,
-                    'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                    'currency': 'EUR' #str(price['currency']).upper(),
-                })
-        return purchased_one_time_products
-    return []
+    return purchased_one_time_products
 
 def get_subscription_plan_paid(user):
     subscriptions = []
@@ -390,11 +386,11 @@ def stripe_webhook(request):
                 #payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
                 #print(f"payment_intent: {payment_intent}")
                 #stripe_customer_id = payment_intent.get('customer', "")
-                stripe_customer = StripeCustomer.objects.get_or_create(
-                    user=user,
-                    stripeCustomerId=stripe_subscription_id,
-                    stripeSubscriptionId=stripe_subscription_id
-                )
+                #stripe_customer = StripeCustomer.objects.get_or_create(
+                #    user=user,
+                #    stripeCustomerId=stripe_subscription_id,
+                #    stripeSubscriptionId=stripe_subscription_id
+                #)
 
                 print(f"Using StripeCustomer for user {user.username}.")
 

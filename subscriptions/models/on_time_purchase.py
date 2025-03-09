@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class OneTimePurchase(models.Model):
-    stripe_customer = models.ForeignKey('StripeCustomer', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=255)  # Nome del prodotto acquistato
     product_id = models.CharField(max_length=255)  # ID del prodotto da Stripe
     price_amount = models.DecimalField(max_digits=10, decimal_places=2)  # Prezzo del prodotto
