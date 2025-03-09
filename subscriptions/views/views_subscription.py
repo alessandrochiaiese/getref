@@ -223,6 +223,9 @@ def create_checkout_session(request):
         price_id = request.GET.get('priceId', None)
         promotion_link = request.GET.get('promotionLink', None)
 
+        is_promotion = False if promotion_link == None else True
+        is_buying = False if price_id == None else True
+
         try:
             print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
             products = list_stripe_all_products()
@@ -269,11 +272,13 @@ def create_checkout_session(request):
                 customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
             )
 
-            if promotion_link:
+            if is_promotion:
                 return redirect(checkout_session.url)
+            elif is_buying:
+                return JsonResponse({'sessionId': checkout_session.id})
             else:
                 return JsonResponse({'sessionId': checkout_session.id})
-
+            
         except stripe.error.StripeError as e:
             return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
         except Exception as e:
@@ -342,15 +347,29 @@ def check_for_reward(user):
     number_of_customer_seller = 0
     
     # Seller get Bonus if more than 5 customer have made first bought
+    referral_program = ReferralProgram.objects.get(
+            name="Programma Referral Premium",
+            description="Programma per utenti premium",
+            reward_type="Cash",
+            reward_value=100.00,
+            currency="EUR",
+            min_referral_count=5,
+            max_referrals_per_user=10,
+            date_created=datetime.datetime.now(),
+            is_active=True,
+            program_duration=365*10,  # Durata di 10 anni
+            target_industry="Getref")
     referrals = Referral.objects.filter(referrer=user).all()
-    if referrals.count() >=5:
+    if referrals.count() >= referral_program.min_referral_count and \
+       referrals.count() <= referral_program.max_referrals_per_user:
         for referral in referrals:
             promotion_sales = PromotionSale.objects.filter(user=referral.referred).all()
             one_time_purchases = OneTimePurchase.objects.filter(stripe_customer__user=referral.referred).all()
             if promotion_sales.count() + one_time_purchases.count() >= 1:
                 number_of_customer_seller += 1
 
-        if number_of_customer_seller >= 5:
+        if number_of_customer_seller >= referral_program.min_referral_count and \
+           number_of_customer_seller >= referral_program.max_referrals_per_user:
             referral_code = ReferralCode.objects.filter(user=user).first()
             referral_reward = ReferralReward.objects.create(
                 referral_code=referral_code,
@@ -529,7 +548,7 @@ def stripe_webhook(request):
                     )
                 customer = request.user
                 seller = promotion.user
-                check_for_reward(user)
+                check_for_reward(seller)
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")
