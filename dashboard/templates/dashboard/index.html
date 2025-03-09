@@ -526,13 +526,13 @@
                     const activeReferrals = referralData.active_referrals || 0;
 
                     // Aggiorna l'UI con i dati di commissione
-                    document.getElementById('total-commission').innerText = `€${totalCommission.toFixed(2)}`;
+                    document.getElementById('total-commission').innerText = `€${totalCommission}`;
                     document.getElementById('active-referrals').innerText = activeReferrals;
-                    document.getElementById('total-rewards').innerText = `€${totalRewards.toFixed(2)}`;
+                    document.getElementById('total-rewards').innerText = `€${totalRewards}`;
 
                     // Impostare anche il bonus, se presente
                     if (totalRewards !== undefined) {
-                        document.getElementById('bonus-amount').innerText = `€${totalRewards.toFixed(2)}`;
+                        document.getElementById('bonus-amount').innerText = `€${totalRewards}`;
                     }
                 } else {
                     console.error('I dati di referral non sono nel formato previsto:', data);
