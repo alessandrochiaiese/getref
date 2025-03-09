@@ -6,7 +6,7 @@ from getref import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from referral.models import *
@@ -220,8 +220,8 @@ def get_product_by_product_id(products, product_id):
 def create_checkout_session(request):
     if request.method == 'GET':
         # load stipe secret key here
-        price_id = request.GET.get('priceId')
-        promotion_link = request.GET.get('promotionLink')
+        price_id = request.GET.get('priceId', None)
+        promotion_link = request.GET.get('promotionLink', None)
 
         try:
             print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
@@ -269,7 +269,10 @@ def create_checkout_session(request):
                 customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
             )
 
-            return JsonResponse({'sessionId': checkout_session.id})
+            if promotion_link:
+                return redirect(checkout_session.url)
+            else:
+                return JsonResponse({'sessionId': checkout_session.id})
 
         except stripe.error.StripeError as e:
             return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
