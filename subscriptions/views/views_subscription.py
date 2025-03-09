@@ -213,6 +213,9 @@ def list_plans(products):
 def get_product_by_price_id(products, price_id):
     return next((product for product in products if product['price_id'] == price_id), None)
 
+def get_product_by_product_id(products, product_id):
+    return next((product for product in products if product['product_id'] == product_id), None)
+
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -238,9 +241,7 @@ def create_checkout_session(request):
                     'promotion_link': promotion_link
                 },
                 promotion = Promotion.objects.get(promotion_link=promotion_link)
-                selected_product = stripe.Product.list(product=promotion.stripe_product_id)
-                prices = get_prices_for_product(selected_product)#stripe.Price.list(product=selected_product)
-                price_id = prices[0]['price_id'] or prices['price_id']
+                selected_product = get_product_by_price_id(products, promotion.stripe_product_id)
             elif price_id:
                 selected_product = get_product_by_price_id(products, price_id)
             
