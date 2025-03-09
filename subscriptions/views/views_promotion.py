@@ -42,7 +42,7 @@ def promote(request, promotion_link):
     
     # Recupera il prodotto Stripe utilizzando l'ID del prodotto
     product = stripe.Product.retrieve(promotion.stripe_product_id)
-    prices = get_prices_for_product(product.id)
+    prices = get_prices_for_product(promotion.stripe_product_id)
     
     customer = request.user
     seller = promotion.user
