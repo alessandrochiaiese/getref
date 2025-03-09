@@ -1,11 +1,13 @@
 
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from referral.models.referral import Referral
 from referral.models.referral_bonus import ReferralBonus
 from referral.models.referral_code import ReferralCode
 from referral.models.referral_notification import ReferralNotification
 from referral.models.referral_reward import ReferralReward
+from subscriptions.models.on_time_purchase import OneTimePurchase
 from subscriptions.models.promotion import Promotion
 from subscriptions.models.promotion_sale import PromotionSale
 
@@ -33,6 +35,7 @@ def my_promotions(request):
     # Passa le promozioni e i dettagli dei prodotti al template
     return render(request, 'promotions/my_promotions.html', {'products': products})
 
+@login_required
 def promote(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
@@ -42,9 +45,11 @@ def promote(request, promotion_link):
     prices = get_prices_for_product(product.id)
     
     customer = request.user
-
-    # Seller get Commission
     seller = promotion.user
+
+    customer_rewards = ReferralReward.objects.filter(referred_user=customer).all()
+    
+    # Seller get Commission
     unit_commission = prices[0]['price_amount'] or prices['price_amount'] * 0.15
     unit_amount = prices[0]['price_amount'] or prices['price_amount'] - unit_commission #AttributeError: 'list' object has no attribute 'amount'. Did you mean: 'count'?
     # check if customer have bonus
@@ -65,38 +70,40 @@ def promote(request, promotion_link):
         success_url=request.build_absolute_uri('/success/'), #promote/success/
         cancel_url=request.build_absolute_uri('/cancel/'),   #promote/cancel/
     )
-    # Seller get Bonus if more than 5 customer have made first bought
-    referral = Referral.objects.filter(referred=customer).first()
-    promotion_sales = PromotionSale.objects.filter(user=referral.referrer)
-    numer_of_customer_seller = 0
-    if len(promotion_sales) >= 5:
-        for promotion_sale in promotion_sales:
-            customer_promotion_sales = PromotionSale.objects.filter(user=promotion_sale.user)
-            if len(customer_promotion_sales) >= 1:
-                numer_of_customer_seller += 1
 
-    if numer_of_customer_seller >= 5:
-        referral_code = ReferralCode.objects.filter(user=customer).first()
-        referral_reward = ReferralReward.objects.create(
-            referral_code=referral_code,
-            referred_user=customer,
-            reward_type="Cash",
-            reward_value=50.00,
-            date_awarded=datetime.datetime.now(),
-            status="Awarded",
-            expiry_date=datetime.datetime.today() + datetime.timedelta(days=30),
-            reward_description="Premio per aver completato la registrazione",
-            reward_source="ReferralProgram"
-        )
-        referral_notification = ReferralNotification.objects.create(
-            user=customer,
-            message="Hai ricevuto un nuovo referral bonus!",
-            date_sent=datetime.datetime.now(),
-            is_read=False,
-            notification_type="Bonus",
-            priority="High",
-            action_required=True
-        )
+    number_of_customer_seller = 0
+    
+    # Seller get Bonus if more than 5 customer have made first bought
+    referrals = Referral.objects.filter(referrer=seller).all()
+    if referrals.count() >=5:
+        for referral in referrals:
+            promotion_sales = PromotionSale.objects.filter(user=referral.referred).all()
+            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer__user=referral.referred).all()
+            if promotion_sales.count() + one_time_purchases.count() >= 1:
+                number_of_customer_seller += 1
+
+        if number_of_customer_seller >= 5:
+            referral_code = ReferralCode.objects.filter(user=seller).first()
+            referral_reward = ReferralReward.objects.create(
+                referral_code=referral_code,
+                referred_user=customer,
+                reward_type="Cash",
+                reward_value=50.00,
+                date_awarded=datetime.datetime.now(),
+                status="Awarded",
+                expiry_date=datetime.datetime.today() + datetime.timedelta(days=30),
+                reward_description="Premio per aver completato la registrazione",
+                reward_source="ReferralProgram"
+            )
+            referral_notification = ReferralNotification.objects.create(
+                user=customer,
+                message="Hai ricevuto un nuovo referral bonus!",
+                date_sent=datetime.datetime.now(),
+                is_read=False,
+                notification_type="Bonus",
+                priority="High",
+                action_required=True
+            )
 
     # Reindirizza direttamente alla sessione di checkout di Stripe
     return redirect(checkout_session.url)
