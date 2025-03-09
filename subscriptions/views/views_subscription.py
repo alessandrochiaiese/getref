@@ -229,8 +229,8 @@ def create_checkout_session(request):
                 print("Nessun prodotto trovato in Stripe.") 
                 return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
 
-            if not price_id or not promotion_link:
-                return JsonResponse({'error': 'Price ID or Promotion Link missed.'}, status=400)
+            #if not price_id and not promotion_link:
+            #    return JsonResponse({'error': 'Price ID or Promotion Link missed.'}, status=400)
             
             selected_product = get_product_by_price_id(products, price_id)
             print('Product selected: ', selected_product)
