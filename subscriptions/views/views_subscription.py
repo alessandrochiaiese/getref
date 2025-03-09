@@ -283,7 +283,7 @@ def get_prices_for_product(product_id):
 @login_required
 def purchased_products(request):
     try:
-        purchased_one_time_products = get_products_paid or []
+        purchased_one_time_products = get_products_paid(request.user) or []
         
         # Passa i dati al template
         return render(request, 'subscriptions/purchased_products.html', {
