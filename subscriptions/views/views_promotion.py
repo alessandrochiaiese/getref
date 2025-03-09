@@ -50,8 +50,8 @@ def promote(request, promotion_link):
     customer_rewards = ReferralReward.objects.filter(user=customer).all()
     
     # Seller get Commission
-    unit_commission = prices[0]['price_amount'] or prices['price_amount'] * 0.15
-    unit_amount = prices[0]['price_amount'] or prices['price_amount'] - unit_commission #AttributeError: 'list' object has no attribute 'amount'. Did you mean: 'count'?
+    #unit_commission = prices[0]['price_amount'] or prices['price_amount'] * 0.15
+    #unit_amount = prices[0]['price_amount'] or prices['price_amount'] - unit_commission #AttributeError: 'list' object has no attribute 'amount'. Did you mean: 'count'?
     # check if customer have bonus
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
@@ -62,7 +62,7 @@ def promote(request, promotion_link):
                 'product_data': {
                     'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
                 },
-                'unit_amount': price, #2000,  # Prezzo in centesimi (es. $20)
+                'unit_amount': price or 2000,  # Prezzo in centesimi (es. $20)
             },
             'quantity': 1,
         }],
