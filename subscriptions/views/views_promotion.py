@@ -42,8 +42,8 @@ def promote(request, promotion_link):
     
     # Recupera il prodotto Stripe utilizzando l'ID del prodotto
     product = stripe.Product.retrieve(promotion.stripe_product_id)
-    prices = get_prices_for_product(promotion.stripe_product_id)
-    price = float(prices[0]['price_amount'] or prices['price_amount'])
+    prices = get_prices_for_product(product)
+    #price = float(prices[0]['price_amount'] or prices['price_amount'])
     customer = request.user
     seller = promotion.user
 
@@ -62,7 +62,7 @@ def promote(request, promotion_link):
                 'product_data': {
                     'name': product.name or 'Product Promotion',  # Puoi personalizzare qui il nome del prodotto
                 },
-                'unit_amount': price or 2000,  # Prezzo in centesimi (es. $20)
+                'unit_amount': 2000,  # Prezzo in centesimi (es. $20)
             },
             'quantity': 1,
         }],
