@@ -381,6 +381,8 @@ def stripe_webhook(request):
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
 
+    products = list_stripe_all_products()
+    
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
@@ -447,14 +449,15 @@ def stripe_webhook(request):
                     product_id=stripe_subscription.plan.product,
                     status=stripe_subscription.status
                 )
+                selected_product = get_product_by_product_id(products, product.id)
                 print(f"Subscription saved for {user.username}.")
                 ReferralTransaction(
                     referral_code = referral_code,
                     referred_user = user,
                     transaction_date = datetime.datetime.now(),
                     order = None,
-                    transaction_amount = prices[0]['price_amount'] or prices['price_amount'],
-                    currency = prices[0]['currency'] or prices['currency'],
+                    transaction_amount = selected_product.get('price_amount'),
+                    currency = selected_product.get('currency'),
                     status = 'completed',
                     conversion_value = 2,
                     discount_value = 0,
