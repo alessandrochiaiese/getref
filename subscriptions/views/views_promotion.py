@@ -1,7 +1,10 @@
 
 import datetime
+from urllib.parse import urlencode
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from referral.models.referral import Referral
 from referral.models.referral_bonus import ReferralBonus
 from referral.models.referral_code import ReferralCode
@@ -36,7 +39,17 @@ def my_promotions(request):
     return render(request, 'promotions/my_promotions.html', {'products': products})
 
 @login_required
-def promote(request, promotion_link):
+def promote(request):
+    promotion_link = request.GET.get('code')
+    # Costruisci l'URL con il parametro di query
+    url = reverse('create_checkout_session')  # Ottieni la base dell'URL
+    query_string = urlencode({'promotionLink': promotion_link})  # Aggiungi il parametro alla query
+    full_url = f'{url}?{query_string}'  # Combina l'URL con la query
+
+    return HttpResponseRedirect(full_url)
+
+@login_required
+def promote_test(request, promotion_link):
     # Ottieni la promozione tramite il link
     promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
     

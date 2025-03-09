@@ -70,7 +70,7 @@ urlpatterns = [
     
     # subscriptions
     path('config/', stripe_config),
-    path('create-checkout-session/', create_checkout_session),
+    path('create-checkout-session/', create_checkout_session, name="create_checkout_session"),
     path('webhook/', stripe_webhook),
 
     # swagger 
