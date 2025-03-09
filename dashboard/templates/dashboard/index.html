@@ -86,6 +86,8 @@
                 <p id="active-referrals" class="profile-stat-value">{% trans "N/A" %}</p>
                 <p class="profile-stat">{% trans "Commissioni Totali (€):" %}</p>
                 <p id="total-rewards" class="profile-stat-value">{% trans "N/A" %}</p>
+                <p class="profile-stat">{% trans "Transazioni Totali (€):" %}</p>
+                <p id="total-transactions" class="profile-stat-value">{% trans "N/A" %}</p>
             </div>
         </div>
     </div>
@@ -521,11 +523,13 @@
                     const referralData = data.referral_data;
                     console.log('Dati referral trovati:', referralData);
 
+                    const totalTransactions = referralData.total_transactions || 0;
                     const totalCommission = referralData.total_commission || 0;
                     const totalRewards = referralData.total_rewards || 0;
                     const activeReferrals = referralData.active_referrals || 0;
 
                     // Aggiorna l'UI con i dati di commissione
+                    document.getElementById('total-transactions').innerText = `€${totalTransactions}`;
                     document.getElementById('total-commission').innerText = `€${totalCommission}`;
                     document.getElementById('active-referrals').innerText = activeReferrals;
                     document.getElementById('total-rewards').innerText = `€${totalRewards}`;
