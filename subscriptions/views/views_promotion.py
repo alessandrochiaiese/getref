@@ -39,14 +39,14 @@ def promote(request, promotion_link):
     
     # Recupera il prodotto Stripe utilizzando l'ID del prodotto
     product = stripe.Product.retrieve(promotion.stripe_product_id)
-    price = get_prices_for_product(product.id)
+    prices = get_prices_for_product(product.id)
     
     customer = request.user
 
     # Seller get Commission
     seller = promotion.user
-    unit_commission = product.price_amount * 0.15
-    unit_amount = product.price_amount - unit_commission #AttributeError: 'list' object has no attribute 'amount'. Did you mean: 'count'?
+    unit_commission = prices[0]['price_amount'] or prices['price_amount'] * 0.15
+    unit_amount = prices[0]['price_amount'] or prices['price_amount'] - unit_commission #AttributeError: 'list' object has no attribute 'amount'. Did you mean: 'count'?
     # check if customer have bonus
     # Crea una sessione di checkout con Stripe
     checkout_session = stripe.checkout.Session.create(
