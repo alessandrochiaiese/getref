@@ -47,7 +47,7 @@ def promote(request, promotion_link):
     customer = request.user
     seller = promotion.user
 
-    customer_rewards = ReferralReward.objects.filter(referred_user=customer).all()
+    customer_rewards = ReferralReward.objects.filter(user=customer).all()
     
     # Seller get Commission
     unit_commission = prices[0]['price_amount'] or prices['price_amount'] * 0.15
@@ -86,7 +86,7 @@ def promote(request, promotion_link):
             referral_code = ReferralCode.objects.filter(user=seller).first()
             referral_reward = ReferralReward.objects.create(
                 referral_code=referral_code,
-                referred_user=customer,
+                user=customer,
                 reward_type="Cash",
                 reward_value=50.00,
                 date_awarded=datetime.datetime.now(),
