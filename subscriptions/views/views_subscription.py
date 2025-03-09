@@ -232,7 +232,18 @@ def create_checkout_session(request):
             #if not price_id and not promotion_link:
             #    return JsonResponse({'error': 'Price ID or Promotion Link missed.'}, status=400)
             
-            selected_product = get_product_by_price_id(products, price_id)
+            metadata = {}
+            if promotion_link:
+                metadata={
+                    'promotion_link': promotion_link
+                },
+                promotion = get_object_or_404(Promotion, promotion_link=promotion_link)
+                selected_product = stripe.Product.list(product=promotion['stripe_product_id'])
+                prices = get_prices_for_product(selected_product)#stripe.Price.list(product=selected_product)
+                price_id = prices[0]['price_id'] or prices['price_id']
+            elif price_id:
+                selected_product = get_product_by_price_id(products, price_id)
+            
             print('Product selected: ', selected_product)
             
             if selected_product and selected_product.get('type') == 'recurring' and selected_product.get('type') != 'one_time':
@@ -240,12 +251,6 @@ def create_checkout_session(request):
             elif selected_product and selected_product.get('type') == 'one_time' and selected_product.get('type') != 'recurring':
                 mode = 'payment'
 
-            metadata = {}
-            if promotion_link:
-                metadata={
-                    'promotion_link': promotion_link
-                },
-            
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
