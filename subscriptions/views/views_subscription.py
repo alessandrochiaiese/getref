@@ -46,11 +46,12 @@ def get_products_paid(user):
         for one_time_purchase in one_time_purchases:
             product_id = one_time_purchase.product_id
             product = stripe.Product.retrieve(product_id)
-            price = get_prices_for_product(product_id)
+            prices = get_prices_for_product(product_id)
             purchased_one_time_products.append({
                 'name': product.name,
                 'id': product.id,
                 'description': product.description,
+                'price_amount': prices[0]['price_amount'] or prices['price_amount'],
                 'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
                 'currency': 'EUR' #str(price['currency']).upper(),
             })
@@ -68,8 +69,11 @@ def get_subscription_plan_paid(user):
             # load stipe secret key here
             subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
             product = stripe.Product.retrieve(subscription.plan.product)
+            prices = get_prices_for_product(product)
             subscriptions.append({
                 'status': subscription.status,
+                'price_amount': prices[0]['price_amount'] or prices['price_amount'],
+                'currency': str(prices[0]['currency'] or prices['price_amount']).upper() or 'EUR',
                 'name': product.name,
                 'description': product.description,
 
@@ -265,6 +269,7 @@ def get_prices_for_product(product_id):
         for price in prices.auto_paging_iter():
             price_list.append({
                 'price_id': price.id,
+                'price_amount': str(round(price.unit_amount / 100, 2)),
                 #'amount': price.unit_amount / 100,  # Converti da centesimi a unità di valuta
                 'currency': price.currency.upper(),
                 'billing_scheme': price.billing_scheme,
