@@ -1,0 +1,46 @@
+
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Dashboard - Transactions {% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %} 
+<!-- Transactions -->
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="section-title">{% trans "My Transactions" %}</h4>
+                <table class="table table-striped" id="user-table">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Date" %}</th>
+                            <th>{% trans "Amount" %}</th>
+                            <th>{% trans "Currency" %}</th>
+                            <th>{% trans "Status" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-tbody ">
+                        {% for transaction in transactions %}
+                        <tr>
+                            <th>{{ transaction.transaction_date }}</th>
+                            <th>{{ transaction.transaction_amount }}</th>
+                            <th>{{ transaction.currency }}</th>
+                            <th>{{ transaction.status }}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+ 

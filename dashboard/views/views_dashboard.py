@@ -407,6 +407,22 @@ class MyNetworkView(TemplateView):
 class WithdrawalView(TemplateView):
     template_name = 'dashboard/withdrawals.html'
 
+@method_decorator(login_required, name='dispatch')
+class TransactionsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
+    template_name = 'dashboard/transactions.html'
+
+    def get_object(self, queryset=None):
+        # Ritorna l'oggetto corrispondente all'utente autenticato
+        return self.request.user
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['transactions'] = ReferralTransaction.objects.filter(referred_user=self.request.user) or []
+        
+        return context
+
 
 class UserReferredLevelView(View):
     def get(self, request, *args, **kwargs):

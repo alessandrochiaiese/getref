@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
-from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, NotificationsView, ParticipateCampaignView, SettingsView, WithdrawalView, privacyPolice, termService, )
+from dashboard.views.views_dashboard import (HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, NotificationsView, ParticipateCampaignView, SettingsView, TransactionsView, WithdrawalView, privacyPolice, termService, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
@@ -87,6 +87,7 @@ urlpatterns = [
     # Partecipazione a campagne di referral
     path('campaign/participate/', ParticipateCampaignView.as_view(), name='core_participate_campaign'),
     
+    path('transactions/', TransactionsView.as_view(), name='transactions'),
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
     # enterprise
