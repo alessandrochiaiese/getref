@@ -37,7 +37,7 @@ def test(request):
 def get_products_paid(user):
     purchased_one_time_products = []
     # Recupera il cliente Stripe per l'utente
-    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId=None).all()
+    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId="" or None).all()
 
     if stripe_customers:
         for stripe_customer in stripe_customers:
