@@ -451,7 +451,7 @@ def stripe_webhook(request):
                 )
                 selected_product = get_product_by_product_id(products, product.id)
                 print(f"Subscription saved for {user.username}.")
-                ReferralTransaction(
+                ReferralTransaction.objects.create(
                     referral_code = referral_code,
                     referred_user = user,
                     transaction_date = datetime.datetime.now(),
@@ -502,7 +502,7 @@ def stripe_webhook(request):
                 )
                 print(f"One-time purchase saved for {user.username}.")
 
-                ReferralTransaction(
+                ReferralTransaction.objects.create(
                     referral_code = referral_code,
                     referred_user = user,
                     transaction_date = datetime.datetime.now(),
