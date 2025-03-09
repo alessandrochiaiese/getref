@@ -3,8 +3,8 @@ from django.db import models
 
 class StripeCustomer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    stripeCustomerId = models.CharField(max_length=255)  # Cambia il nome del campo qui
-    stripeSubscriptionId = models.CharField(max_length=255)
+    stripeCustomerId = models.CharField(default=None, null=True, max_length=255)
+    stripeSubscriptionId = models.CharField(default=None, null=True, max_length=255)
 
     def __str__(self):
         return self.user.username

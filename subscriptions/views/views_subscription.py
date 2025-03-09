@@ -36,22 +36,26 @@ def test(request):
 
 def get_products_paid(user):
     purchased_one_time_products = []
+    # Recupera il cliente Stripe per l'utente
+    stripe_customers = StripeCustomer.objects.filter(user=user, stripeSubscriptionId=None).all()
 
-    one_time_purchases = OneTimePurchase.objects.filter(user=user).all()
-    if one_time_purchases:
-        for one_time_purchase in one_time_purchases:
-            product_id = one_time_purchase.product_id
-            product = stripe.Product.retrieve(product_id)
-            price = get_prices_for_product(product_id)
-            purchased_one_time_products.append({
-                'name': product.name,
-                'id': product.id,
-                'description': product.description,
-                'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
-                'currency': 'EUR' #str(price['currency']).upper(),
-            })
+    if stripe_customers:
+        for stripe_customer in stripe_customers:
+            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer=stripe_customer).all()
 
-    return purchased_one_time_products
+            for one_time_purchase in one_time_purchases:
+                product_id = one_time_purchase.product_id
+                product = stripe.Product.retrieve(product_id)
+                price = get_prices_for_product(product_id)
+                purchased_one_time_products.append({
+                    'name': product.name,
+                    'id': product.id,
+                    'description': product.description,
+                    'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
+                    'currency': 'EUR' #str(price['currency']).upper(),
+                })
+        return purchased_one_time_products
+    return []
 
 def get_subscription_plan_paid(user):
     subscriptions = []
@@ -339,8 +343,8 @@ def stripe_webhook(request):
 
         # Ottieni il customer dalla sessione
         mode = checkout_session.get('mode')
-        stripe_customer_id = checkout_session.get('customer', '')
-        stripe_subscription_id = checkout_session.get('subscription', '')  # Questo può essere null se il checkout non è per una sottoscrizione
+        stripe_customer_id = checkout_session.get('customer', None)
+        stripe_subscription_id = checkout_session.get('subscription', None)  # Questo può essere null se il checkout non è per una sottoscrizione
 
         print("mode: ", mode)
         print("stripe_customer_id: ", stripe_customer_id)
@@ -386,18 +390,18 @@ def stripe_webhook(request):
                 #payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
                 #print(f"payment_intent: {payment_intent}")
                 #stripe_customer_id = payment_intent.get('customer', "")
-                #stripe_customer = StripeCustomer.objects.get_or_create(
-                #    user=user,
-                #    stripeCustomerId=stripe_subscription_id,
-                #    stripeSubscriptionId=stripe_subscription_id
-                #)
+                stripe_customer = StripeCustomer.objects.get_or_create(
+                    user=user,
+                    stripeCustomerId=stripe_subscription_id,
+                    stripeSubscriptionId=stripe_subscription_id
+                )
 
                 print(f"Using StripeCustomer for user {user.username}.")
 
                 # Handle one-time payment (if no subscription ID is available)
                 line_items = stripe.checkout.Session.list_line_items(session_id)
                 line_item = line_items.data[0] if line_items.data else None
-                
+                print("line_item: ", line_item)
                 """if not line_item:
                     print(f"Error: No line items found for session {session_id}")
                     return HttpResponse(status=400)
