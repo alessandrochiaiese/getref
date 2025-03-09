@@ -39,8 +39,8 @@ def my_promotions(request):
     return render(request, 'promotions/my_promotions.html', {'products': products})
 
 @login_required
-def promote(request):
-    promotion_link = request.GET.get('code')
+def promote(request, promotion_link):
+    #promotion_link = request.GET.get('code')
     # Costruisci l'URL con il parametro di query
     url = reverse('create_checkout_session')  # Ottieni la base dell'URL
     query_string = urlencode({'promotionLink': promotion_link})  # Aggiungi il parametro alla query
