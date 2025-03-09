@@ -242,6 +242,7 @@ def create_checkout_session(request):
                 }
                 promotion = Promotion.objects.get(promotion_link=promotion_link)
                 selected_product = get_product_by_product_id(products, promotion.stripe_product_id)
+                price_id = selected_product.get('price_id')
             elif price_id:
                 selected_product = get_product_by_price_id(products, price_id)
             
