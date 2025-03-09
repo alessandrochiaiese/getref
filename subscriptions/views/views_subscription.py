@@ -392,7 +392,7 @@ def stripe_webhook(request):
                 #payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
                 #print(f"payment_intent: {payment_intent}")
                 #stripe_customer_id = payment_intent.get('customer', "")
-                stripe_customer, created = StripeCustomer.objects.get_or_create(
+                stripe_customer = StripeCustomer.objects.create(
                     user=user,
                     stripeCustomerId=stripe_subscription_id,
                     stripeSubscriptionId=stripe_subscription_id
