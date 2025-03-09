@@ -54,6 +54,7 @@ def get_products_paid(user):
                     'amount': 1, #product['unit_amount'] / 100,  # Converti da cent a euro
                     'currency': 'EUR' #str(price['currency']).upper(),
                 })
+        print("purchased_one_time_products: ", purchased_one_time_products)
         return purchased_one_time_products
     return []
 
