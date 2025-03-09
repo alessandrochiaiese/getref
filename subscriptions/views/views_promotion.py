@@ -12,7 +12,7 @@ from subscriptions.models.promotion import Promotion
 from subscriptions.models.promotion_sale import PromotionSale
 
 import stripe
-from subscriptions.views.views_subscription import get_prices_for_product
+from subscriptions.views.views_subscription import check_for_reward, get_prices_for_product
 
 
 def my_promotions(request):
@@ -71,39 +71,7 @@ def promote(request, promotion_link):
         cancel_url=request.build_absolute_uri('/cancel/'),   #promote/cancel/
     )
 
-    number_of_customer_seller = 0
-    
-    # Seller get Bonus if more than 5 customer have made first bought
-    referrals = Referral.objects.filter(referrer=seller).all()
-    if referrals.count() >=5:
-        for referral in referrals:
-            promotion_sales = PromotionSale.objects.filter(user=referral.referred).all()
-            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer__user=referral.referred).all()
-            if promotion_sales.count() + one_time_purchases.count() >= 1:
-                number_of_customer_seller += 1
-
-        if number_of_customer_seller >= 5:
-            referral_code = ReferralCode.objects.filter(user=seller).first()
-            referral_reward = ReferralReward.objects.create(
-                referral_code=referral_code,
-                user=customer,
-                reward_type="Cash",
-                reward_value=50.00,
-                date_awarded=datetime.datetime.now(),
-                status="Awarded",
-                expiry_date=datetime.datetime.today() + datetime.timedelta(days=30),
-                reward_description="Premio per aver completato la registrazione",
-                reward_source="ReferralProgram"
-            )
-            referral_notification = ReferralNotification.objects.create(
-                user=customer,
-                message="Hai ricevuto un nuovo referral bonus!",
-                date_sent=datetime.datetime.now(),
-                is_read=False,
-                notification_type="Bonus",
-                priority="High",
-                action_required=True
-            )
+    check_for_reward(seller)
 
     # Reindirizza direttamente alla sessione di checkout di Stripe
     return redirect(checkout_session.url)

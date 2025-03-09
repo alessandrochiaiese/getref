@@ -1,6 +1,6 @@
 #DOMAIN='https://affiliate.getcall.it'
+import datetime
 from getref.settings import DOMAIN
-from referral.models.referral_transaction import ReferralTransaction
 import stripe
 from getref import settings
 from django.contrib.auth.decorators import login_required
@@ -9,7 +9,8 @@ from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
-from subscriptions.models import OneTimePurchase, StripeCustomer, StripeSubscription, Promotion, PromotionSale 
+from referral.models import *
+from subscriptions.models import *
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -217,6 +218,7 @@ def create_checkout_session(request):
     if request.method == 'GET':
         # load stipe secret key here
         price_id = request.GET.get('priceId')
+        promotion_link = request.GET.get('promotionLink')
 
         try:
             print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
@@ -238,6 +240,12 @@ def create_checkout_session(request):
             elif selected_product and selected_product.get('type') == 'one_time' and selected_product.get('type') != 'recurring':
                 mode = 'payment'
 
+            metadata = {}
+            if promotion_link:
+                metadata={
+                    'promotion_link': promotion_link
+                },
+            
             # Create checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
@@ -249,6 +257,7 @@ def create_checkout_session(request):
                     'price': price_id,
                     'quantity': 1,
                 }],
+                metadata=metadata,
                 customer_creation='always',  # "if_required" # Forza sempre la creazione del cliente
                 customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
             )
@@ -319,6 +328,41 @@ def success(request):
 def cancel(request):
     return render(request, 'subscriptions/cancel.html')
 
+def check_for_reward(user):
+    number_of_customer_seller = 0
+    
+    # Seller get Bonus if more than 5 customer have made first bought
+    referrals = Referral.objects.filter(referrer=user).all()
+    if referrals.count() >=5:
+        for referral in referrals:
+            promotion_sales = PromotionSale.objects.filter(user=referral.referred).all()
+            one_time_purchases = OneTimePurchase.objects.filter(stripe_customer__user=referral.referred).all()
+            if promotion_sales.count() + one_time_purchases.count() >= 1:
+                number_of_customer_seller += 1
+
+        if number_of_customer_seller >= 5:
+            referral_code = ReferralCode.objects.filter(user=user).first()
+            referral_reward = ReferralReward.objects.create(
+                referral_code=referral_code,
+                user=user,
+                reward_type="Cash",
+                reward_value=50.00,
+                date_awarded=datetime.datetime.now(),
+                status="Awarded",
+                expiry_date=datetime.datetime.today() + datetime.timedelta(days=30),
+                reward_description="Premio per aver completato la registrazione",
+                reward_source="ReferralProgram"
+            )
+            referral_notification = ReferralNotification.objects.create(
+                user=user,
+                message="Hai ricevuto un nuovo referral bonus!",
+                date_sent=datetime.datetime.now(),
+                is_read=False,
+                notification_type="Bonus",
+                priority="High",
+                action_required=True
+            )
+
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -364,6 +408,7 @@ def stripe_webhook(request):
             print(f"Received session for user ID {client_reference_id}, customer ID {stripe_customer_id}, subscription ID {stripe_subscription_id}")
 
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
+            referral_code = ReferralCode.objects.get(user=user)
 
             # Handle subscription and one-time payments
             if mode == 'subscription':
@@ -383,7 +428,8 @@ def stripe_webhook(request):
                 # Subscription created, save the subscription details
                 stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
                 product = stripe.Product.retrieve(stripe_subscription.plan.product) #BUG: Error while processing Stripe webhook: 'str' object has no attribute 'name'
-
+                prices = get_prices_for_product(product)
+                    
                 subscription = StripeSubscription.objects.create(
                     stripe_customer=stripe_customer,
                     stripe_subscription_id=stripe_subscription_id,
@@ -392,6 +438,19 @@ def stripe_webhook(request):
                     status=stripe_subscription.status
                 )
                 print(f"Subscription saved for {user.username}.")
+                ReferralTransaction(
+                    referral_code = referral_code,
+                    referred_user = user,
+                    transaction_date = datetime.datetime.now(),
+                    order = None,
+                    transaction_amount = price_amount,
+                    currency = currency,
+                    status = 'completed',
+                    conversion_value = 2,
+                    discount_value = 0,
+                    coupon_code_used = "",
+                    channel = ""
+                )
             elif mode == 'payment':
                 #payment_intent_id = checkout_session.get('payment_intent')  # Assicurati che ci sia un payment_intent
                 #payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
@@ -430,18 +489,34 @@ def stripe_webhook(request):
                 )
                 print(f"One-time purchase saved for {user.username}.")
 
+                ReferralTransaction(
+                    referral_code = referral_code,
+                    referred_user = user,
+                    transaction_date = datetime.datetime.now(),
+                    order = None,
+                    transaction_amount = prices[0]['price_amount'] or prices['price_amount'],
+                    currency = prices[0]['currency'] or prices['currency'],
+                    status = 'completed',
+                    conversion_value = 2,
+                    discount_value = 0,
+                    coupon_code_used = "",
+                    channel = ""
+                )
             # Se il prodotto è stato promosso da un venditore
-            #promotion_link = session.get('metadata', {}).get('promotion_link')
-            #ReferralTransaction.objects.create()
-            #if promotion_link:
-            #    promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
-            #    if promotion:
-            #        # Crea una nuova vendita promozionale
-            #        PromotionSale.objects.create(
-            #            promotion=promotion,
-            #            user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
-            #            amount=session['amount_total'] / 100,  # Prezzo in dollari
-            #        )
+            promotion_link = session.get('metadata', {}).get('promotion_link')
+            ReferralTransaction.objects.create()
+            if promotion_link:
+                promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
+                if promotion:
+                    # Crea una nuova vendita promozionale
+                    PromotionSale.objects.create(
+                        promotion=promotion,
+                        user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
+                        amount=session['amount_total'] / 100,  # Prezzo in dollari
+                    )
+                customer = request.user
+                seller = promotion.user
+                check_for_reward(user)
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")

@@ -16,7 +16,7 @@ promoteButtons.forEach(function(button) {
     })
     .then((data) => {
       if (data.promotionLink) {
-        const promotionUrl = `${window.location.origin}/promote/${data.promotionLink}`;
+        const promotionUrl = `${window.location.origin}/create-checkout-session/?promotionLink=${data.promotionLink}`;
         alert(`Il tuo link promozionale è: ${promotionUrl}`);
       } else {
         alert("Errore: Impossibile creare il link promozionale.");
