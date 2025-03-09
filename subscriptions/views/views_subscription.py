@@ -1,5 +1,6 @@
 #DOMAIN='https://affiliate.getcall.it'
 import datetime
+import json
 from getref.settings import DOMAIN
 import stripe
 from getref import settings
@@ -263,7 +264,7 @@ def create_checkout_session(request):
                     'price': price_id,
                     'quantity': 1,
                 }],
-                metadata=metadata,
+                metadata=json.dumps(metadata),
                 customer_creation='always',  # "if_required" # Forza sempre la creazione del cliente
                 customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
             )
@@ -509,7 +510,7 @@ def stripe_webhook(request):
                     channel = ""
                 )
             # Se il prodotto è stato promosso da un venditore
-            promotion_link = session.get('metadata', {}).get('promotion_link')
+            promotion_link = json.loads(session.get('metadata', {})).get('promotion_link')
             ReferralTransaction.objects.create()
             if promotion_link:
                 promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
