@@ -253,12 +253,13 @@ def create_checkout_session(request):
                     'mode': mode,
                     'customer_email': request.user.email if request.user.is_authenticated else None
                 }
+                checkout_params['ui_mode'] = 'embedded' # [embedded] or default [hosted]
 
-                checkout_params['payment_intent_data'] = {
-                    'statement_descriptor': 'GETREF',
-                    'description': 'Acquisto prodotto',
-                }
-                checkout_params['logo'] = "https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color-150x150.png"
+                #checkout_params['payment_intent_data'] = {
+                #    'statement_descriptor': 'GETREF',
+                #    'description': 'Acquisto prodotto',
+                #}
+                #checkout_params['logo'] = "https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color-150x150.png"
                 #checkout_params['logo'] = "https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color.png"
 
                 return checkout_params
