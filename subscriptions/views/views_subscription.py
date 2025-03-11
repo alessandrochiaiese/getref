@@ -227,33 +227,30 @@ def create_checkout_session(request):
         products = list_stripe_all_products()
         product = None
         
-        if price_id is None and promotion_link is not None:
-            try:
-                promotion = Promotion.objects.get(promotion_link=promotion_link)
-                product = get_product_by_product_id(products, promotion.stripe_product_id)
-            except Promotion.DoesNotExist:
-                logger.error(f"Promotion with link {promotion_link} not found")
-                return JsonResponse({'error': 'Promotion not found'}, status=400)
-        elif price_id is not None and promotion_link is None:
-            product = get_product_by_price_id(products, price_id)
-
-        if product is None:
-            logger.error("Product is None")
-            return JsonResponse({'error': 'Product not found'}, status=400)
-        else:
-            if product.get('type') == 'recurring': mode = 'subscription'
-            else: mode = 'payment'
+        def generate_checkout_session(product):
+            if product is None:
+                logger.error("Product is None")
+                return JsonResponse({'error': 'Product not found'}, status=400)
+            else:
+                if product.get('type') == 'recurring': mode = 'subscription'
+                else: mode = 'payment'
+            
+            checkout_params = {
+                'client_reference_id': request.user.id if request.user.is_authenticated else None,
+                'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
+                'cancel_url': f"{DOMAIN}/cancel/",
+                'payment_method_types': ['card'],
+                'mode': mode,
+                'customer_email': request.user.email if request.user.is_authenticated else None
+            }
+            return checkout_params
         
-        checkout_params = {
-            'client_reference_id': request.user.id if request.user.is_authenticated else None,
-            'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
-            'cancel_url': f"{DOMAIN}/cancel/",
-            'payment_method_types': ['card'],
-            'mode': mode,
-            'customer_email': request.user.email if request.user.is_authenticated else None
-        }
-
         if price_id is None and promotion_link is not None:
+            promotion = Promotion.objects.get(promotion_link=promotion_link)
+            product = get_product_by_product_id(products, promotion.stripe_product_id)
+
+            checkout_params = generate_checkout_session(product)
+
             price_id = product.get('price_id')
             checkout_params['metadata']={
                 'promotion_link': str(promotion_link)
@@ -262,25 +259,20 @@ def create_checkout_session(request):
                 'price': price_id,
                 'quantity': 1,
             }]
-            try:
-                checkout_session = stripe.checkout.Session.create(**checkout_params)
-                return redirect(checkout_session.url)
-            except stripe.error.StripeError as e:
-                logger.error(f"Stripe Error: {str(e)}")
-                return JsonResponse({'error': 'Stripe error occurred'}, status=500)
-        
+            checkout_session = stripe.checkout.Session.create(**checkout_params)
+            return redirect(checkout_session.url)
         elif price_id is not None and promotion_link is None:
+            product = get_product_by_price_id(products, price_id)
+
+            checkout_params = generate_checkout_session(product)
+
             checkout_params['line_items']=[{
                 'price': price_id,
                 'quantity': 1,
             }]
             checkout_params['customer_creation'] = 'always'
-            try:
-                checkout_session = stripe.checkout.Session.create(**checkout_params)
-                return JsonResponse({'sessionId': checkout_session.id})
-            except stripe.error.StripeError as e:
-                logger.error(f"Stripe Error: {str(e)}")
-                return JsonResponse({'error': 'Stripe error occurred'}, status=500)
+            checkout_session = stripe.checkout.Session.create(**checkout_params)
+            return JsonResponse({'sessionId': checkout_session.id})
             
     #Errore Stripe: Could not determine which URL to request: Subscription instance has invalid ID: None, <class 'NoneType'>. ID should be of type `str` (or `unicode`)
 
