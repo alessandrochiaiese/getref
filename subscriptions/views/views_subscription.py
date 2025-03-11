@@ -217,9 +217,9 @@ def get_product_by_price_id(products, price_id):
 def get_product_by_product_id(products, product_id):
     return next((product for product in products if product['product_id'] == product_id), None)
 
-def create_coupon():
+def create_coupon(percent_off=10):
     coupon = stripe.Coupon.create(
-        percent_off=20,  # Sconto del 20%
+        percent_off=percent_off,  # Sconto del 10%
         duration='once',  # Lo sconto si applica solo una volta
     )
     return coupon.id  # Restituisce l'ID del coupon per salvarlo nel tuo database
@@ -297,74 +297,6 @@ def create_checkout_session(request):
             checkout_session = stripe.checkout.Session.create(**checkout_params)
             return JsonResponse({'sessionId': checkout_session.id})
     
-@csrf_exempt
-def create_checkout_session_good(request):
-    if request.method == 'GET':
-        # load stipe secret key here
-        price_id = request.GET.get('priceId', None)
-        promotion_link = request.GET.get('promotionLink', None)
-
-        is_promotion = False if promotion_link == None else True
-        is_buying = False if price_id == None else True
-
-        try:
-            print("Recupero dei prodotti e dei prezzi...")  # Log for debugging
-            products = list_stripe_all_products()
-            #plans = list_plans(products)            
-
-            if not products:
-                print("Nessun prodotto trovato in Stripe.") 
-                return JsonResponse({'error': 'No products found in Stripe.'}, status=404)
-
-            #if not price_id and not promotion_link:
-            #    return JsonResponse({'error': 'Price ID or Promotion Link missed.'}, status=400)
-            
-            metadata = {}
-            if promotion_link:
-                metadata={
-                    'promotion_link': str(promotion_link) or ''
-                }
-                promotion = Promotion.objects.get(promotion_link=promotion_link)
-                selected_product = get_product_by_product_id(products, promotion.stripe_product_id)
-                price_id = selected_product.get('price_id')
-            elif price_id:
-                selected_product = get_product_by_price_id(products, price_id)
-            
-            print('Product selected: ', selected_product)
-            
-            if selected_product and selected_product.get('type') == 'recurring' and selected_product.get('type') != 'one_time':
-                mode = 'subscription'
-            elif selected_product and selected_product.get('type') == 'one_time' and selected_product.get('type') != 'recurring':
-                mode = 'payment'
-
-            # Create checkout session
-            checkout_session = stripe.checkout.Session.create(
-                client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
-                cancel_url=f"{DOMAIN}/cancel/",
-                payment_method_types=['card'],
-                mode= mode, # 'subscription' if price is recurring type else 'payment'
-                line_items=[{
-                    'price': price_id,
-                    'quantity': 1,
-                }],
-                metadata=metadata,
-                customer_creation='always',  # "if_required" # Forza sempre la creazione del cliente
-                customer_email=request.user.email if request.user.is_authenticated else None  # Imposta l'email
-            )
-
-            if is_promotion:
-                return redirect(checkout_session.url)
-            elif is_buying:
-                return JsonResponse({'sessionId': checkout_session.id})
-            else:
-                return JsonResponse({'sessionId': checkout_session.id})
-            
-        except stripe.error.StripeError as e:
-            return JsonResponse({'error': f"Stripe Error: {str(e)}"}, status=500)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-
 def get_prices_for_product(product_id):
     try:
         # Recupera i prezzi associati al prodotto
@@ -414,11 +346,9 @@ def purchased_products(request):
         'purchased_one_time_products': [],
     })
 
-
 @login_required
 def success(request):
     return render(request, 'subscriptions/success.html')
-
 
 @login_required
 def cancel(request):
@@ -452,6 +382,7 @@ def check_for_reward(user):
         if number_of_customer_seller >= referral_program.min_referral_count and \
            number_of_customer_seller >= referral_program.max_referrals_per_user:
             referral_code = ReferralCode.objects.filter(user=user).first()
+            coupon_id = create_coupon(percent_off=10)
             referral_reward = ReferralReward.objects.create(
                 referral_code=referral_code,
                 user=user,
