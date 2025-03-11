@@ -233,17 +233,17 @@ def create_checkout_session(request):
                 return JsonResponse({'error': 'Product not found'}, status=400)
             else:
                 if product.get('type') == 'recurring': mode = 'subscription'
-                else: mode = 'payment'
+                elif product.get('type') == 'one_time': mode = 'payment'
             
-            checkout_params = {
-                'client_reference_id': request.user.id if request.user.is_authenticated else None,
-                'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
-                'cancel_url': f"{DOMAIN}/cancel/",
-                'payment_method_types': ['card'],
-                'mode': mode,
-                'customer_email': request.user.email if request.user.is_authenticated else None
-            }
-            return checkout_params
+                checkout_params = {
+                    'client_reference_id': request.user.id if request.user.is_authenticated else None,
+                    'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
+                    'cancel_url': f"{DOMAIN}/cancel/",
+                    'payment_method_types': ['card'],
+                    'mode': mode,
+                    'customer_email': request.user.email if request.user.is_authenticated else None
+                }
+                return checkout_params
         
         if price_id is None and promotion_link is not None:
             promotion = Promotion.objects.get(promotion_link=promotion_link)
