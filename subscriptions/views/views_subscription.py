@@ -247,7 +247,7 @@ def create_checkout_session(request):
             
                 checkout_params = {
                     'client_reference_id': request.user.id if request.user.is_authenticated else None,
-                    'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
+                    #'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
                     'cancel_url': f"{DOMAIN}/cancel/",
                     'payment_method_types': ['card'],
                     'mode': mode,
