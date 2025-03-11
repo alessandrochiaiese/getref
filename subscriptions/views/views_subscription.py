@@ -1,5 +1,6 @@
 #DOMAIN='https://affiliate.getcall.it'
 import datetime
+import logging
 from getref.settings import DOMAIN
 import stripe
 from getref import settings
@@ -216,6 +217,7 @@ def get_product_by_price_id(products, price_id):
 def get_product_by_product_id(products, product_id):
     return next((product for product in products if product['product_id'] == product_id), None)
 
+logger = logging.getLogger(__name__)
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -226,10 +228,18 @@ def create_checkout_session(request):
         product = None
         
         if price_id is None and promotion_link is not None:
-            promotion = Promotion.objects.get(promotion_link=promotion_link)
-            product = get_product_by_product_id(products, promotion.stripe_product_id)
+            try:
+                promotion = Promotion.objects.get(promotion_link=promotion_link)
+                product = get_product_by_product_id(products, promotion.stripe_product_id)
+            except Promotion.DoesNotExist:
+                logger.error(f"Promotion with link {promotion_link} not found")
+                return JsonResponse({'error': 'Promotion not found'}, status=400)
         elif price_id is not None and promotion_link is None:
             product = get_product_by_price_id(products, price_id)
+
+        if product is None:
+            logger.error("Product is None")
+            return JsonResponse({'error': 'Product not found'}, status=400)
 
         if product.get('type') == 'recurring': mode = 'subscription'
         elif product.get('type') == 'one_time': mode = 'payment'
@@ -254,17 +264,26 @@ def create_checkout_session(request):
                 'price': price_id,
                 'quantity': 1,
             }]
-            checkout_session = stripe.checkout.Session.create(**checkout_params)
-            return redirect(checkout_session.url)
+            try:
+                checkout_session = stripe.checkout.Session.create(**checkout_params)
+                return redirect(checkout_session.url)
+            except stripe.error.StripeError as e:
+                logger.error(f"Stripe Error: {str(e)}")
+                return JsonResponse({'error': 'Stripe error occurred'}, status=500)
         
         elif price_id is not None and promotion_link is None:
             checkout_params['line_items']=[{
                 'price': price_id,
                 'quantity': 1,
             }]
-            checkout_session = stripe.checkout.Session.create(**checkout_params)
-            return JsonResponse({'sessionId': checkout_session.id})
-
+            try:
+                checkout_session = stripe.checkout.Session.create(**checkout_params)
+                return JsonResponse({'sessionId': checkout_session.id})
+            except stripe.error.StripeError as e:
+                logger.error(f"Stripe Error: {str(e)}")
+                return JsonResponse({'error': 'Stripe error occurred'}, status=500)
+            
+    #Errore Stripe: Could not determine which URL to request: Subscription instance has invalid ID: None, <class 'NoneType'>. ID should be of type `str` (or `unicode`)
 
 @csrf_exempt
 def create_checkout_session_good(request):
