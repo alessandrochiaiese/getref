@@ -219,6 +219,56 @@ def get_product_by_product_id(products, product_id):
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
+        price_id = request.GET.get('priceId', None)
+        promotion_link = request.GET.get('promotionLink', None)
+        
+        products = list_stripe_all_products()
+        product = None
+        
+        if price_id is None and promotion_link is not None:
+            promotion = Promotion.objects.get(promotion_link=promotion_link)
+            product = get_product_by_product_id(products, promotion.stripe_product_id)
+        elif price_id is not None and promotion_link is None:
+            product = get_product_by_price_id(products, price_id)
+
+        if product.get('type') == 'recurring': mode = 'subscription'
+        elif product.get('type') == 'one_time': mode = 'payment'
+        else: mode = 'payment'
+        
+        checkout_params = {
+            'client_reference_id': request.user.id if request.user.is_authenticated else None,
+            'success_url': f"{DOMAIN}/success?session_id={{CHECKOUT_SESSION_ID}}",
+            'cancel_url': f"{DOMAIN}/cancel/",
+            'payment_method_types': ['card'],
+            'mode': mode,
+            'customer_email': request.user.email if request.user.is_authenticated else None,
+            'customer_creation': 'always',  # Forza la creazione del cliente se non esiste
+        }
+
+        if price_id is None and promotion_link is not None:
+            price_id = product.get('price_id')
+            checkout_params['metadata']={
+                'promotion_link': str(promotion_link)
+            }
+            checkout_params['line_items']=[{
+                'price': price_id,
+                'quantity': 1,
+            }]
+            checkout_session = stripe.checkout.Session.create(**checkout_params)
+            return redirect(checkout_session.url)
+        
+        elif price_id is not None and promotion_link is None:
+            checkout_params['line_items']=[{
+                'price': price_id,
+                'quantity': 1,
+            }]
+            checkout_session = stripe.checkout.Session.create(**checkout_params)
+            return JsonResponse({'sessionId': checkout_session.id})
+
+
+@csrf_exempt
+def create_checkout_session_good(request):
+    if request.method == 'GET':
         # load stipe secret key here
         price_id = request.GET.get('priceId', None)
         promotion_link = request.GET.get('promotionLink', None)
