@@ -254,7 +254,7 @@ def create_checkout_session(request):
                     'customer_email': request.user.email if request.user.is_authenticated else None
                 }
                 checkout_params['ui_mode'] = 'embedded' # [embedded] or default [hosted]
-
+                checkout_params['redirect_on_completion'] = 'never'
                 #checkout_params['payment_intent_data'] = {
                 #    'statement_descriptor': 'GETREF',
                 #    'description': 'Acquisto prodotto',
