@@ -217,6 +217,16 @@ def get_product_by_price_id(products, price_id):
 def get_product_by_product_id(products, product_id):
     return next((product for product in products if product['product_id'] == product_id), None)
 
+def create_coupon():
+    coupon = stripe.Coupon.create(
+        percent_off=20,  # Sconto del 20%
+        duration='once',  # Lo sconto si applica solo una volta
+    )
+    return coupon.id  # Restituisce l'ID del coupon per salvarlo nel tuo database
+
+def calculate_commission(product_price, commission_percentage):
+    return product_price * (commission_percentage / 100)
+
 logger = logging.getLogger(__name__)
 @csrf_exempt
 def create_checkout_session(request):
@@ -243,6 +253,14 @@ def create_checkout_session(request):
                     'mode': mode,
                     'customer_email': request.user.email if request.user.is_authenticated else None
                 }
+
+                checkout_params['payment_intent_data'] = {
+                    'statement_descriptor': 'GETREF',
+                    'description': 'Acquisto prodotto',
+                }
+                checkout_params['logo'] = "https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color-150x150.png"
+                #checkout_params['logo'] = "https://getcall.it/wp-content/uploads/2024/04/getcall_icon_color.png"
+
                 return checkout_params
         
         if price_id is None and promotion_link is not None:
@@ -274,9 +292,7 @@ def create_checkout_session(request):
                 checkout_params['customer_creation'] = 'always'
             checkout_session = stripe.checkout.Session.create(**checkout_params)
             return JsonResponse({'sessionId': checkout_session.id})
-            
-    #Errore Stripe: Could not determine which URL to request: Subscription instance has invalid ID: None, <class 'NoneType'>. ID should be of type `str` (or `unicode`)
-
+    
 @csrf_exempt
 def create_checkout_session_good(request):
     if request.method == 'GET':
