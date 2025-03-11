@@ -240,10 +240,9 @@ def create_checkout_session(request):
         if product is None:
             logger.error("Product is None")
             return JsonResponse({'error': 'Product not found'}, status=400)
-
-        if product.get('type') == 'recurring': mode = 'subscription'
-        elif product.get('type') == 'one_time': mode = 'payment'
-        else: mode = 'payment'
+        else:
+            if product.get('type') == 'recurring': mode = 'subscription'
+            else: mode = 'payment'
         
         checkout_params = {
             'client_reference_id': request.user.id if request.user.is_authenticated else None,
