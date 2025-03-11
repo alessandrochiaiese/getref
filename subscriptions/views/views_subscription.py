@@ -270,7 +270,7 @@ def create_checkout_session(request):
                 'price': price_id,
                 'quantity': 1,
             }]
-            if checkout_params['mode'] == 'subscription':
+            if checkout_params['mode'] == 'payment':
                 checkout_params['customer_creation'] = 'always'
             checkout_session = stripe.checkout.Session.create(**checkout_params)
             return JsonResponse({'sessionId': checkout_session.id})
