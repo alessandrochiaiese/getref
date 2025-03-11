@@ -251,8 +251,7 @@ def create_checkout_session(request):
             'cancel_url': f"{DOMAIN}/cancel/",
             'payment_method_types': ['card'],
             'mode': mode,
-            'customer_email': request.user.email if request.user.is_authenticated else None,
-            'customer_creation': 'always',  # Forza la creazione del cliente se non esiste
+            'customer_email': request.user.email if request.user.is_authenticated else None
         }
 
         if price_id is None and promotion_link is not None:
@@ -264,6 +263,7 @@ def create_checkout_session(request):
                 'price': price_id,
                 'quantity': 1,
             }]
+            checkout_params['customer_creation'] = 'if_required'
             try:
                 checkout_session = stripe.checkout.Session.create(**checkout_params)
                 return redirect(checkout_session.url)
@@ -276,6 +276,7 @@ def create_checkout_session(request):
                 'price': price_id,
                 'quantity': 1,
             }]
+            checkout_params['customer_creation'] = 'always'
             try:
                 checkout_session = stripe.checkout.Session.create(**checkout_params)
                 return JsonResponse({'sessionId': checkout_session.id})

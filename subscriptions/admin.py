@@ -1,10 +1,12 @@
 from django.contrib import admin
-from subscriptions.models import OneTimePurchase, StripeCustomer, StripeSubscription, Plan, APIKey, APIUsageLog
+from subscriptions.models import *
 
 #admin.site.register(StripeCustomer)
 #admin.site.register(Subscription)
 admin.site.register(OneTimePurchase)
 admin.site.register(Plan)
+admin.site.register(Promotion)
+admin.site.register(PromotionSale)
 #admin.site.register(APIKey)
 #admin.site.register(APIUsageLog)
 
