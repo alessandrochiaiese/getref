@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.forms import * 
 from dashboard.views.views_accounts import ( LandingPageView, LoginView, CustomLoginView, ResetPasswordView, ChangePasswordView, RegisterView)
 from dashboard.views.views_profile import (EnterpriseCreateView, EnterpriseDetailView, EnterpriseListView, EnterpriseUpdateView, ProfileView)
-from dashboard.views.views_dashboard import (CommissionsView, HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, NotificationsView, ParticipateCampaignView, SettingsView, TransactionsView, WithdrawalView, privacyPolice, termService, )
+from dashboard.views.views_dashboard import (CommissionsView, CustomerTransactionsView, HomeView, IncompleteRegistrationsView, InvestorAccountsView, MasterAccountsView, MyNetworkView, NotificationsView, ParticipateCampaignView, SettingsView, TransactionsView, WithdrawalView, privacyPolice, termService, )
 from dashboard.views.views_kit_template import (ChartJSView, DocumentationView, BasicElementsView, IconsView, Error500View, Error404View, TableView, DropdownsView, TypographyView,)
 from django.contrib.auth.views import LogoutView
 
@@ -89,6 +89,7 @@ urlpatterns = [
     
     path('commissions/', CommissionsView.as_view(), name='commissions'),
     path('transactions/', TransactionsView.as_view(), name='transactions'),
+    path('customer-transactions/', CustomerTransactionsView.as_view(), name='customer_transactions'),
     path('withdrawals/', WithdrawalView.as_view(), name='withdrawals'),
 
     # enterprise

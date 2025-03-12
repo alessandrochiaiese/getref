@@ -422,6 +422,35 @@ class TransactionsView(TemplateView):
         context['transactions'] = ReferralTransaction.objects.filter(referred_user=self.request.user) or []
         
         return context
+    
+@method_decorator(login_required, name='dispatch')
+class CustomerTransactionsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
+    template_name = 'dashboard/transactions.html'
+
+    def get_object(self, queryset=None):
+        # Ritorna l'oggetto corrispondente all'utente autenticato
+        return self.request.user
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        referreds = []
+        tree_referred = get_tree_referred(self.request.user, level=0)
+        list_referred = tree_to_list(tree_referred, referreds)
+        
+        print(tree_referred)
+        print(list_referred)
+        context['referred_leveled_users'] = list_referred
+
+        transactions = []
+        for referred in list_referred:
+            transactions.extend(ReferralTransaction.objects.filter(referred_user__username=referred.get('username')) or [])
+
+        context['transactions'] = transactions
+        
+        return context
 
 @method_decorator(login_required, name='dispatch')
 class CommissionsView(TemplateView):
