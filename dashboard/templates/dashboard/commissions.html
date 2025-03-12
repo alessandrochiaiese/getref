@@ -1,0 +1,47 @@
+
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Dashboard - Commissions {% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %} 
+<!-- Commissions -->
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="section-title">{% trans "My Commissions" %}</h4>
+                <p>{% trans "Every first day of month, commission are sended to sellers..." %}</p>
+                <table class="table table-striped" id="user-table">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Date" %}</th>
+                            <th>{% trans "Amount" %}</th>
+                            <th>{% trans "Percentage" %}</th>
+                            <th>{% trans "Status" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-tbody ">
+                        {% for commission in commissions %}
+                        <tr>
+                            <th>{{ commission.commission_date }}</th>
+                            <th>{{ commission.commission_value }}</th>
+                            <th>{{ commission.commission_percentage }}</th>
+                            <th>{{ commission.status }}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+ 

@@ -3,6 +3,7 @@ from .referral_audit import ReferralAudit
 from .referral_bonus import ReferralBonus
 from .referral_campaign import ReferralCampaign
 from .referral_code import ReferralCode
+from .referral_commission import ReferralCommission
 from .referral_conversion import ReferralConversion
 from .referral_engagement import ReferralEngagement
 from .referral_notification import ReferralNotification

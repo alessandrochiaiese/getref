@@ -17,11 +17,6 @@ logger = logging.getLogger(__name__)
 User = get_user_model()
 
 @method_decorator(login_required, name='dispatch')
-class SettingsView(TemplateView):
-    model = get_user_model()  # Usa il modello User di default
-    template_name = 'dashboard/settings.html'
-
-@method_decorator(login_required, name='dispatch')
 class HomeView(TemplateView):
     model = get_user_model()  # Usa il modello User di default
     template_name = 'dashboard/index.html'
@@ -91,6 +86,11 @@ class HomeView(TemplateView):
         
         return context
     
+
+@method_decorator(login_required, name='dispatch')
+class SettingsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
+    template_name = 'dashboard/settings.html'
 
 @method_decorator(login_required, name='dispatch')
 class NotificationsView(TemplateView):
@@ -420,6 +420,22 @@ class TransactionsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['transactions'] = ReferralTransaction.objects.filter(referred_user=self.request.user) or []
+        
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class CommissionsView(TemplateView):
+    model = get_user_model()  # Usa il modello User di default
+    template_name = 'dashboard/commissions.html'
+
+    def get_object(self, queryset=None):
+        # Ritorna l'oggetto corrispondente all'utente autenticato
+        return self.request.user
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['commissions'] = ReferralCommission.objects.filter(referred_user=self.request.user) or []
         
         return context
 

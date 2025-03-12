@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import View 
 from django.db.models import Sum 
+from referral.models.referral_commission import ReferralCommission
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import JSONRenderer
@@ -140,7 +141,10 @@ class UserProfileDataView(View):
         # Dati generali di referral
         referral_data = {
             # Totale delle commissioni: supponendo che siano in ReferralTransaction o ReferralReward
-            'total_commission': ReferralTransaction.objects.filter(referral_code__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
+            #'total_commission': ReferralTransaction.objects.filter(referral_code__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
+            
+            # Totale delle commissioni: supponendo che siano in ReferralTransaction o ReferralReward
+            'total_commissions': ReferralCommission.objects.filter(referral_code__user=user).aggregate(Sum('commission_value'))['commission_value__sum'] or 0,
             
             # Totale delle ricompense (bonus e premi)
             #'total_rewards': (ReferralBonus.objects.filter(user=user).aggregate(Sum('bonus_value'))['bonus_value__sum'] or 0) + 

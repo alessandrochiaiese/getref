@@ -2,6 +2,7 @@ from django.urls import path
 from referral.api.views.views_referral_audit import ReferralAuditAPIView
 from referral.api.views.views_referral_campaign import ReferralCampaignAPIView
 from referral.api.views.views_referral_code import ReferralCodeAPIView
+from referral.api.views.views_referral_commission import ReferralCommissionAPIView
 from referral.api.views.views_referral_conversion import ReferralConversionAPIView
 from referral.api.views.views_referral_program import ReferralProgramAPIView
 from referral.api.views.views_referral_program_partecipation import ReferralProgramPartecipationAPIView
@@ -26,8 +27,11 @@ urlpatterns = [
     path('codes/', ReferralCodeAPIView.as_view(), name='referral_codes'),
     path('codes/<int:referral_code_id>/', ReferralCodeAPIView.as_view(), name='referral_code'), 
 
-    path('converions/', ReferralConversionAPIView.as_view(), name='referral_converions'),
-    path('converions/<int:referral_conversion_id>/', ReferralConversionAPIView.as_view(), name='referral_converion'), 
+    path('commissions/', ReferralCommissionAPIView.as_view(), name='referral_commissions'),
+    path('commissions/<int:referral_commission_id>/', ReferralCommissionAPIView.as_view(), name='referral_commission'), 
+    
+    path('conversions/', ReferralConversionAPIView.as_view(), name='referral_conversions'),
+    path('conversions/<int:referral_conversion_id>/', ReferralConversionAPIView.as_view(), name='referral_conversion'), 
     
     path('notifications/', ReferralCodeAPIView.as_view(), name='referral_notifications'),
     path('notifications/<int:referral_notification_id>/', ReferralCodeAPIView.as_view(), name='referral_notification'), 

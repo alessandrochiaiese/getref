@@ -22,6 +22,11 @@ class ReferralCodeForm(forms.ModelForm):
         model = ReferralCode
         fields = ['id', 'user', 'program', 'code', 'usage_count', 'status', 'expiry_date', 'referred_user_count', 'unique_url', 'campaign_source', 'campaign_medium'] # '__all__' #
 
+class ReferralCommissionForm(forms.ModelForm):
+    class Meta:
+        model = ReferralCommission
+        fields = ['id', 'referral_code', 'referred_user', 'commission_value', 'status', 'trigger_event', 'transaction', 'commission_percentage', 'expiry_date']# '__all__' #
+
 class ReferralConversionForm(forms.ModelForm):
     class Meta:
         model = ReferralConversion

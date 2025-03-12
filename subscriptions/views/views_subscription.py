@@ -2,6 +2,7 @@
 import datetime
 import logging
 from getref.settings import DOMAIN
+from referral.models.referral_commission import ReferralCommission
 import stripe
 from getref import settings
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.contrib.auth.models import User
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string 
 
 from referral.models import *
 from subscriptions.models import *
@@ -217,12 +219,33 @@ def get_product_by_price_id(products, price_id):
 def get_product_by_product_id(products, product_id):
     return next((product for product in products if product['product_id'] == product_id), None)
 
-def create_coupon(percent_off=10):
-    coupon = stripe.Coupon.create(
-        percent_off=percent_off,  # Sconto del 10%
-        duration='once',  # Lo sconto si applica solo una volta
+def create_coupon(percent_off=None, amount_off=None, currency = 'EUR'):
+    coupon = None
+    if percent_off is not None and amount_off is None:
+        coupon = stripe.Coupon.create(
+            percent_off=percent_off,  # Sconto del 10%
+            duration='once',  # Lo sconto si applica solo una volta
+        )
+    elif percent_off is None and amount_off is not None:
+        coupon = stripe.Coupon.create(
+            amount_off=amount_off,  # Sconto del 10€
+            duration='once',  # Lo sconto si applica solo una volta
+            currency = currency
+        )
+
+    return coupon #.id  # Restituisce l'ID del coupon per salvarlo nel tuo database
+
+def create_promotion_code(coupon, code=None):
+    if code is None:
+        code = get_random_string(length=6).upper()
+
+    promotion_code = stripe.PromotionCode.create(
+        coupon=coupon.id,  # Il coupon che vuoi associare al codice promozionale
+        code=code   # Codice che l'utente può inserire durante il checkout
     )
-    return coupon.id  # Restituisce l'ID del coupon per salvarlo nel tuo database
+
+    return promotion_code
+
 
 def calculate_commission(product_price, commission_percentage):
     return product_price * (commission_percentage / 100)
@@ -431,6 +454,7 @@ def stripe_webhook(request):
         client_reference_id = session.get('client_reference_id')
         # Ottieni l'ID della sessione
         session_id = session.get('id')
+        referral_transaction = None
 
         # Recupera la sessione completa usando l'ID della sessione
         checkout_session = stripe.checkout.Session.retrieve(session_id)
@@ -482,7 +506,7 @@ def stripe_webhook(request):
                 )
                 selected_product = get_product_by_product_id(products, product.id)
                 print(f"Subscription saved for {user.username}.")
-                ReferralTransaction.objects.create(
+                referral_transaction = ReferralTransaction.objects.create(
                     referral_code = referral_code,
                     referred_user = user,
                     transaction_date = datetime.datetime.now(),
@@ -533,7 +557,7 @@ def stripe_webhook(request):
                 )
                 print(f"One-time purchase saved for {user.username}.")
 
-                ReferralTransaction.objects.create(
+                referral_transaction = ReferralTransaction.objects.create(
                     referral_code = referral_code,
                     referred_user = user,
                     transaction_date = datetime.datetime.now(),
@@ -548,7 +572,7 @@ def stripe_webhook(request):
                 )
             # Se il prodotto è stato promosso da un venditore
             promotion_link = session.get('metadata', {}).get('promotion_link')
-            ReferralTransaction.objects.create()
+            
             if promotion_link:
                 promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
                 if promotion:
@@ -558,6 +582,16 @@ def stripe_webhook(request):
                         user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
                         amount=session['amount_total'] / 100,  # Prezzo in dollari
                     )
+
+                ReferralCommission.objects.create(
+                    referral_code = referral_code,
+                    referred_user = promotion.user,
+                    commission_value = referral_transaction.transaction_amount * 0.15,
+                    commission_date = datetime.datetime.now(),
+                    status = 'Pending',
+                    trigger_event = "acquisto effettuato",
+                    transaction = referral_transaction.id
+                )
                 customer = request.user
                 seller = promotion.user
                 check_for_reward(seller)
