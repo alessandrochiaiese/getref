@@ -100,6 +100,15 @@ class ProfileView(UpdateView):
         if profile.business or profile.is_business==True:
             context['is_business'] = profile.is_business
             context['business'] = profile.business
+            profile_business = ProfileBusiness.objects.filter(user_ower=self.request.user).first()
+            context['referral_code'] = profile_business.code if profile_business else None
+            referrer_code = ReferralCode.objects.filter(user=profile_business.user).first()
+            referrer = referrer_code.user
+            context['referrer_code'] = referrer_code.code if profile_business else None
+            context['referrer_first_name'] = referrer.first_name if referrer else ""
+            context['referrer_last_name'] = referrer.last_name if referrer else ""
+            context['referrer_username'] = referrer.username if referrer else ""
+            context['referrer_name'] = f"{referrer.first_name} {referrer.last_name}" if referrer else ""
         else:
             context['is_business'] = profile.is_business
             context['business'] = None
@@ -197,8 +206,38 @@ class EnterpriseUpdateView(UpdateView):
         return ProfileBusiness.objects.get(id=self.kwargs['pk'])
 
     def form_valid(self, form):
-        # Operazioni personalizzate quando il form è valido
+        # Salva prima l'oggetto ProfileBusiness
+        profile_business = form.save(commit=False)
+        
+        # Cerca l'oggetto Business correlato. Potresti usare il 'company_name' o un altro campo
+        business = Business.objects.filter(company_name=profile_business.company_name).first()
+        
+        if business:
+            # Aggiorna i campi di Business con i dati di ProfileBusiness
+            business.company_name = profile_business.company_name
+            business.contact_number = profile_business.contact_number
+            business.email = profile_business.email
+            business.link_google_maps = profile_business.link_google_maps
+            business.chamber_commerce_certificate = profile_business.chamber_commerce_certificate
+            business.insurance_policy_certificate = profile_business.insurance_policy_certificate
+            
+            # Aggiorna la regione, se c'è una relazione di ForeignKey con Region
+            business.region = profile_business.region
+            
+            # Se stai usando un ManyToMany per i settori
+            business.sectors.set(profile_business.sectors.all())
+            
+            # Salva i cambiamenti nel modello Business
+            business.save()
+            
+        # Salva ProfileBusiness
+        profile_business.save()
+
         return super().form_valid(form)
+
+    #def form_valid(self, form):
+    #    # Operazioni personalizzate quando il form è valido
+    #    return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -104,6 +104,11 @@ class RegisterView(View):
                 'is_redirect_customer': True
             })
         elif referral_code_used and is_enterprise_redirect and not is_referral_redirect:
+            profile_business = ProfileBusiness.objects.filter(code=referral_code_used).first()
+            
+            if profile_business:
+                # Pre-popoliamo il form 'business_form' con i dati di 'ProfileBusiness'
+                business_form = self.business_form_class(instance=profile_business)
             response = render(request, self.template_name, {
                 'form': form,
                 'business_form': business_form,
@@ -197,11 +202,11 @@ class RegisterView(View):
                         # Recupera utente che ha invitato un'azienda a registrarsi
                         referrer=profile_business.user
 
-                        referral_code = ReferralCode.objects.get(code=referral_code_used, status="active")
+                        referral_code = profile_business.code #ReferralCode.objects.get(code=referral_code_used, status="active")
                         # Recupera utente che ha invitato un utente a registrarsi
-                        referrer = referral_code.user
-                        referral_code.referred_user_count += 1
-                        referral_code.save()
+                        referrer = profile_business.user_ower #referral_code.user
+                        #referral_code.referred_user_count += 1
+                        #referral_code.save()
                         
                         # Creazione o aggiornamento del record di referral
                         referral = Referral.objects.create(referrer=referrer, referred=user)
