@@ -107,21 +107,21 @@
           </div>
           {% endif %}
 
-          <div class="form-group">
-            <a href="{% url 'social:begin' 'github' %}" 
-              class="btn btn-link btn-lg active btn-block">{% trans "Sign  with GitHub" %}</a>
-            <a href="{% url 'social:begin' 'google-oauth2' %}" 
-              class="btn btn-link btn-lg active btn-block">{% trans "Sign in with Google" %}</a>
-            <a href="{% url 'social:begin' 'facebook' %}" 
-              class="btn btn-link btn-lg active btn-block">{% trans "Sign in with Facebook" %}</a>
-            <a href="{% url 'social:begin' 'twitter' %}"
-              class="btn btn-link btn-lg active btn-block">{% trans "Sign in with Twitter" %}</a>
-            <a href="{% url 'social:begin' 'instagram' %}" 
-              class="btn btn-link btn-lg active btn-block">{% trans "Sign in with Instagram" %}</a>
+          <!--<div class="form-group">
+            <a href="{#% url 'social:begin' 'github' %#}" 
+              class="btn btn-link btn-lg active btn-block">{#% trans "Sign  with GitHub" %#}</a>
+            <a href="{#% url 'social:begin' 'google-oauth2' %#}" 
+              class="btn btn-link btn-lg active btn-block">{#% trans "Sign in with Google" %#}</a>
+            <a href="{#% url 'social:begin' 'facebook' %#}" 
+              class="btn btn-link btn-lg active btn-block">{#% trans "Sign in with Facebook" %#}</a>
+            <a href="{#% url 'social:begin' 'twitter' %#}"
+              class="btn btn-link btn-lg active btn-block">{#% trans "Sign in with Twitter" %#}</a>
+            <a href="{#% url 'social:begin' 'instagram' %#}" 
+              class="btn btn-link btn-lg active btn-block">{#% trans "Sign in with Instagram" %#}</a>
             <hr>
-            <p class="text-center"><strong>{% trans "OR" %}</strong></p>
+            <p class="text-center"><strong>{#% trans "OR" %#}</strong></p>
             <hr>
-          </div>
+          </div>-->
           <form method="POST" class="pt-3">
             {% csrf_token %}
             <div class="form-group">
