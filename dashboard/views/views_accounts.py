@@ -224,6 +224,15 @@ class RegisterView(View):
 
         # Se il nuovo utente ha usato un codice referral
         if referral_code_used or is_enterprise_redirect or is_referral_redirect: 
+            ReferralNotification.objects.create(
+                user=user,
+                message=f"Un utente si è registrato usando il tuo referral code: {referral_code_used}.",
+                date_sent=datetime.datetime.now(),
+                is_read=False,
+                notification_type="Alert",
+                priority="Low",
+                action_required=False
+            )
             # Rimuovi il flag dalla sessione dopo l'uso
             request.session.pop('is_enterprise_redirect', None)
             request.session.pop('is_referral_redirect', None)

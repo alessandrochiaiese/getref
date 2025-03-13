@@ -210,7 +210,7 @@ class EnterpriseUpdateView(UpdateView):
         profile_business = form.save(commit=False)
         
         # Cerca l'oggetto Business correlato. Potresti usare il 'company_name' o un altro campo
-        business = Business.objects.filter(company_name=profile_business.company_name).first()
+        business = Business.objects.filter(id=profile_business.id).first()
         
         if business:
             # Aggiorna i campi di Business con i dati di ProfileBusiness

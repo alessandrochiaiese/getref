@@ -476,6 +476,7 @@ def stripe_webhook(request):
 
             user = User.objects.get(id=client_reference_id)  # Trova l'utente
             referral_code = ReferralCode.objects.get(user=user)
+            referral_transaction = None
 
             # Handle subscription and one-time payments
             if mode == 'subscription':
@@ -583,18 +584,27 @@ def stripe_webhook(request):
                         amount=session['amount_total'] / 100,  # Prezzo in dollari
                     )
 
-                ReferralCommission.objects.create(
-                    referral_code = referral_code,
-                    referred_user = promotion.user,
-                    commission_value = referral_transaction.transaction_amount * 0.15,
-                    commission_date = datetime.datetime.now(),
-                    status = 'Pending',
-                    trigger_event = "acquisto effettuato",
-                    transaction = referral_transaction.id
-                )
-                customer = request.user
-                seller = promotion.user
-                check_for_reward(seller)
+                    ReferralCommission.objects.create(
+                        referral_code = referral_code,
+                        referred_user = promotion.user,
+                        commission_value = referral_transaction.transaction_amount * 0.15,
+                        commission_date = datetime.datetime.now(),
+                        status = 'Pending',
+                        trigger_event = "acquisto effettuato",
+                        transaction = referral_transaction.id
+                    )
+                    ReferralNotification.objects.create(
+                        user=user,
+                        message=f"Un cliente ha acquistato un prodotto attraverso il tuo link promozionale: {promotion_link}",
+                        date_sent=datetime.datetime.now(),
+                        is_read=False,
+                        notification_type="Alert",
+                        priority="Low",
+                        action_required=False
+                    )
+                    customer = request.user
+                    seller = promotion.user
+                    check_for_reward(seller)
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")
