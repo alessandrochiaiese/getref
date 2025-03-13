@@ -148,6 +148,7 @@ class RegisterView(View):
         business_form = None
         form = None
         user = None
+        referrer = None
         
         if account_type == 'user':
             form = self.form_class(self.request.POST)
@@ -225,7 +226,7 @@ class RegisterView(View):
         # Se il nuovo utente ha usato un codice referral
         if referral_code_used or is_enterprise_redirect or is_referral_redirect: 
             ReferralNotification.objects.create(
-                user=user,
+                user=referrer,
                 message=f"Un utente si è registrato usando il tuo referral code: {referral_code_used}.",
                 date_sent=datetime.datetime.now(),
                 is_read=False,

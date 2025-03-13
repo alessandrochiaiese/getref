@@ -96,6 +96,7 @@ class SettingsView(TemplateView):
 class NotificationsView(TemplateView):
     model = get_user_model()  # Usa il modello User di default
     template_name = 'dashboard/notifications.html'
+    
     def get_object(self, queryset=None):
         # Ritorna l'oggetto corrispondente all'utente autenticato
         return self.request.user

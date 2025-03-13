@@ -573,15 +573,19 @@ def stripe_webhook(request):
                 )
             # Se il prodotto è stato promosso da un venditore
             promotion_link = session.get('metadata', {}).get('promotion_link')
+            print(f"promotion_link {promotion_link}.")
             
             if promotion_link:
                 promotion = Promotion.objects.filter(promotion_link=promotion_link).first()
+                print(f"promotion {promotion}.")
                 if promotion:
+                    customer = request.user
+                    seller = promotion.user
                     # Crea una nuova vendita promozionale
                     PromotionSale.objects.create(
                         promotion=promotion,
-                        user=promotion.user,  # Assumiamo che l'utente che ha creato la promozione sia il venditore
-                        amount=session['amount_total'] / 100,  # Prezzo in dollari
+                        user=seller,
+                        amount=session['amount_total'] / 100 or referral_transaction.transaction_amount,  # Prezzo in dollari
                     )
 
                     ReferralCommission.objects.create(
@@ -594,7 +598,7 @@ def stripe_webhook(request):
                         transaction = referral_transaction.id
                     )
                     ReferralNotification.objects.create(
-                        user=user,
+                        user=seller,
                         message=f"Un cliente ha acquistato un prodotto attraverso il tuo link promozionale: {promotion_link}",
                         date_sent=datetime.datetime.now(),
                         is_read=False,
@@ -602,8 +606,6 @@ def stripe_webhook(request):
                         priority="Low",
                         action_required=False
                     )
-                    customer = request.user
-                    seller = promotion.user
                     check_for_reward(seller)
 
         except Exception as e:
