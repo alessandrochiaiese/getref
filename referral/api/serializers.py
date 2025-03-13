@@ -41,7 +41,7 @@ class ReferralEngagementSerializer(serializers.ModelSerializer):
 class ReferralNotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReferralNotification
-        fields = ['id', 'user', 'message', 'is_read', 'notification_type', 'priority', 'action_required']# '__all__' #
+        fields = ['id', 'user', 'message', 'is_read', 'notification_type', 'priority', 'date_sent', 'action_required']# '__all__' #
 
 class ReferralProgramSerializer(serializers.ModelSerializer):
     class Meta:
