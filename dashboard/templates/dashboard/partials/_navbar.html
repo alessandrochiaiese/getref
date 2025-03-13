@@ -126,16 +126,16 @@
     </button>
   </div>
 </nav>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
 
     async function loadNotifications() {
       try {
-        const response = await fetch('/api/v0/referral/notifications/'); // Assuming you have an endpoint for fetching regions
+        const response = await fetch('/api/v0/referral/notifications/'); // Assuming you have an endpoint for fetching notifications
         const notifications = await response.json();
         const div_notifications = document.getElementById('notifications');
-        if (notifications) {
+        
+        if (notifications && notifications.length > 0) {
           notifications.forEach(notification => {
             div_notifications.innerHTML += `
             <a class="dropdown-item preview-item">
@@ -145,23 +145,22 @@
                 </div>
               </div>
               <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">{{ notification.message }}</h6>
+                <h6 class="preview-subject font-weight-normal">${notification.message}</h6>
                 <p class="font-weight-light small-text mb-0 text-muted">
-                  {{ notification.date_sent }}
+                  ${notification.date_sent}
                 </p>
               </div>
             </a>`;
-
           });
-        }
-        else { 
-          div_notifications.innerHTML += 'Non ci sono Notifiche'
+        } else { 
+          div_notifications.innerHTML += 'Non ci sono Notifiche';
         }
 
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
     }
+
     loadNotifications();
   });
 </script>

@@ -103,8 +103,11 @@ class NotificationsView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['notifications'] = ReferralNotification.objects.filter(user=self.request.user).all() or []
-        
+        notifications = ReferralNotification.objects.filter(user=self.request.user).all()
+        if len(notifications) > 0:
+            context['notifications'] = notifications
+        else:
+            context['notifications'] = []
         return context
     
 
