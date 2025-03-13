@@ -126,7 +126,7 @@
     </button>
   </div>
 </nav>
-<!--
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -135,25 +135,28 @@
         const response = await fetch('/api/v0/referral/notifications/'); // Assuming you have an endpoint for fetching regions
         const notifications = await response.json();
         const div_notifications = document.getElementById('notifications');
-
-        notifications.forEach(notification => {
-          div_notifications.innerHTML += `
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-success">
-                <i class="ti-info-alt mx-0"></i>
+        if (notifications) {
+          notifications.forEach(notification => {
+            div_notifications.innerHTML += `
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-success">
+                  <i class="ti-info-alt mx-0"></i>
+                </div>
               </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-normal">{{ notification.message }}</h6>
-              <p class="font-weight-light small-text mb-0 text-muted">
-                {{ notification.date_sent }}
-              </p>
-            </div>
-          </a>`;
+              <div class="preview-item-content">
+                <h6 class="preview-subject font-weight-normal">{{ notification.message }}</h6>
+                <p class="font-weight-light small-text mb-0 text-muted">
+                  {{ notification.date_sent }}
+                </p>
+              </div>
+            </a>`;
 
-        });
-
+          });
+        }
+        else { 
+          div_notifications.innerHTML += 'Non ci sono Notifiche'
+        }
 
       } catch (error) {
         console.error('Error loading notifications:', error);
@@ -161,4 +164,4 @@
     }
     loadNotifications();
   });
-</script>-->
+</script>
