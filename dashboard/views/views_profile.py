@@ -210,14 +210,7 @@ class EnterpriseUpdateView(UpdateView):
         profile_business = form.save(commit=False)
         
         # Cerca l'oggetto Business correlato. Potresti usare il 'company_name' o un altro campo
-        business = Business.objects.filter(link_google_maps=profile_business.link_google_maps,
-                                           contact_number=profile_business.contact_number,
-                                           chamber_commerce_certificate=profile_business.chamber_commerce_certificate,
-                                           insurance_policy_certificate=profile_business.insurance_policy_certificate,
-                                           region=profile_business.region,
-                                           sectors=profile_business.sectors,
-                                           holder=profile_business.holder,
-                                           company_name=profile_business.company_name,
+        business = Business.objects.filter(company_name=profile_business.company_name,
                                            email=profile_business.email
                                            ).first()
         
