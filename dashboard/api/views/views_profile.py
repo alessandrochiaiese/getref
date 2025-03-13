@@ -144,7 +144,7 @@ class UserProfileDataView(View):
             #'total_commission': ReferralTransaction.objects.filter(referral_code__user=user).aggregate(Sum('conversion_value'))['conversion_value__sum'] or 0,
             
             # Totale delle commissioni: supponendo che siano in ReferralTransaction o ReferralReward
-            'total_commissions': ReferralCommission.objects.filter(referral_code__user=user).aggregate(Sum('commission_value'))['commission_value__sum'] or 0,
+            'total_commissions': ReferralCommission.objects.filter(referred_user=user).aggregate(Sum('commission_value'))['commission_value__sum'] or 0,
             
             # Totale delle ricompense (bonus e premi)
             #'total_rewards': (ReferralBonus.objects.filter(user=user).aggregate(Sum('bonus_value'))['bonus_value__sum'] or 0) + 

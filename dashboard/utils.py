@@ -123,9 +123,9 @@ def get_tree_referred(user, level=1):  # -> dict:
     if level > 5:
         return tree
     
-    referral = None
+    referrals = None
     try:
-        referral = Referral.objects.filter(referrer=user).first()  # Recupera il primo referral per l'utente
+        referrals = Referral.objects.filter(referrer=user).all()  # Recupera il primo referral per l'utente
     except Exception as e:
         print(e)
         return tree
@@ -133,18 +133,18 @@ def get_tree_referred(user, level=1):  # -> dict:
     if referral is None:
         print(f"No referral found for user {user.username}")
         return tree
-
-    referred_user = referral.referred  # Ora è un solo utente, non una lista
-    print(f"Processing user: {referred_user.username}, Level: {level}")  # Debug
-    user_to_add = {
-        "first_name": referred_user.first_name,
-        "last_name": referred_user.last_name,
-        "username": referred_user.username,
-        "date_joined": referred_user.date_joined,
-        "level": level,
-        "list_referred": get_tree_referred(referred_user, level + 1)
-    }
-    tree.append(user_to_add)
+    for referral in referrals:
+        referred_user = referral.referred  # Ora è un solo utente, non una lista
+        print(f"Processing user: {referred_user.username}, Level: {level}")  # Debug
+        user_to_add = {
+            "first_name": referred_user.first_name,
+            "last_name": referred_user.last_name,
+            "username": referred_user.username,
+            "date_joined": referred_user.date_joined,
+            "level": level,
+            "list_referred": get_tree_referred(referred_user, level + 1)
+        }
+        tree.append(user_to_add)
      
     return tree
 
