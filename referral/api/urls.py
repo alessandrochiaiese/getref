@@ -4,6 +4,7 @@ from referral.api.views.views_referral_campaign import ReferralCampaignAPIView
 from referral.api.views.views_referral_code import ReferralCodeAPIView
 from referral.api.views.views_referral_commission import ReferralCommissionAPIView
 from referral.api.views.views_referral_conversion import ReferralConversionAPIView
+from referral.api.views.views_referral_notification import ReferralNotificationAPIView
 from referral.api.views.views_referral_program import ReferralProgramAPIView
 from referral.api.views.views_referral_program_partecipation import ReferralProgramPartecipationAPIView
 from referral.api.views.views_referral_settings import ReferralSettingsAPIView
@@ -33,8 +34,8 @@ urlpatterns = [
     path('conversions/', ReferralConversionAPIView.as_view(), name='referral_conversions'),
     path('conversions/<int:referral_conversion_id>/', ReferralConversionAPIView.as_view(), name='referral_conversion'), 
     
-    path('notifications/', ReferralCodeAPIView.as_view(), name='referral_notifications'),
-    path('notifications/<int:referral_notification_id>/', ReferralCodeAPIView.as_view(), name='referral_notification'), 
+    path('notifications/', ReferralNotificationAPIView.as_view(), name='referral_notifications'),
+    path('notifications/<int:referral_notification_id>/', ReferralNotificationAPIView.as_view(), name='referral_notification'), 
     
     path('rewards/', ReferralProgramAPIView.as_view(), name='referral_rewards'),
     path('rewards/<int:referral_reward_id>/', ReferralProgramAPIView.as_view(), name='referral_reward'),
