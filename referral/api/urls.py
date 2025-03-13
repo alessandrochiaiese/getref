@@ -1,5 +1,6 @@
 from django.urls import path
 from referral.api.views.views_referral_audit import ReferralAuditAPIView
+from referral.api.views.views_referral_bonus import ReferralBonusAPIView
 from referral.api.views.views_referral_campaign import ReferralCampaignAPIView
 from referral.api.views.views_referral_code import ReferralCodeAPIView
 from referral.api.views.views_referral_commission import ReferralCommissionAPIView
@@ -19,8 +20,8 @@ urlpatterns = [
     path('audits/', ReferralAuditAPIView.as_view(), name='referral_audits'),
     path('audits/<int:referral_audit_id>/', ReferralAuditAPIView.as_view(), name='referral_audit'),
 
-    path('bonus/', ReferralCodeAPIView.as_view(), name='referral_bonus'),
-    path('bonus/<int:referral_bonus_id>/', ReferralCodeAPIView.as_view(), name='referral_bonus'), 
+    path('bonus/', ReferralBonusAPIView.as_view(), name='referral_bonuses'),
+    path('bonus/<int:referral_bonus_id>/', ReferralBonusAPIView.as_view(), name='referral_bonus'), 
 
     path('campaigns/', ReferralCampaignAPIView.as_view(), name='referral_campaigns'),
     path('campaigns/<int:referral_campaign_id>/', ReferralCampaignAPIView.as_view(), name='referral_campaign'), 
