@@ -595,7 +595,7 @@ def stripe_webhook(request):
                         commission_date = datetime.datetime.now(),
                         status = 'Pending',
                         trigger_event = "acquisto effettuato",
-                        transaction = referral_transaction.id
+                        transaction = referral_transaction
                     )
                     ReferralNotification.objects.create(
                         user=seller,
