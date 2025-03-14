@@ -130,9 +130,10 @@ def get_tree_referred(user, level=1):  # -> dict:
         print(e)
         return tree
 
-    if referral is None:
-        print(f"No referral found for user {user.username}")
+    if referrals is None:
+        print(f"No referrals found for user {user.username}")
         return tree
+        
     for referral in referrals:
         referred_user = referral.referred  # Ora è un solo utente, non una lista
         print(f"Processing user: {referred_user.username}, Level: {level}")  # Debug
