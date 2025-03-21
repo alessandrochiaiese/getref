@@ -7,10 +7,10 @@ urlpatterns = [
     path('test/', views_subscription.test, name='subscriptions-test'),
 
     # promotions
-    path('my_promotions/', views_promotion.my_promotions, name='my_promotions'),
-    path('promote/<uuid:promotion_link>/', views_promotion.promote, name='promote'),  # Assicurati che la rotta sia configurata correttamente
-    path('promote/', views_promotion.promote, name='stripe_promote'),
-    path('promotion_sales/', views_promotion.promotion_sales, name='promotion_sales'),
+    #path('my_promotions/', views_promotion.my_promotions, name='my_promotions'),
+    #path('promote/<uuid:promotion_link>/', views_promotion.promote, name='promote'),  # Assicurati che la rotta sia configurata correttamente
+    #path('promote/', views_promotion.promote, name='stripe_promote'),
+    #path('promotion_sales/', views_promotion.promotion_sales, name='promotion_sales'),
     
     # products
     path('products/', views_subscription.products, name='product_list'),

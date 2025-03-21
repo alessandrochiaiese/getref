@@ -255,7 +255,7 @@ logger = logging.getLogger(__name__)
 def create_checkout_session(request):
     if request.method == 'GET':
         price_id = request.GET.get('priceId', None)
-        promotion_link = request.GET.get('promotionLink', None)
+        #promotion_link = request.GET.get('promotionLink', None)
         
         products = list_stripe_all_products()
         product = None
@@ -290,23 +290,24 @@ def create_checkout_session(request):
 
                 return checkout_params
         
-        if price_id is None and promotion_link is not None:
-            promotion = Promotion.objects.get(promotion_link=promotion_link)
-            product = get_product_by_product_id(products, promotion.stripe_product_id)
-
-            checkout_params = generate_checkout_session(product)
-
-            price_id = product.get('price_id')
-            checkout_params['metadata']={
-                'promotion_link': str(promotion_link)
-            }
-            checkout_params['line_items']=[{
-                'price': price_id,
-                'quantity': 1,
-            }]
-            checkout_session = stripe.checkout.Session.create(**checkout_params)
-            return redirect(checkout_session.url)
-        elif price_id is not None and promotion_link is None:
+        #if price_id is None and promotion_link is not None:
+        #    promotion = Promotion.objects.get(promotion_link=promotion_link)
+        #    product = get_product_by_product_id(products, promotion.stripe_product_id)
+        #
+        #    checkout_params = generate_checkout_session(product)
+        #
+        #    price_id = product.get('price_id')
+        #    checkout_params['metadata']={
+        #        'promotion_link': str(promotion_link)
+        #    }
+        #    checkout_params['line_items']=[{
+        #        'price': price_id,
+        #        'quantity': 1,
+        #    }]
+        #    checkout_session = stripe.checkout.Session.create(**checkout_params)
+        #    return redirect(checkout_session.url)
+        #elif ...
+        if price_id is not None:# and promotion_link is None:
             product = get_product_by_price_id(products, price_id)
 
             checkout_params = generate_checkout_session(product)
@@ -571,6 +572,29 @@ def stripe_webhook(request):
                     coupon_code_used = "",
                     channel = ""
                 )
+
+            referral = Referral.objects.filter(referred=user).first()    
+            referrer = referral.referrer
+            referrer_code = ReferralCode.objects.filter(user=referrer).first()
+            ReferralCommission.objects.create(
+                referral_code = referrer_code,
+                referred_user = referrer,
+                commission_value = referral_transaction.transaction_amount * 0.15,
+                commission_date = datetime.datetime.now(),
+                status = 'Pending',
+                trigger_event = "acquisto effettuato",
+                transaction = referral_transaction
+            )
+            ReferralNotification.objects.create(
+                user=referrer,
+                message=f"Un cliente ha acquistato un prodotto attraverso il tuo referral code: {referrer_code}",
+                date_sent=datetime.datetime.now(),
+                is_read=False,
+                notification_type="Alert",
+                priority="Low",
+                action_required=False
+            )
+            """
             # Se il prodotto è stato promosso da un venditore
             promotion_link = session.get('metadata', {}).get('promotion_link')
             print(f"promotion_link {promotion_link}.")
@@ -607,6 +631,7 @@ def stripe_webhook(request):
                         action_required=False
                     )
                     check_for_reward(seller)
+            """
 
         except Exception as e:
             print(f"Error while processing Stripe webhook: {str(e)}")

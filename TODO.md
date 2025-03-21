@@ -227,6 +227,19 @@ molte delle logiche comuni dovrebbero ripetersi
 
 
 
+21.03.2025
+[] Bottone buy in products non traccia commissioni a referrer (tramite referral code)
+[] Bottone Promote da eliminare o commentare
+[] Redirect Promotion da eliminare o commentare
+[] Quando compri, da cliente, un prodotto, arriva la commissione al referrer
+[] Product Detail
+[] Prodotti Tabellati o doppia visione (card e tabella)	
+
+
+
+
+
+
 
 
 

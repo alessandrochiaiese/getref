@@ -24,9 +24,9 @@
                     <a href="#" class="btn btn-primary buy-btn" data-price-id="{{ product.price_id }}">
                         {% trans "Buy" %}
                     </a>
-                    <a href="#" class="btn btn-primary promote-btn" data-stripe-product-id="{{ product.product_id }}">
-                        {% trans "Promote" %}
-                    </a>
+                    <!--<a href="#" class="btn btn-primary promote-btn" data-stripe-product-id="{#{ product.product_id }#}">
+                        {#% trans "Promote" %#}
+                    </a>-->
                 </div>
             </div>
         </div>
@@ -49,5 +49,5 @@
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>-->
     <script src="{% static 'subscriptions/products.js' %}"></script>
-    <script src="{% static 'subscriptions/promotions.js' %}"></script>
+    <!--<script src="{#% static 'subscriptions/promotions.js' %#}"></script>-->
 {% endblock %}
